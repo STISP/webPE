@@ -1,31 +1,29 @@
+import { Link } from 'react-router-dom'
+import LogoCompleta from '../assets/LogoCompleta.svg'
+
+
 export default function Menu() {
     return (
-        <>
-            {/* logo */}
-            <img src="" alt="Logo Pernambucano" />
+        <nav>
+            <img src={LogoCompleta} alt="Logo Pernambucano" />
             {/* menu */}
-            <nav>
-                <ul>
-                    <li>
-                        <a href="#">Inicio</a>
-                    </li>
-                    <li>
-                        <a href="#">Sobre Nós</a>
-                    </li>
-                    <li>
-                        <a href="#">Cartão</a>
-                    </li>
-                    <li>
-                        <a href="#">Nossas Lojas</a>
-                    </li>
-                    <li>
-                        <a href="#">Parceiros</a>
-                    </li>
-                    <li>
-                        <a href="#">Contatos</a>
-                    </li>
-                </ul>
-            </nav>
-        </>
+            <ul>
+                <li>
+                    <Link to="/inicio">Inicio</Link>
+                </li>
+                <li>
+                    <Link to="">Cartão</Link>
+                </li>
+                <li>
+                    <Link to="">Nossas Lojas</Link>
+                </li>
+                <li>
+                    <Link to="">Parceiros</Link>
+                </li>
+                <li>
+                    <Link to="">Contatos</Link>
+                </li>
+            </ul>
+        </nav>
     )
 }

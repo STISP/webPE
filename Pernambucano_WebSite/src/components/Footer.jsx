@@ -1,17 +1,21 @@
 import '../App.css'
+import LogoCompleta from '../assets/LogoCompleta.svg'
+import Facebook from '../assets/facebook.svg'
+import whatsapp from '../assets/whatsapp.svg'
+import Instagram from '../assets/instagram.svg'
 
 export default function Footer() {
     return (
         <>
             <footer>
-                <div className="flexInLine">
-                    <div className="flex">
-                        <img src="" alt="logo" />
+                <div className="footerAll">
+                    <div className="logoAndRedes">
+                        <img src={LogoCompleta} alt="logo" />
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum at nisi nec eros tempus vulputate. Suspendisse vitae neque consequat, eleifend justo</p>
                         <div className="redesSociais">
-                            <img src="" alt="whatsapp" />
-                            <img src="" alt="instagram" />
-                            <img src="" alt="facebook" />
+                            <img src={whatsapp} alt="whatsapp" />
+                            <img src={Facebook} alt="instagram" />
+                            <img src={Instagram} alt="facebook" />
                         </div>
                     </div>
 
