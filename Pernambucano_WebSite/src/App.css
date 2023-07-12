@@ -1,18 +1,18 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
   font-family: "Source Sans 3", sans-serif;
   cursor: default;
+}
+body {
+  margin: 0;
 }
 a {
   text-decoration: none;
 }
 nav {
-  display: flex;
   align-items: flex-end;
-  justify-content: space-between;
   white-space: nowrap;
-  margin-top: 1rem;
+  margin: 1rem auto 0;
 }
 nav img {
   height: 4rem;
@@ -30,10 +30,11 @@ nav ul li a {
   font-size: 1rem;
   font-weight: 600;
   color: #000;
-  transition: color 0.2s;
+  transition: 0.3s;
 }
 nav ul li a:hover {
   color: #0261a3;
+  text-decoration: underline;
 }
 .noMercado {
   display: flex;
@@ -112,9 +113,7 @@ nav ul li a:hover {
   color: #104b75;
 }
 .maintop {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 5.4rem;
+  margin: 5.4rem auto 0;
 }
 .maintop img {
   width: 23.0625rem;
@@ -137,10 +136,11 @@ nav ul li a:hover {
 .QualidadeVariedadePreco {
   display: flex;
   justify-content: space-between;
+  max-width: 1114px;
 
   border-radius: 0.625rem;
   background: #f0f5f9;
-  margin-top: 4.4rem;
+  margin: 4.4rem auto 0;
   padding: 1.3rem 2rem;
 }
 .flex {
@@ -189,10 +189,8 @@ nav ul li a:hover {
   align-self: center;
 }
 .maintop2 {
-  display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  margin-top: 2.5rem;
+  margin: 2.5rem auto 0;
   gap: 2rem;
   align-items: center;
 }
@@ -334,6 +332,8 @@ nav ul li a:hover {
   overflow: auto;
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
+  max-width: 74rem;
+  margin: 0 auto;
 }
 .parceiros::-webkit-scrollbar {
   width: 8px;
@@ -347,7 +347,8 @@ nav ul li a:hover {
   display: flex;
   justify-content: center;
   padding: 0.5rem;
-  margin-top: 2rem;
+  margin: 2rem auto 0;
+  max-width: 73rem;
 }
 .experiencia h3 {
   margin: 0;
@@ -380,19 +381,65 @@ nav ul li a:hover {
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  padding: 1rem;
+  padding: 0.4rem;
   text-align: center;
 }
-.copyright p{
+.copyright p {
   margin: 0;
 }
 .footerAll {
-  margin-top: 2.25rem;
-  background: #f4f4f4;
+  margin: 2.25rem auto 0;
   display: flex;
+  gap: 5rem;
+  max-width: 73rem;
+  padding: 2rem 0 2rem;
+}
+footer {
+  background: #f4f4f4;
+}
+.footerAll ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0.5rem 0;
+}
+.footerAll li {
+  margin: 0.1rem 0;
+}
+.footerAll a:hover {
+  color: #000000;
+  text-decoration: underline;
+}
+.footerAll h3 {
+  color: #000;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+}
+.footerAll p {
+  color: #a0a0a0;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  max-width: 21rem;
+}
+.institucional a,
+.CentralDeAtendimento a {
+  color: #929292;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.institucional,
+.CentralDeAtendimento {
+  padding-top: 1rem;
 }
 .logoAndRedes img {
   width: 14.375rem;
+  mix-blend-mode: multiply;
 }
 .redesSociais {
   display: flex;
@@ -403,4 +450,11 @@ nav ul li a:hover {
   padding: 0.62rem;
   background-color: #0261a3;
   border-radius: 0.5rem;
+}
+nav,
+.maintop,
+.maintop2 {
+  max-width: 73rem;
+  display: flex;
+  justify-content: space-between;
 }

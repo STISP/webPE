@@ -82,8 +82,6 @@ export default function TelaInicio() {
                 <div className="parceiros">
                     <h3>Parceiros</h3>
                     <div className="flexInLine">
-                        <img src={Vitarella} alt="parceiro1" />
-                        <div className="line" />
                         <img src={Vitarella} alt="parceiro2" />
                         <div className="line" />
                         <img src={Vitarella} alt="parceiro3" />

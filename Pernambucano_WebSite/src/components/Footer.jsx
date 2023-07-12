@@ -32,7 +32,7 @@ export default function Footer() {
                                 <a href="#">Venda conosco</a>
                             </li>
                             <li>
-                                <a href="#">Política de Privacidade e Termos de Uso</a>
+                                <a href="#">Política de Privacidade</a>
                             </li>
                         </ul>
                     </div>
