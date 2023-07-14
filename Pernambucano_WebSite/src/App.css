@@ -34,7 +34,6 @@ nav ul li a {
 }
 nav ul li a:hover {
   color: #0261a3;
-  text-decoration: underline;
 }
 .noMercado {
   display: flex;
@@ -457,4 +456,77 @@ nav,
   max-width: 73rem;
   display: flex;
   justify-content: space-between;
+}
+.caminho_page {
+  color: #696969;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  max-width: 73rem;
+  margin: 1.44rem auto;
+}
+.contato {
+  display: flex;
+  background: #f5f5f5;
+  border-radius: 1rem;
+  align-items: center;
+  padding: 1rem 4.6rem 1rem 1.5rem;
+}
+.contato img {
+  width: 1.7625rem;
+  height: 1.73913rem;
+  padding: 10px;
+  border-radius: 0.5rem;
+  background: #0261a3;
+}
+.TituloContato {
+  color: #0261a3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0 auto;
+  width: 73rem;
+  height: 5.25rem;
+  border-radius: 1rem;
+  background: #f5f5f5;
+}
+.lojas {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 73rem;
+  margin: 0 auto;
+  gap: 1.09rem;
+  margin-top: 1.88rem;
+}
+.lojaAndNumber h1,
+h3 {
+  margin: 0 0.7rem;
+}
+.lojaAndNumber h4 {
+  color: rgba(19, 36, 56, 0.73);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 100%;
+  cursor: initial !important;
+  user-select: all;
+  margin: 0.5rem 0.7rem 0;
+
+}
+.lojaAndNumber h4::selection {
+  background: #0261a3;
+  color: #ffffff;
+}
+.lojaAndNumber h1,
+h3 {
+  color: #07111c;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 100%;
 }

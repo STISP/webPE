@@ -21,7 +21,7 @@ export default function Menu() {
                     <Link to="">Parceiros</Link>
                 </li>
                 <li>
-                    <Link to="">Contatos</Link>
+                    <Link to="/contatos">Contatos</Link>
                 </li>
             </ul>
         </nav>
