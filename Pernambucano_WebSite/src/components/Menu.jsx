@@ -14,7 +14,7 @@ export default function Menu() {
                 <li>
                     <Link to="/Cartao">Cartão</Link>
                 </li>
-                <li
+                <li>
                     <Link to="/lojas">Nossas Lojas</Link>
                 </li>
                 <li>
