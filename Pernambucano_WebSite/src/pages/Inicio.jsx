@@ -67,12 +67,12 @@ export default function TelaInicio() {
 
                         <div className="entrarEmContato">
                             <div className="vendaComAGente">
-                                <h3>Venda com <strong>a gente</strong></h3>
+                                <h3>alguma coisa </h3>
                                 <button>Confira</button>
                             </div>
 
                             <div className="CanaisDeAtendimento">
-                                <h3>Canais de atendimento</h3>
+                                <h3>alguma coisa</h3>
                                 <button>Confira</button>
                             </div>
                         </div>

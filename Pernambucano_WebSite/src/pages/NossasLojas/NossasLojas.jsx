@@ -2,7 +2,8 @@ import '../../App.css'
 import { Link } from 'react-router-dom'
 import Menu from '../../components/menu'
 import Footer from '../../components/Footer'
-import ConsultaLojas from '../../components/Lojas'
+import ConsultaLojas from '../../components/ConsultaLojas'
+import Car from '../../assets/car.svg'
 
 export default function NossasLojas() {
     return (
@@ -13,9 +14,10 @@ export default function NossasLojas() {
                 <h5 className='caminho_page'>
                     Página Inicial / Nossas Lojas
                 </h5>
-                <h1>Escolha a loja</h1>
+                <h1 className='tituloPageLojas'>Escolha a loja</h1>
                 <div className="listlojas">
                     <ConsultaLojas
+                        img={Car}
                         ID="Loja1"
                         LinkPage="/lojas/Dom_Helder"
                         loja="Dom Helder"
@@ -26,6 +28,7 @@ export default function NossasLojas() {
                         linkWhatsapp="https://goo.gl/maps/SP1EW8NhG1vtjRgU8"
                     />
                     <ConsultaLojas
+                        img={Car}
                         ID="Loja2"
                         LinkPage="/lojas/Goiana"
                         loja="Goiana"
@@ -36,6 +39,7 @@ export default function NossasLojas() {
                         linkWhatsapp="https://goo.gl/maps/SP1EW8NhG1vtjRgU8"
                     />
                     <ConsultaLojas
+                        img={Car}
                         ID="Loja3"
                         LinkPage="/lojas/SaoLourencoDaMataCentro"
                         loja="São Lourenco da Mata Centro"
@@ -46,6 +50,7 @@ export default function NossasLojas() {
                         linkWhatsapp="https://goo.gl/maps/SP1EW8NhG1vtjRgU8"
                     />
                     <ConsultaLojas
+                        img={Car}
                         ID="Loja4"
                         LinkPage="/lojas/jaboatao_Centro"
                         loja="Jaboatão Centro"
@@ -56,6 +61,7 @@ export default function NossasLojas() {
                         linkWhatsapp="https://goo.gl/maps/SP1EW8NhG1vtjRgU8"
                     />
                     <ConsultaLojas
+                        img={Car}
                         ID="Loja5"
                         LinkPage="/lojas/Moreno"
                         loja="Moreno"
@@ -66,6 +72,7 @@ export default function NossasLojas() {
                         linkWhatsapp="https://goo.gl/maps/SP1EW8NhG1vtjRgU8"
                     />
                     <ConsultaLojas
+                        img={Car}
                         ID="Loja6"
                         LinkPage="/lojas/Olinda"
                         loja="Olinda"
@@ -76,6 +83,7 @@ export default function NossasLojas() {
                         linkWhatsapp="https://goo.gl/maps/SP1EW8NhG1vtjRgU8"
                     />
                     <ConsultaLojas
+                        img={Car}
                         ID="Loja7"
                         LinkPage="/lojas/VascoDaGama"
                         loja="Vasco da Gama"
@@ -86,6 +94,7 @@ export default function NossasLojas() {
                         linkWhatsapp="https://goo.gl/maps/SP1EW8NhG1vtjRgU8"
                     />
                     <ConsultaLojas
+                        img={Car}
                         ID="Loja8"
                         LinkPage="/lojas/DomHelderServicos"
                         loja="Dom Helder Centro de Servicos"

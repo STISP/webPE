@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
-<Link to="/Lojas"><button>Nossas Lojas</button></Link>
+import RelogioIcon from '../assets/relogio icon.svg'
 
 export default function ConsultaLojas(props) {
 
   return (
     <Link to={props.LinkPage} id={props.ID}>
       <div className="lojas">
-        <img src="" alt="LogoIcon" />
+        <img className='imgCar' src={props.img} alt="LogoIcon" />
         <div className="nameLoja">
           <h3>{props.loja}</h3>
           <h3>{props.nome}</h3>
@@ -16,7 +16,9 @@ export default function ConsultaLojas(props) {
 
         <div className="lineButton">
           <div className="lojaStatus">
-            <div className="timeIcon">relogio aqui</div>
+            <div className="timeIcon">
+              <img src={RelogioIcon} alt="RelogioIcon" />
+            </div>
             <p><span>Fechado</span> • {props.horarioOpenClose}</p>
           </div>
 
