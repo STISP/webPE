@@ -5,7 +5,7 @@ import RelogioIcon from '../assets/relogio icon.svg'
 export default function ConsultaLojas(props) {
 
   return (
-    <Link to={props.LinkPage} id={props.ID}>
+    <Link to={props.LinkPage} className='detalhesLojas'>
       <div className="lojas">
         <img className='imgCar' src={props.img} alt="LogoIcon" />
         <div className="nameLoja">
@@ -19,7 +19,7 @@ export default function ConsultaLojas(props) {
             <div className="timeIcon">
               <img src={RelogioIcon} alt="RelogioIcon" />
             </div>
-            <p><span>Fechado</span> • {props.horarioOpenClose}</p>
+            <p>{props.openClose} • {props.horarioOpenClose}</p>
           </div>
 
           <div className="localAndWhats">

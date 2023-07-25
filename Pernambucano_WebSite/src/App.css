@@ -316,7 +316,7 @@ nav ul li a:hover {
 }
 .flexInLine {
   display: flex;
-  gap: 0.9rem;
+  gap: 0.7rem;
   align-items: center;
 }
 .flexInLine img {
@@ -335,11 +335,12 @@ nav ul li a:hover {
   margin: 2.5rem 0 0.4em 0;
 }
 .parceiros {
+  max-width: 74rem;
+  margin: 0 auto;
   overflow: auto;
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
-  max-width: 74rem;
-  margin: 0 auto;
+  text-align: left;
 }
 .parceiros::-webkit-scrollbar {
   width: 8px;
@@ -471,6 +472,7 @@ nav,
   font-weight: 400;
   line-height: normal;
   max-width: 73rem;
+  width: 95%;
   margin: 1.44rem auto;
 }
 .contato {
@@ -478,7 +480,9 @@ nav,
   background: #f5f5f5;
   border-radius: 1rem;
   align-items: center;
-  padding: 1rem 4.6rem 1rem 1.5rem;
+  padding: 1rem;
+  width: calc(min(33.33%, 346px));
+  flex-grow: 1;
 }
 .contato img,
 .imgCar {
@@ -487,6 +491,15 @@ nav,
   padding: 10px;
   border-radius: 0.5rem;
   background: #0261a3;
+  @media screen and (max-width: 480px) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+@media screen and (max-width: 480px) {
+  .contato {
+    width: 100%;
+  }
 }
 .TituloContato {
   color: #0261a3;
@@ -498,18 +511,20 @@ nav,
   font-weight: 700;
   line-height: normal;
   margin: 0 auto;
-  width: 73rem;
+  max-width: 73rem;
+  width: 95%;
   height: 5.25rem;
   border-radius: 1rem;
   background: #f5f5f5;
+  margin-bottom: 1rem;
 }
 .lojas {
   display: flex;
   flex-wrap: wrap;
+  width: 95%;
   max-width: 73rem;
   margin: 0 auto;
-  gap: 1.09rem;
-  margin-top: 1.88rem;
+  gap: 1rem;
 }
 .lojaAndNumber h1,
 h3 {
@@ -549,4 +564,12 @@ body::-webkit-scrollbar {
 
 body::-webkit-scrollbar-thumb {
   background-color: transparent;
+}
+.listlojas {
+  display: flex;
+  flex-wrap: wrap;
+  width: 95%;
+  max-width: 73rem;
+  margin: 0 auto;
+  gap: 1rem;
 }

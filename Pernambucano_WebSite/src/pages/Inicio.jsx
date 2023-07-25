@@ -100,6 +100,8 @@ export default function TelaInicio() {
                         <div className="line" />
                         <img src={Vitarella} alt="parceiro6" />
                         <div className="line" />
+                        <img src={Vitarella} alt="parceiro6" />
+                        <div className="line" />
                         <Link to="/Parceiros" >ver mais</Link>
                     </div>
                 </div>
