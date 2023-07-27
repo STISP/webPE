@@ -71,7 +71,7 @@ export default function Contatos(props) {
 
             <div className="lojas">
                 {lojas.map((loja, index) => (
-                    <Contato
+                    <Contato 
                         key={index}
                         icon={loja.icon}
                         loja={loja.loja}

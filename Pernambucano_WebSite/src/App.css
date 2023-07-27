@@ -483,11 +483,12 @@ nav,
   padding: 1rem;
   width: calc(min(33.33%, 346px));
   flex-grow: 1;
+  transition: 0.3s;
 }
 .contato img,
 .imgCar {
-  width: 1.7625rem;
-  height: 1.73913rem;
+  width: 1.9625rem;
+  height: 1.93913rem;
   padding: 10px;
   border-radius: 0.5rem;
   background: #0261a3;
@@ -556,6 +557,8 @@ h3 {
 .TituloParceiros {
   max-width: 73rem;
   margin: 0 auto;
+  width: 95%;
+  margin-bottom: 1rem;
 }
 body::-webkit-scrollbar {
   width: 0;
@@ -572,4 +575,151 @@ body::-webkit-scrollbar-thumb {
   max-width: 73rem;
   margin: 0 auto;
   gap: 1rem;
+  margin-bottom: 5.38rem;
+}
+.Close,
+.Open {
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+}
+.Close {
+  color: #8b1818;
+}
+.Open {
+  color: #368b18;
+}
+.lojaStatus p {
+  display: flex;
+  gap: 0.3rem;
+  margin: 0;
+}
+.lojaStatus span {
+  color: #999;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.lojaStatus img {
+  width: 1rem;
+}
+.lojaStatus {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #999;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.detalhesLojas {
+  border-radius: 1rem;
+  background: #f5f5f5;
+  padding: 1rem;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  transition: 0.3s;
+}
+.detalhesLojas:hover {
+  background: #ebebeb;
+}
+.lineButton {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+.nameLoja h3 {
+  color: #333;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 100%;
+  margin: 0;
+}
+.nameLoja p {
+  color: #999;
+  font-size: 0.9rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 90.9%;
+  margin: 0.5rem 0 0 0;
+}
+.imgNameLojas {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.localAndWhats {
+  gap: 0.5rem;
+  display: flex;
+}
+.localizaçãoButton,
+.whatsappButton {
+  border-radius: 0.4rem;
+  border: 1px solid #0261a3;
+  padding: 0.51rem 0.72rem;
+  color: #0261a3;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+.localizaçãoButton::before {
+  content: "";
+  position: absolute;
+  width: 0.9rem;
+  height: 1.2rem;
+  background-image: url("/src/assets/localizacaoIconWhite.svg");
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.whatsappButton::before {
+  content: "";
+  position: absolute;
+  width: 1.1rem;
+  height: 1.1rem;
+  background-image: url("/src/assets/whatsappIconWhite.svg");
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.localizaçãoButton:hover::before,
+.whatsappButton:hover::before {
+  opacity: 1;
+}
+.localizaçãoButton:hover,
+.whatsappButton:hover {
+  background: #0261a3;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+}
+.whatsappButton img {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+.localizaçãoButton img {
+  width: 0.9rem;
+  height: 1.2rem;
+}
+.imgCarNossasLojas {
+  width: 2.0625rem;
+  height: 2.03913rem;
+  padding: 1rem;
+  border-radius: 0.6rem;
+  background: #0261a3;
+  @media screen and (max-width: 480px) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }

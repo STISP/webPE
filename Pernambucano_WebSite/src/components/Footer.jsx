@@ -40,7 +40,7 @@ export default function Footer() {
                         <h3>Central de Atendimento</h3>
                         <ul>
                             <li>
-                                <a href="#">0800 000 000</a>
+                                <a href="#">(81) 3361 1155</a>
                             </li>
                             <li>
                                 <a href="#">Fale Conosco</a>
