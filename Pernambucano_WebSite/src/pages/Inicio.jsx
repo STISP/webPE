@@ -1,7 +1,7 @@
 import '../App.css'
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
-import Menu from '../components/menu'
+import Menu from '../components/Menu'
 import SacolaC from '../assets/SacolaCompras.svg'
 import StarIcon from '../assets/starIcon.svg'
 import BoxIcon from '../assets/boxIcon.svg'

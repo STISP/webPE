@@ -1,6 +1,6 @@
 import '../../App.css'
 import { Link } from 'react-router-dom'
-import Menu from '../../components/menu'
+import Menu from '../../components/Menu'
 import Footer from '../../components/Footer'
 import ConsultaLojas from '../../components/ConsultaLojas'
 import Central from '../../../src/assets/central de servico.svg'

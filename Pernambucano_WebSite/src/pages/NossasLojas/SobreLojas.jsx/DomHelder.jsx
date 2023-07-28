@@ -1,5 +1,6 @@
 import '../../../App.css'
 import { Link } from 'react-router-dom'
+import Menu from '../../../components/Menu'
 import Footer from '../../../components/Footer'
 import DetalhesLoja from '../../../components/DetalhesLoja';
 
@@ -7,6 +8,7 @@ import DetalhesLoja from '../../../components/DetalhesLoja';
 export default function DomHelder() {
     return (
         <>
+            <Menu />
             <p className='caminho_page'></p>
             <DetalhesLoja ID="Loja1"
                 loja="Dom Helder"

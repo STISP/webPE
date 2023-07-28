@@ -1,6 +1,6 @@
 import React from 'react';
 import Footer from '../components/Footer';
-import Menu from '../components/menu';
+import Menu from '../components/Menu';
 import Contato from '../components/ContatoComponente';
 import Car from '../../src/assets/car.svg';
 import Central from '../../src/assets/central de servico.svg';
