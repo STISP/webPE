@@ -40,7 +40,7 @@ export default function Footer() {
                         <h3>Central de Atendimento</h3>
                         <ul>
                             <li>
-                                <a href="#">(81) 3361 1155</a>
+                            <a href='tel:(81) 3361 1155'>(81) 3361 1155 </a>
                             </li>
                             <li>
                                 <a href="#">Fale Conosco</a>
@@ -59,14 +59,6 @@ export default function Footer() {
                             </li>
                             <li>
                                 <a href="#">Nossos canais</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="CentralDeAtendimento">
-                        <h3>Recursos</h3>
-                        <ul>
-                            <li>
-                                <a href="#">Radio</a>
                             </li>
                         </ul>
                     </div>

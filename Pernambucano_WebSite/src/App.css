@@ -113,6 +113,7 @@ nav ul li a:hover {
 }
 .maintop {
   margin: 4.4rem auto 0;
+  width: 95%;
 }
 .maintop img {
   width: 23.0625rem;
@@ -319,12 +320,19 @@ nav ul li a:hover {
   gap: 0.7rem;
   align-items: center;
 }
+@media screen and (max-width: 856px) {
+  .flexInLine {
+    gap: 0.3rem;
+  }
+}
 .flexInLine img {
   width: 3rem;
   padding: 0.8rem;
   border-radius: 0.625rem;
   background: #d9d9d9;
   filter: grayscale(100%);
+  object-fit: contain;
+  mix-blend-mode: color-burn;
 }
 .parceiros h3 {
   color: #666;
@@ -336,6 +344,7 @@ nav ul li a:hover {
 }
 .parceiros {
   max-width: 74rem;
+  width: 95%;
   margin: 0 auto;
   overflow: auto;
   scrollbar-width: thin;
@@ -353,9 +362,10 @@ nav ul li a:hover {
   background: #ffd01b;
   display: flex;
   justify-content: center;
-  padding: 0.5rem;
+  padding: 0.5rem 0;
   margin: 2rem auto 0;
   max-width: 73rem;
+  width: 95%;
 }
 .experiencia h3 {
   margin: 0;
@@ -369,7 +379,7 @@ nav ul li a:hover {
 .parceiros a {
   margin: 0;
   color: #3f3f3f;
-  text-align: center;
+  text-align: inherit;
   font-size: 1rem;
   font-style: normal;
   font-weight: 600;
@@ -400,6 +410,7 @@ nav ul li a:hover {
   gap: 5rem;
   max-width: 73rem;
   padding: 2rem 0 2rem;
+  width: 95%;
 }
 footer {
   background: #f4f4f4;
@@ -439,6 +450,7 @@ footer {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  white-space: nowrap;
 }
 .institucional,
 .CentralDeAtendimento {
@@ -721,5 +733,33 @@ body::-webkit-scrollbar-thumb {
   @media screen and (max-width: 480px) {
     width: 1.5rem;
     height: 1.5rem;
+  }
+}
+.Parceiros img {
+  width: 6rem;
+  object-fit: contain;
+}
+.Parceiros {
+  max-width: 73rem;
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.marca {
+  flex-grow: 1;
+  padding: 0.6rem;
+  border-radius: 1em;
+  background: #d9d9d9;
+  display: flex;
+  justify-content: center;
+}
+@media screen and (max-width: 347px) {
+  .marca {
+    width: 95%;
+  }
+  .Parceiros img {
+    width: 100%;
   }
 }
