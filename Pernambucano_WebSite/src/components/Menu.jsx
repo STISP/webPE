@@ -9,7 +9,7 @@ export default function Menu() {
             {/* menu */}
             <ul>
                 <li>
-                    <Link to="/inicio">Inicio</Link>
+                    <Link to="/">Inicio</Link>
                 </li>
                 <li>
                     <Link to="/Cartao">Cartão</Link>

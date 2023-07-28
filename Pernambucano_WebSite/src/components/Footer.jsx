@@ -62,6 +62,14 @@ export default function Footer() {
                             </li>
                         </ul>
                     </div>
+                    <div className="CentralDeAtendimento">
+                        <h3>Recursos</h3>
+                        <ul>
+                            <li>
+                                <a href="#">Radio</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div className="copyright">
