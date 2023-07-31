@@ -15,6 +15,8 @@ import Contatos from './pages/contatos.jsx'
 import Parceiros from './pages/Parceiros.jsx'
 import Cartao from './pages/Cartao/Cartao.jsx'
 import Radio from './pages/Radio.jsx'
+import Central from './pages/NossasLojas/SobreLojas.jsx/Central.jsx'
+import Sobre from './pages/Sobre/Sobre.jsx'
 
 
 
@@ -30,12 +32,14 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/lojas/jaboatao_Centro" element={<JaboataoCentro />} />
         <Route path="/lojas/Moreno" element={<Moreno />} />
         <Route path="/lojas/Olinda" element={<Olinda />} />
+        <Route path="/lojas/DomHelderServicos" element={<Central />} />
         <Route path="/lojas/Sao_Lourenco_da_Mata_centro" element={<SaoLourencoDaMataCentro />} />
         <Route path="/lojas/Vasco_da_Gama" element={<VascoDaGama />} />
         <Route path="/contatos" element={<Contatos />} />
         <Route path="/parceiros" element={<Parceiros />} />
         <Route path="/radio" element={<Radio />} />
         <Route path="/Cartao" element={<Cartao />} />
+        <Route path="/sobre" element={<Sobre />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

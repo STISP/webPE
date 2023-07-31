@@ -62,8 +62,10 @@ export default function App() {
                             experiência de compra perfeita, combinada com uma ampla
                             variedade de produtos de alta qualidade.</p>
                         <div className='botoes'>
-                            <button className='buttonContato'>Loja mais proxima</button>
-                            <button className='buttonLojas'>Nossas Lojas</button>
+                            <Link to='/lojas'><button className='buttonContato'>Veja a loja mais proxima</button></Link>
+                            <a href="https://cartoes.uzecomvoce.com.br/pernambuco" target="_blank">
+                                <button className='buttonLojas'>Cartão</button>
+                            </a>
                         </div>
                     </div>
                     <img src={SacolaC} alt="Sacola de compras" />
@@ -107,12 +109,12 @@ export default function App() {
 
                         <div className="entrarEmContato">
                             <div className="vendaComAGente">
-                                <h3>alguma coisa </h3>
+                                <h3>teste</h3>
                                 <button>Confira</button>
                             </div>
 
                             <div className="CanaisDeAtendimento">
-                                <h3>alguma coisa</h3>
+                                <h3>teste</h3>
                                 <button>Confira</button>
                             </div>
                         </div>

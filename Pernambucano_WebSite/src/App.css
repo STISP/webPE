@@ -2,9 +2,15 @@
   margin: 0 auto;
   font-family: "Source Sans 3", sans-serif;
   cursor: default;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
+html,
 body {
+  height: 100%;
   margin: 0;
+  padding: 0;
 }
 a {
   text-decoration: none;
@@ -13,6 +19,7 @@ nav {
   align-items: flex-end;
   white-space: nowrap;
   margin: 1rem auto 0;
+  width: 100%;
 }
 nav img {
   height: 4rem;
@@ -30,7 +37,7 @@ nav ul li a {
   font-size: 1rem;
   font-weight: 600;
   color: #000;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 nav ul li a:hover {
   color: #0261a3;
@@ -67,6 +74,7 @@ nav ul li a:hover {
   max-width: 27.375rem;
 }
 .buttonContato {
+  white-space: nowrap;
   color: #014270;
   display: flex;
   text-align: center;
@@ -79,7 +87,7 @@ nav ul li a:hover {
   border: none;
   align-items: center;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s ease;
 }
 .buttonContato:hover {
   background: #ffdf4f;
@@ -99,10 +107,9 @@ nav ul li a:hover {
   font-style: normal;
   font-weight: 700;
   line-height: 90%;
-  text-decoration-line: underline;
   background: none;
   border: none;
-  transition: color 0.2s;
+  transition: all 0.2s ease;
 }
 .buttonLojas:hover {
   color: #206da3;
@@ -121,6 +128,7 @@ nav ul li a:hover {
 .botoes {
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
 .esqText {
   display: flex;
@@ -135,13 +143,12 @@ nav ul li a:hover {
 }
 .QualidadeVariedadePreco {
   display: flex;
-  justify-content: space-between;
-  max-width: 1114px;
-
+  justify-content: space-evenly;
+  max-width: 73rem;
+  width: 95%;
   border-radius: 0.625rem;
   background: #f0f5f9;
   margin: 4.4rem auto 0;
-  padding: 1.3rem 2rem;
 }
 .flex {
   display: flex;
@@ -153,6 +160,7 @@ nav ul li a:hover {
 .preco {
   display: flex;
   gap: 1rem;
+  padding: 1.3rem 1rem;
 }
 .qualidade p,
 .variedade p,
@@ -243,7 +251,7 @@ nav ul li a:hover {
   line-height: normal;
   cursor: pointer;
   font-family: "Source Sans 3", sans-serif;
-  transition: 0.2s;
+  transition: all 0.2s ease;
 }
 .FacaSeuCartao button:hover {
   background: #fff;
@@ -259,6 +267,7 @@ nav ul li a:hover {
   justify-content: center;
   padding: 1.5rem 1.3rem;
   gap: 1rem;
+  max-width: 202px;
 }
 .vendaComAGente h3,
 .CanaisDeAtendimento h3 {
@@ -297,7 +306,7 @@ nav ul li a:hover {
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  transition: 0.2s;
+  transition: all 0.2s ease;
   cursor: pointer;
 }
 .vendaComAGente button:hover,
@@ -322,7 +331,7 @@ nav ul li a:hover {
 }
 @media screen and (max-width: 856px) {
   .flexInLine {
-    gap: 0.3rem;
+    gap: 0rem;
   }
 }
 .flexInLine img {
@@ -343,13 +352,16 @@ nav ul li a:hover {
   margin: 2.5rem 0 0.4em 0;
 }
 .parceiros {
-  max-width: 74rem;
+  max-width: 73rem;
   width: 95%;
   margin: 0 auto;
   overflow: auto;
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
   text-align: left;
+}
+.parceirosAll {
+  height: 80%;
 }
 .parceiros::-webkit-scrollbar {
   width: 8px;
@@ -392,7 +404,6 @@ nav ul li a:hover {
 }
 .copyright {
   background: #0261a3;
-
   color: #fff;
   font-size: 1rem;
   font-style: normal;
@@ -407,10 +418,11 @@ nav ul li a:hover {
 .footerAll {
   margin: 2.25rem auto 0;
   display: flex;
-  gap: 5rem;
   max-width: 73rem;
   padding: 2rem 0 2rem;
   width: 95%;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 footer {
   background: #f4f4f4;
@@ -434,8 +446,9 @@ footer {
   font-weight: 700;
   line-height: normal;
   margin: 0;
+  white-space: nowrap;
 }
-.footerAll p {
+.logoAndRedes p {
   color: #a0a0a0;
   font-size: 1rem;
   font-style: normal;
@@ -443,18 +456,81 @@ footer {
   line-height: normal;
   max-width: 21rem;
 }
+.logoAndRedes,
+.institucional,
+.CentralDeAtendimento,
+.promocoes {
+  flex-grow: 1;
+}
+@media screen and (max-width: 768px) {
+  .logoAndRedes,
+  .institucional,
+  .CentralDeAtendimento {
+    margin-bottom: 20px;
+    flex-grow: 1;
+  }
+  
+}
+@media screen and (max-width: 970px) {
+  .footerAll {
+    gap: 1rem;
+    justify-content: center;
+  }
+  .institucional,
+  .promocoes,
+  .CentralDeAtendimento {
+    padding-top: 0rem;
+  }
+}
+.logoAndRedes img {
+  width: 14rem;
+}
 .institucional a,
 .CentralDeAtendimento a {
   color: #929292;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   white-space: nowrap;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 .institucional,
+.promocoes,
 .CentralDeAtendimento {
   padding-top: 1rem;
+}
+.promocoes p {
+  margin: 0.3rem 0 1rem;
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: #b1b1b1;
+  max-width: 20rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.3px;
+  line-height: normal;
+}
+.promocoes input {
+  min-width: 5rem;
+  padding: 9px 20px;
+  letter-spacing: 0.3px;
+  color: #313131;
+  outline: 0;
+  border-radius: 5px 0 0 5px;
+  font-size: 14px;
+  border: 1px solid #dcdcdc;
+}
+.promocoes button {
+  background-color: #0261a3;
+  color: #fff;
+  border: none;
+  padding: 9px 20px;
+  border-radius: 0 5px 5px 0;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid #0261a3;
 }
 .logoAndRedes img {
   width: 14.375rem;
@@ -462,13 +538,19 @@ footer {
 }
 .redesSociais {
   display: flex;
-  gap: 1.25rem;
+  gap: 1rem;
 }
 .redesSociais img {
-  width: 1.25094rem;
+  width: 1.3rem;
   padding: 0.62rem;
   background-color: #0261a3;
   border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  object-fit: cover;
+}
+.redesSociais img:hover {
+  cursor: pointer;
+  background-color: #00518b;
 }
 nav,
 .maintop,
@@ -476,6 +558,7 @@ nav,
   max-width: 73rem;
   display: flex;
   justify-content: space-between;
+  width: 95%;
 }
 .caminho_page {
   color: #696969;
@@ -495,7 +578,7 @@ nav,
   padding: 1rem;
   width: calc(min(33.33%, 346px));
   flex-grow: 1;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 .contato img,
 .imgCar {
@@ -507,6 +590,11 @@ nav,
   @media screen and (max-width: 480px) {
     width: 1.5rem;
     height: 1.5rem;
+  }
+}
+@media screen and (max-width: 480px) {
+  .contato {
+    width: 100%;
   }
 }
 @media screen and (max-width: 480px) {
@@ -636,7 +724,7 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 .detalhesLojas:hover {
   background: #ebebeb;
@@ -678,7 +766,7 @@ body::-webkit-scrollbar-thumb {
   border: 1px solid #0261a3;
   padding: 0.51rem 0.72rem;
   color: #0261a3;
-  transition: 0.2s;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -762,4 +850,54 @@ body::-webkit-scrollbar-thumb {
   .Parceiros img {
     width: 100%;
   }
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.modal {
+  background-color: #fff;
+  border-radius: 8px;
+  max-width: 800px;
+  width: 90%;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+.modal header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.modal header h1 {
+  font-size: 24px;
+  color: #007bff;
+}
+.modal header button {
+  font-size: 24px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #777;
+}
+.modal main {
+  margin-bottom: 20px;
+}
+.modal footer {
+  text-align: center;
+  display: flex;
+  border-top: 1px solid #ccc;
+  justify-content: center;
+}
+.modal footer p {
+  font-size: 14px;
+  color: #777;
 }

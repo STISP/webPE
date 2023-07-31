@@ -12,16 +12,13 @@ export default function Menu() {
                     <Link to="/">Inicio</Link>
                 </li>
                 <li>
-                    <Link to="/Cartao">Cartão</Link>
+                    <Link to="/Parceiros">Parceiros</Link>
                 </li>
                 <li>
                     <Link to="/lojas">Nossas Lojas</Link>
                 </li>
                 <li>
-                    <Link to="/Parceiros">Parceiros</Link>
-                </li>
-                <li>
-                    <Link to="/contatos">Contatos</Link>
+                    <Link to="/Cartao">Cartão</Link>
                 </li>
             </ul>
         </nav>
