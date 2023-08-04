@@ -46,8 +46,9 @@ export default function Parceiros() {
                         <img src={Vitarella} alt="Logo da marca" />
                     </div>
                 </div>
+
+                <Footer />
             </div>
-            <Footer />
         </>
     )
 }

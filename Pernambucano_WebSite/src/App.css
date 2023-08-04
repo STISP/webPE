@@ -469,7 +469,6 @@ footer {
     margin-bottom: 20px;
     flex-grow: 1;
   }
-  
 }
 @media screen and (max-width: 970px) {
   .footerAll {
@@ -512,7 +511,8 @@ footer {
   line-height: normal;
 }
 .promocoes input {
-  min-width: 5rem;
+  max-width: 7rem;
+  width: 100%;
   padding: 9px 20px;
   letter-spacing: 0.3px;
   color: #313131;
@@ -596,11 +596,14 @@ nav,
   .contato {
     width: 100%;
   }
-}
-@media screen and (max-width: 480px) {
-  .contato {
-    width: 100%;
+  .institucional,
+  .promocoes,
+  .CentralDeAtendimento {
+    padding-top: 0rem;
   }
+}
+.promocoes :is(h3, p) {
+  white-space: normal;
 }
 .TituloContato {
   color: #0261a3;
@@ -848,7 +851,15 @@ body::-webkit-scrollbar-thumb {
     width: 95%;
   }
   .Parceiros img {
-    width: 100%;
+    width: 9rem;
+  }
+}
+@media screen and (max-width: 330px) {
+  .lojaStatus span {
+    display: none;
+  }
+  .lojaStatus p {
+    flex-direction: column;
   }
 }
 .modal-overlay {
@@ -900,4 +911,7 @@ body::-webkit-scrollbar-thumb {
 .modal footer p {
   font-size: 14px;
   color: #777;
+}
+.inputEmail {
+  white-space: nowrap;
 }

@@ -66,7 +66,7 @@ export default function Footer() {
                                 <a href='tel:(81) 3361 1155'>(81) 3361 1155 </a>
                             </li>
                             <li>
-                                <Link to={{ pathname: '/lojas/DomHelderServicos', state: { fromDashboard: true } }} onClick={handleClick}>
+                                <Link to={{ pathname: '/lojas', state: { fromDashboard: true } }} onClick={handleClick}>
                                     Fale Conosco
                                 </Link>
                             </li>
@@ -83,8 +83,11 @@ export default function Footer() {
                     <div className="promocoes">
                         <h3>Receba novidades e descontos especiais</h3>
                         <p>inscreva-se e ganhe as melhores promoções disponíveis e muito mais.</p>
-                        <input name="email" type="text" placeholder="Digite seu email" />
-                        <button type="button">Enviar</button>
+                        <div className='inputEmail'>
+                            <input name="email" type="text" placeholder="Digite seu email" />
+                            <button type="button">Enviar</button>
+                        </div>
+
                     </div>
                 </div>
 
