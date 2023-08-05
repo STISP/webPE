@@ -32,11 +32,11 @@ export default function App() {
     const handleResize = () => {
         const windowWidth = window.innerWidth;
         if (windowWidth < 768) {
-            setNumItemsToShow(7);
-        } else if (windowWidth < 992) {
             setNumItemsToShow(8);
+        } else if (windowWidth < 992) {
+            setNumItemsToShow(9);
         } else {
-            setNumItemsToShow(10);
+            setNumItemsToShow(11);
         }
     };
 

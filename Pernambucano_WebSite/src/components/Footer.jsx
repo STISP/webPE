@@ -6,16 +6,23 @@ import Instagram from '../assets/instagram.svg'
 import PoliticaDePrivacidade from '../pages/Sobre/PoliticaDePrivacidade'
 import { Link } from 'react-router-dom'
 import React, { useState } from 'react';
+import PaymentMethodsModal from '../pages/Sobre/PaymentMethodsModal'
 
 export default function Footer() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [PoliticModalOpen, setPoliticModalOpen] = useState(false);
+    const [PaymentModalOpen, setPaymentModalOpen] = useState(false);
 
-    const handleOpenModal = () => {
-        setIsModalOpen(true);
+    const PoliticHandleOpenModal = () => {
+        setPoliticModalOpen(true);
+    };
+
+    const PaymentHandleOpenModal = () => {
+        setPaymentModalOpen(true);
     };
 
     const handleCloseModal = () => {
-        setIsModalOpen(false);
+        setPaymentModalOpen(false);
+        setPoliticModalOpen(false);
     };
 
     function handleClick() {
@@ -53,11 +60,11 @@ export default function Footer() {
                                 </Link>
                             </li>
                             <li>
-                                <a onClick={handleOpenModal}>Política de Privacidade</a>
+                                <a onClick={PoliticHandleOpenModal}>Política de Privacidade</a>
                             </li>
                         </ul>
 
-                        <PoliticaDePrivacidade isOpen={isModalOpen} onClose={handleCloseModal} />
+                        <PoliticaDePrivacidade isOpen={PoliticModalOpen} onClose={handleCloseModal} />
                     </div>
                     <div className="CentralDeAtendimento">
                         <h3>Central de Atendimento</h3>
@@ -76,9 +83,10 @@ export default function Footer() {
                                 </Link>
                             </li>
                             <li>
-                                <a href="#">Formas de Pagamento</a>
+                                <a onClick={PaymentHandleOpenModal}>Formas de Pagamento</a>
                             </li>
                         </ul>
+                        <PaymentMethodsModal isOpen={PaymentModalOpen} onClose={handleCloseModal} />
                     </div>
                     <div className="promocoes">
                         <h3>Receba novidades e descontos especiais</h3>

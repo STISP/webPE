@@ -5,11 +5,6 @@ import { AppService } from "./app.service";
 export class AppController {
     constructor(private readonly appService: AppService) { }
 
-    @Get('lojas')
-    getLojas(): any {
-        return this.appService.getLojas();
-    }
-
     @Get('All') //rota para listar tudo
     GetAll(): string {
         return this.appService.GetAll();

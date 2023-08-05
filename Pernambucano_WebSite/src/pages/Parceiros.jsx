@@ -45,6 +45,24 @@ export default function Parceiros() {
                     <div className='marca'>
                         <img src={Vitarella} alt="Logo da marca" />
                     </div>
+                    <div className='marca'>
+                        <img src={Vitarella} alt="Logo da marca" />
+                    </div>
+                    <div className='marca'>
+                        <img src={Vitarella} alt="Logo da marca" />
+                    </div>
+                    <div className='marca'>
+                        <img src={Vitarella} alt="Logo da marca" />
+                    </div>
+                    <div className='marca'>
+                        <img src={Vitarella} alt="Logo da marca" />
+                    </div>
+                    <div className='marca'>
+                        <img src={Vitarella} alt="Logo da marca" />
+                    </div>
+                    <div className='marca'>
+                        <img src={Vitarella} alt="Logo da marca" />
+                    </div>
                 </div>
 
                 <Footer />

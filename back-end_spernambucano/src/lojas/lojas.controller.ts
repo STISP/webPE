@@ -3,7 +3,7 @@ import { LojasService } from "./lojas.service";
 import { Lojas } from "./lojas.entity";
 
 @Controller('lojas')
-export class UsuarioController {
+export class LojasController {
   constructor(private readonly LojasService: LojasService) { }
 
   @Get('listar')
@@ -11,8 +11,9 @@ export class UsuarioController {
     return this.LojasService.findAll();
   }
 
-  @Get('todasAsLojas')
+  @Get('todasLojas')
   getLojas(): any {
       return this.LojasService.getLojas();
   }
 }
+

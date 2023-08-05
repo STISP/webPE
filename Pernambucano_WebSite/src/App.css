@@ -107,6 +107,7 @@ nav ul li a:hover {
   font-style: normal;
   font-weight: 700;
   line-height: 90%;
+  outline: none;
   background: none;
   border: none;
   transition: all 0.2s ease;
@@ -231,6 +232,7 @@ nav ul li a:hover {
   height: 6.0625rem;
   justify-content: center;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 .FacaSeuCartao h3 {
   margin: 0;
@@ -256,6 +258,9 @@ nav ul li a:hover {
 .FacaSeuCartao button:hover {
   background: #fff;
   color: #0261a3;
+}
+.FacaSeuCartao:hover {
+  opacity: 0.9;
 }
 .vendaComAGente,
 .CanaisDeAtendimento {
@@ -334,6 +339,11 @@ nav ul li a:hover {
     gap: 0rem;
   }
 }
+@media screen and (max-width: 830px) {
+  .LojaInfoAndHorarioFuncionamento {
+    flex-direction: column;
+  }
+}
 .flexInLine img {
   width: 3rem;
   padding: 0.8rem;
@@ -342,6 +352,11 @@ nav ul li a:hover {
   filter: grayscale(100%);
   object-fit: contain;
   mix-blend-mode: color-burn;
+  transition: all 0.2s ease;
+}
+.flexInLine img:hover {
+  filter: grayscale(30%);
+  cursor: pointer;
 }
 .parceiros h3 {
   color: #666;
@@ -601,6 +616,26 @@ nav,
   .CentralDeAtendimento {
     padding-top: 0rem;
   }
+  .footerAll {
+    flex-direction: column;
+  }
+  .WhatsappTellAlterarLoja {
+    gap: 5px !important;
+  }
+  .WhatsappTellAlterarLoja a {
+    padding: 0.5rem 0.5rem !important;
+  }
+  .HorarioFuncionamento {
+    margin: 2rem 0 0;
+  }
+  .LojaEndereco {
+    margin-bottom: 0.4rem !important;
+  }
+}
+@media screen and (max-width: 344px) {
+  .lojaStatus img {
+    display: none;
+  }
 }
 .promocoes :is(h3, p) {
   white-space: normal;
@@ -678,7 +713,6 @@ body::-webkit-scrollbar-thumb {
   max-width: 73rem;
   margin: 0 auto;
   gap: 1rem;
-  margin-bottom: 5.38rem;
 }
 .Close,
 .Open {
@@ -914,4 +948,139 @@ body::-webkit-scrollbar-thumb {
 }
 .inputEmail {
   white-space: nowrap;
+}
+.LojaInfoAndHorarioFuncionamento {
+  max-width: 73rem;
+  width: 95%;
+  margin: 1.44rem auto;
+  display: flex;
+  justify-content: space-between;
+}
+.LojaInfoAndHorarioFuncionamento h5 {
+  color: #4d4d4d;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin: 1.5rem auto;
+}
+.IconLojaInfo {
+  border-radius: 0.8rem;
+  background: #0261a3;
+  width: 3.5625rem;
+  height: 3.53913rem;
+  padding: 0.9rem;
+}
+.WhatsappTellAlterarLoja img {
+  height: 0.85888rem;
+}
+.LojaInfo {
+  display: flex;
+  gap: 1rem;
+}
+.WhatsappTellAlterarLoja {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.WhatsappTellAlterarLoja svg {
+  fill: #0261a3;
+  height: 0.85888rem;
+  transition: all 0.2s ease;
+}
+.LojaWhatsapp svg {
+  stroke: #0261a3;
+  stroke-width: 0.4rem;
+  height: 1rem;
+  transition: all 0.2s ease;
+}
+.WhatsappTellAlterarLoja a {
+  border-radius: 0.5rem;
+  border: 1.5px solid #0261a3;
+  flex-grow: 1;
+  display: flex;
+  padding: 0.5rem 1.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3125rem;
+  flex-shrink: 0;
+
+  color: #0261a3;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  transition: all 0.2s ease;
+}
+.WhatsappTellAlterarLoja a:hover {
+  background: #0261a3;
+  color: #fff;
+  cursor: pointer;
+}
+.WhatsappTellAlterarLoja a:hover svg {
+  fill: #ffffff;
+  stroke: #ffffff;
+}
+.HorarioFuncionamento {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.HF {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 19rem;
+}
+.HF p {
+  margin: 0;
+  color: #333;
+  font-size: 0.95rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.HF :hover {
+  color: #0261a3;
+}
+.pontS {
+  color: #cfcfcf !important;
+  text-align: center !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: normal !important;
+}
+.LojaMapa iframe {
+  max-width: 73rem;
+  width: 95%;
+  border-radius: 1.1rem;
+}
+.LojaMapa {
+  display: flex;
+  justify-content: center;
+}
+.LojaNome {
+  color: #333;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 0.3rem;
+}
+.LojaEndereco {
+  color: #999;
+  font-size: 0.9rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 90.9%;
+  margin-bottom: 1rem;
+}
+.LojaHorario svg {
+  fill: #333;
+  height: 0.9rem;
+}
+.LojaHorario {
+  display: flex;
+  gap: 0.31rem;
+  align-items: center;
 }

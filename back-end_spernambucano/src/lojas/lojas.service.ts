@@ -54,3 +54,4 @@ export class LojasService {
     return objetoLojas;
   }
 }
+

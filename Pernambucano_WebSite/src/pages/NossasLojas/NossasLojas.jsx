@@ -171,7 +171,7 @@ export default function NossasLojas() {
                     ))}
                 </div>
             </section>
-
+            <br /> <br />
             <Footer />
         </>
     )
