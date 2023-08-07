@@ -48,7 +48,7 @@ export default function Footer() {
                         <ul>
                             <li>
                                 <Link to={{ pathname: '/sobre', state: { fromDashboard: true } }} onClick={handleClick}>
-                                    Sobre
+                                    Quem somos
                                 </Link>
                             </li>
                             <li>
@@ -100,7 +100,7 @@ export default function Footer() {
                 </div>
 
                 <div className="copyright">
-                    <p><strong>©</strong> 2021 - Todos os direitos reservados</p>
+                    <p><strong>©</strong> 2023 - Todos os direitos reservados</p>
                 </div>
             </footer>
         </>

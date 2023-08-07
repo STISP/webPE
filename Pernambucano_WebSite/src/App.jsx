@@ -63,13 +63,14 @@ export default function App() {
                             variedade de produtos de alta qualidade.</p>
                         <div className='botoes'>
                             <Link to='/lojas'><button className='buttonContato'>Veja a loja mais proxima</button></Link>
-                            <a href="https://cartoes.uzecomvoce.com.br/pernambuco" target="_blank">
+                            <Link to="/Cartao">
                                 <button className='buttonLojas'>Cartão</button>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <img src={SacolaC} alt="Sacola de compras" />
                 </div>
+                <img className='SacolaDeCompras' src={SacolaC} alt="Sacola de compras" />
 
                 <div className='QualidadeVariedadePreco'>
                     <div className="qualidade">
@@ -102,10 +103,10 @@ export default function App() {
                     </div>
 
                     <div className="flex2">
-                        <div className="FacaSeuCartao">
+                        <Link to='/Cartao' className="FacaSeuCartao">
                             <h3>Torne suas compras ainda mais faceis com o nosso cartão!</h3>
                             <button>Faça seu cartão</button>
-                        </div>
+                        </Link>
 
                         <div className="entrarEmContato">
                             <div className="vendaComAGente">

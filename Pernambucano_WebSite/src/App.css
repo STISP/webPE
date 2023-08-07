@@ -22,7 +22,7 @@ nav {
   width: 100%;
 }
 nav img {
-  height: 4rem;
+  height: 3rem;
   mix-blend-mode: multiply;
 }
 nav ul {
@@ -186,7 +186,7 @@ nav ul li a:hover {
 .qualidade img,
 .variedade img,
 .preco img {
-  width: 1.7rem;
+  height: 1.7rem;
   align-self: center;
 }
 .line {
@@ -211,6 +211,7 @@ nav ul li a:hover {
   background-position: center;
   border-radius: 0.625rem;
   background-size: cover;
+  min-width: 16rem;
 }
 .FacaSeuCartao {
   background-image: url("./assets/facaCartao.svg");
@@ -228,7 +229,8 @@ nav ul li a:hover {
   gap: 1rem;
   display: flex;
   flex-direction: column;
-  width: 25rem;
+  max-width: 25rem;
+  width: 95%;
   height: 6.0625rem;
   justify-content: center;
   cursor: pointer;
@@ -343,6 +345,9 @@ nav ul li a:hover {
   .LojaInfoAndHorarioFuncionamento {
     flex-direction: column;
   }
+}
+.SacolaDeCompras {
+  display: none;
 }
 .flexInLine img {
   width: 3rem;
@@ -477,12 +482,138 @@ footer {
 .promocoes {
   flex-grow: 1;
 }
+.menuMobileIcon img {
+  width: 2rem;
+  height: 2rem;
+}
 @media screen and (max-width: 768px) {
+  .menuDesktop {
+    display: none;
+  }
+  .menuMobileIcon {
+    display: flex;
+  }
   .logoAndRedes,
   .institucional,
   .CentralDeAtendimento {
     margin-bottom: 20px;
     flex-grow: 1;
+  }
+  .maintop img {
+    display: none;
+  }
+  .maintop {
+    justify-content: center !important;
+  }
+  .bemVindo,
+  .esqText h1 {
+    text-align: center;
+  }
+  .esqText h1 {
+    font-size: 2.5rem;
+  }
+  .bemVindo {
+    width: 90%;
+  }
+  .noMercado {
+    width: 85% !important;
+  }
+  .maintop {
+    margin: 3rem auto 0;
+  }
+  .buttonLojas {
+    white-space: nowrap;
+    color: #014270;
+    display: flex;
+    text-align: center;
+    font-size: 0.9rem;
+    font-style: normal;
+    font-weight: 700;
+    padding: 0.78rem 1.3rem;
+    border-radius: 0.5rem;
+    background: #ffd01b;
+    border: none;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .buttonLojas:hover {
+    background: #ffdf4f;
+    color: #0b4f80;
+  }
+  .esqText {
+    gap: 2rem;
+  }
+  .maintop,
+  .maintop2 {
+    width: 95%;
+    flex-direction: column;
+  }
+  .flex2 {
+    width: 100%;
+  }
+  .blocoAnuncio {
+    width: 100%;
+    height: 7rem;
+  }
+  .vendaComAGente,
+  .CanaisDeAtendimento {
+    flex-grow: 1;
+  }
+  .bemVindo {
+    font-size: 0.75rem;
+  }
+  .SacolaDeCompras {
+    display: block !important;
+    max-width: 23.0625rem;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 2.5rem;
+  }
+  .esqText {
+    align-items: center;
+  }
+  .qualidade p,
+  .variedade p,
+  .preco p {
+    display: none;
+  }
+  .qualidade h3,
+  .variedade h3,
+  .preco h3 {
+    font-size: 0.75rem;
+  }
+  .qualidade img,
+  .variedade img,
+  .preco img {
+    height: 1.3rem;
+  }
+  .qualidade,
+  .variedade,
+  .preco {
+    padding: 0.59rem 0.75rem 0.59rem 0.9rem;
+    background: #f0f5f9;
+    display: flex;
+    flex-grow: 1;
+    border-radius: 0.5rem;
+    gap: 0.4rem;
+    min-width: 4rem;
+  }
+  .QualidadeVariedadePreco > .line {
+    display: none;
+  }
+  .QualidadeVariedadePreco {
+    background: none;
+    gap: 0.8rem;
+    margin: 2rem auto 0;
+  }
+  .vendaComAGente button,
+  .CanaisDeAtendimento button {
+    width: 8rem;
+  }
+  .FacaSeuCartao {
+    max-width: none;
+    width: auto;
   }
 }
 @media screen and (max-width: 970px) {
@@ -896,6 +1027,28 @@ body::-webkit-scrollbar-thumb {
     flex-direction: column;
   }
 }
+{/* <!-- Modal Mobile --> */} 
+.modal-menu {
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.op-menu {
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+}
+{/* <!-- Modal politica e forma de pagamento --> */}
 .modal-overlay {
   position: fixed;
   top: 0;
