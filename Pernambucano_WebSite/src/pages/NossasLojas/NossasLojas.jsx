@@ -149,6 +149,7 @@ export default function NossasLojas() {
                 <h5 className='caminho_page'>
                     Página Inicial / Nossas Lojas
                 </h5>
+
                 <h1 className='tituloPageLojas'>Escolha a loja</h1>
                 <div className="listlojas">
                     {lojas.map((loja) => (

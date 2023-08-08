@@ -340,6 +340,9 @@ nav ul li a:hover {
   .flexInLine {
     gap: 0rem;
   }
+  .HorarioFuncionamento {
+    margin: 2rem 0 0;
+  }
 }
 @media screen and (max-width: 830px) {
   .LojaInfoAndHorarioFuncionamento {
@@ -482,7 +485,7 @@ footer {
 .promocoes {
   flex-grow: 1;
 }
-.menuMobileIcon img {
+nav > .menuMobileIcon {
   width: 2rem;
   height: 2rem;
 }
@@ -551,7 +554,7 @@ footer {
 .menuMobileRedes > .redesSociais {
   gap: 2rem;
 }
-.menuMobileRedes img{
+.menuMobileRedes img {
   width: 100%;
 }
 .op-menu a:active {
@@ -575,6 +578,21 @@ footer {
   display: none;
 }
 @media screen and (max-width: 768px) {
+  .HorarioFuncionamento {
+    margin: 2rem 0 0;
+    align-items: center;
+  }
+  .LojaHorario,
+  .LojaHorario p {
+    font-size: 0.9rem;
+  }
+  .LojaHorario svg {
+    height: 0.8rem;
+  }
+  .IconLojaInfo {
+    width: 2.5625rem !important;
+    height: 2.53913rem !important;
+  }
   .menuDesktop {
     display: none;
   }
@@ -844,11 +862,18 @@ nav,
   .WhatsappTellAlterarLoja a {
     padding: 0.5rem 0.5rem !important;
   }
-  .HorarioFuncionamento {
-    margin: 2rem 0 0;
-  }
   .LojaEndereco {
     margin-bottom: 0.4rem !important;
+  }
+  .LojaEndereco {
+    font-size: 0.8rem;
+  }
+  .LojaNome {
+    font-size: 1.1rem;
+  }
+  .caminho_page {
+    font-size: 0.75rem;
+    margin: 1rem auto;
   }
 }
 @media screen and (max-width: 344px) {

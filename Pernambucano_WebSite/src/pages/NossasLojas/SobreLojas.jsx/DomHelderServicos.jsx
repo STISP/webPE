@@ -8,12 +8,11 @@ export default function DomHelder() {
     return (
         <>
             <Menu />
-
             <DetalhesLoja ID="Loja2"
                 image={LogoCA}
                 loja="Dom Helder - Centro de serviços"
                 LojaNome="Dom Helder - Centro de serviços"
-                LojaEndereco="Av. Dom Helder Câmara, 5474 - Cachambi, Rio de Janeiro - RJ, 20771-004"
+                LojaEndereco="806, R. João Fragoso de Medeiros, 736 - PE, 54430-250"
                 LojaHorario="08h ás 16h"
                 cnpj="00.000.000/0000-00"
                 SegundaASextaI="07:00"

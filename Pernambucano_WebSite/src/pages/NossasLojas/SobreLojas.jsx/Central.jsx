@@ -11,7 +11,7 @@ export default function Central() {
             <DetalhesLoja ID="Loja1"
                 image={CentralIcon}
                 loja="Dom Helder - Central de serviços"
-                LojaEndereco="Av. Dom Helder Câmara, 5474 - Cachambi, Rio de Janeiro"
+                LojaEndereco="806, R. João Fragoso de Medeiros, 736 - PE, 54430-250"
                 LojaHorario="08h ás 16h"
                 cnpj="12.493.871/0001-73"
                 SegundaASextaI="07:00"

@@ -34,9 +34,7 @@ export default function Menu() {
                 </li>
             </ul>
             {/* menu Mobile*/}
-            <div onClick={MenuHandleOpenModal} className="menuMobileIcon">
-                <img src={MenuMobileIcon} alt="" />
-            </div>
+            <img className='menuMobileIcon' onClick={MenuHandleOpenModal} src={MenuMobileIcon} alt="" />
             <ModalMenuMobile isOpen={menuMobile} onClose={handleCloseModal} />
         </nav>
     )
