@@ -30,7 +30,7 @@ export default function Menu() {
                     <Link to="/lojas">Nossas Lojas</Link>
                 </li>
                 <li>
-                    <Link to="/Cartao">Cartão</Link>
+                    <a href='https://cartoes.uzecomvoce.com.br/pernambuco' target='_blank'>Cartão</a>
                 </li>
             </ul>
             {/* menu Mobile*/}

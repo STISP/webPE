@@ -26,17 +26,21 @@ const MenuMobileModal = ({ isOpen, onClose }) => {
                         Inicio
                     </Link>
                     <div className="linee" />
-                    <Link to={{ pathname: '/sobre', state: { fromDashboard: true } }} onClick={() => { onClose(); handleClick(); }}>
-                        Quem somos
-                    </Link>
-                    <div className="linee" />
                     <Link to="/lojas" onClick={onClose}>
                         Nossas Lojas
+                    </Link>
+                    <div className="linee" />
+                    <Link to={{ pathname: '/sobre', state: { fromDashboard: true } }} onClick={() => { onClose(); handleClick(); }}>
+                        Quem somos
                     </Link>
                     <div className="linee" />
                     <Link to="/Parceiros" onClick={onClose}>
                         Parceiros
                     </Link>
+                    <div className="linee" />
+                    <a href='https://cartoes.uzecomvoce.com.br/pernambuco' target='_blank' onClick={onClose}>
+                        Cartão
+                    </a>
                 </section>
                 <br /><br /><br /><br />
                 <section className='menuMobileRedes'>

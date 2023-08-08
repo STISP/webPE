@@ -1,6 +1,4 @@
 import React from 'react';
-import Footer from '../components/Footer';
-import Menu from '../components/Menu';
 import Contato from '../components/ContatoComponente';
 import Car from '../../src/assets/car.svg';
 import Central from '../../src/assets/central de servico.svg';
@@ -65,13 +63,12 @@ export default function Contatos(props) {
 
     return (
         <>
-            <Menu />
             <p className='caminho_page'>Página Inícial / Contatos</p>
             <h4 className='TituloContato'>Contatos</h4>
 
             <div className="lojas">
                 {lojas.map((loja, index) => (
-                    <Contato 
+                    <Contato
                         key={index}
                         icon={loja.icon}
                         loja={loja.loja}
@@ -80,8 +77,6 @@ export default function Contatos(props) {
                     />
                 ))}
             </div>
-
-            <Footer />
         </>
     );
 }

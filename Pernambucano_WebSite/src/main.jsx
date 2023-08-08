@@ -18,10 +18,13 @@ import Radio from './pages/Radio.jsx'
 import Central from './pages/NossasLojas/SobreLojas.jsx/Central.jsx'
 import Sobre from './pages/Sobre/Sobre.jsx'
 import JaboataoMatriz from './pages/NossasLojas/SobreLojas.jsx/JaboataoMatriz.jsx'
+import Layout from './Layout';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <BrowserRouter>
+
+<React.StrictMode>
+  <BrowserRouter>
+    <Layout>
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/lojas" element={<NossasLojas />} />
@@ -41,6 +44,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/Cartao" element={<Cartao />} />
         <Route path="/sobre" element={<Sobre />} />
       </Routes>
-    </BrowserRouter>
-  </React.StrictMode>,
+    </Layout>
+  </BrowserRouter>
+</React.StrictMode>,
 )

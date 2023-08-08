@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css'
 import { Link } from 'react-router-dom'
-import Footer from './components/Footer'
-import Menu from './components/Menu'
 import SacolaC from './assets/SacolaCompras.svg'
 import StarIcon from './assets/starIcon.svg'
 import BoxIcon from './assets/boxIcon.svg'
@@ -22,17 +20,16 @@ export default function App() {
         { id: 8, imgSrc: Vitarella, altText: 'parceiro8' },
         { id: 9, imgSrc: Vitarella, altText: 'parceiro9' },
         { id: 10, imgSrc: Vitarella, altText: 'parceiro10' },
+        { id: 11, imgSrc: Vitarella, altText: 'parceiro11' },
     ];
 
 
-    // Estado para controlar o número de itens exibidos com base no tamanho da tela
     const [numItemsToShow, setNumItemsToShow] = useState(6);
 
-    // Função para atualizar o número de itens a serem exibidos quando a tela for redimensionada
     const handleResize = () => {
         const windowWidth = window.innerWidth;
         if (windowWidth < 768) {
-            setNumItemsToShow(8);
+            setNumItemsToShow(5);
         } else if (windowWidth < 992) {
             setNumItemsToShow(9);
         } else {
@@ -40,19 +37,16 @@ export default function App() {
         }
     };
 
-    // Efeito para adicionar o ouvinte de redimensionamento quando o componente montar
     useEffect(() => {
-        handleResize(); // Chama a função inicialmente para definir o número correto de itens
+        handleResize();
         window.addEventListener('resize', handleResize);
         return () => {
-            window.removeEventListener('resize', handleResize); // Remove o ouvinte quando o componente desmontar
+            window.removeEventListener('resize', handleResize);
         };
     }, []);
 
     return (
         <>
-            <Menu />
-            {/* conteudo */}
             <section>
                 <div className="maintop">
                     <div className="esqText">
@@ -63,9 +57,9 @@ export default function App() {
                             variedade de produtos de alta qualidade.</p>
                         <div className='botoes'>
                             <Link to='/lojas'><button className='buttonContato'>Veja a loja mais proxima</button></Link>
-                            <Link to="/Cartao">
+                            <a href='https://cartoes.uzecomvoce.com.br/pernambuco' target='_blank'>
                                 <button className='buttonLojas'>Cartão</button>
-                            </Link>
+                            </a>
                         </div>
                     </div>
                     <img src={SacolaC} alt="Sacola de compras" />
@@ -103,10 +97,10 @@ export default function App() {
                     </div>
 
                     <div className="flex2">
-                        <Link to='/Cartao' className="FacaSeuCartao">
+                        <a href='https://cartoes.uzecomvoce.com.br/pernambuco' target='_blank' className="FacaSeuCartao">
                             <h3>Torne suas compras ainda mais faceis com o nosso cartão!</h3>
                             <button>Faça seu cartão</button>
-                        </Link>
+                        </a>
 
                         <div className="entrarEmContato">
                             <div className="vendaComAGente">
@@ -139,10 +133,8 @@ export default function App() {
                 </div>
 
                 <div className="experiencia">
-                    <h3>Aqui sua experiência é o nosso foco</h3>
+                    <h3>Qualidade e variedade de produtos é aqui</h3>
                 </div>
-
-                <Footer />
             </section>
         </>
     )

@@ -1,7 +1,4 @@
 import '../../App.css'
-import { Link } from 'react-router-dom'
-import Menu from '../../components/Menu'
-import Footer from '../../components/Footer'
 import ConsultaLojas from '../../components/ConsultaLojas'
 import Central from '../../../src/assets/central de servico.svg'
 import Car from '../../assets/car.svg'
@@ -143,8 +140,6 @@ export default function NossasLojas() {
 
     return (
         <>
-            <Menu />
-
             <section>
                 <h5 className='caminho_page'>
                     Página Inicial / Nossas Lojas
@@ -173,7 +168,6 @@ export default function NossasLojas() {
                 </div>
             </section>
             <br /> <br />
-            <Footer />
         </>
     )
 }
