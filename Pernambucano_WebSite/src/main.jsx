@@ -17,8 +17,7 @@ import Cartao from './pages/Cartao/Cartao.jsx'
 import Radio from './pages/Radio.jsx'
 import Central from './pages/NossasLojas/SobreLojas.jsx/Central.jsx'
 import Sobre from './pages/Sobre/Sobre.jsx'
-
-
+import JaboataoMatriz from './pages/NossasLojas/SobreLojas.jsx/JaboataoMatriz.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -30,11 +29,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/lojas/Dom_Helder_Servicos" element={<DomHelderServicos />} />
         <Route path="/lojas/Goiana" element={<Goiana />} />
         <Route path="/lojas/jaboatao_Centro" element={<JaboataoCentro />} />
+        <Route path="/lojas/JaboataoMatriz" element={<JaboataoMatriz />} />
         <Route path="/lojas/Moreno" element={<Moreno />} />
         <Route path="/lojas/Olinda" element={<Olinda />} />
         <Route path="/lojas/DomHelderServicos" element={<Central />} />
-        <Route path="/lojas/Sao_Lourenco_da_Mata_centro" element={<SaoLourencoDaMataCentro />} />
-        <Route path="/lojas/Vasco_da_Gama" element={<VascoDaGama />} />
+        <Route path="/lojas/SaoLourencoDaMataCentro" element={<SaoLourencoDaMataCentro />} />
+        <Route path="/lojas/VascoDaGama" element={<VascoDaGama />} />
         <Route path="/contatos" element={<Contatos />} />
         <Route path="/parceiros" element={<Parceiros />} />
         <Route path="/radio" element={<Radio />} />

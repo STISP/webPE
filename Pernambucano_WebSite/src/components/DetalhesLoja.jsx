@@ -92,7 +92,7 @@ export default function DetalhesLoja(props) {
             </div>
             <br />
             <div className="LojaMapa">
-                {props.mapaLojaURL}
+                <iframe src={props.mapaLojaURL} width="1072" height="288" title="Mapa da loja" frameBorder="0" style={{ border: 0 }} allowFullScreen="" aria-hidden="false" tabIndex="0"></iframe>
             </div>
             <br /> <br />
         </section>

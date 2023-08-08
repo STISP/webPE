@@ -145,7 +145,7 @@ nav ul li a:hover {
 .QualidadeVariedadePreco {
   display: flex;
   justify-content: space-evenly;
-  max-width: 73rem;
+  max-width: 82.5rem;
   width: 95%;
   border-radius: 0.625rem;
   background: #f0f5f9;
@@ -372,7 +372,7 @@ nav ul li a:hover {
   margin: 2.5rem 0 0.4em 0;
 }
 .parceiros {
-  max-width: 73rem;
+  max-width: 82.5rem;
   width: 95%;
   margin: 0 auto;
   overflow: auto;
@@ -396,7 +396,7 @@ nav ul li a:hover {
   justify-content: center;
   padding: 0.5rem 0;
   margin: 2rem auto 0;
-  max-width: 73rem;
+  max-width: 82.5rem;
   width: 95%;
 }
 .experiencia h3 {
@@ -438,7 +438,7 @@ nav ul li a:hover {
 .footerAll {
   margin: 2.25rem auto 0;
   display: flex;
-  max-width: 73rem;
+  max-width: 82.5rem;
   padding: 2rem 0 2rem;
   width: 95%;
   gap: 1rem;
@@ -486,12 +486,100 @@ footer {
   width: 2rem;
   height: 2rem;
 }
+/* <!-- Modal Mobile --> */
+.modal-menu {
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.op-menu {
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+.op-menu header {
+  display: flex;
+  align-items: center;
+}
+.op-menu header > h1 {
+  flex: 1;
+  text-align: center;
+  color: #0261a3;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-left: 2.3rem;
+}
+.op-menu svg {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  fill: #0261a3;
+}
+.op-menu a {
+  color: #3d3d3d;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0;
+  padding: 1rem 0;
+  width: 100%;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+.op-menu a:hover {
+  color: #0261a3;
+  background: #f4f4f4;
+  border-radius: 1rem;
+}
+.menuMobileRedes > .redesSociais > img {
+  height: 1.5rem;
+  width: auto;
+}
+.menuMobileRedes > .redesSociais {
+  gap: 2rem;
+}
+.menuMobileRedes img{
+  width: 100%;
+}
+.op-menu a:active {
+  color: #f4f4f4;
+  background: #0261a3;
+  border-radius: 1rem;
+  transition: all 0s ease;
+}
+.linee {
+  width: 100%;
+  height: 1px;
+  background-color: #bebebe;
+  margin: 0.5rem;
+}
+.op-menu section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.menuMobileIcon {
+  display: none;
+}
 @media screen and (max-width: 768px) {
   .menuDesktop {
     display: none;
   }
   .menuMobileIcon {
-    display: flex;
+    display: block;
   }
   .logoAndRedes,
   .institucional,
@@ -701,7 +789,7 @@ footer {
 nav,
 .maintop,
 .maintop2 {
-  max-width: 73rem;
+  max-width: 82.5rem;
   display: flex;
   justify-content: space-between;
   width: 95%;
@@ -712,7 +800,7 @@ nav,
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  max-width: 73rem;
+  max-width: 82.5rem;
   width: 95%;
   margin: 1.44rem auto;
 }
@@ -781,7 +869,7 @@ nav,
   font-weight: 700;
   line-height: normal;
   margin: 0 auto;
-  max-width: 73rem;
+  max-width: 82.5rem;
   width: 95%;
   height: 5.25rem;
   border-radius: 1rem;
@@ -792,7 +880,7 @@ nav,
   display: flex;
   flex-wrap: wrap;
   width: 95%;
-  max-width: 73rem;
+  max-width: 82.5rem;
   margin: 0 auto;
   gap: 1rem;
 }
@@ -824,7 +912,7 @@ h3 {
 }
 .tituloPageLojas,
 .TituloParceiros {
-  max-width: 73rem;
+  max-width: 82.5rem;
   margin: 0 auto;
   width: 95%;
   margin-bottom: 1rem;
@@ -841,7 +929,7 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   flex-wrap: wrap;
   width: 95%;
-  max-width: 73rem;
+  max-width: 82.5rem;
   margin: 0 auto;
   gap: 1rem;
 }
@@ -996,7 +1084,7 @@ body::-webkit-scrollbar-thumb {
   object-fit: contain;
 }
 .Parceiros {
-  max-width: 73rem;
+  max-width: 82.5rem;
   width: 95%;
   margin: 0 auto;
   display: flex;
@@ -1027,28 +1115,7 @@ body::-webkit-scrollbar-thumb {
     flex-direction: column;
   }
 }
-{/* <!-- Modal Mobile --> */} 
-.modal-menu {
-  z-index: 999;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.op-menu {
-  background-color: #fefefe;
-  padding: 20px;
-  border: 1px solid #888;
-  max-width: 100%;
-  max-height: 100%;
-  overflow: auto;
-}
-{/* <!-- Modal politica e forma de pagamento --> */}
+/* <!-- Modal politica e forma de pagamento --> */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -1103,7 +1170,7 @@ body::-webkit-scrollbar-thumb {
   white-space: nowrap;
 }
 .LojaInfoAndHorarioFuncionamento {
-  max-width: 73rem;
+  max-width: 82.5rem;
   width: 95%;
   margin: 1.44rem auto;
   display: flex;
@@ -1204,7 +1271,7 @@ body::-webkit-scrollbar-thumb {
   line-height: normal !important;
 }
 .LojaMapa iframe {
-  max-width: 73rem;
+  max-width: 82.5rem;
   width: 95%;
   border-radius: 1.1rem;
 }

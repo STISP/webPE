@@ -57,7 +57,7 @@ export default function NossasLojas() {
         {
             img: Car,
             ID: "Loja5",
-            LinkPage: "/lojas/jaboatao_Centro",
+            LinkPage: "/lojas/jaboataoMatriz",
             loja: "Jaboatão Centro Matriz",
             nome: "Supermercado Pernambucano",
             endereco: "Rua Barão de Lucena, 729",

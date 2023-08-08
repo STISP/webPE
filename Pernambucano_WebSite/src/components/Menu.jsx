@@ -17,7 +17,7 @@ export default function Menu() {
 
     return (
         <nav>
-            <img src={LogoCompleta} alt="Logo Pernambucano" />
+            <Link to="/"><img src={LogoCompleta} alt="Logo Pernambucano" /></Link>
             {/* menu Desktop*/}
             <ul className='menuDesktop'>
                 <li>

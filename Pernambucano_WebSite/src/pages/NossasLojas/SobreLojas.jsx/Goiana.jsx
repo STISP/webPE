@@ -1,21 +1,29 @@
 import '../../../App.css'
-import { Link } from 'react-router-dom'
 import Menu from '../../../components/Menu'
 import Footer from '../../../components/Footer'
 import DetalhesLoja from '../../../components/DetalhesLoja';
-
+import LogoCA from '../../../assets/car.svg'
 
 export default function Goiana() {
     return (
         <>
             <Menu />
 
-            <section>
-                <h5 className='caminho_page'>
-                    Página Inicial / Nossas Lojas / Goiana
-                </h5>
-                <h1>Goiana</h1>
-            </section>
+            <DetalhesLoja ID="Loja2"
+                image={LogoCA}
+                loja="Goiana"
+                LojaNome="Goiana"
+                LojaEndereco="R. Benjamin Constant, 68 - Centro, Goiana - PE, 55900-000"
+                LojaHorario="07h ás 19h"
+                cnpj="23.094.631/0001-12"
+                SegundaASextaI="07:00"
+                SegundaASextaF="19:00"
+                SabadoI="07:00"
+                SabadoF="19:00"
+                DomingoI="07:00"
+                DomingoF="19:00"
+                mapaLojaURL={'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.13856509584!2d-35.00080259999999!3d-7.559867100000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab63e66190decd%3A0x958e3b37775119f3!2sSupermercado%20Pernambucano!5e0!3m2!1spt-BR!2sbr!4v1691452306208!5m2!1spt-BR!2sbr'}
+            />
 
             <Footer />
         </>
