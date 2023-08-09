@@ -1177,6 +1177,11 @@ body::-webkit-scrollbar-thumb {
     width: 9rem;
   }
 }
+@media screen and (max-width: 440px) {
+  .carousel-item img {
+    height: calc(5rem * (16 / 9)) !important;
+  }
+}
 @media screen and (max-width: 330px) {
   .lojaStatus span {
     display: none;
@@ -1494,10 +1499,10 @@ body::-webkit-scrollbar-thumb {
   width: 95%;
   margin: 0 auto;
 }
-.trabalheConoscoAtivo p{
+.trabalheConoscoAtivo p {
   color: #727272;
 }
-.trabalheConoscoAtivo p > a{
+.trabalheConoscoAtivo p > a {
   color: #004779;
 }
 .quemSomoAtivo p {
@@ -1577,22 +1582,20 @@ body::-webkit-scrollbar-thumb {
   overflow: hidden;
   width: 100%;
 }
-
 .carousel-track {
   display: flex;
   transition: transform 1s ease-in-out;
 }
-
 .carousel-item {
   flex: 0 0 100%;
+  display: flex !important;
 }
-
 .carousel-item img {
   width: 100%;
   height: auto;
   object-fit: cover;
+  display: flex;
 }
-
 .padaria img {
   max-width: 25rem;
   border-radius: 0.625rem;
