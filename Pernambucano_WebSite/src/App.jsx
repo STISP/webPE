@@ -6,7 +6,7 @@ import StarIcon from './assets/starIcon.svg'
 import BoxIcon from './assets/boxIcon.svg'
 import CarrinhoIcon from './assets/carrinhoIcon.svg'
 import Vitarella from './assets/vitarella.png'
-import Verduras from './assets/Verduras.svg'
+import Verduras from './assets/verduras.svg'
 import TodosProdutos from './assets/TodosProdutos.svg'
 import Padaria from './assets/padaria.svg'
 
