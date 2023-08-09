@@ -8,6 +8,17 @@ export default function NossasLojas() {
     const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString('pt-BR'));
     const lojas = [
         {
+            img: Central,
+            ID: "central",
+            LinkPage: "/lojas/DomHelderServicos",
+            loja: "Dom Helder",
+            nome: "Centro de Servicos",
+            endereco: "R. João Fragoso de Medeiros, 1687",
+            horarioOpenClose: "08:00 às 18:00",
+            linkLocalizacao: "https://goo.gl/maps/931D6t7NPsK3wJZ28",
+            linkWhatsapp: "https://goo.gl/maps/931D6t7NPsK3wJZ28"
+        },
+        {
             img: Car,
             ID: "Loja1",
             LinkPage: "/lojas/Dom_Helder",
@@ -94,17 +105,6 @@ export default function NossasLojas() {
             horarioOpenClose: "07:00 às 20:30",
             linkLocalizacao: "https://goo.gl/maps/7zqz5jZM7bx6HDqV7",
             linkWhatsapp: "https://goo.gl/maps/7zqz5jZM7bx6HDqV7"
-        },
-        {
-            img: Central,
-            ID: "central",
-            LinkPage: "/lojas/DomHelderServicos",
-            loja: "Dom Helder",
-            nome: "Centro de Servicos",
-            endereco: "R. João Fragoso de Medeiros, 1687",
-            horarioOpenClose: "08:00 às 18:00",
-            linkLocalizacao: "https://goo.gl/maps/931D6t7NPsK3wJZ28",
-            linkWhatsapp: "https://goo.gl/maps/931D6t7NPsK3wJZ28"
         }
     ];
 

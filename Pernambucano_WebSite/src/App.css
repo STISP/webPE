@@ -124,7 +124,7 @@ nav ul li a:hover {
   width: 95%;
 }
 .maintop img {
-  width: 40%;
+  width: 35%;
 }
 .botoes {
   display: flex;
@@ -1494,6 +1494,12 @@ body::-webkit-scrollbar-thumb {
   width: 95%;
   margin: 0 auto;
 }
+.trabalheConoscoAtivo p{
+  color: #727272;
+}
+.trabalheConoscoAtivo p > a{
+  color: #004779;
+}
 .quemSomoAtivo p {
   text-align: justify;
 }
@@ -1527,13 +1533,13 @@ body::-webkit-scrollbar-thumb {
 }
 .vaga {
   color: #0261a3;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
 
   display: inline-flex;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
   justify-content: center;
   align-items: center;
   gap: 0.625rem;
@@ -1562,20 +1568,31 @@ body::-webkit-scrollbar-thumb {
   align-items: center;
   contain: content;
   margin-top: 2rem;
-}
-.promocoes {
   overflow: hidden;
   position: relative;
 }
-.carousel {
+
+.carousel-container {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-track {
   display: flex;
   transition: transform 1s ease-in-out;
 }
+
 .carousel-item {
+  flex: 0 0 100%;
+}
+
+.carousel-item img {
   width: 100%;
   height: auto;
   object-fit: cover;
 }
+
 .padaria img {
   max-width: 25rem;
   border-radius: 0.625rem;

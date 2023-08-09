@@ -13,8 +13,6 @@ import VascoDaGama from '../src/pages/NossasLojas/SobreLojas.jsx/VascoDaGama.jsx
 import JaboataoCentro from '../src/pages/NossasLojas/SobreLojas.jsx/jaboataoCentro.jsx'
 import Contatos from './pages/contatos.jsx'
 import Parceiros from './pages/Parceiros.jsx'
-import Cartao from './pages/Cartao/Cartao.jsx'
-import Radio from './pages/Radio.jsx'
 import Central from './pages/NossasLojas/SobreLojas.jsx/Central.jsx'
 import Sobre from './pages/Sobre/Sobre.jsx'
 import JaboataoMatriz from './pages/NossasLojas/SobreLojas.jsx/JaboataoMatriz.jsx'
@@ -40,8 +38,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/lojas/VascoDaGama" element={<VascoDaGama />} />
         <Route path="/contatos" element={<Contatos />} />
         <Route path="/parceiros" element={<Parceiros />} />
-        <Route path="/radio" element={<Radio />} />
-        <Route path="/Cartao" element={<Cartao />} />
         <Route path="/sobre" element={<Sobre />} />
       </Routes>
     </Layout>

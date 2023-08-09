@@ -49,7 +49,6 @@ export default function App() {
     }, []);
 
     const [currentIndex, setCurrentIndex] = useState(0);
-
     const images = [Verduras, TodosProdutos];
 
     const nextSlide = () => {
@@ -64,12 +63,15 @@ export default function App() {
     return (
         <>
             <section>
-
                 <div className='promocoes'>
-                    <div className="carousel" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
-                        {images.map((image, index) => (
-                            <img src={image} alt={`Promoção ${index}`} className="carousel-item" key={index} />
-                        ))}
+                    <div className="carousel-container">
+                        <div className="carousel-track" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+                            {images.map((image, index) => (
+                                <div className="carousel-item" key={index}>
+                                    <img src={image} alt={`Promoção ${index}`} />
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
 
@@ -131,22 +133,6 @@ export default function App() {
                                 <img src={Padaria} alt="padaria" />
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div className="parceiros">
-                    <h3>Parceiros</h3>
-                </div>
-
-                <div className="parceiros">
-                    <div className="flexInLine">
-                        {parceiros.slice(0, numItemsToShow).map((parceiro) => (
-                            <React.Fragment key={parceiro.id}>
-                                <img src={parceiro.imgSrc} alt={parceiro.altText} />
-                                <div className="line" />
-                            </React.Fragment>
-                        ))}
-                        <Link to="/Parceiros">ver mais</Link>
                     </div>
                 </div>
 
