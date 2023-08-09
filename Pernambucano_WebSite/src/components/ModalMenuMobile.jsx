@@ -42,7 +42,7 @@ const MenuMobileModal = ({ isOpen, onClose }) => {
                         Cartão
                     </a>
                 </section>
-                <br /><br /><br /><br />
+                <br /><br /><br />
                 <section className='menuMobileRedes'>
                     <div className="redesSociais">
                         <img src={whatsapp} alt="whatsapp" />
@@ -51,6 +51,7 @@ const MenuMobileModal = ({ isOpen, onClose }) => {
                     </div>
                     <br />
                     <img src={LogoCompleta} alt="logo" />
+                    <br /><br />
                 </section>
             </div>
         </div>

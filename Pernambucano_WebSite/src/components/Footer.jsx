@@ -29,6 +29,11 @@ export default function Footer() {
         window.scrollTo(0, 0);
     }
 
+    const handleTrabalheConoscoLinkClick = () => {
+        setIsTrabalheConoscoAtivo(true);
+        setIsQuemSomosAtivo(false);
+    };
+
     return (
         <>
             <footer>
@@ -52,7 +57,9 @@ export default function Footer() {
                                 </Link>
                             </li>
                             <li>
-                                <a href="#">Trabalhe Conosco</a>
+                                <Link to={{ pathname: '/sobre', state: { fromDashboard: true } }} onClick={handleTrabalheConoscoLinkClick}>
+                                    Trabalhe Conosco
+                                </Link>
                             </li>
                             <li>
                                 <Link to={{ pathname: '/lojas/DomHelderServicos', state: { fromDashboard: true } }} onClick={handleClick}>
@@ -88,7 +95,7 @@ export default function Footer() {
                         </ul>
                         <PaymentMethodsModal isOpen={PaymentModalOpen} onClose={handleCloseModal} />
                     </div>
-                    <div className="promocoes">
+                    <div className="Recebapromocoes">
                         <h3>Receba novidades e descontos especiais</h3>
                         <p>inscreva-se e ganhe as melhores promoções disponíveis e muito mais.</p>
                         <div className='inputEmail'>

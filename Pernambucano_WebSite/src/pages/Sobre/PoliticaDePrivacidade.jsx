@@ -13,15 +13,15 @@ const PrivacyPolicyModal = ({ isOpen, onClose }) => {
         <main>
           <section>
             <h2>Coleta de informações</h2>
-            <p>Coletamos informações pessoais que você nos fornece voluntariamente, como seu nome, endereço de e-mail e outras informações de contato. Também podemos coletar informações automaticamente quando você usa nosso site, como seu endereço IP, tipo de navegador e informações sobre como você interage com nosso site.</p>
+            <p>Coletamos informações pessoais que você fornece, como nome, e-mail e outras informações de contato. Também coletamos dados automáticos, como IP e navegador.</p>
           </section>
           <section>
             <h2>Alterações na política de privacidade</h2>
-            <p>Podemos alterar esta política de privacidade a qualquer momento. Quando fizermos alterações, publicaremos a política atualizada em nosso site e notificaremos você conforme exigido por lei.</p>
+            <p>Podemos alterar esta política a qualquer momento e notificaremos conforme necessário.</p>
           </section>
           <section>
             <h2>Contato</h2>
-            <p>Se você tiver alguma dúvida sobre esta política de privacidade ou sobre como usamos suas informações pessoais, entre em contato conosco pelo endereço fornecido em nosso site.</p>
+            <p>Se tiver dúvidas sobre esta política ou uso de informações pessoais, entre em contato pelo endereço do site.</p>
           </section>
         </main>
         <footer>

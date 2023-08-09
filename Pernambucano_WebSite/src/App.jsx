@@ -6,6 +6,9 @@ import StarIcon from './assets/starIcon.svg'
 import BoxIcon from './assets/boxIcon.svg'
 import CarrinhoIcon from './assets/carrinhoIcon.svg'
 import Vitarella from './assets/vitarella.png'
+import Verduras from './assets/Verduras.svg'
+import TodosProdutos from './assets/TodosProdutos.svg'
+import Padaria from './assets/padaria.svg'
 
 export default function App() {
 
@@ -45,26 +48,30 @@ export default function App() {
         };
     }, []);
 
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const images = [Verduras, TodosProdutos];
+
+    const nextSlide = () => {
+        setCurrentIndex((currentIndex + 1) % images.length);
+    };
+
+    useEffect(() => {
+        const interval = setInterval(nextSlide, 5000);
+        return () => clearInterval(interval);
+    }, [currentIndex]);
+
     return (
         <>
             <section>
-                <div className="maintop">
-                    <div className="esqText">
-                        <p className='noMercado'>20 anos de experiência no mercado</p>
-                        <h1>O melhor mercado da região é aqui</h1>
-                        <p className='bemVindo'>Seja bem-vindo! Aqui, nossa missão é oferecer uma
-                            experiência de compra perfeita, combinada com uma ampla
-                            variedade de produtos de alta qualidade.</p>
-                        <div className='botoes'>
-                            <Link to='/lojas'><button className='buttonContato'>Veja a loja mais proxima</button></Link>
-                            <a href='https://cartoes.uzecomvoce.com.br/pernambuco' target='_blank'>
-                                <button className='buttonLojas'>Cartão</button>
-                            </a>
-                        </div>
+
+                <div className='promocoes'>
+                    <div className="carousel" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+                        {images.map((image, index) => (
+                            <img src={image} alt={`Promoção ${index}`} className="carousel-item" key={index} />
+                        ))}
                     </div>
-                    <img src={SacolaC} alt="Sacola de compras" />
                 </div>
-                <img className='SacolaDeCompras' src={SacolaC} alt="Sacola de compras" />
 
                 <div className='QualidadeVariedadePreco'>
                     <div className="qualidade">
@@ -91,6 +98,23 @@ export default function App() {
                         </div>
                     </div>
                 </div>
+                <div className="maintop">
+                    <div className="esqText">
+                        <p className='noMercado'>20 anos de experiência no mercado</p>
+                        <h1>O melhor mercado da região é aqui</h1>
+                        <p className='bemVindo'>Seja bem-vindo! Aqui, nossa missão é oferecer uma
+                            experiência de compra perfeita em nossas lojas, combinada com uma ampla
+                            variedade de produtos de alta qualidade.</p>
+                        <div className='botoes'>
+                            <Link to='/lojas'><button className='buttonContato'>Veja a loja mais proxima</button></Link>
+                            <a href='https://cartoes.uzecomvoce.com.br/pernambuco' target='_blank'>
+                                <button className='buttonLojas'>Cartão</button>
+                            </a>
+                        </div>
+                    </div>
+                    <img src={SacolaC} alt="Sacola de compras" />
+                </div>
+                <img className='SacolaDeCompras' src={SacolaC} alt="Sacola de compras" />
 
                 <div className='maintop2'>
                     <div className="blocoAnuncio">
@@ -103,14 +127,8 @@ export default function App() {
                         </a>
 
                         <div className="entrarEmContato">
-                            <div className="vendaComAGente">
-                                <h3>teste</h3>
-                                <button>Confira</button>
-                            </div>
-
-                            <div className="CanaisDeAtendimento">
-                                <h3>teste</h3>
-                                <button>Confira</button>
+                            <div className="padaria">
+                                <img src={Padaria} alt="padaria" />
                             </div>
                         </div>
                     </div>

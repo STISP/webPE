@@ -124,7 +124,7 @@ nav ul li a:hover {
   width: 95%;
 }
 .maintop img {
-  width: 23.0625rem;
+  width: 40%;
 }
 .botoes {
   display: flex;
@@ -149,7 +149,7 @@ nav ul li a:hover {
   width: 95%;
   border-radius: 0.625rem;
   background: #f0f5f9;
-  margin: 4.4rem auto 0;
+  margin: 3.4rem auto 0;
 }
 .flex {
   display: flex;
@@ -206,7 +206,7 @@ nav ul li a:hover {
 .blocoAnuncio {
   flex-grow: 1;
   background-image: url("./assets/anuncio.svg");
-  height: 17rem;
+  height: 19rem;
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 0.625rem;
@@ -230,7 +230,6 @@ nav ul li a:hover {
   display: flex;
   flex-direction: column;
   max-width: 25rem;
-  width: 95%;
   min-height: 6.0625rem;
   justify-content: center;
   cursor: pointer;
@@ -340,6 +339,9 @@ nav ul li a:hover {
 @media screen and (max-width: 856px) {
   .flexInLine {
     gap: 0rem;
+  }
+  nav ul {
+    gap: 2rem;
   }
   .HorarioFuncionamento {
     margin: 2rem 0 0;
@@ -484,7 +486,7 @@ footer {
 .logoAndRedes,
 .institucional,
 .CentralDeAtendimento,
-.promocoes {
+.Recebapromocoes {
   flex-grow: 1;
 }
 nav > .menuMobileIcon {
@@ -579,7 +581,18 @@ nav > .menuMobileIcon {
 .menuMobileIcon {
   display: none;
 }
+@media screen and (max-width: 627px) {
+  .flex2 {
+    flex-direction: column !important;
+  }
+  .padaria img {
+    max-width: 100% !important;
+  }
+}
 @media screen and (max-width: 768px) {
+  .flex2 {
+    flex-direction: row;
+  }
   .vendaComAGente,
   .CanaisDeAtendimento {
     max-width: none;
@@ -587,6 +600,9 @@ nav > .menuMobileIcon {
   .HorarioFuncionamento {
     margin: 2rem 0 0;
     align-items: center;
+  }
+  .trabalheConosco-vendaConosco-quemSomos {
+    gap: 1rem !important;
   }
   .LojaHorario,
   .LojaHorario p {
@@ -628,7 +644,8 @@ nav > .menuMobileIcon {
     width: 90%;
   }
   .noMercado {
-    width: 85% !important;
+    width: 90% !important;
+    display: none;
   }
   .maintop {
     margin: 3rem auto 0;
@@ -734,7 +751,7 @@ nav > .menuMobileIcon {
     justify-content: center;
   }
   .institucional,
-  .promocoes,
+  .Recebapromocoes,
   .CentralDeAtendimento {
     padding-top: 0rem;
   }
@@ -754,11 +771,11 @@ nav > .menuMobileIcon {
   cursor: pointer;
 }
 .institucional,
-.promocoes,
+.Recebapromocoes,
 .CentralDeAtendimento {
   padding-top: 1rem;
 }
-.promocoes p {
+.Recebapromocoes p {
   margin: 0.3rem 0 1rem;
   font-weight: 300;
   font-size: 0.9rem;
@@ -768,7 +785,7 @@ nav > .menuMobileIcon {
   letter-spacing: 0.3px;
   line-height: normal;
 }
-.promocoes input {
+.Recebapromocoes input {
   max-width: 7rem;
   width: 100%;
   padding: 9px 20px;
@@ -779,7 +796,7 @@ nav > .menuMobileIcon {
   font-size: 14px;
   border: 1px solid #dcdcdc;
 }
-.promocoes button {
+.Recebapromocoes button {
   background-color: #0261a3;
   color: #fff;
   border: none;
@@ -804,7 +821,7 @@ nav > .menuMobileIcon {
   background-color: #0261a3;
   border-radius: 0.5rem;
   transition: all 0.2s ease;
-  object-fit: cover;
+  object-fit: none;
 }
 .redesSociais img:hover {
   cursor: pointer;
@@ -856,6 +873,9 @@ nav,
   }
 }
 @media screen and (max-width: 480px) {
+  nav img {
+    height: 2.5rem;
+  }
   .Parceiros {
     gap: 1rem !important;
   }
@@ -873,7 +893,7 @@ nav,
     width: 100%;
   }
   .institucional,
-  .promocoes,
+  .Recebapromocoes,
   .CentralDeAtendimento {
     padding-top: 0rem;
   }
@@ -905,7 +925,7 @@ nav,
     display: none;
   }
 }
-.promocoes :is(h3, p) {
+.Recebapromocoes :is(h3, p) {
   white-space: normal;
 }
 .TituloContato {
@@ -1167,16 +1187,16 @@ body::-webkit-scrollbar-thumb {
 }
 /* <!-- Modal politica e forma de pagamento --> */
 .modal-overlay {
-  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 999;
+  justify-content: center;
+  z-index: 9999;
 }
 .modal {
   background-color: #fff;
@@ -1185,6 +1205,7 @@ body::-webkit-scrollbar-thumb {
   width: 90%;
   padding: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  overflow: auto;
 }
 .modal header {
   display: flex;
@@ -1353,4 +1374,209 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   gap: 0.31rem;
   align-items: center;
+}
+.privacidade {
+  display: flex;
+  border-radius: 0.625rem;
+  background: #f1f1f199;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 6%;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.privacidade:hover {
+  background: #0261a3;
+  color: color #fff;
+}
+.privacidade:hover,
+.privacidade:hover :is(h3, p) {
+  color: #fff;
+}
+.privacidade h3 {
+  color: #373737;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  transition: 0.3s ease;
+  line-height: 100%;
+}
+.privacidade p {
+  color: #787878;
+  text-align: right;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  transition: 0.3s ease;
+  line-height: normal;
+}
+.opSobre {
+  max-width: 82.5rem;
+  width: 95%;
+  margin: 0 auto;
+}
+.trabalheConosco,
+.vendaConosco,
+.quemSomos {
+  display: flex;
+  border-radius: 0.625rem;
+  background: rgba(241, 241, 241, 0.6);
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 10px;
+  flex-direction: column;
+  cursor: pointer;
+  flex-grow: 1;
+  transition: 0.3s ease;
+}
+.trabalheConosco p,
+.vendaConosco p,
+.quemSomos p {
+  margin: 0;
+  color: #787878;
+  font-size: 0.9rem;
+  font-style: normal;
+  font-weight: 400;
+  transition: 0.3s ease;
+  line-height: normal;
+}
+.trabalheConosco h3,
+.vendaConosco h3,
+.quemSomos h3 {
+  color: #373737;
+  font-size: 1.1rem;
+  font-style: normal;
+  font-weight: 700;
+  transition: 0.3s ease;
+  line-height: 100%;
+}
+.trabalheConosco:hover,
+.vendaConosco:hover,
+.quemSomos:hover {
+  background: #0261a3;
+  transition: 0.3s ease;
+  color: #fff;
+}
+.trabalheConosco:hover p,
+.vendaConosco:hover p,
+.quemSomos:hover p,
+.trabalheConosco:hover h3,
+.vendaConosco:hover h3,
+.quemSomos:hover h3 {
+  transition: 0.3s ease;
+  color: #fff;
+}
+.trabalheConosco-vendaConosco-quemSomos {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+.trabalheConosco.ativo,
+.vendaConosco.ativo,
+.quemSomos.ativo {
+  background: #0261a3;
+  color: #fff;
+}
+.trabalheConosco.ativo p,
+.vendaConosco.ativo p,
+.quemSomos.ativo p,
+.trabalheConosco.ativo h3,
+.vendaConosco.ativo h3,
+.quemSomos.ativo h3 {
+  color: #fff;
+}
+.trabalheConoscoAtivo,
+.quemSomoAtivo {
+  max-width: 82.5rem;
+  width: 95%;
+  margin: 0 auto;
+}
+.quemSomoAtivo p {
+  text-align: justify;
+}
+/* Estilos para a classe "quemSomosInfo" */
+.quemSomosInfo {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333;
+  text-align: justify;
+  margin-bottom: 30px;
+}
+
+.quemSomosInfo p {
+  margin-bottom: 10px;
+}
+
+/* Estilizar links dentro do conteúdo */
+.quemSomosInfo a {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.quemSomosInfo a:hover {
+  color: #0056b3;
+}
+.quemSomoAtivo h1,
+.trabalheConoscoAtivo h1 {
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 20px;
+}
+.vaga {
+  color: #0261a3;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  display: inline-flex;
+  padding: 1rem 2rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  flex-grow: 1;
+  border-radius: 0.625rem;
+  background: rgba(2, 97, 163, 0.05);
+}
+.vagasAll {
+  display: flex;
+  gap: 0.8rem;
+  flex-flow: wrap;
+}
+.trabalheConoscoAtivo a {
+  text-decoration: underline;
+}
+.promocoes {
+  max-width: 82.5rem;
+  width: 95%;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  color: #fff;
+  font-weight: bold;
+  align-items: center;
+  contain: content;
+  margin-top: 2rem;
+}
+.promocoes {
+  overflow: hidden;
+  position: relative;
+}
+.carousel {
+  display: flex;
+  transition: transform 1s ease-in-out;
+}
+.carousel-item {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.padaria img {
+  max-width: 25rem;
+  border-radius: 0.625rem;
 }
