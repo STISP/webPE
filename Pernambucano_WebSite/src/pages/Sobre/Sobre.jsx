@@ -57,7 +57,7 @@ export default function Sobre() {
                         <div className="vaga">Operador(a) de loja</div>
                         <div className="vaga">Balconista</div>
                     </div>
-                    <p>Envie seu currículo com a vaga que deseja e foto para o email para o email: <a href="mailto:vagasemsupermercadope@gmail.com">vagasemsupermercadope@gmail.com</a></p>
+                    <p>Envie seu currículo com a vaga que deseja e sua foto para o email: <a href="mailto:vagasemsupermercadope@gmail.com">vagasemsupermercadope@gmail.com</a></p>
                 </div>
             )}
             {isQuemSomosAtivo && (

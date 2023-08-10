@@ -1600,3 +1600,9 @@ body::-webkit-scrollbar-thumb {
   max-width: 25rem;
   border-radius: 0.625rem;
 }
+.inicioScreen {
+  max-width: 83rem;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
