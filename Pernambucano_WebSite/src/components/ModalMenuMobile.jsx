@@ -45,12 +45,12 @@ const MenuMobileModal = ({ isOpen, onClose }) => {
                 <br /><br /><br />
                 <section className='menuMobileRedes'>
                     <div className="redesSociais">
-                        <img src={whatsapp} alt="whatsapp" />
-                        <img src={Facebook} alt="instagram" />
-                        <img src={Instagram} alt="facebook" />
+                        <img loading="lazy" src={whatsapp} alt="whatsapp" />
+                        <img loading="lazy" src={Facebook} alt="instagram" />
+                        <img loading="lazy" src={Instagram} alt="facebook" />
                     </div>
                     <br />
-                    <img src={LogoCompleta} alt="logo" />
+                    <img loading="lazy" src={LogoCompleta} alt="logo" />
                     <br /><br />
                 </section>
             </div>

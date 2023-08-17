@@ -1600,9 +1600,65 @@ body::-webkit-scrollbar-thumb {
   max-width: 25rem;
   border-radius: 0.625rem;
 }
-.inicioScreen {
-  max-width: 83rem;
-  margin: auto;
+.radio-container {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin: 0 auto;
+  max-width: 400px;
+}
+.radio-content {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+.radio-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333;
+}
+.play-button {
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  justify-content: center;
+  align-items: center;
+}
+.play-button.playing {
+  background-color: #f1f1f1;
+}
+.play-button svg {
+  width: 50px;
+  height: 50px;
+  fill: #0261a3;
+}
+.volume-label {
+  display: inline-block;
+  width: 30px;
+  margin-right: 10px;
+}
+.volume-slider {
+  width: 100%;
+  appearance: none;
+  height: 5px;
+  border-radius: 5px;
+  background-color: #ccc;
+  outline: none;
+  transition: background-color 0.3s ease-in-out;
+}
+.volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #0261a3;
+  cursor: pointer;
 }

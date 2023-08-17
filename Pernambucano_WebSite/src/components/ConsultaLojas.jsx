@@ -13,7 +13,7 @@ export default function ConsultaLojas({ LinkPage, img, loja, nome, endereco, ope
   return (
     <Link to={LinkPage} className='detalhesLojas'>
       <div className='imgNameLojas'>
-        <img className='imgCarNossasLojas' src={img} alt="LogoIcon" />
+        <img loading="lazy" className='imgCarNossasLojas' src={img} alt="LogoIcon" />
         <div className="nameLoja">
           <h3>{loja}</h3>
           <h3>{nome}</h3>
@@ -22,15 +22,15 @@ export default function ConsultaLojas({ LinkPage, img, loja, nome, endereco, ope
       </div>
       <div className="lineButton">
         <div className="lojaStatus">
-          <img src={RelogioIcon} alt="RelogioIcon" />
+          <img loading="lazy" src={RelogioIcon} alt="RelogioIcon" />
           <p>{openClose} <span>•</span> {horarioOpenClose}</p>
         </div>
         <div className="localAndWhats">
           <a className='localizaçãoButton' href={linkLocalizacao} onClick={handleLocalizacaoClick}>
-            <img src={LocalizacaoIcon} alt="localizacao" />
+            <img loading="lazy" src={LocalizacaoIcon} alt="localizacao" />
           </a>
           <a className='whatsappButton' href={linkWhatsapp} onClick={handleLocalizacaoClick}>
-            <img src={whatsappIcon} alt="whatsapp" />
+            <img loading="lazy" src={whatsappIcon} alt="whatsapp" />
           </a>
         </div>
       </div>

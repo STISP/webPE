@@ -9,9 +9,14 @@ export default function Login() {
   const [tentativas, setTentativas] = useState(0);
   const [bloqueado, setBloqueado] = useState(false);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!email.endsWith('@suppernambucano.com.br')) {
+      const mensagem = 'Por favor, use um email válido do domínio @suppernambucano.com.br';
+      setMensagem(mensagem);
+      return;
+    }
 
     if (!email || !senha) {
       const mensagem = 'Preencha todos os campos';
@@ -21,6 +26,12 @@ export default function Login() {
 
     if (bloqueado) {
       const mensagem = 'Usuário bloqueado. Tente novamente mais tarde.';
+      setMensagem(mensagem);
+      return;
+    }
+
+    if (!email.endsWith('@suppernambucano.com.br')) {
+      const mensagem = 'Email deve ter o final @suppernambucano.com.br';
       setMensagem(mensagem);
       return;
     }

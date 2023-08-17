@@ -65,10 +65,10 @@ export default function App() {
             <section>
                 <div className='promocoes'>
                     <div className="carousel-container">
-                        <div className="carousel-track" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+                        <div className="carousel-track"  style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
                             {images.map((image, index) => (
                                 <div className="carousel-item" key={index}>
-                                    <img src={image} alt={`Promoção ${index}`} />
+                                    <img loading="lazy" src={image} alt={`Promoção ${index}`} />
                                 </div>
                             ))}
                         </div>
@@ -77,7 +77,7 @@ export default function App() {
 
                 <div className='QualidadeVariedadePreco'>
                     <div className="qualidade">
-                        <img src={StarIcon} alt="estrela" />
+                        <img loading="lazy" src={StarIcon} alt="estrela" />
                         <div className="flex">
                             <h3>Qualidade Garantida</h3>
                             <p>Produtos frescos e de alta qualidade para você</p>
@@ -85,7 +85,7 @@ export default function App() {
                     </div>
                     <div className="line" />
                     <div className="variedade">
-                        <img src={BoxIcon} alt="caixas" />
+                        <img loading="lazy" src={BoxIcon} alt="caixas" />
                         <div className="flex">
                             <h3>Variedade de Produtos</h3>
                             <p>Encontre tudo o que você precisa em um só lugar</p>
@@ -93,7 +93,7 @@ export default function App() {
                     </div>
                     <div className="line" />
                     <div className="preco">
-                        <img src={CarrinhoIcon} alt="carrinho" />
+                        <img loading="lazy" src={CarrinhoIcon} alt="carrinho" />
                         <div className="flex">
                             <h3>Preços Acessíveis</h3>
                             <p>Produtos de qualidade a preços acessíveis.</p>
@@ -114,9 +114,9 @@ export default function App() {
                             </a>
                         </div>
                     </div>
-                    <img src={SacolaC} alt="Sacola de compras" />
+                    <img loading="lazy" src={SacolaC} alt="Sacola de compras" />
                 </div>
-                <img className='SacolaDeCompras' src={SacolaC} alt="Sacola de compras" />
+                <img loading="lazy" className='SacolaDeCompras' src={SacolaC} alt="Sacola de compras" />
 
                 <div className='maintop2'>
                     <div className="blocoAnuncio">
@@ -130,7 +130,7 @@ export default function App() {
 
                         <div className="entrarEmContato">
                             <div className="padaria">
-                                <img src={Padaria} alt="padaria" />
+                                <img loading="lazy" src={Padaria} alt="padaria" />
                             </div>
                         </div>
                     </div>

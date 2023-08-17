@@ -16,7 +16,7 @@ export default function NossasLojas() {
             endereco: "R. João Fragoso de Medeiros, 1687",
             horarioOpenClose: "08:00 às 18:00",
             linkLocalizacao: "https://goo.gl/maps/931D6t7NPsK3wJZ28",
-            linkWhatsapp: "https://goo.gl/maps/931D6t7NPsK3wJZ28"
+            linkWhatsapp: "https://wa.me/5581999716303"
         },
         {
             img: Car,
@@ -27,7 +27,7 @@ export default function NossasLojas() {
             endereco: "R. joão Fragoso de Medeiros, 1687",
             horarioOpenClose: "07:00 às 20:00",
             linkLocalizacao: "https://goo.gl/maps/931D6t7NPsK3wJZ28",
-            linkWhatsapp: "https://goo.gl/maps/931D6t7NPsK3wJZ28"
+            linkWhatsapp: "https://wa.me/5581999716303"
         },
         {
             img: Car,
@@ -38,7 +38,7 @@ export default function NossasLojas() {
             endereco: "Rua Benjamin Constantino, 52",
             horarioOpenClose: "07:00 às 19:00",
             linkLocalizacao: "https://goo.gl/maps/yLnnPeet6bjXDMYD9",
-            linkWhatsapp: "https://goo.gl/maps/yLnnPeet6bjXDMYD9"
+            linkWhatsapp: "https://wa.me/5581999716303"
         },
         {
             img: Car,
@@ -49,7 +49,7 @@ export default function NossasLojas() {
             endereco: "Av. Dr. Francisco Correia, 774",
             horarioOpenClose: "07:00 às 19:00",
             linkLocalizacao: "https://goo.gl/maps/1SdJ7Fb7YuKLi5Bn9",
-            linkWhatsapp: "https://goo.gl/maps/1SdJ7Fb7YuKLi5Bn9"
+            linkWhatsapp: "https://wa.me/5581999716303"
         },
         {
             img: Car,
@@ -60,7 +60,7 @@ export default function NossasLojas() {
             endereco: "Nossa Senhora do Rosário, 644",
             horarioOpenClose: "08:00 às 20:00",
             linkLocalizacao: "https://goo.gl/maps/ePr5DvfhauyAxmmL6",
-            linkWhatsapp: "https://goo.gl/maps/ePr5DvfhauyAxmmL6"
+            linkWhatsapp: "https://wa.me/5581999716303"
         },
         {
             img: Car,
@@ -71,7 +71,7 @@ export default function NossasLojas() {
             endereco: "Rua Barão de Lucena, 729",
             horarioOpenClose: "07:00 às 19:00",
             linkLocalizacao: "https://goo.gl/maps/ULQiuSHQy4whgaVw7",
-            linkWhatsapp: "https://goo.gl/maps/ULQiuSHQy4whgaVw7"
+            linkWhatsapp: "https://wa.me/5581999716303"
         },
         {
             img: Car,
@@ -82,7 +82,7 @@ export default function NossasLojas() {
             endereco: "Av. Sifronio Portela, 3916",
             horarioOpenClose: "07:00 às 19:00",
             linkLocalizacao: "https://goo.gl/maps/7RdUrb5jKW61ho2y7",
-            linkWhatsapp: "https://goo.gl/maps/7RdUrb5jKW61ho2y7"
+            linkWhatsapp: "https://wa.me/5581999716303"
         },
         {
             img: Car,
@@ -93,7 +93,7 @@ export default function NossasLojas() {
             endereco: "Praça da Bandeira, 22",
             horarioOpenClose: "07:00 às 19:00",
             linkLocalizacao: "https://goo.gl/maps/bpkrmQKrMgH53fEe8",
-            linkWhatsapp: "https://goo.gl/maps/bpkrmQKrMgH53fEe8"
+            linkWhatsapp: "https://wa.me/5581999716303"
         },
         {
             img: Car,
@@ -104,7 +104,7 @@ export default function NossasLojas() {
             endereco: "Rua Vasco da Gama, 662",
             horarioOpenClose: "07:00 às 20:30",
             linkLocalizacao: "https://goo.gl/maps/7zqz5jZM7bx6HDqV7",
-            linkWhatsapp: "https://goo.gl/maps/7zqz5jZM7bx6HDqV7"
+            linkWhatsapp: "https://wa.me/5581999716303"
         }
     ];
 

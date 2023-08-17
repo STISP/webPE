@@ -39,12 +39,12 @@ export default function Footer() {
             <footer>
                 <div className="footerAll">
                     <div className="logoAndRedes">
-                        <img src={LogoCompleta} alt="logo" />
+                        <img loading="lazy" src={LogoCompleta} alt="logo" />
                         <p>Produtos de alta qualidade para você e sua família.</p>
                         <div className="redesSociais">
-                            <img src={whatsapp} alt="whatsapp" />
-                            <img src={Facebook} alt="instagram" />
-                            <img src={Instagram} alt="facebook" />
+                            <img loading="lazy" src={whatsapp} alt="whatsapp" />
+                            <img loading="lazy" src={Facebook} alt="instagram" />
+                            <img loading="lazy" src={Instagram} alt="facebook" />
                         </div>
                     </div>
 
