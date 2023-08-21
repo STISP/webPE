@@ -7,7 +7,7 @@ export default function DomHelder() {
     return <DetalhesLoja ID="Loja1"
         image={LogoCA}
         loja="Dom Helder"
-        LojaEndereco="806, R. João Fragoso de Medeiros, 736 - PE, 54430-250"
+        LojaEndereco="R. João Fragoso de Medeiros, 1687 - PE, 54430-250"
         LojaHorario="07h ás 20h"
         cnpj="12.493.871/0001-73"
         SegundaASextaI="07:00"

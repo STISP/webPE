@@ -6,9 +6,9 @@ export default function Central() {
     return <DetalhesLoja ID="Loja1"
         image={CentralIcon}
         loja="Dom Helder - Central de serviços"
-        LojaEndereco="806, R. João Fragoso de Medeiros, 736 - PE, 54430-250"
+        LojaEndereco="R. João Fragoso de Medeiros, 1687 - PE, 54430-250"
         LojaHorario="08h ás 18h"
-        cnpj="12.493.871/0001-73"
+        cnpj="21.931.834/0001-90"
         SegundaASextaI="08:00"
         SegundaASextaF="18:00"
         SabadoI="00:00"

@@ -7,7 +7,7 @@ export default function Goiana() {
         image={LogoCA}
         loja="Goiana"
         LojaNome="Goiana"
-        LojaEndereco="R. Benjamin Constant, 68 - Centro, Goiana - PE, 55900-000"
+        LojaEndereco="R. Benjamin Constant, 52 - Centro, Goiana - PE, 55900-000"
         LojaHorario="07h ás 19h"
         cnpj="23.094.631/0001-12"
         SegundaASextaI="07:00"

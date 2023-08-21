@@ -42,9 +42,9 @@ export default function Footer() {
                         <img loading="lazy" src={LogoCompleta} alt="logo" />
                         <p>Produtos de alta qualidade para você e sua família.</p>
                         <div className="redesSociais">
-                            <img loading="lazy" src={whatsapp} alt="whatsapp" />
-                            <img loading="lazy" src={Facebook} alt="instagram" />
-                            <img loading="lazy" src={Instagram} alt="facebook" />
+                            <a href="https://wa.me/5581999716303"><img loading="lazy" src={whatsapp} alt="whatsapp" /></a>
+                            <a href="https://www.facebook.com/people/Supermercados-pernambucano/100063747332450/"><img loading="lazy" src={Facebook} alt="Facebook" /></a>
+                            <a href="https://www.instagram.com/supermercadospernambucano/"><img loading="lazy" src={Instagram} alt="Instagram" /></a>
                         </div>
                     </div>
 
@@ -99,10 +99,9 @@ export default function Footer() {
                         <h3>Receba novidades e descontos especiais</h3>
                         <p>inscreva-se e ganhe as melhores promoções disponíveis e muito mais.</p>
                         <div className='inputEmail'>
-                            <input name="email" type="text" placeholder="Digite seu email" />
+                            <input name="email" placeholder="Digite seu email" />
                             <button type="button">Enviar</button>
                         </div>
-
                     </div>
                 </div>
 

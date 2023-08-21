@@ -13,7 +13,7 @@ export default function Login() {
     e.preventDefault();
 
     if (!email.endsWith('@suppernambucano.com.br')) {
-      const mensagem = 'Por favor, use um email válido do domínio @suppernambucano.com.br';
+      const mensagem = 'Email inválido. Certifique-se de usar um email autorizado para continuar.';
       setMensagem(mensagem);
       return;
     }
@@ -26,12 +26,6 @@ export default function Login() {
 
     if (bloqueado) {
       const mensagem = 'Usuário bloqueado. Tente novamente mais tarde.';
-      setMensagem(mensagem);
-      return;
-    }
-
-    if (!email.endsWith('@suppernambucano.com.br')) {
-      const mensagem = 'Email deve ter o final @suppernambucano.com.br';
       setMensagem(mensagem);
       return;
     }
@@ -67,46 +61,49 @@ export default function Login() {
   };
 
   return (
-    <div className="inicioScreen">
-      <div className="allForms">
-        <h2>Entrar na conta</h2>
-        <p>Seja bem vindo de volta</p>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <input
-              placeholder='Email'
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                setMensagem('');
-              }}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              placeholder='Senha'
-              type="password"
-              id="senha"
-              value={senha}
-              onChange={(e) => {
-                setSenha(e.target.value);
-                setMensagem('');
-              }}
-            />
-          </div>
-          <button type="submit">Entrar</button>
-        </form>
-        {bloqueado ? (
-          <p className="errorEmailExist">Usuário bloqueado. Tente novamente mais tarde.</p>
-        ) : (
-          mensagem && <p className="errorEmailExist">{mensagem}</p>
-        )}
-        <p>
-          Ainda não tem uma conta? <Link to="/cadastro" style={{ textDecoration: 'underline' }}>Cadastre-se</Link>
-        </p>
+    <>
+      <br />
+      <div className="inicioScreen">
+        <div className="allForms">
+          <h2>Entrar na conta</h2>
+          <p>Seja bem vindo de volta</p>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <input
+                placeholder='Email'
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setMensagem('');
+                }}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                placeholder='Senha'
+                type="password"
+                id="senha"
+                value={senha}
+                onChange={(e) => {
+                  setSenha(e.target.value);
+                  setMensagem('');
+                }}
+              />
+            </div>
+            <button className='buttonLoginCadastro' type="submit">Entrar</button>
+          </form>
+          {bloqueado ? (
+            <p className="errorEmailExist">Usuário bloqueado. Tente novamente mais tarde.</p>
+          ) : (
+            mensagem && <p className="errorEmailExist">{mensagem}</p>
+          )}
+          <p className='alterarLoginCadastro'>
+            Ainda não tem uma conta? <Link to="/cadastro" style={{ textDecoration: 'underline' }}>Cadastre-se</Link>
+          </p>
+        </div>
       </div>
-    </div >
+    </>
   );
 }

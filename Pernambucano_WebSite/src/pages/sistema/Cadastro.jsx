@@ -30,6 +30,12 @@ export default function CriarConta() {
       return;
     }
 
+    if (!email.endsWith('@suppernambucano.com.br')) {
+      const mensagem = 'Email inválido. Certifique-se de usar um email autorizado para continuar.';
+      setMensagem(mensagem);
+      return;
+    }
+
     try {
       const checkEmailResponse = await fetch(`http://localhost:3000/usuario/check-email?email=${email}`);
       const { exists } = await checkEmailResponse.json();
@@ -60,59 +66,61 @@ export default function CriarConta() {
   };
 
   return (
-    <div className="inicioScreen">
-      <div className="allForms">
-        <h2>Cadastre-se</h2>
-        <p>cadastre-se gratuitamente</p>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <input
-              placeholder='Nome'
-              type="text"
-              id="nome"
-              value={name}
-              autoComplete="off"
-              maxLength={50}
-              onChange={(e) => {
-                setName(e.target.value);
-                setMensagem('');
-              }}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              placeholder='Email'
-              type="email"
-              id="email"
-              value={email}
-              autoComplete="off"
-              maxLength={255}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                setMensagem('');
-              }}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              placeholder='Senha'
-              type="password"
-              id="senha"
-              value={senha}
-              autoComplete="off"
-              onChange={(e) => {
-                setSenha(e.target.value);
-                setMensagem('');
-              }}
-            />
-          </div>
-          <button type="submit">Cadastrar</button>
-        </form>
-        {mensagem && <p className="errorEmailExist">{mensagem}</p>}
-        <p>
-          Já tem uma conta? <Link to="/Login" style={{ textDecoration: 'underline' }}>Entrar na conta</Link>
-        </p>
+    <>
+      <br />
+      <div className="inicioScreen">
+        <div className="allForms">
+          <h2>Criar uma nova conta</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <input
+                placeholder='Nome'
+                type="text"
+                id="nome"
+                value={name}
+                autoComplete="off"
+                maxLength={50}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  setMensagem('');
+                }}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                placeholder='Email'
+                type="email"
+                id="email"
+                value={email}
+                autoComplete="off"
+                maxLength={255}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setMensagem('');
+                }}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                placeholder='Senha'
+                type="password"
+                id="senha"
+                value={senha}
+                autoComplete="off"
+                onChange={(e) => {
+                  setSenha(e.target.value);
+                  setMensagem('');
+                }}
+              />
+            </div>
+            <button className='buttonLoginCadastro' type="submit">Cadastrar</button>
+          </form>
+          {mensagem && <p className="errorEmailExist">{mensagem}</p>}
+          <p className='alterarLoginCadastro'>
+            Já tem uma conta? <Link to="/Login" style={{ textDecoration: 'underline' }}>Entrar na conta</Link>
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

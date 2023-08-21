@@ -33,7 +33,7 @@ export default function Menu() {
                     <Link to="/sobre">Sobre</Link>
                 </li>
                 <li>
-                    <a href='https://cartoes.uzecomvoce.com.br/pernambuco' target='_blank'>Cartão</a>
+                    <a href='https://wa.me/551221360100' target='_blank'>Peça seu Cartão</a>
                 </li>
             </ul>
             {/* menu Mobile*/}

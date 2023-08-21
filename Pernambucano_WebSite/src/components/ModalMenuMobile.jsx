@@ -39,7 +39,7 @@ const MenuMobileModal = ({ isOpen, onClose }) => {
                     </Link>
                     <div className="linee" />
                     <a href='https://cartoes.uzecomvoce.com.br/pernambuco' target='_blank' onClick={onClose}>
-                        Cartão
+                        Peça Seu Cartão
                     </a>
                 </section>
                 <br /><br /><br />

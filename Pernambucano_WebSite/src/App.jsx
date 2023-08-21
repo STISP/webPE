@@ -5,48 +5,11 @@ import SacolaC from './assets/SacolaCompras.svg'
 import StarIcon from './assets/starIcon.svg'
 import BoxIcon from './assets/boxIcon.svg'
 import CarrinhoIcon from './assets/carrinhoIcon.svg'
-import Vitarella from './assets/vitarella.png'
 import Verduras from './assets/verduras.svg'
 import TodosProdutos from './assets/TodosProdutos.svg'
 import Padaria from './assets/padaria.svg'
 
 export default function App() {
-
-    const parceiros = [
-        { id: 1, imgSrc: Vitarella, altText: 'parceiro1' },
-        { id: 2, imgSrc: Vitarella, altText: 'parceiro2' },
-        { id: 3, imgSrc: Vitarella, altText: 'parceiro3' },
-        { id: 4, imgSrc: Vitarella, altText: 'parceiro4' },
-        { id: 5, imgSrc: Vitarella, altText: 'parceiro5' },
-        { id: 6, imgSrc: Vitarella, altText: 'parceiro6' },
-        { id: 7, imgSrc: Vitarella, altText: 'parceiro7' },
-        { id: 8, imgSrc: Vitarella, altText: 'parceiro8' },
-        { id: 9, imgSrc: Vitarella, altText: 'parceiro9' },
-        { id: 10, imgSrc: Vitarella, altText: 'parceiro10' },
-        { id: 11, imgSrc: Vitarella, altText: 'parceiro11' },
-    ];
-
-
-    const [numItemsToShow, setNumItemsToShow] = useState(6);
-
-    const handleResize = () => {
-        const windowWidth = window.innerWidth;
-        if (windowWidth < 768) {
-            setNumItemsToShow(5);
-        } else if (windowWidth < 992) {
-            setNumItemsToShow(9);
-        } else {
-            setNumItemsToShow(11);
-        }
-    };
-
-    useEffect(() => {
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const images = [Verduras, TodosProdutos];
@@ -65,7 +28,7 @@ export default function App() {
             <section>
                 <div className='promocoes'>
                     <div className="carousel-container">
-                        <div className="carousel-track"  style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+                        <div className="carousel-track" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
                             {images.map((image, index) => (
                                 <div className="carousel-item" key={index}>
                                     <img loading="lazy" src={image} alt={`Promoção ${index}`} />
@@ -109,8 +72,8 @@ export default function App() {
                             variedade de produtos de alta qualidade.</p>
                         <div className='botoes'>
                             <Link to='/lojas'><button className='buttonContato'>Veja a loja mais proxima</button></Link>
-                            <a href='https://cartoes.uzecomvoce.com.br/pernambuco' target='_blank'>
-                                <button className='buttonLojas'>Cartão</button>
+                            <a href='https://wa.me/551221360100' target='_blank'>
+                                <button className='buttonLojas'>Peça seu Cartão</button>
                             </a>
                         </div>
                     </div>
@@ -121,13 +84,11 @@ export default function App() {
                 <div className='maintop2'>
                     <div className="blocoAnuncio">
                     </div>
-
                     <div className="flex2">
-                        <a href='https://cartoes.uzecomvoce.com.br/pernambuco' target='_blank' className="FacaSeuCartao">
+                        <a href='https://wa.me/551221360100' target='_blank' className="FacaSeuCartao">
                             <h3>Torne suas compras ainda mais faceis com o nosso cartão!</h3>
-                            <button>Faça seu cartão</button>
+                            <button>Peça seu cartão</button>
                         </a>
-
                         <div className="entrarEmContato">
                             <div className="padaria">
                                 <img loading="lazy" src={Padaria} alt="padaria" />
