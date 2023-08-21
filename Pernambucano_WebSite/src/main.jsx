@@ -15,37 +15,38 @@ import Central from './pages/NossasLojas/SobreLojas.jsx/Central.jsx'
 import Sobre from './pages/Sobre/Sobre.jsx'
 import JaboataoMatriz from './pages/NossasLojas/SobreLojas.jsx/JaboataoMatriz.jsx'
 import Layout from './Layout';
-import Login from './Pages/sistema/Login.jsx'
-import CriarConta from './Pages/sistema/Cadastro.jsx'
+import Login from './pages/sistema/Login.jsx'
+import CriarConta from './pages/sistema/Cadastro.jsx'
 import RotaNaoEncontrada from './pages/RotaNaoEncontrada.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 
-<React.StrictMode>
-  <BrowserRouter>
-    <Layout>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/lojas" element={<NossasLojas />} />
-        <Route path="/lojas/Dom_Helder" element={<DomHelder />} />
-        <Route path="/lojas/Goiana" element={<Goiana />} />
-        <Route path="/lojas/jaboatao_Centro" element={<JaboataoCentro />} />
-        <Route path="/lojas/JaboataoMatriz" element={<JaboataoMatriz />} />
-        <Route path="/lojas/Moreno" element={<Moreno />} />
-        <Route path="/lojas/Olinda" element={<Olinda />} />
-        <Route path="/lojas/DomHelderServicos" element={<Central />} />
-        <Route path="/lojas/SaoLourencoDaMataCentro" element={<SaoLourencoDaMataCentro />} />
-        <Route path="/lojas/VascoDaGama" element={<VascoDaGama />} />
-        {/* exemplo de rota privada 
-         <Route path="/parceiros" element={<PrivateRoute><Parceiros /></PrivateRoute>} />
-        */}
-        <Route path="/parceiros" element={<Parceiros />} />
-        <Route path="/sobre" element={<Sobre />} />
-        <Route path="/cadastro" element={<CriarConta />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="*" element={<RotaNaoEncontrada />} />
-      </Routes>
-    </Layout>
-  </BrowserRouter>
-</React.StrictMode>,
+  <React.StrictMode>
+    <BrowserRouter>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/lojas" element={<NossasLojas />} />
+          <Route path="/lojas/Dom_Helder" element={<DomHelder />} />
+          <Route path="/lojas/Goiana" element={<Goiana />} />
+          <Route path="/lojas/jaboatao_Centro" element={<JaboataoCentro />} />
+          <Route path="/lojas/JaboataoMatriz" element={<JaboataoMatriz />} />
+          <Route path="/lojas/Moreno" element={<Moreno />} />
+          <Route path="/lojas/Olinda" element={<Olinda />} />
+          <Route path="/lojas/DomHelderServicos" element={<Central />} />
+          <Route path="/lojas/SaoLourencoDaMataCentro" element={<SaoLourencoDaMataCentro />} />
+          <Route path="/lojas/VascoDaGama" element={<VascoDaGama />} />
+          {/*
+           exemplo de rota privada 
+             <Route path="/parceiros" element={<PrivateRoute><Parceiros /></PrivateRoute>} />
+          */}
+          <Route path="/parceiros" element={<Parceiros />} />
+          <Route path="/sobre" element={<Sobre />} />
+          <Route path="/cadastro" element={<CriarCont />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="*" element={<RotaNaoEncontrada />} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
+  </React.StrictMode>,
 )
