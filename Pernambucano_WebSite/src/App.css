@@ -369,32 +369,6 @@ nav ul li a:hover {
   filter: grayscale(30%);
   cursor: pointer;
 }
-.parceiros h3 {
-  color: #666;
-  font-size: 1.25rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  margin: 2.5rem 0 0.4em 0;
-}
-.parceiros {
-  max-width: 82.5rem;
-  width: 95%;
-  margin: 0 auto;
-  overflow: auto;
-  scrollbar-width: thin;
-  scrollbar-color: transparent transparent;
-  text-align: left;
-}
-.parceirosAll {
-  height: 80%;
-}
-.parceiros::-webkit-scrollbar {
-  width: 8px;
-}
-.parceiros::-webkit-scrollbar-thumb {
-  background-color: transparent;
-}
 .experiencia {
   border-radius: 0.625rem;
   background: #ffd01b;
@@ -413,20 +387,6 @@ nav ul li a:hover {
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-}
-.parceiros a {
-  margin: 0;
-  color: #3f3f3f;
-  text-align: inherit;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
-.parceiros a:hover {
-  text-decoration: underline;
-  cursor: pointer;
-  color: #161616;
 }
 .copyright {
   background: #0261a3;
@@ -874,7 +834,7 @@ nav,
 }
 @media screen and (max-width: 480px) {
   nav img {
-    height: 2.5rem;
+    height: 1.5rem;
   }
   .Parceiros {
     gap: 1rem !important;
@@ -953,32 +913,6 @@ nav,
   margin: 0 auto;
   gap: 1rem;
 }
-.lojaAndNumber h1,
-h3 {
-  margin: 0 0.7rem;
-}
-.lojaAndNumber h4 {
-  color: rgba(19, 36, 56, 0.73);
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 100%;
-  cursor: initial !important;
-  user-select: all;
-  margin: 0.5rem 0.7rem 0;
-}
-.lojaAndNumber h4::selection {
-  background: #0261a3;
-  color: #ffffff;
-}
-.lojaAndNumber h1,
-h3 {
-  color: #07111c;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 100%;
-}
 .tituloPageLojas,
 .TituloParceiros {
   max-width: 82.5rem;
@@ -1016,7 +950,7 @@ body::-webkit-scrollbar-thumb {
 .Open {
   color: #368b18;
 }
-.lojaStatus p {
+.lojaStatus div {
   display: flex;
   gap: 0.3rem;
   margin: 0;
@@ -1095,14 +1029,13 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  position: relative;
 }
 .localizaçãoButton::before {
   content: "";
   position: absolute;
   width: 0.9rem;
   height: 1.2rem;
-  background-image: url("/src/assets/localizacaoIconWhite.svg");
+  background-image: url("/src/assets/LocalizacaoIconWhite.svg");
   background-size: cover;
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -1186,7 +1119,7 @@ body::-webkit-scrollbar-thumb {
   .lojaStatus span {
     display: none;
   }
-  .lojaStatus p {
+  .lojaStatus div {
     flex-direction: column;
   }
 }
@@ -1392,7 +1325,7 @@ body::-webkit-scrollbar-thumb {
 }
 .privacidade:hover {
   background: #0261a3;
-  color: color #fff;
+  color: #fff;
 }
 .privacidade:hover,
 .privacidade:hover :is(h3, p) {
@@ -1572,11 +1505,11 @@ body::-webkit-scrollbar-thumb {
   font-weight: bold;
   align-items: center;
   contain: content;
+  will-change: auto;
   margin-top: 2rem;
   overflow: hidden;
   position: relative;
 }
-
 .carousel-container {
   display: flex;
   overflow: hidden;

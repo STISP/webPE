@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css'
 import { Link } from 'react-router-dom'
 import SacolaC from './assets/SacolaCompras.svg'
@@ -72,7 +72,7 @@ export default function App() {
                             variedade de produtos de alta qualidade.</p>
                         <div className='botoes'>
                             <Link to='/lojas'><button className='buttonContato'>Veja a loja mais proxima</button></Link>
-                            <a href='https://wa.me/551221360100' target='_blank'>
+                            <a href='https://wa.me/551221360100' target='_blank' rel="noreferrer">
                                 <button className='buttonLojas'>Peça seu Cartão</button>
                             </a>
                         </div>
@@ -85,7 +85,7 @@ export default function App() {
                     <div className="blocoAnuncio">
                     </div>
                     <div className="flex2">
-                        <a href='https://wa.me/551221360100' target='_blank' className="FacaSeuCartao">
+                        <a href='https://wa.me/551221360100' target='_blank' className="FacaSeuCartao" rel="noreferrer">
                             <h3>Torne suas compras ainda mais faceis com o nosso cartão!</h3>
                             <button>Peça seu cartão</button>
                         </a>

@@ -1,13 +1,25 @@
-import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import RelogioIcon from '../assets/relogio icon.svg'
 import whatsappIcon from '../assets/whatsappIcon.svg'
 import LocalizacaoIcon from '../assets/LocalizaçãoIcon.svg'
+import PropTypes from 'prop-types';
 
 export default function ConsultaLojas({ LinkPage, img, loja, nome, endereco, openClose, horarioOpenClose, linkLocalizacao, linkWhatsapp }) {
-  const handleLocalizacaoClick = (event) => {
+  const handleLinkClick = (event, link) => {
     event.preventDefault();
-    window.open(linkLocalizacao, '_blank');
+    window.open(link, '_blank');
+  };
+
+  ConsultaLojas.propTypes = {
+    LinkPage: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired,
+    loja: PropTypes.string.isRequired,
+    nome: PropTypes.string.isRequired,
+    endereco: PropTypes.string.isRequired,
+    openClose: PropTypes.node.isRequired,
+    horarioOpenClose: PropTypes.string.isRequired,
+    linkLocalizacao: PropTypes.string.isRequired,
+    linkWhatsapp: PropTypes.string.isRequired,
   };
 
   return (
@@ -23,15 +35,15 @@ export default function ConsultaLojas({ LinkPage, img, loja, nome, endereco, ope
       <div className="lineButton">
         <div className="lojaStatus">
           <img loading="lazy" src={RelogioIcon} alt="RelogioIcon" />
-          <p>{openClose} <span>•</span> {horarioOpenClose}</p>
+          <div>{openClose} <span>•</span> {horarioOpenClose}</div>
         </div>
         <div className="localAndWhats">
-          <a className='localizaçãoButton' href={linkLocalizacao} onClick={handleLocalizacaoClick}>
+          <div className='localizaçãoButton' onClick={(event) => handleLinkClick(event, linkLocalizacao)}>
             <img loading="lazy" src={LocalizacaoIcon} alt="localizacao" />
-          </a>
-          <a className='whatsappButton' href={linkWhatsapp} onClick={handleLocalizacaoClick}>
+          </div>
+          <div className='whatsappButton' onClick={(event) => handleLinkClick(event, linkWhatsapp)}>
             <img loading="lazy" src={whatsappIcon} alt="whatsapp" />
-          </a>
+          </div>
         </div>
       </div>
     </Link>
