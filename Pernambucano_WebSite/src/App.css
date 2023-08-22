@@ -789,6 +789,7 @@ nav > .menuMobileIcon {
   display: flex;
   gap: 1rem;
   padding: 0;
+  width: 3rem;
 }
 .redesSociaisMobile a {
   padding: 0;
@@ -858,9 +859,6 @@ nav,
   }
 }
 @media screen and (max-width: 480px) {
-  nav img {
-    height: 3rem;
-  }
   .Parceiros {
     gap: 1rem !important;
   }
