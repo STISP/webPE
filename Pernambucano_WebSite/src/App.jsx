@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
+import Verduras from './assets/verduras.png'
+import TodosProdutos from './assets/TodosProdutos.png'
 import './App.css'
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import SacolaC from './assets/SacolaCompras.svg'
 import StarIcon from './assets/starIcon.svg'
 import BoxIcon from './assets/boxIcon.svg'
 import CarrinhoIcon from './assets/carrinhoIcon.svg'
-import Verduras from './assets/verduras.svg'
-import TodosProdutos from './assets/TodosProdutos.svg'
 import Padaria from './assets/padaria.svg'
 
-export default function App() {
 
+export default function App() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const images = [Verduras, TodosProdutos];
 
@@ -26,7 +26,7 @@ export default function App() {
     return (
         <>
             <section>
-                <div className='promocoes'>
+                <Link to="/lojas" className='promocoes'>
                     <div className="carousel-container">
                         <div className="carousel-track" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
                             {images.map((image, index) => (
@@ -36,7 +36,7 @@ export default function App() {
                             ))}
                         </div>
                     </div>
-                </div>
+                </Link>
 
                 <div className='QualidadeVariedadePreco'>
                     <div className="qualidade">

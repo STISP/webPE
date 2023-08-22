@@ -44,7 +44,7 @@ const MenuMobileModal = ({ isOpen, onClose }) => {
                 </section>
                 <br /><br /><br />
                 <section className='menuMobileRedes'>
-                    <div className="redesSociais">
+                    <div className="redesSociaisMobile">
                         <a href="https://wa.me/5581999716303"><img loading="lazy" src={whatsapp} alt="whatsapp" /></a>
                         <a href="https://www.facebook.com/people/Supermercados-pernambucano/100063747332450/"><img loading="lazy" src={Facebook} alt="Facebook" /></a>
                         <a href="https://www.instagram.com/supermercadospernambucano/"><img loading="lazy" src={Instagram} alt="Instagram" /></a>

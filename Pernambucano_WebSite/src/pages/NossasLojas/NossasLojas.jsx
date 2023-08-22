@@ -2,7 +2,7 @@ import '../../App.css'
 import ConsultaLojas from '../../components/ConsultaLojas'
 import Central from '../../../src/assets/central de servico.svg'
 import Car from '../../assets/car.svg'
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 export default function NossasLojas() {
     const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString('pt-BR'));
@@ -138,6 +138,11 @@ export default function NossasLojas() {
         }
     };
 
+    function handleClick() {
+        window.scrollTo(0, 0);
+    }
+
+
     return (
         <>
             <section>
@@ -146,7 +151,7 @@ export default function NossasLojas() {
                 </h5>
 
                 <h1 className='tituloPageLojas'>Escolha a loja</h1>
-                <div className="listlojas">
+                <div onClick={handleClick} className="listlojas">
                     {lojas.map((loja) => (
                         <ConsultaLojas
                             key={loja.ID}

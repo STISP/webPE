@@ -78,10 +78,10 @@ nav ul li a:hover {
   color: #014270;
   display: flex;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-style: normal;
   font-weight: 700;
-  padding: 0.7rem 1.3rem;
+  padding: 0.78rem 1rem;
   border-radius: 0.5rem;
   background: #ffd01b;
   border: none;
@@ -106,7 +106,6 @@ nav ul li a:hover {
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 90%;
   outline: none;
   background: none;
   border: none;
@@ -260,9 +259,6 @@ nav ul li a:hover {
 .FacaSeuCartao button:hover {
   background: #fff;
   color: #0261a3;
-}
-.FacaSeuCartao:hover {
-  opacity: 0.9;
 }
 .vendaComAGente,
 .CanaisDeAtendimento {
@@ -506,11 +502,6 @@ nav > .menuMobileIcon {
   text-align: center;
   transition: all 0.3s ease;
 }
-.op-menu a:hover {
-  color: #0261a3;
-  background: #f4f4f4;
-  border-radius: 1rem;
-}
 .menuMobileRedes > .redesSociais > img {
   height: 1.5rem;
   width: auto;
@@ -550,6 +541,24 @@ nav > .menuMobileIcon {
   }
 }
 @media screen and (max-width: 768px) {
+  .privacidade:hover p,
+  .trabalheConosco:hover p,
+  .vendaConosco:hover p,
+  .quemSomos:hover p {
+    color: #787878 !important;
+  }
+  .privacidade:hover h3,
+  .trabalheConosco:hover h3,
+  .vendaConosco:hover h3,
+  .quemSomos:hover h3 {
+    color: #373737 !important;
+  }
+  .privacidade:hover,
+  .trabalheConosco:hover,
+  .vendaConosco:hover,
+  .quemSomos:hover {
+    background: rgba(241, 241, 241, 0.6) !important;
+  }
   .flex2 {
     flex-direction: row;
   }
@@ -615,10 +624,10 @@ nav > .menuMobileIcon {
     color: #014270;
     display: flex;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-style: normal;
     font-weight: 700;
-    padding: 0.78rem 1.3rem;
+    padding: 0.78rem 1rem;
     border-radius: 0.5rem;
     background: #ffd01b;
     border: none;
@@ -643,7 +652,7 @@ nav > .menuMobileIcon {
   }
   .blocoAnuncio {
     width: 100%;
-    height: 7rem;
+    height: 9rem;
   }
   .vendaComAGente,
   .CanaisDeAtendimento {
@@ -703,6 +712,7 @@ nav > .menuMobileIcon {
   .FacaSeuCartao {
     max-width: none;
     width: auto;
+    height: 7rem;
   }
 }
 @media screen and (max-width: 970px) {
@@ -775,9 +785,24 @@ nav > .menuMobileIcon {
   display: flex;
   gap: 1rem;
 }
+.redesSociaisMobile {
+  display: flex;
+  gap: 1rem;
+  padding: 0;
+}
+.redesSociaisMobile a {
+  padding: 0;
+  display: flex;
+}
 .redesSociais img {
   width: 1.4rem;
   padding: 0.62rem;
+  background-color: #0261a3;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  object-fit: none;
+}
+.redesSociaisMobile img {
   background-color: #0261a3;
   border-radius: 0.5rem;
   transition: all 0.2s ease;
@@ -834,7 +859,7 @@ nav,
 }
 @media screen and (max-width: 480px) {
   nav img {
-    height: 1.5rem;
+    height: 3rem;
   }
   .Parceiros {
     gap: 1rem !important;
@@ -1385,6 +1410,7 @@ body::-webkit-scrollbar-thumb {
   font-size: 1.1rem;
   font-style: normal;
   font-weight: 700;
+  margin: 0;
   transition: 0.3s ease;
   line-height: 100%;
 }
