@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../../App.css';
 
@@ -6,7 +6,9 @@ export default function CriarConta() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [adminSenha] = useState('suptiadm');
   const [mensagem, setMensagem] = useState('');
+  const [isAdminSenhaCorreta, setIsAdminSenhaCorreta] = useState(false);
 
   useEffect(() => {
     const storedEmail = localStorage.getItem('email');
@@ -30,8 +32,15 @@ export default function CriarConta() {
       return;
     }
 
-    if (!email.endsWith('@suppernambucano.com.br')) {
+    const emailMinusc = email.toLowerCase();
+    if (!emailMinusc.endsWith('@suppernambucano.com.br')) {
       const mensagem = 'Email inválido. Certifique-se de usar um email autorizado para continuar.';
+      setMensagem(mensagem);
+      return;
+    }
+
+    if (!isAdminSenhaCorreta) {
+      const mensagem = 'Senha de administrador incorreta';
       setMensagem(mensagem);
       return;
     }
@@ -56,14 +65,27 @@ export default function CriarConta() {
         console.log('conta registrada');
         localStorage.setItem('email', email);
         localStorage.setItem('nome', name);
-        window.location.href = 'http://localhost:5173/PrimeiroAcesso'
+        window.location.href = 'http://localhost:5173/SistemaPE/'
       } else {
         console.log('Erro ao criar conta' + response.status);
+        const mensagem = 'Erro ao criar conta. Por favor, tente novamente mais tarde.';
+        setMensagem(mensagem);
       }
     } catch (error) {
       console.log('Erro ao registrar usuário:', error);
+      const mensagem = 'Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.';
+      setMensagem(mensagem);
     }
   };
+
+  const handleAdminSenhaChange = (e) => {
+    const inputSenhaAdmin = e.target.value;
+    setIsAdminSenhaCorreta(inputSenhaAdmin === adminSenha);
+  };
+
+  function handleClick() {
+    window.scrollTo(0, 0);
+  }
 
   return (
     <>
@@ -113,11 +135,20 @@ export default function CriarConta() {
                 }}
               />
             </div>
-            <button className='buttonLoginCadastro' type="submit">Cadastrar</button>
+            <div className="form-group">
+              <input
+                placeholder='Senha de Administrador'
+                type="password"
+                id="adminSenha"
+                autoComplete="off"
+                onChange={handleAdminSenhaChange}
+              />
+            </div>
+            <button className='buttonLoginCadastro' type="submit" disabled={!isAdminSenhaCorreta}>Cadastrar</button>
           </form>
           {mensagem && <p className="errorEmailExist">{mensagem}</p>}
           <p className='alterarLoginCadastro'>
-            Já tem uma conta? <Link to="/Login" style={{ textDecoration: 'underline' }}>Entrar na conta</Link>
+            Já tem uma conta? <Link to="/Login" onClick={handleClick} style={{ textDecoration: 'underline' }}>Entrar na conta</Link>
           </p>
         </div>
       </div>

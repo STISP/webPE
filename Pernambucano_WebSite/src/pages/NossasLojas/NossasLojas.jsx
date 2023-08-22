@@ -2,7 +2,7 @@ import '../../App.css'
 import ConsultaLojas from '../../components/ConsultaLojas'
 import Central from '../../../src/assets/central de servico.svg'
 import Car from '../../assets/car.svg'
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function NossasLojas() {
     const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString('pt-BR'));
@@ -141,7 +141,6 @@ export default function NossasLojas() {
     function handleClick() {
         window.scrollTo(0, 0);
     }
-
 
     return (
         <>

@@ -1701,3 +1701,17 @@ button[type="submit"]:hover {
 .alterarLoginCadastro a:hover {
   text-decoration: underline;
 }
+.buttonLoginCadastro:disabled,
+.buttonLoginCadastro:hover:disabled {
+  background-color: #ccc; /* Cor de fundo quando o botão está desativado */
+  color: #999; /* Cor do texto quando o botão está desativado */
+  cursor: not-allowed; /* Altera o cursor para 'não permitido' quando o botão está desativado */
+}
+.centralizado {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}

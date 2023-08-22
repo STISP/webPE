@@ -1,14 +1,13 @@
 import Verduras from './assets/verduras.png'
 import TodosProdutos from './assets/TodosProdutos.png'
 import './App.css'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom'
 import SacolaC from './assets/SacolaCompras.svg'
 import StarIcon from './assets/starIcon.svg'
 import BoxIcon from './assets/boxIcon.svg'
 import CarrinhoIcon from './assets/carrinhoIcon.svg'
 import Padaria from './assets/padaria.svg'
-
 
 export default function App() {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -18,9 +17,12 @@ export default function App() {
         setCurrentIndex((currentIndex + 1) % images.length);
     };
 
+    const intervalRef = useRef();
+
     useEffect(() => {
-        const interval = setInterval(nextSlide, 5000);
-        return () => clearInterval(interval);
+        const interval = setInterval(nextSlide, 4000);
+        intervalRef.current = interval;
+        return () => clearInterval(intervalRef.current);
     }, [currentIndex]);
 
     return (

@@ -18,6 +18,8 @@ import Layout from './Layout';
 import Login from './pages/sistema/Login.jsx'
 import CriarConta from './pages/sistema/Cadastro.jsx'
 import RotaNaoEncontrada from './pages/RotaNaoEncontrada.jsx'
+import PrivateRoute from './PrivateRoute.jsx'
+import TelaInicialSystem from './pages/sistema/app/TelaInicialSystem.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 
@@ -42,6 +44,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           */}
           <Route path="/parceiros" element={<Parceiros />} />
           <Route path="/sobre" element={<Sobre />} />
+          <Route path="/SistemaPE" element={<PrivateRoute><TelaInicialSystem /></PrivateRoute>} />
           <Route path="/cadastro" element={<CriarConta />} />
           <Route path="/Login" element={<Login />} />
           <Route path="*" element={<RotaNaoEncontrada />} />
