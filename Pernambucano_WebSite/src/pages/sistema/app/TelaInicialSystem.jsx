@@ -15,12 +15,13 @@ export default function TelaInicialSystem() {
 
     return (
         <>
+        <br />
             {isLoading ? (
                 <div className='centralizado'>
-                    <MoonLoader color="#0261a3" loading={isLoading} size={60} />
+                    <MoonLoader color="#0261a3" loading={isLoading} size={50} />
                 </div >
             ) : (
-                <h1 style={{ display: 'flex', justifyContent: 'center', height: '100vh', alignItems: 'center' }}>
+                <h1 style={{ display: 'flex', justifyContent: 'center', height: '80vh', alignItems: 'center' }}>
                     Bem vindo ao sistema do Pernambucano
                 </h1>
             )

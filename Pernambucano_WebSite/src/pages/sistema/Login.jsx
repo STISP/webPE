@@ -45,7 +45,7 @@ export default function Login() {
       });
 
       const data = await response.json();
-
+      
       if (response.ok && data.success) {
         localStorage.setItem('email', email);
         window.location.href = 'http://localhost:5173/SistemaPE/';

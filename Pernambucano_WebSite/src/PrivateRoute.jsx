@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import { MoonLoader } from 'react-spinners';
 
 export default function PrivateRoute({ children }) {
   const [emailExists, setEmailExists] = useState(null);
@@ -28,8 +29,14 @@ export default function PrivateRoute({ children }) {
   }, []);
 
   if (emailExists === null) {
-    // Exibição de um carregamento enquanto a verificação do email está sendo realizada
-    return <div>Carregando...</div>;
+    return (
+      <>
+        <br />
+        <div className='centralizado'>
+          <MoonLoader color="#0261a3" loading={true} size={60} />
+        </div>
+      </>
+    );
   }
 
   return emailExists ? children : <Navigate to="/Login" />;
