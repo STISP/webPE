@@ -2,6 +2,7 @@
   "name": "pernambucano-website",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://suppernambucano.com.br/",
   "type": "module",
   "scripts": {
     "dev": "vite",

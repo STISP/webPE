@@ -1,5 +1,6 @@
-import Verduras from './assets/verduras.png'
-import TodosProdutos from './assets/TodosProdutos.png'
+import Verduras from './assets/BannerQuartaVerde.png'
+import TodosProdutos from './assets/BannerFinalDeSemana.png'
+import PromoCarne from './assets/BannerPromoCarne.png'
 import './App.css'
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom'
@@ -7,11 +8,12 @@ import SacolaC from './assets/SacolaCompras.svg'
 import StarIcon from './assets/starIcon.svg'
 import BoxIcon from './assets/boxIcon.svg'
 import CarrinhoIcon from './assets/carrinhoIcon.svg'
-import Padaria from './assets/padaria.svg'
+import Padaria from './assets/padaria.png'
 
 export default function App() {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const images = [Verduras, TodosProdutos];
+    const images = [Verduras, PromoCarne, TodosProdutos];
+    const [isPaused, setIsPaused] = useState(false);
 
     const nextSlide = () => {
         setCurrentIndex((currentIndex + 1) % images.length);
@@ -20,17 +22,27 @@ export default function App() {
     const intervalRef = useRef();
 
     useEffect(() => {
-        const interval = setInterval(nextSlide, 4000);
+        const interval = setInterval(nextSlide, 5000);
         intervalRef.current = interval;
         return () => clearInterval(intervalRef.current);
     }, [currentIndex]);
+
+    const handleMouseEnter = () => {
+        setIsPaused(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsPaused(false);
+    };
 
     return (
         <>
             <section>
                 <Link to="/lojas" className='promocoes'>
                     <div className="carousel-container">
-                        <div className="carousel-track" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+                        <div className="carousel-track" onMouseEnter={handleMouseEnter}
+                            onMouseLeave={handleMouseLeave}
+                            style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
                             {images.map((image, index) => (
                                 <div className="carousel-item" key={index}>
                                     <img loading="lazy" src={image} alt={`Promoção ${index}`} />
@@ -39,6 +51,16 @@ export default function App() {
                         </div>
                     </div>
                 </Link>
+
+                <div className="carousel-indicators">
+                    {images.map((_, index) => (
+                        <div
+                            key={index}
+                            className={`carousel-indicator ${index === currentIndex ? 'active' : ''}`}
+                            onClick={() => setCurrentIndex(index)}
+                        />
+                    ))}
+                </div>
 
                 <div className='QualidadeVariedadePreco'>
                     <div className="qualidade">
