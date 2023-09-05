@@ -23,9 +23,9 @@ export default function Menu() {
                 <li>
                     <Link to="/">Inicio</Link>
                 </li>
-                <li>
+                {/*<li>
                     <Link to="/Parceiros">Parceiros</Link>
-                </li>
+                </li>*/}
                 <li>
                     <Link to="/lojas">Nossas Lojas</Link>
                 </li>

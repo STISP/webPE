@@ -1,23 +1,15 @@
+import { useState, useEffect } from 'react';
 import '../../App.css'
 import ConsultaLojas from '../../components/ConsultaLojas'
 import Central from '../../../src/assets/central de servico.svg'
 import Car from '../../assets/car.svg'
-import { useState, useEffect } from 'react';
+import { MoonLoader } from 'react-spinners';
 
 export default function NossasLojas() {
+    const [isLoading, setIsLoading] = useState(true);
+    const [loadingMessage, setLoadingMessage] = useState('Carregando lojas...');
     const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString('pt-BR'));
     const lojas = [
-        {
-            img: Central,
-            ID: "central",
-            LinkPage: "/lojas/DomHelderServicos",
-            loja: "Dom Helder",
-            nome: "Centro de Servicos",
-            endereco: "R. João Fragoso de Medeiros, 1687",
-            horarioOpenClose: "08:00 às 18:00",
-            linkLocalizacao: "https://goo.gl/maps/931D6t7NPsK3wJZ28",
-            linkWhatsapp: "https://wa.me/5581999716303"
-        },
         {
             img: Car,
             ID: "Loja1",
@@ -105,12 +97,28 @@ export default function NossasLojas() {
             horarioOpenClose: "07:00 às 20:30",
             linkLocalizacao: "https://goo.gl/maps/7zqz5jZM7bx6HDqV7",
             linkWhatsapp: "https://wa.me/5581999716303"
-        }
+        },
+        {
+            img: Central,
+            ID: "central",
+            LinkPage: "/lojas/DomHelderServicos",
+            loja: "Dom Helder",
+            nome: "Centro de Servicos",
+            endereco: "R. João Fragoso de Medeiros, 1687",
+            horarioOpenClose: "08:00 às 18:00",
+            linkLocalizacao: "https://goo.gl/maps/931D6t7NPsK3wJZ28",
+            linkWhatsapp: "https://wa.me/5581999716303"
+        },
     ];
 
     useEffect(() => {
         const interval = setInterval(() => {
             updateCurrentTime();
+        }, 1000);
+
+        setTimeout(() => {
+            setIsLoading(false);
+            clearInterval(interval);
         }, 1000);
 
         return () => {
@@ -145,33 +153,43 @@ export default function NossasLojas() {
     return (
         <>
             <section>
-                <h5 className='caminho_page'>
-                    Página Inicial / Nossas Lojas
-                </h5>
+                {isLoading ? (
+                    <div className="centralizado loaderBg">
+                        <MoonLoader color="#0261a3" loading={isLoading} size={60} />
+                        <p>{loadingMessage}</p>
+                    </div>
+                ) : (
+                    <>
+                        <h5 className='caminho_page'>
+                            Página Inicial / Nossas Lojas
+                        </h5>
 
-                <h1 className='tituloPageLojas'>Escolha a loja</h1>
-                <div onClick={handleClick} className="listlojas">
-                    {lojas.map((loja) => (
-                        <ConsultaLojas
-                            key={loja.ID}
-                            img={loja.img}
-                            ID={loja.ID}
-                            LinkPage={loja.LinkPage}
-                            loja={loja.loja}
-                            nome={loja.nome}
-                            endereco={loja.endereco}
-                            horarioOpenClose={loja.horarioOpenClose}
-                            linkLocalizacao={loja.linkLocalizacao}
-                            linkWhatsapp={loja.linkWhatsapp}
-                            openClose={checkOpenStatus(
-                                loja.horarioOpenClose.split("às")[0].trim(),
-                                loja.horarioOpenClose.split("às")[1].trim()
-                            ) ? <p className='Open'>Aberto</p> : <p className='Close'>Fechado</p>}
-                        />
-                    ))}
-                </div>
+                        <h1 className='tituloPageLojas'>Escolha a loja</h1>
+
+                        <div onClick={handleClick} className="listlojas">
+                            {lojas.map((loja) => (
+                                <ConsultaLojas
+                                    key={loja.ID}
+                                    img={loja.img}
+                                    ID={loja.ID}
+                                    LinkPage={loja.LinkPage}
+                                    loja={loja.loja}
+                                    nome={loja.nome}
+                                    endereco={loja.endereco}
+                                    horarioOpenClose={loja.horarioOpenClose}
+                                    linkLocalizacao={loja.linkLocalizacao}
+                                    linkWhatsapp={loja.linkWhatsapp}
+                                    openClose={checkOpenStatus(
+                                        loja.horarioOpenClose.split("às")[0].trim(),
+                                        loja.horarioOpenClose.split("às")[1].trim()
+                                    ) ? <p className='Open'>Aberto</p> : <p className='Close'>Fechado</p>}
+                                />
+                            ))}
+                        </div>
+                    </>
+                )}
             </section>
             <br /> <br />
         </>
-    )
+    );
 }

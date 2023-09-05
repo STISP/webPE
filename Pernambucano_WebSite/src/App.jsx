@@ -1,5 +1,5 @@
-import Verduras from './assets/BannerQuartaVerde.png'
 import TodosProdutos from './assets/BannerFinalDeSemana.png'
+import Verduras from './assets/BannerQuartaVerde.png'
 import PromoCarne from './assets/BannerPromoCarne.png'
 import './App.css'
 import { useState, useEffect, useRef } from 'react';
@@ -12,7 +12,7 @@ import Padaria from './assets/padaria.png'
 
 export default function App() {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const images = [Verduras, PromoCarne, TodosProdutos];
+    const images = [TodosProdutos, PromoCarne, Verduras];
     const [isPaused, setIsPaused] = useState(false);
 
     const nextSlide = () => {

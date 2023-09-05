@@ -1689,7 +1689,9 @@ button[type="submit"]:hover {
   flex-direction: column;
   background-color: #f5f5f5;
 }
-/* Estilização básica do indicador */
+.loaderBg {
+  background-color: #fff !important;
+}
 .carousel-indicators {
   text-align: center;
   margin-top: 10px;
