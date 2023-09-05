@@ -35,6 +35,10 @@ export default function App() {
         setIsPaused(false);
     };
 
+    function handleClick() {
+        window.scrollTo(0, 0);
+    }
+
     return (
         <>
             <section>
@@ -95,7 +99,7 @@ export default function App() {
                             experiência de compra perfeita em nossas lojas, combinada com uma ampla
                             variedade de produtos de alta qualidade.</p>
                         <div className='botoes'>
-                            <Link to='/lojas'><button className='buttonContato'>Veja a loja mais proxima</button></Link>
+                            <Link to='/lojas' onClick={handleClick}><button className='buttonContato'>Veja a loja mais proxima</button></Link>
                             <a href='https://wa.me/551221360100' target='_blank' rel="noreferrer">
                                 <button className='buttonLojas'>Peça seu Cartão</button>
                             </a>

@@ -502,16 +502,6 @@ nav > .menuMobileIcon {
   text-align: center;
   transition: all 0.3s ease;
 }
-.menuMobileRedes > .redesSociais > img {
-  height: 1.5rem;
-  width: auto;
-}
-.menuMobileRedes > .redesSociais {
-  gap: 2rem;
-}
-.menuMobileRedes img {
-  width: 100%;
-}
 .op-menu a:active {
   color: #f4f4f4;
   background: #0261a3;
@@ -785,24 +775,9 @@ nav > .menuMobileIcon {
   display: flex;
   gap: 1rem;
 }
-.redesSociaisMobile {
-  display: flex;
-  gap: 1rem;
-  padding: 0;
-}
-.redesSociaisMobile a {
-  padding: 0;
-  display: flex;
-}
 .redesSociais img {
   width: 1.4rem;
   padding: 0.62rem;
-  background-color: #0261a3;
-  border-radius: 0.5rem;
-  transition: all 0.2s ease;
-  object-fit: none;
-}
-.redesSociaisMobile img {
   background-color: #0261a3;
   border-radius: 0.5rem;
   transition: all 0.2s ease;
