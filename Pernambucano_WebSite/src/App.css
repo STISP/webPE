@@ -703,7 +703,7 @@ nav > .menuMobileIcon {
   .QualidadeVariedadePreco {
     background: none;
     gap: 0.8rem;
-    margin: 2rem auto 0;
+    margin: 1rem auto 0;
   }
   .vendaComAGente button,
   .CanaisDeAtendimento button {
@@ -789,7 +789,6 @@ nav > .menuMobileIcon {
   display: flex;
   gap: 1rem;
   padding: 0;
-  width: 3rem;
 }
 .redesSociaisMobile a {
   padding: 0;
@@ -1722,7 +1721,7 @@ button[type="submit"]:hover {
 }
 .carousel-indicator {
   width: 15px;
-  height: 5px;
+  height: 4px;
   border-radius: 10px;
   background-color: #ccc;
   display: inline-block;
