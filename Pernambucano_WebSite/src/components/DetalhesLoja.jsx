@@ -60,7 +60,6 @@ export default function DetalhesLoja(props) {
                     </h5>
                     <div className="LojaInfoAndHorarioFuncionamento">
                         <div>
-
                             <div className="LojaInfo">
                                 <img loading="lazy" className='IconLojaInfo' src={props.image} alt='Logo' />
                                 <div className="NomeLocalizacaoHorario">

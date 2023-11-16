@@ -7,10 +7,39 @@ import PoliticaDePrivacidade from '../pages/Sobre/PoliticaDePrivacidade'
 import { Link } from 'react-router-dom'
 import React, { useState } from 'react';
 import PaymentMethodsModal from '../pages/Sobre/PaymentMethodsModal'
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 export default function Footer() {
+    const firebaseConfig = {
+        apiKey: "AIzaSyCogQPbXj0_GzUb1vXycWdU4Upyjo7jcS0",
+        authDomain: "emailspromopenambucano.firebaseapp.com",
+        projectId: "emailspromopenambucano",
+        storageBucket: "emailspromopenambucano.appspot.com",
+        messagingSenderId: "366741265494",
+        appId: "1:366741265494:web:d37bee567f402cf490eff7",
+        measurementId: "G-7Q87KNG7S4"
+    };
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    const handleGoogleLogin = async () => {
+        const provider = new GoogleAuthProvider();
+        const auth = getAuth();
+        try {
+            await signInWithPopup(auth, provider);
+            setButtonText("Registrado com sucesso");
+            setButtonColor("#4CAF50");
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     const [PoliticModalOpen, setPoliticModalOpen] = useState(false);
     const [PaymentModalOpen, setPaymentModalOpen] = useState(false);
+    const [buttonText, setButtonText] = useState("Registrar com Google");
+    const [buttonColor, setButtonColor] = useState("#0261a3");
 
     const PoliticHandleOpenModal = () => {
         setPoliticModalOpen(true);
@@ -98,13 +127,9 @@ export default function Footer() {
                     <div className="Recebapromocoes">
                         <h3>Receba novidades e descontos especiais</h3>
                         <p>inscreva-se e ganhe as melhores promoções disponíveis e muito mais.</p>
-                        <div className='inputEmail'>
-                            <input name="email" placeholder="Digite seu email" />
-                            <button type="button">Enviar</button>
-                        </div>
+                        <button onClick={handleGoogleLogin} style={{ backgroundColor: buttonColor }}>{buttonText}</button>
                     </div>
                 </div>
-
                 <div className="copyright">
                     <p><strong>©</strong> 2023 - Todos os direitos reservados</p>
                 </div>

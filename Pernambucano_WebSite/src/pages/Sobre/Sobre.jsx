@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PoliticaDePrivacidade from '../../pages/Sobre/PoliticaDePrivacidade'
 
 export default function Sobre() {
@@ -52,10 +52,6 @@ export default function Sobre() {
                     <h1>Vagas disponiveis:</h1>
                     <div className='vagasAll'>
                         {/*<div className="vaga">Vendas</div>*/}
-                        <div className="vaga">Gerente de loja</div>
-                        <div className="vaga">Estoquista</div>
-                        <div className="vaga">Operador(a) de loja</div>
-                        <div className="vaga">Balconista</div>
                     </div>
                     <p>Envie seu currículo com a vaga que deseja e sua foto para o email: <a href="mailto:vagasemsupermercadope@gmail.com">vagasemsupermercadope@gmail.com</a></p>
                 </div>

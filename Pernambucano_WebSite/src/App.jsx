@@ -113,7 +113,7 @@ export default function App() {
                     <div className="blocoAnuncio">
                     </div>
                     <div className="flex2">
-                        <a href='https://wa.me/551221360100' target='_blank' className="FacaSeuCartao" rel="noreferrer">
+                        <a href='https://wa.me/551221360100' target='_blank' className="FacaSeuCartao">
                             <h3>Torne suas compras ainda mais faceis com o nosso cartão!</h3>
                             <button>Peça seu cartão</button>
                         </a>
