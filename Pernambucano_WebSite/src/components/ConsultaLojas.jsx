@@ -1,26 +1,25 @@
-import { Link } from 'react-router-dom'
-import RelogioIcon from '../assets/relogio icon.svg'
-import whatsappIcon from '../assets/whatsappIcon.svg'
-import LocalizacaoIcon from '../assets/LocalizaçãoIcon.svg'
+import React, { memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import RelogioIcon from '../assets/relogio icon.svg';
+import whatsappIcon from '../assets/whatsappIcon.svg';
+import LocalizacaoIcon from '../assets/LocalizaçãoIcon.svg';
 
-export default function ConsultaLojas({ LinkPage, img, loja, nome, endereco, openClose, horarioOpenClose, linkLocalizacao, linkWhatsapp }) {
-  const handleLinkClick = (event, link) => {
+const ConsultaLojas = memo(({
+  LinkPage,
+  img,
+  loja,
+  nome,
+  endereco,
+  openClose,
+  horarioOpenClose,
+  linkLocalizacao,
+  linkWhatsapp
+}) => {
+  const handleLinkClick = useCallback((event, link) => {
     event.preventDefault();
     window.open(link, '_blank');
-  };
-
-  ConsultaLojas.propTypes = {
-    LinkPage: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    loja: PropTypes.string.isRequired,
-    nome: PropTypes.string.isRequired,
-    endereco: PropTypes.string.isRequired,
-    openClose: PropTypes.node.isRequired,
-    horarioOpenClose: PropTypes.string.isRequired,
-    linkLocalizacao: PropTypes.string.isRequired,
-    linkWhatsapp: PropTypes.string.isRequired,
-  };
+  }, []);
 
   return (
     <Link to={LinkPage} className='detalhesLojas'>
@@ -48,4 +47,18 @@ export default function ConsultaLojas({ LinkPage, img, loja, nome, endereco, ope
       </div>
     </Link>
   );
-}
+});
+
+ConsultaLojas.propTypes = {
+  LinkPage: PropTypes.string.isRequired,
+  img: PropTypes.string.isRequired,
+  loja: PropTypes.string.isRequired,
+  nome: PropTypes.string.isRequired,
+  endereco: PropTypes.string.isRequired,
+  openClose: PropTypes.node.isRequired,
+  horarioOpenClose: PropTypes.string.isRequired,
+  linkLocalizacao: PropTypes.string.isRequired,
+  linkWhatsapp: PropTypes.string.isRequired,
+};
+
+export default ConsultaLojas;

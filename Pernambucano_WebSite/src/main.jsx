@@ -1,7 +1,7 @@
 import App from './App.jsx'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import NossasLojas from './pages/NossasLojas/NossasLojas.jsx'
 import DomHelder from '../src/pages/NossasLojas/SobreLojas.jsx/DomHelder.jsx'
 import Olinda from '../src/pages/NossasLojas/SobreLojas.jsx/Olinda.jsx'
@@ -24,7 +24,7 @@ import TelaInicialSystem from './pages/sistema/app/TelaInicialSystem.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
 
   <React.StrictMode>
-    <BrowserRouter>
+    <Router>
       <Layout>
         <Routes>
           <Route path="/" element={<App />} />
@@ -50,6 +50,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="*" element={<RotaNaoEncontrada />} />
         </Routes>
       </Layout>
-    </BrowserRouter>
-  </React.StrictMode>,
+    </Router>
+  </React.StrictMode>
 )

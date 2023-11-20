@@ -130,14 +130,21 @@ export default function NossasLojas() {
         setCurrentTime(new Date().toLocaleTimeString('pt-BR'));
     };
 
-    const checkOpenStatus = (openingTime, closingTime) => {
-        const currentTimeParts = currentTime.split(':');
-        const openingTimeParts = openingTime.split(':');
-        const closingTimeParts = closingTime.split(':');
+    useEffect(() => {
+        window.addEventListener('focus', updateCurrentTime);
+        return () => {
+            window.removeEventListener('focus', updateCurrentTime);
+        };
+    }, []);
 
-        const currentTimeInMinutes = parseInt(currentTimeParts[0], 10) * 60 + parseInt(currentTimeParts[1], 10);
-        const openingTimeInMinutes = parseInt(openingTimeParts[0], 10) * 60 + parseInt(openingTimeParts[1], 10);
-        const closingTimeInMinutes = parseInt(closingTimeParts[0], 10) * 60 + parseInt(closingTimeParts[1], 10);
+    const checkOpenStatus = (openingTime, closingTime) => {
+        const [openingHour, openingMinute] = openingTime.split(':').map(Number);
+        const [closingHour, closingMinute] = closingTime.split(':').map(Number);
+        const [currentHour, currentMinute] = currentTime.split(':').map(Number);
+
+        const openingTimeInMinutes = openingHour * 60 + openingMinute;
+        const closingTimeInMinutes = closingHour * 60 + closingMinute;
+        const currentTimeInMinutes = currentHour * 60 + currentMinute;
 
         if (closingTimeInMinutes < openingTimeInMinutes) {
             return currentTimeInMinutes <= closingTimeInMinutes || currentTimeInMinutes >= openingTimeInMinutes;
