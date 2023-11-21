@@ -50,7 +50,7 @@ export default function NossasLojas() {
             loja: "Jaboatão Centro Fílial",
             nome: "Supermercado Pernambucano",
             endereco: "Nossa Senhora do Rosário, 644",
-            horarioOpenClose: "08:00 às 20:00",
+            horarioOpenClose: "07:00 às 20:00",
             linkLocalizacao: "https://goo.gl/maps/ePr5DvfhauyAxmmL6",
             linkWhatsapp: "https://wa.me/5581999716303"
         },
