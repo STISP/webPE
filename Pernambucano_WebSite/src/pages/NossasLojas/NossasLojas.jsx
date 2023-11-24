@@ -4,8 +4,10 @@ import ConsultaLojas from '../../components/ConsultaLojas'
 import Central from '../../../src/assets/central de servico.svg'
 import Car from '../../assets/car.svg'
 import { MoonLoader } from 'react-spinners';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 export default function NossasLojas() {
+    const [isOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [loadingMessage, setLoadingMessage] = useState('Carregando lojas...');
     const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString('pt-BR'));
@@ -157,6 +159,21 @@ export default function NossasLojas() {
         window.scrollTo(0, 0);
     }
 
+    const [search, setSearch] = useState('');
+    const [searchNormalized, setSearchNormalized] = useState('');
+
+    useEffect(() => {
+        setSearchNormalized(search.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase());
+    }, [search]);
+
+    const filteredLojas = lojas.filter((loja) => {
+        const lojaString = JSON.stringify(loja).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        return lojaString.includes(searchNormalized) && (!isOpen || checkOpenStatus(
+            loja.horarioOpenClose.split("às")[0].trim(),
+            loja.horarioOpenClose.split("às")[1].trim()
+        ));
+    });
+
     return (
         <>
             <section>
@@ -171,28 +188,34 @@ export default function NossasLojas() {
                             Página Inicial / Nossas Lojas
                         </h5>
 
-                        <h1 className='tituloPageLojas'>Escolha a loja</h1>
+                        <h1 className='tituloPageLojas'>Nossas lojas</h1>
 
-                        <div onClick={handleClick} className="listlojas">
-                            {lojas.map((loja) => (
-                                <ConsultaLojas
-                                    key={loja.ID}
-                                    img={loja.img}
-                                    ID={loja.ID}
-                                    LinkPage={loja.LinkPage}
-                                    loja={loja.loja}
-                                    nome={loja.nome}
-                                    endereco={loja.endereco}
-                                    horarioOpenClose={loja.horarioOpenClose}
-                                    linkLocalizacao={loja.linkLocalizacao}
-                                    linkWhatsapp={loja.linkWhatsapp}
-                                    openClose={checkOpenStatus(
-                                        loja.horarioOpenClose.split("às")[0].trim(),
-                                        loja.horarioOpenClose.split("às")[1].trim()
-                                    ) ? <p className='Open'>Aberto</p> : <p className='Close'>Fechado</p>}
-                                />
-                            ))}
+                        <div className="filtro">
+                            <input type="searchLoja" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Digite o local da loja" />
+                            <label className="chackboxIsOpen"><input type="checkbox" checked={isOpen} onChange={() => setIsOpen(!isOpen)} /> Mostrar apenas lojas abertas </label>
                         </div>
+
+                        <TransitionGroup component="div" className="listlojas">
+                            {filteredLojas.map((loja) => (
+                                <CSSTransition key={loja.ID} timeout={300} classNames="fade">
+                                    <ConsultaLojas
+                                        img={loja.img}
+                                        ID={loja.ID}
+                                        LinkPage={loja.LinkPage}
+                                        loja={loja.loja}
+                                        nome={loja.nome}
+                                        endereco={loja.endereco}
+                                        horarioOpenClose={loja.horarioOpenClose}
+                                        linkLocalizacao={loja.linkLocalizacao}
+                                        linkWhatsapp={loja.linkWhatsapp}
+                                        openClose={checkOpenStatus(
+                                            loja.horarioOpenClose.split("às")[0].trim(),
+                                            loja.horarioOpenClose.split("às")[1].trim()
+                                        ) ? <p className='Open'>Aberto</p> : <p className='Close'>Fechado</p>}
+                                    />
+                                </CSSTransition>
+                            ))}
+                        </TransitionGroup>
                     </>
                 )}
             </section>

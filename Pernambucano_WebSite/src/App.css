@@ -531,6 +531,9 @@ nav > .menuMobileIcon {
   }
 }
 @media screen and (max-width: 768px) {
+  input[type="searchLoja"] {
+    width: 60%;
+  }
   .privacidade:hover p,
   .trabalheConosco:hover p,
   .vendaConosco:hover p,
@@ -1698,4 +1701,71 @@ button[type="submit"]:hover {
 .carousel-indicator.active {
   width: 25px;
   background-color: #0261a3;
+}
+input[type="searchLoja"] {
+  display: flex;
+  width: 90%;
+  max-width: 20rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 2px solid #0261a3;
+  font-style: normal;
+  transition: all 0.2s ease;
+  outline: none;
+}
+input[type="searchLoja"]::placeholder {
+  font-size: 0.9rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.filtro {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 auto 1rem auto;
+  width: 95%;
+}
+.chackboxIsOpen {
+  display: flex;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.chackboxIsOpen input[type="checkbox"] {
+  margin-right: 8px;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #0261a3;
+  border-radius: 4px;
+  outline: none;
+}
+.chackboxIsOpen input[type="checkbox"]:checked {
+  background-color: #0261a3; /* Cor de fundo quando marcado */
+}
+.chackboxIsOpen input[type="checkbox"]:checked::before {
+  content: "\2714";
+  color: #ffffff;
+  display: block;
+  text-align: center;
+  line-height: 20px;
+}
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 500ms;
 }
