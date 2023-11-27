@@ -33,14 +33,14 @@ const MenuMobileModal = ({ isOpen, onClose }) => {
                     <Link to={{ pathname: '/sobre', state: { fromDashboard: true } }} onClick={() => { onClose(); handleClick(); }}>
                         Quem somos
                     </Link>
-                    {/*<div className="linee" />
-                    <Link to="/Parceiros" onClick={onClose}>
-                        Parceiros
-                    </Link>*/}
                     <div className="linee" />
                     <a href='https://cartoes.uzecomvoce.com.br/pernambuco' target='_blank' onClick={onClose}>
                         Peça Seu Cartão
                     </a>
+                    <div className="linee" />
+                    <Link className='MenuOptionPanfleto' to="/panfletos" onClick={onClose}>
+                        Panfletos
+                    </Link>
 
                     <br /><br /><br />
                     <img loading="lazy" src={LogoCompleta} alt="logo" />

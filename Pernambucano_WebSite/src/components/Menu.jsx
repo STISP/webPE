@@ -20,12 +20,12 @@ export default function Menu() {
             <Link to="/"><img src={LogoCompleta} alt="Logo Pernambucano" /></Link>
             {/* menu Desktop*/}
             <ul className='menuDesktop'>
+                <li className='MenuOptionPanfleto2'>
+                    <Link className='MenuOptionPanfleto' to="/panfletos">Panfletos</Link>
+                </li>
                 <li>
                     <Link to="/">Inicio</Link>
                 </li>
-                {/*<li>
-                    <Link to="/Parceiros">Parceiros</Link>
-                </li>*/}
                 <li>
                     <Link to="/lojas">Nossas Lojas</Link>
                 </li>

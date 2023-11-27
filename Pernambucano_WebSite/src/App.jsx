@@ -10,10 +10,12 @@ import BoxIcon from './assets/boxIcon.svg'
 import CarrinhoIcon from './assets/carrinhoIcon.svg'
 import Padaria from './assets/padaria.png'
 
+
 export default function App() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const images = [TodosProdutos, PromoCarne, Verduras];
     const [isPaused, setIsPaused] = useState(false);
+    const [anosDeExperiencia, setAnosDeExperiencia] = useState(0);
 
     const nextSlide = () => {
         setCurrentIndex((currentIndex + 1) % images.length);
@@ -22,7 +24,7 @@ export default function App() {
     const intervalRef = useRef();
 
     useEffect(() => {
-        const interval = setInterval(nextSlide, 5000);
+        const interval = setInterval(nextSlide, 6000);
         intervalRef.current = interval;
         return () => clearInterval(intervalRef.current);
     }, [currentIndex]);
@@ -38,7 +40,19 @@ export default function App() {
     function handleClick() {
         window.scrollTo(0, 0);
     }
-    
+
+    useEffect(() => {
+        const dataAtual = new Date();
+        const mesAlvo = 10;
+        const diaAlvo = 1;
+        const anoAtual = dataAtual.getFullYear();
+        const anoAlvo = anoAtual - 23;
+        const dataAlvo = new Date(anoAlvo, mesAlvo, diaAlvo);
+        const diferencaEmMilissegundos = dataAtual.getTime() - dataAlvo.getTime();
+        const anos = Math.floor(diferencaEmMilissegundos / (1000 * 60 * 60 * 24 * 365));
+        setAnosDeExperiencia(anos);
+    }, []);
+
     return (
         <>
             <section>
@@ -93,7 +107,7 @@ export default function App() {
                 </div>
                 <div className="maintop">
                     <div className="esqText">
-                        <p className='noMercado'>20 anos de experiência no mercado</p>
+                        <p className='noMercado'>{anosDeExperiencia} anos de experiência no mercado</p>
                         <h1>O melhor mercado da região é aqui</h1>
                         <p className='bemVindo'>Seja bem-vindo! Aqui, nossa missão é oferecer uma
                             experiência de compra perfeita em nossas lojas, combinada com uma ampla

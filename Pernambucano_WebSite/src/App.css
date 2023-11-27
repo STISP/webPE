@@ -22,13 +22,14 @@ nav {
   width: 100%;
 }
 nav img {
-  height: 3rem;
+  height: 2.6rem;
   mix-blend-mode: multiply;
 }
 nav ul {
   display: flex;
-  gap: 3.2rem;
+  gap: 2.5rem;
   margin: 0;
+  align-items: center;
 }
 nav ul li {
   list-style: none;
@@ -332,12 +333,20 @@ nav ul li a:hover {
   gap: 0.7rem;
   align-items: center;
 }
+@media screen and (max-width: 895px) {
+  nav ul {
+    gap: 1rem;
+  }
+  .MenuOptionPanfleto {
+    color: #fff !important;
+  }
+}
 @media screen and (max-width: 856px) {
   .flexInLine {
     gap: 0rem;
   }
   nav ul {
-    gap: 2rem;
+    gap: 0.7rem;
   }
   .HorarioFuncionamento {
     margin: 2rem 0 0;
@@ -531,8 +540,11 @@ nav > .menuMobileIcon {
   }
 }
 @media screen and (max-width: 768px) {
+  .MensagemTopoPagina {
+    font-size: 0.7rem !important;
+  }
   input[type="searchLoja"] {
-    width: 60%;
+    width: 50% !important;
   }
   .privacidade:hover p,
   .trabalheConosco:hover p,
@@ -795,7 +807,7 @@ nav,
   line-height: normal;
   max-width: 82.5rem;
   width: 95%;
-  margin: 1.44rem auto;
+  margin: 1rem auto;
 }
 .contato {
   display: flex;
@@ -1669,9 +1681,9 @@ button[type="submit"]:hover {
 }
 .buttonLoginCadastro:disabled,
 .buttonLoginCadastro:hover:disabled {
-  background-color: #ccc; /* Cor de fundo quando o botão está desativado */
-  color: #999; /* Cor do texto quando o botão está desativado */
-  cursor: not-allowed; /* Altera o cursor para 'não permitido' quando o botão está desativado */
+  background-color: #ccc;
+  color: #999;
+  cursor: not-allowed;
 }
 .centralizado {
   display: flex;
@@ -1725,6 +1737,7 @@ input[type="searchLoja"]::placeholder {
   gap: 1rem;
   margin: 0 auto 1rem auto;
   width: 95%;
+  max-width: 82.5rem;
 }
 .chackboxIsOpen {
   display: flex;
@@ -1735,37 +1748,83 @@ input[type="searchLoja"]::placeholder {
 }
 .chackboxIsOpen input[type="checkbox"] {
   margin-right: 8px;
-  appearance: none;
   width: 20px;
   height: 20px;
   border: 2px solid #0261a3;
   border-radius: 4px;
   outline: none;
+  transition: all 0.2s ease;
 }
 .chackboxIsOpen input[type="checkbox"]:checked {
   background-color: #0261a3; /* Cor de fundo quando marcado */
 }
-.chackboxIsOpen input[type="checkbox"]:checked::before {
-  content: "\2714";
-  color: #ffffff;
-  display: block;
-  text-align: center;
-  line-height: 20px;
-}
 .fade-enter {
   opacity: 0;
 }
-
 .fade-enter-active {
   opacity: 1;
   transition: opacity 500ms;
 }
-
 .fade-exit {
   opacity: 1;
 }
-
 .fade-exit-active {
   opacity: 0;
   transition: opacity 500ms;
+}
+.MensagemTopoPagina {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;
+  color: #fff;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  padding: 0.5rem 0;
+  margin: 0;
+}
+.MenuOptionPanfleto {
+  background-color: rgba(2, 96, 163, 0.925);
+  color: #fffffff1;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  margin: 0;
+}
+.MenuOptionPanfleto:hover {
+  background-color: #0261a3;
+  color: #fff;
+}
+.MenuOptionPanfleto2 {
+  padding: 0.5rem 0rem;
+}
+.blackFridayBackground {
+  background-color: black;
+  color: white;
+}
+.normalDayBackground {
+  background-color: #0261a3;
+  color: white;
+}
+.bakeryPromoBackground {
+  background-color: #ffcc00;
+  color: black;
+}
+.vegetablePromoBackground {
+  background-color: #4caf50;
+  color: white;
+}
+.meatPromoBackground {
+  background-color: #e91e63;
+  color: white;
+}
+.ExcluirDPS {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
 }

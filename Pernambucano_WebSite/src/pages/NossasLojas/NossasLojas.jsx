@@ -121,7 +121,7 @@ export default function NossasLojas() {
         setTimeout(() => {
             setIsLoading(false);
             clearInterval(interval);
-        }, 1000);
+        }, 500);
 
         return () => {
             clearInterval(interval);
@@ -188,7 +188,7 @@ export default function NossasLojas() {
                             Página Inicial / Nossas Lojas
                         </h5>
 
-                        <h1 className='tituloPageLojas'>Nossas lojas</h1>
+                        <h1 className='tituloPageLojas'>Encontre Nossas Lojas</h1>
 
                         <div className="filtro">
                             <input type="searchLoja" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Digite o local da loja" />
@@ -197,7 +197,7 @@ export default function NossasLojas() {
 
                         <TransitionGroup component="div" className="listlojas">
                             {filteredLojas.map((loja) => (
-                                <CSSTransition key={loja.ID} timeout={300} classNames="fade">
+                                <CSSTransition key={loja.ID} timeout={500} classNames="fade">
                                     <ConsultaLojas
                                         img={loja.img}
                                         ID={loja.ID}
