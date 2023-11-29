@@ -17,14 +17,12 @@ const Layout = ({ children }) => {
       2: 'Hoje é promoção na padaria!',
       3: 'Hoje é promoção de verduras!',
       4: 'Hoje é promoção de carne!',
-      5: 'Hoje é promoção de carne!'
     };
 
     const promoDayClasses = {
       2: 'bakeryPromoBackground',
       3: 'vegetablePromoBackground',
       4: 'meatPromoBackground',
-      5: 'meatPromoBackground',
     };
 
     const isBlackFrday = month === 10 && date >= 23 && date <= 30;

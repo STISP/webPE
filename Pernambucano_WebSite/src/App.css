@@ -11,6 +11,37 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
+  scroll-margin-top: 10px;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  overscroll-behavior-y: contain;
+}
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(to right, #0261a3, #ffdf4f);
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+body.scroll-up::after,
+body.scroll-down::after {
+  opacity: 1;
+}
+body.scroll-up::after {
+  transform: translateY(-8px);
+}
+body.scroll-down::after {
+  transform: translateY(8px);
 }
 a {
   text-decoration: none;
@@ -532,6 +563,9 @@ nav > .menuMobileIcon {
   display: none;
 }
 @media screen and (max-width: 627px) {
+  .tituloBottonBack h1 {
+    display: none;
+  }
   .flex2 {
     flex-direction: column !important;
   }
@@ -1823,8 +1857,197 @@ input[type="searchLoja"]::placeholder {
   background-color: #e91e63;
   color: white;
 }
-.ExcluirDPS {
-  margin-top: 2rem;
+.panfletos {
+  margin: 0 auto;
+  width: 95%;
+  max-width: 82.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding-bottom: 2rem;
+}
+.panfleto {
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+}
+.panfleto img {
+  width: 15rem;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0.3rem;
+  display: flex;
+}
+.panfleto:hover {
+  transform: scale(1.03);
+  cursor: pointer;
+}
+.panfleto:hover img {
+  filter: saturate(1.2);
+}
+.panfleto:hover h3 {
+  color: #0261a3;
+}
+.panfleto h3 {
+  color: #333;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 0.5rem 0 0 0;
+}
+.panfleto p {
+  color: #999;
+  font-size: 0.9rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0.2rem 0 0 0;
+}
+.panfleto a {
+  color: #0261a3;
+  font-size: 0.9rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0rem 0 0 0;
+  text-decoration: none;
+}
+
+.panfleto p,
+.panfleto a,
+.panfleto h3 {
+  width: 15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tituloBottonBack {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+  align-items: center;
+}
+.tituloBottonBack h1 {
+  margin: 0;
+  color: #333;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.voltar-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 500;
+  padding: 10px 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.voltar-btn2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 500;
+  padding: 10px 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.bottonBack2 {
   display: flex;
   justify-content: center;
+  margin: 1rem 0;
+  gap: 1rem;
+  align-items: center;
+}
+.imagens-panfleto {
+  max-width: 25rem;
+  width: 95%;
+  margin: 2rem auto;
+}
+.imagens-panfleto p {
+  margin: 2rem 0 0 0;
+  text-align: center;
+}
+.imagens-panfleto img {
+  max-width: 100%;
+  height: auto;
+}
+.slick-dots {
+  text-align: center;
+  margin-top: 20px;
+}
+.slick-dots li {
+  display: inline-block;
+  margin: 0 5px;
+}
+.slick-dots li button {
+  font-size: 12px;
+  line-height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  background: transparent;
+  color: #ccc;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.slick-dots li.slick-active button {
+  background-color: #ccc;
+  color: #fff;
+}
+.slick-slide {
+  display: flex;
+  justify-content: center;
+}
+/* Estilos para os botões de "Anterior" e "Próximo" */
+.bottonsPrevNext {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.prevBTN,
+.nextBTN {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.prevBTN:hover,
+.nextBTN:hover {
+  background-color: #0056b3;
+}
+.prevBTN::before,
+.nextBTN::after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 18px;
+}
+.prevBTN::before {
+  margin-right: 5px;
+}
+.nextBTN::after {
+  margin-left: 5px;
+}
+.prevBTN::before {
+  content: "\f053";
+  font-size: 14px;
+}
+.nextBTN::after {
+  content: "\f054";
+  font-size: 14px;
 }

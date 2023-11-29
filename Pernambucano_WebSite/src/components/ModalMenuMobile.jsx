@@ -1,7 +1,4 @@
 import React from 'react';
-import Facebook from '../assets/facebook.svg'
-import whatsapp from '../assets/whatsapp.svg'
-import Instagram from '../assets/instagram.svg'
 import LogoCompleta from '../assets/LogoCompleta.svg'
 import { Link } from 'react-router-dom';
 
@@ -9,7 +6,7 @@ const MenuMobileModal = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
 
     function handleClick() {
-        window.scrollTo(0, 0);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         onClose();
     }
 
@@ -38,7 +35,7 @@ const MenuMobileModal = ({ isOpen, onClose }) => {
                         Peça Seu Cartão
                     </a>
                     <div className="linee" />
-                    <Link className='MenuOptionPanfleto' to="/panfletos" onClick={onClose}>
+                    <Link to="/panfletos" onClick={onClose}>
                         Panfletos
                     </Link>
 
