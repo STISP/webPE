@@ -18,7 +18,7 @@ export default function Panfletos() {
   const panfletos = [
     {
       id: 1,
-      titulo: 'Quarta verde',
+      titulo: 'Dia P e Aniversário',
       dataValidade: 'Ofertas válidas no dia 31 de novembro',
       imagem: [DiaPeAniversario1, DiaPeAniversario2],
     },
