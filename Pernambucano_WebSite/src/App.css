@@ -871,6 +871,12 @@ nav,
   }
 }
 @media screen and (max-width: 480px) {
+  .panfleto img {
+    width: 100% !important;
+  }
+  .panfletos {
+    width: 90% !important;
+  }
   .Parceiros {
     gap: 1rem !important;
   }
@@ -1937,6 +1943,7 @@ input[type="searchLoja"]::placeholder {
   line-height: normal;
 }
 .voltar-btn {
+  color: #333;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -1951,6 +1958,7 @@ input[type="searchLoja"]::placeholder {
   transition: all 0.2s ease;
 }
 .voltar-btn2 {
+  color: #333;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -2026,6 +2034,12 @@ input[type="searchLoja"]::placeholder {
   padding: 10px 15px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  display: flex;
+  align-items: center;
 }
 .prevBTN:hover,
 .nextBTN:hover {

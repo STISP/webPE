@@ -69,11 +69,6 @@ export default function Panfletos() {
               Voltar
             </button>
           </div>*/}
-          <div className="bottonBack2">
-            <button onClick={handleVoltar} className="voltar-btn2">
-              Voltar
-            </button>
-          </div>
           <Slider ref={sliderRef} dots={true} infinite={true} speed={500}>
             {panfletoSelecionado.imagem.map((imagem, index) => (
               <div key={index}>
