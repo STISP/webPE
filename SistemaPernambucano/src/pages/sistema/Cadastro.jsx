@@ -62,7 +62,6 @@ export default function CriarConta() {
         body: JSON.stringify(newUser)
       });
       if (response.ok) {
-        console.log('conta registrada');
         localStorage.setItem('email', email);
         localStorage.setItem('nome', name);
         window.location.href = 'http://localhost:5173/SistemaPE/'

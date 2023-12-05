@@ -111,7 +111,7 @@ export default function Login() {
                   }}
                 />
               </div>
-              <button className='buttonLoginCadastro' type="submit">Entrar</button>
+              <Link to="/SistemaPE"><button className='buttonLoginCadastro' type="submit">Entrar</button></Link>
             </form>
             {bloqueado ? (
               <p className="errorEmailExist">Usuário bloqueado. Tente novamente mais tarde.</p>
@@ -119,7 +119,7 @@ export default function Login() {
               mensagem && <p className="errorEmailExist">{mensagem}</p>
             )}
             <p className='alterarLoginCadastro'>
-              Não tem uma conta? <Link to="/lojas/DomHelderServicos" onClick={handleClick} style={{ textDecoration: 'underline' }}>entre em contato com o ADM</Link>
+              Não tem uma conta? <Link to="https://suppernambucano.com.br/#/lojas/DomHelderServicos" onClick={handleClick} style={{ textDecoration: 'underline' }}>entre em contato com o ADM</Link>
             </p>
           </div>
         </div>
