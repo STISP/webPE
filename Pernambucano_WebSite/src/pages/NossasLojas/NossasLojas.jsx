@@ -177,6 +177,15 @@ export default function NossasLojas() {
     return (
         <>
             <section>
+                <h5 className='caminho_page'>
+                    Página Inicial / Nossas Lojas
+                </h5>
+                <h1 className='tituloPageLojas'>Encontre Nossas Lojas</h1>
+                <div className="filtro">
+                    <input type="searchLoja" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Digite o local da loja" />
+                    <label className="chackboxIsOpen"><input type="checkbox" checked={isOpen} onChange={() => setIsOpen(!isOpen)} /> Mostrar apenas lojas abertas </label>
+                </div>
+
                 {isLoading ? (
                     <div className="centralizado loaderBg">
                         <MoonLoader color="#0261a3" loading={isLoading} size={60} />
@@ -184,17 +193,6 @@ export default function NossasLojas() {
                     </div>
                 ) : (
                     <>
-                        <h5 className='caminho_page'>
-                            Página Inicial / Nossas Lojas
-                        </h5>
-
-                        <h1 className='tituloPageLojas'>Encontre Nossas Lojas</h1>
-
-                        <div className="filtro">
-                            <input type="searchLoja" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Digite o local da loja" />
-                            <label className="chackboxIsOpen"><input type="checkbox" checked={isOpen} onChange={() => setIsOpen(!isOpen)} /> Mostrar apenas lojas abertas </label>
-                        </div>
-
                         <TransitionGroup component="div" className="listlojas">
                             {filteredLojas.map((loja) => (
                                 <CSSTransition key={loja.ID} timeout={500} classNames="fade">

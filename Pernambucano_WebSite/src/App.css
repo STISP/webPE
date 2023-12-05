@@ -909,8 +909,6 @@ nav,
   }
   .LojaEndereco {
     margin-bottom: 0.4rem !important;
-  }
-  .LojaEndereco {
     font-size: 0.8rem;
   }
   .LojaNome {
@@ -1344,6 +1342,19 @@ body::-webkit-scrollbar-thumb {
   font-weight: 400;
   line-height: 90.9%;
   margin-bottom: 1rem;
+}
+.LojaEndereco {
+  color: #999;
+  font-size: 0.9rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 90.9%;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid transparent;
+}
+.LojaEndereco:hover {
+  color: #0261a3;
+  border-bottom-color: #0261a3;
 }
 .LojaHorario svg {
   fill: #333;

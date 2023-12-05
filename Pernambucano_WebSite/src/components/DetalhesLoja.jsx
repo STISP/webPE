@@ -45,9 +45,13 @@ export default function DetalhesLoja(props) {
     function handleClick() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    
+
+
     return (
         <>
+            <h5 className='caminho_page'>
+                Página Inicial / Nossas Lojas / {props.loja}
+            </h5>
             {isLoading ? (
                 <div className="centralizado loaderBg">
                     <MoonLoader color="#0261a3" loading={isLoading} size={60} />
@@ -55,16 +59,13 @@ export default function DetalhesLoja(props) {
                 </div>
             ) : (
                 <section id={props.ID}>
-                    <h5 className='caminho_page'>
-                        Página Inicial / Nossas Lojas / {props.loja}
-                    </h5>
                     <div className="LojaInfoAndHorarioFuncionamento">
                         <div>
                             <div className="LojaInfo">
                                 <img loading="lazy" className='IconLojaInfo' src={props.image} alt='Logo' />
                                 <div className="NomeLocalizacaoHorario">
                                     <div className="LojaNome">{props.loja}</div>
-                                    <div className="LojaEndereco">{props.LojaEndereco}</div>
+                                    <a href={props.mapaLojaURL} target="meuIframe"><div className="LojaEndereco">{props.LojaEndereco}</div></a>
 
                                     <div className="LojaHorario">
                                         {checkOpenStatus(props.SegundaASextaI, props.SegundaASextaF) ||
@@ -132,7 +133,7 @@ export default function DetalhesLoja(props) {
                     </div>
                     <br />
                     <div className="LojaMapa">
-                        <iframe src={props.mapaLojaURL} width="1072" height="288" title="Mapa da loja" frameBorder="0" style={{ border: 0 }} allowFullScreen="" aria-hidden="false" tabIndex="0"></iframe>
+                        <iframe name='Local da loja' src={props.mapaLojaURL} width="1072" height="288" title="Mapa da loja" frameBorder="0" style={{ border: 0 }} allowFullScreen="" aria-hidden="false" tabIndex="0"></iframe>
                     </div>
                     <br /> <br />
                 </section>
