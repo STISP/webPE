@@ -10,17 +10,13 @@ import PrivateRoute from './PrivateRoute.jsx'
 import TelaInicialSystem from './pages/sistema/app/TelaInicialSystem.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-
   <React.StrictMode>
     <Router>
       <Layout>
         <Routes>
-          <Route path="/" element={<App />} />
-          {/*
-           exemplo de rota privada 
-             <Route path="/parceiros" element={<PrivateRoute><Parceiros /></PrivateRoute>} />
-          */}
-          <Route path="/SistemaPE" element={<PrivateRoute><TelaInicialSystem /></PrivateRoute>} />
+          {/*<Route path="/" element={<App />} />
+          <Route path="/SistemaPE" element={<PrivateRoute><TelaInicialSystem /></PrivateRoute>} />*/}
+          <Route path="/" element={<PrivateRoute><TelaInicialSystem /></PrivateRoute>} />
           <Route path="/cadastro" element={<CriarConta />} />
           <Route path="/Login" element={<Login />} />
           <Route path="*" element={<RotaNaoEncontrada />} />
@@ -29,3 +25,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </Router>
   </React.StrictMode>
 )
+
+

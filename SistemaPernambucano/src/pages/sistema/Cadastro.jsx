@@ -6,9 +6,7 @@ export default function CriarConta() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const [adminSenha] = useState('suptiadm');
   const [mensagem, setMensagem] = useState('');
-  const [isAdminSenhaCorreta, setIsAdminSenhaCorreta] = useState(false);
 
   useEffect(() => {
     const storedEmail = localStorage.getItem('email');
@@ -35,12 +33,6 @@ export default function CriarConta() {
     const emailMinusc = email.toLowerCase();
     if (!emailMinusc.endsWith('@suppernambucano.com.br')) {
       const mensagem = 'Email inválido. Certifique-se de usar um email autorizado para continuar.';
-      setMensagem(mensagem);
-      return;
-    }
-
-    if (!isAdminSenhaCorreta) {
-      const mensagem = 'Senha de administrador incorreta';
       setMensagem(mensagem);
       return;
     }
@@ -75,11 +67,6 @@ export default function CriarConta() {
       const mensagem = 'Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.';
       setMensagem(mensagem);
     }
-  };
-
-  const handleAdminSenhaChange = (e) => {
-    const inputSenhaAdmin = e.target.value;
-    setIsAdminSenhaCorreta(inputSenhaAdmin === adminSenha);
   };
 
   function handleClick() {
@@ -134,16 +121,7 @@ export default function CriarConta() {
                 }}
               />
             </div>
-            <div className="form-group">
-              <input
-                placeholder='Senha de Administrador'
-                type="password"
-                id="adminSenha"
-                autoComplete="off"
-                onChange={handleAdminSenhaChange}
-              />
-            </div>
-            <button className='buttonLoginCadastro' type="submit" disabled={!isAdminSenhaCorreta}>Cadastrar</button>
+            <button className='buttonLoginCadastro' type="submit">Cadastrar</button>
           </form>
           {mensagem && <p className="errorEmailExist">{mensagem}</p>}
           <p className='alterarLoginCadastro'>

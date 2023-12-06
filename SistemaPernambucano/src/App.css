@@ -40,3 +40,84 @@ body.scroll-down::after {
 a {
   text-decoration: none;
 }
+
+.sistemaInicial {
+  background-color: #0261a3;
+  border-radius: 0.6rem;
+  margin: 10px;
+  padding: 10px;
+  color: #fff;
+}
+.sistemaInicial h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  padding: 0.8rem;
+}
+.sistemaInicial h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  padding: 0.8rem 0.8rem 0 0.8rem;
+}
+.sistemaInicial p {
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 0 0.8rem 0.8rem;
+}
+.menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 280px;
+  height: 100%;
+  background-color: #132438;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.menu ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  flex-shrink: 0;
+  margin-top: 1rem;
+}
+.menu ul a {
+  background: #273648;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 0.8125rem;
+  width: 13rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  transition: 0.3s ease;
+}
+.menu ul a {
+  color: #fff;
+  transition: 0.3s ease;
+}
+.menu ul a:hover {
+  background: #fafafa;
+  cursor: pointer;
+  color: #132438;
+  transition: 0.3s ease;
+}
+.menu img {
+  margin-top: 2rem;
+  width: 10rem;
+}
+.content {
+  padding-left: 304px;
+}
+.menu {
+  margin-right: 20px;
+}

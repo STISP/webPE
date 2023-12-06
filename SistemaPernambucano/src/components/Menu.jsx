@@ -5,19 +5,18 @@ import React, { useState } from 'react'
 export default function Menu() {
 
     return (
-        <nav>
+        <nav className='menu'>
             <Link to="/"><img src={LogoCompleta} alt="Logo Pernambucano" /></Link>
-            {/* menu Desktop*/}
             <ul className='menuDesktop'>
-                <li>
-                    <Link to="/">Inicio</Link>
-                </li>
-                <li>
-                    <Link to="/Login">Login</Link>
-                </li>
-                <li>
-                    <Link to="/cadastro">cadastro</Link>
-                </li>
+                <Link to="/">
+                    Inicio
+                </Link>
+                <Link to="/Login">
+                    Login
+                </Link>
+                <Link to="/cadastro">
+                    cadastro
+                </Link>
             </ul>
         </nav>
     )

@@ -13,6 +13,7 @@ export class UsuarioService {
   async cadastrar(usuario: Usuario): Promise<Usuario> {
     const hashedPassword = await bcrypt.hash(usuario.senha, 8);
     usuario.senha = hashedPassword;
+    //criptografar usuario.id tambem
     return this.usuarioRepository.save(usuario);
   }
 
