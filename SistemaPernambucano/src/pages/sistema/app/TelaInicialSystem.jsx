@@ -7,23 +7,35 @@ export default function TelaInicialSystem() {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-          setIsLoading(false);
+            setIsLoading(false);
         });
-    
+
         return () => clearTimeout(timer);
-      }, []);
+    }, []);
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    const nome = localStorage.getItem('email');
+    const nomeSemDomino = nome.replace(/@suppernambucano.com.br/g, '');
+    const nomeCapitalizado = nomeSemDomino.charAt(0).toUpperCase() + nomeSemDomino.slice(1);
+
 
     return (
         <>
-        <br />
+            <br />
             {isLoading ? (
                 <div className='centralizado'>
                     <MoonLoader color="#0261a3" loading={isLoading} size={50} />
                 </div >
             ) : (
-                <h1 style={{ display: 'flex', justifyContent: 'center', height: '80vh', alignItems: 'center' }}>
-                    Bem vindo ao sistema do Pernambucano
-                </h1>
+                <>
+                    <div className='tituloAndSubtituloPage'>
+                        <h1 className='TituloPage'>Bem vindo {nomeCapitalizado}!</h1>
+                        <p className='SubtituloPage'>Informações gerais</p>
+                    </div>
+                </>
+
             )
             }
         </>

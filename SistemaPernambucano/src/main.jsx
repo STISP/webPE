@@ -8,22 +8,30 @@ import CriarConta from './pages/sistema/Cadastro.jsx'
 import RotaNaoEncontrada from './pages/RotaNaoEncontrada.jsx'
 import PrivateRoute from './PrivateRoute.jsx'
 import TelaInicialSystem from './pages/sistema/app/TelaInicialSystem.jsx'
+import ContractsPage from './pages/sistema/app/ContractsPage/ContractsPage.jsx'
+import ListContracts from './pages/sistema/app/ContractsPage/ListContracts.jsx'
+import ContratoDetalhes from './components/ContratoDetalhes.jsx'
+import AddContract from './pages/sistema/app/ContractsPage/AddContract.jsx'
+
+function isMobileView() {
+  return window.matchMedia('(max-width: 1210px)').matches;
+}
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Router>
-      <Layout>
+  isMobileView() ?
+    <div>Sistema não compatível com dispositivos móveis</div> :
+    <React.StrictMode>
+      <Router>
         <Routes>
-          {/*<Route path="/" element={<App />} />
-          <Route path="/SistemaPE" element={<PrivateRoute><TelaInicialSystem /></PrivateRoute>} />*/}
-          <Route path="/" element={<PrivateRoute><TelaInicialSystem /></PrivateRoute>} />
-          <Route path="/cadastro" element={<CriarConta />} />
-          <Route path="/Login" element={<Login />} />
+          <Route path="/" element={<Layout><PrivateRoute><TelaInicialSystem /></PrivateRoute></Layout>} />
+          <Route path="/ContractsPage" element={<Layout><PrivateRoute><ContractsPage /></PrivateRoute></Layout>} />
+          <Route path="/AddContract" element={<Layout><PrivateRoute><AddContract /></PrivateRoute></Layout>} />
+          <Route path="/ListContracts" element={<Layout><PrivateRoute><ListContracts /></PrivateRoute></Layout>} />
+          <Route exact path="/Contrato/:id" element={<Layout><PrivateRoute><ContratoDetalhes /></PrivateRoute></Layout>} />
+          <Route path="/cadastro" element={<Layout><PrivateRoute><CriarConta /></PrivateRoute></Layout>} />
+          <Route path="/Login" element={<Layout hideMenuPaths={["/Login"]}><Login /></Layout>} />
           <Route path="*" element={<RotaNaoEncontrada />} />
         </Routes>
-      </Layout>
-    </Router>
-  </React.StrictMode>
+      </Router>
+    </React.StrictMode>
 )
-
-

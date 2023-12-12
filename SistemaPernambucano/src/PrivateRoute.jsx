@@ -16,7 +16,7 @@ export default function PrivateRoute({ children }) {
     checkEmail();
   }, []);
 
-  const handleBeforeUnload = () => {
+  {/*  const handleBeforeUnload = () => {
     localStorage.clear();
   };
 
@@ -27,6 +27,7 @@ export default function PrivateRoute({ children }) {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
   }, []);
+ */}
 
   if (emailExists === null) {
     return (

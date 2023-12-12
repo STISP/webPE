@@ -78,7 +78,7 @@ export default function CriarConta() {
       <br />
       <div className="inicioScreen">
         <div className="allForms">
-          <h2>Criar uma nova conta</h2>
+          <h2>Criar um novo usuario</h2>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <input
@@ -124,9 +124,6 @@ export default function CriarConta() {
             <button className='buttonLoginCadastro' type="submit">Cadastrar</button>
           </form>
           {mensagem && <p className="errorEmailExist">{mensagem}</p>}
-          <p className='alterarLoginCadastro'>
-            Já tem uma conta? <Link to="/Login" onClick={handleClick} style={{ textDecoration: 'underline' }}>Entrar na conta</Link>
-          </p>
         </div>
       </div>
     </>
