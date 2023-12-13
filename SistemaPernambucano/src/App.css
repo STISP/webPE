@@ -174,7 +174,10 @@ a {
   line-height: 0.8125rem;
   margin: 0;
 }
-
+.statusListContracts {
+  margin: 0;
+  color: #797979;
+}
 .menuContracts {
   margin: 2rem 0 1.5rem 0;
 }
@@ -436,22 +439,30 @@ a {
 .contract-details__title {
   font-size: 28px;
   color: #333;
-  margin-bottom: 20px;
+  margin: 0 0 20px 0;
 }
 .contract-details__button {
-  display: block;
-  width: 120px;
-  padding: 10px 20px;
-  font-size: 16px;
+  display: inline-flex;
+  overflow: hidden;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  background: #132438;
+  align-items: center;
+  gap: 0.625rem;
   color: #fff;
-  background-color: #007bff;
+  font-family: roboto;
+  font-size: 0.9rem;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: -0.01rem;
+  transition: 0.3s ease;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 .contract-details__button:hover {
-  background-color: #0056b3;
+  background: #273648;
+  transition: 0.3s ease;
+  transform: scale(1.05);
 }
 .titleAndButton {
   display: flex;
@@ -492,7 +503,8 @@ a {
   padding-left: 0;
   margin-bottom: 20px;
 }
-.op-details-button, .op-details-button2 {
+.op-details-button,
+.op-details-button2 {
   display: flex;
   gap: 1rem;
 }
@@ -500,12 +512,9 @@ a {
   margin-bottom: 10px;
 }
 .contract-details {
-  width: 42rem;
-  margin: 50px auto;
-  background-color: #fff;
+  width: 52.5rem;
   border-radius: 8px;
-  border: 2px solid rgba(0, 0, 0, 0.15);
-  padding: 30px;
+  margin: 2rem 0 1.5rem 0;
 }
 .buttonsContracts {
   display: flex;
@@ -513,55 +522,177 @@ a {
 }
 
 .add-contract {
-  width: 42rem;
+  width: 35rem;
   margin: 0 auto;
-  padding: 1rem;
   box-sizing: border-box;
+  padding: 2rem 0 2rem 0;
 }
-
-.add-contract h2, .add-contract h3 {
-  margin-bottom: 1rem;
-}
-
 .info-contract-content {
-  background-color: #f8f8f8;
-  padding: 1rem;
-  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  width: 52.5rem;
 }
-
 .form-group {
   margin-bottom: 1rem;
 }
-
 .form-group label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.2rem;
+  font-size: 1rem;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 600;
 }
-
-.form-group input, .form-group textarea, .form-group select {
+.form-group input,
+.form-group textarea,
+.form-group select {
   width: 100%;
   padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
   box-sizing: border-box;
+  font-size: 1rem;
+  font-family: "Source Sans 3", sans-serif;
 }
-
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+.form-group input[type="file"] {
+  padding: 0.5rem 0;
+}
+.form-group input[type="file"]::-webkit-file-upload-button {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-family: "Source Sans 3", sans-serif;
+  background-color: #fff;
+  cursor: pointer;
+}
+.form-group input[type="file"]::-webkit-file-upload-button:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+.form-group input[type="file"]::-webkit-file-upload-button:active {
+  background-color: #007bff;
+  color: #fff;
+}
+.form-group input[type="file"]::-webkit-file-upload-button:focus {
+  background-color: #007bff;
+  color: #fff;
+}
+.form-group input[type="file"]::-webkit-file-upload-button:visited {
+  background-color: #007bff;
+  color: #fff;
+}
 .form-buttons {
   display: flex;
   justify-content: space-between;
 }
-
 .form-buttons button {
-  padding: 0.5rem 1rem;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
+  padding: 0.7rem 1.5rem;
+  border-radius: 0.3rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  transition: 0.3s ease;
+  background-color: #132438;
+  color: #fff;
 }
-
-.cancel-button {
-  background-color: #f44336;
-  color: white;
+.form-buttons button:hover {
+  background-color: #007bff;
+  transition: 0.3s ease;
 }
-
-.save-button {
-  background-color: #4CAF50;
-  color: white;
+.back-button {
+  background-color: #132438;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  transition: 0.3s ease;
+}
+.back-button:hover {
+  transform: scale(1.03);
+  transition: 0.3s ease;
+}
+.addAndBackButton {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.addAndBackButton h2 {
+  margin: 0;
+}
+.filerSearch {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.filerSearch input {
+  padding: 0.4rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-family: "Source Sans 3", sans-serif;
+}
+.filerSearch input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+.filerSearch label {
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+  font-size: 1rem;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 600;
+}
+.filerSearch input[type="checkbox"] {
+  width: 1.1rem;
+  height: 1.2rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-family: "Source Sans 3", sans-serif;
+}
+.status-checkbox {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 1rem;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 600;
+}
+.filerSearch input[type="checkbox"]:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+.filerSearch input[type="checkbox"]:checked {
+  background-color: #007bff;
+  color: #fff;
+}
+.filerSearch input[type="checkbox"]:checked:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+.filerSearch input[type="checkbox"]:checked:active {
+  background-color: #007bff;
+  color: #fff;
 }

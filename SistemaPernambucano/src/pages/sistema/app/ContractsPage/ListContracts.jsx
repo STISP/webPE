@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const ListContracts = () => {
@@ -130,6 +130,51 @@ const ListContracts = () => {
         navigate('/ContractsPage');
     };
 
+    const [q, setQ] = useState("");
+    const [contracts, setContracts] = useState([]);
+
+    function search(items) {
+        return items.filter((item) => {
+            const clientNameMatches = item.clientName.toLowerCase().indexOf(q.toLowerCase()) > -1;
+            const statusMatches = status.length === 0 || status.includes(item.status);
+            return clientNameMatches && statusMatches;
+        });
+    } useEffect(() => {
+        setContracts(getContractsList());
+    }, []);
+    const [status, setStatus] = useState([]);
+
+    const StatusCheckbox = ({ status, setStatus }) => {
+        const statusOptions = ["Ativo", "Expirado", "Cancelado"];
+
+        const handleChange = (event) => {
+            if (event.target.checked) {
+                setStatus([...status, event.target.value]);
+            } else {
+                setStatus(status.filter(status => status !== event.target.value));
+            }
+        };
+
+        return (
+            <div className="status-checkbox">
+                {statusOptions.map((statusOption, index) => (
+                    <label key={index}>
+                        <input
+                            id={`status-${index}`}
+                            name={`status-${index}`}
+                            type="checkbox"
+                            value={statusOption}
+                            checked={status.includes(statusOption)}
+                            onChange={handleChange}
+                        />
+                        {statusOption}
+                    </label>
+                ))}
+            </div>
+        );
+    };
+
+
     return (
         <div className='view-contracts'>
             <div className='menuContracts'>
@@ -154,19 +199,31 @@ const ListContracts = () => {
                     </Link>
                 </div>
             </div>
+            <div className="filerSearch">
+                <input
+                    type="search"
+                    name="search-form"
+                    id="search-form"
+                    className="search-input"
+                    placeholder="Pesquisar Contrato"
+                    value={q}
+                    onChange={(e) => setQ(e.target.value)}
+                />
+                <StatusCheckbox status={status} setStatus={setStatus} />
+            </div>
             {getContractsList().length === 0 ? (
                 <p>A lista de contratos está vazia.</p>
             ) : (
                 <ul className='contracts-list'>
-                    {getContractsList().map((contract) => (
+                    {search(getContractsList()).map((contract) => (
                         <li key={contract.id} className='contract-item'>
                             <Link to={`/Contrato/${contract.id}`} className='contract-link'>
                                 <p className='client-name'>{contract.clientName}</p>
                                 <p className='contract-value'>Valor do Contrato: {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(contract.contractValue)}</p>
                                 <div className='contractDetails'>
                                     <p className={`due-date ${getDueDateColor(contract.dueDate)}`} style={{ backgroundColor: getDueDateColor(contract.dueDate) }}>Vencimento: {new Date(contract.dueDate).toLocaleDateString('pt-BR')}</p>
-                                    {/*<p>{contract.status}</p>
-                                    <button className='delete-contract-button' onClick={() => handleDeleteContract(contract.id)}>
+                                    <p className='statusListContracts'>{contract.status}</p>
+                                    {/*<button className='delete-contract-button' onClick={() => handleDeleteContract(contract.id)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none">
                                             <path d="M3.09219 0.380273L2.9375 0.6875H0.875C0.494727 0.6875 0.1875 0.994727 0.1875 1.375C0.1875 1.75527 0.494727 2.0625 0.875 2.0625H9.125C9.50527 2.0625 9.8125 1.75527 9.8125 1.375C9.8125 0.994727 9.50527 0.6875 9.125 0.6875H7.0625L6.90781 0.380273C6.7918 0.146094 6.55332 0 6.29336 0H3.70664C3.44668 0 3.2082 0.146094 3.09219 0.380273ZM9.125 2.75H0.875L1.33047 10.0332C1.36484 10.5768 1.81602 11 2.35957 11H7.64043C8.18398 11 8.63516 10.5768 8.66953 10.0332L9.125 2.75Z" fill="white" />
                                         </svg>

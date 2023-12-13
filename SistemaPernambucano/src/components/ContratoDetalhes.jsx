@@ -124,24 +124,27 @@ const ContratoDetalhes = () => {
                             {contrato.status && (
                                 <div className='op-details-button2'>
                                     {contrato.status === 'Ativo' && (
-                                        <button className="contract-details__button" onClick={handleDeactivateContract}>Desativar</button>
+                                        <button className="contract-details__button" onClick={handleDeactivateContract}>Cancelar contrato</button>
                                     )}
                                     {contrato.status === 'Renovado' && (
-                                        <button className="contract-details__button" onClick={handleDeactivateContract}>Desativar</button>
+                                        <button className="contract-details__button" onClick={handleDeactivateContract}>Cancelar contrato</button>
                                     )}
                                     {contrato.status === 'Cancelado' && (
                                         <>
-                                            <button className="contract-details__button" onClick={handleRenewContract}>Ativar</button>
-                                            <button className="contract-details__button" onClick={handleDeactivateContract}>Renovar</button>
+                                            <button className="contract-details__button" onClick={handleRenewContract}>Ativar contrato</button>
                                         </>
                                     )}
                                     {contrato.status === 'Expirado' && (
-                                        <button className="contract-details__button" onClick={handleRenewContract}>Renovar</button>
+                                        <button className="contract-details__button" onClick={handleRenewContract}>Renovar contrato</button>
                                     )}
                                 </div>
                             )}
                             <button className="contract-details__button" onClick={handleGoBack}>Voltar</button>
                         </div>
+                    </div>
+                    <div className="contract-details__info-row">
+                        <span className="contract-details__label">Status: </span>
+                        <span className="contract-details__value">{contrato.status}</span>
                     </div>
                     <section className="contract-details__info-section">
                         <div className="contract-details__info-row">
@@ -163,10 +166,6 @@ const ContratoDetalhes = () => {
                         <div className="contract-details__info-row">
                             <span className="contract-details__label">Data de Publicação: </span>
                             <span className="contract-details__value">{contrato.postedDate}</span>
-                        </div>
-                        <div className="contract-details__info-row">
-                            <span className="contract-details__label">Status: </span>
-                            <span className="contract-details__value">{contrato.status}</span>
                         </div>
                         <div className="contract-details__info-row">
                             <span className="contract-details__label">Descrição do Contrato: </span> <br />

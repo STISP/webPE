@@ -30,9 +30,13 @@ const AddContract = () => {
         <div className="add-contract">
             <div className="info-contract">
                 <div className="info-contract-content">
-                    <h2>Adicionar Contrato</h2>
+                    <div className='addAndBackButton'>
+                        <h2>Adicionar Contrato</h2>
+                        <button className="back-button" onClick={handleCancel}>
+                            Cancelar
+                        </button>
+                    </div>
                     <form>
-                        <h3>Detalhes do Cliente</h3>
                         <div>
                             <div className="form-group">
                                 <label htmlFor="clientName">Nome do Cliente</label>
@@ -52,14 +56,13 @@ const AddContract = () => {
                             </div>
                         </div>
 
-                        <h3>Detalhes do Contrato</h3>
                         <div>
                             <div className="form-group">
                                 <label htmlFor="contractValue">Valor do Contrato</label>
                                 <input type="number" id="contractValue" placeholder="Digite o valor do contrato" />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="contractNumber">Numero do contato</label>
+                                <label htmlFor="contractNumber">Numero do contrato</label>
                                 <input type="number" id="contractNumber" placeholder="Digite o numero do contrato" />
                             </div>
                             <div className="form-group">
@@ -89,8 +92,8 @@ const AddContract = () => {
                                 <textarea id="specialClauses" placeholder="Digite as cláusulas especiais"></textarea>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="productDetails">Detalhes do produto</label>
-                                <textarea id="productDetails" placeholder="Digite os detalhes do produto"></textarea>
+                                <label htmlFor="productDetails">Detalhes do produto ou serviço</label>
+                                <textarea id="productDetails" placeholder="Digite os detalhes do produto ou serviço"></textarea>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="terminationConditions">Condições de rescisão</label>
@@ -98,7 +101,6 @@ const AddContract = () => {
                             </div>
                         </div>
 
-                        <h3>Detalhes do Supermercado</h3>
                         <div>
                             <div className="form-group">
                                 <label htmlFor="supermarketRep">Representante do supermercado</label>
@@ -110,8 +112,7 @@ const AddContract = () => {
                             </div>
                         </div>
 
-                        <h3>Detalhes do Postamento</h3>
-                        <div>
+                        <div style={{ display: 'none' }}>
                             <div className="form-group">
                                 <label htmlFor="postedBy">Usuário atual</label>
                                 <input type="text" id="postedBy" placeholder="Digite o nome do usuário" value={nomeCapitalizado} onChange={(e) => setNomeCapitalizado(e.target.value)} disabled />
@@ -122,9 +123,7 @@ const AddContract = () => {
                             </div>
                         </div>
 
-                        <h3>Ações</h3>
                         <div className="form-buttons">
-                            <button className="cancel-button" onClick={handleCancel}>Cancelar</button>
                             <button className="save-button" onClick={handleSaveContract}>Salvar</button>
                         </div>
                     </form>
