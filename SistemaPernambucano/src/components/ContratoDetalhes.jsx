@@ -7,6 +7,7 @@ const ContratoDetalhes = () => {
                 id: 1,
                 clientName: 'Cliente 1',
                 contractValue: 1000,
+                startDate: '01/01/2022',
                 dueDate: '01/03/2024',
                 postedBy: 'Usuário 1',
                 postedDate: '01/01/2022',
@@ -30,6 +31,7 @@ const ContratoDetalhes = () => {
                 id: 2,
                 clientName: 'Cliente 2',
                 contractValue: 2000,
+                startDate: '01/01/2022',
                 dueDate: '02/01/2025',
                 postedBy: 'Usuário 2',
                 postedDate: '02/01/2022',
@@ -53,6 +55,7 @@ const ContratoDetalhes = () => {
                 id: 3,
                 clientName: 'Cliente 3',
                 contractValue: 3000,
+                startDate: '01/01/2022',
                 dueDate: '12/20/2023',
                 postedBy: 'Usuário 3',
                 postedDate: '03/01/2022',
@@ -76,6 +79,7 @@ const ContratoDetalhes = () => {
                 id: 4,
                 clientName: 'Cliente 4',
                 contractValue: 1500,
+                startDate: '01/01/2022',
                 dueDate: '12/20/2023',
                 postedBy: 'Usuário 3',
                 postedDate: '03/01/2022',
@@ -156,8 +160,12 @@ const ContratoDetalhes = () => {
                             <span className="contract-details__value">R$ {contrato.contractValue}</span>
                         </div>
                         <div className="contract-details__info-row">
+                            <span className="contract-details__label">Data de Início: </span>
+                            <span className="contract-details__value">{contrato.startDate}</span>
+                        </div>
+                        <div className="contract-details__info-row">
                             <span className="contract-details__label">Data de Vencimento: </span>
-                            <span className="contract-details__value">{contrato.dueDate}</span>
+                            <span className="contract-details__value">{contrato.}</span>
                         </div>
                         <div className="contract-details__info-row">
                             <span className="contract-details__label">Publicado por: </span>

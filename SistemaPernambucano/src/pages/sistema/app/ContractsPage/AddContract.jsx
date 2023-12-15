@@ -66,8 +66,12 @@ const AddContract = () => {
                                 <input type="number" id="contractNumber" placeholder="Digite o numero do contrato" />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="dueDate">Data de Vencimento</label>
-                                <input type="date" id="dueDate" placeholder="Selecione a data de vencimento" />
+                                <label htmlFor="startDate">Data de inicio do contrato</label>
+                                <input type="date" id="startDate" placeholder="Selecione a data de vencimento" />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="endDate">Vencimento do contrato</label>
+                                <input type="date" id="endDate" placeholder="Selecione a data de vencimento" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="status">Status do contrato</label>
