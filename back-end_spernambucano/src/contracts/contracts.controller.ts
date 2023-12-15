@@ -1,4 +1,4 @@
-import { Body, Controller, Get, NotFoundException, Param, Post, Query, Request } from "@nestjs/common";
+import { Body, Controller, Get, NotFoundException, Param, Post, Query, Request, Delete } from "@nestjs/common";
 import { ContractsService } from './contracts.service';
 import { Contract } from './contracts.entity';
 
@@ -26,8 +26,14 @@ export class ContractsController {
         return this.contractService.updateContract(id, contract);
     }
 
-    @Post('delete/:id')
-    async deleteContract(@Param('id') id: string): Promise<Contract> {
+    @Delete(':id')
+    async deleteContract(@Param('id') id: string): Promise<void> {
         return this.contractService.deleteContract(id);
+    }
+
+    // renovar contrato
+    @Post(':id/renew')
+    async renewContract(@Param('id') id: string, @Body() renewalContract: Contract): Promise<Contract> {
+        return this.contractService.renewContract(id, renewalContract);
     }
 }

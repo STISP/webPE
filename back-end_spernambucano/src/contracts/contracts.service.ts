@@ -16,10 +16,10 @@ export class ContractsService {
     async findContractById(id: string): Promise<Contract> {
         const contract = await this.contractRepository.findOne({ where: { id: Number(id) } });
         if (!contract) {
-            throw new NotFoundException(`Contract with ID ${id} not found`);
+            throw new NotFoundException(`Contrato não encontrado`);
         }
         return contract;
-     }
+    }
 
     async createContract(contract: Contract): Promise<Contract> {
         return await this.contractRepository.save(contract);
@@ -34,11 +34,17 @@ export class ContractsService {
         return null;
     }
 
-    async deleteContract(id: string): Promise<Contract> {
+    async deleteContract(id: string): Promise<void> {
+        await this.contractRepository.delete(id);
+    }
+
+    // renovar contrato
+    async renewContract(id: string, renewalContract: Contract): Promise<Contract> {
         const contract = await this.contractRepository.findOne({ where: { id: Number(id) } });
-        if (!contract) {
-            throw new NotFoundException(`Contract with ID ${id} not found`);
+        if (contract) {
+            contract.renewalContract = renewalContract;
+            return await this.contractRepository.save(contract);
         }
-        return await this.contractRepository.remove(contract);
+        return null;
     }
 }

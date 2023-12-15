@@ -25,7 +25,8 @@ const ContratoDetalhes = () => {
                 signatures: {
                     supermarketRep: 'Assinatura do Representante do Supermercado A',
                     witnesses: ['Nome da Testemunha 1', 'Nome da Testemunha 2']
-                }
+                },
+                numberSupermarket: 1
             },
             {
                 id: 2,
@@ -49,7 +50,8 @@ const ContratoDetalhes = () => {
                 signatures: {
                     supermarketRep: 'Assinatura do Representante do Supermercado B',
                     witnesses: ['Nome da Testemunha 3', 'Nome da Testemunha 4']
-                }
+                },
+                numberSupermarket: 1
             },
             {
                 id: 3,
@@ -73,7 +75,8 @@ const ContratoDetalhes = () => {
                 signatures: {
                     supermarketRep: 'Assinatura do Representante do Supermercado C',
                     witnesses: ['Nome da Testemunha 5', 'Nome da Testemunha 6']
-                }
+                },
+                numberSupermarket: 1
             },
             {
                 id: 4,
@@ -97,7 +100,8 @@ const ContratoDetalhes = () => {
                 signatures: {
                     supermarketRep: 'Assinatura do Representante do Supermercado D',
                     witnesses: ['Nome da Testemunha 7', 'Nome da Testemunha 8']
-                }
+                },
+                numberSupermarket: 1
             }
         ];
     };
@@ -165,7 +169,7 @@ const ContratoDetalhes = () => {
                         </div>
                         <div className="contract-details__info-row">
                             <span className="contract-details__label">Data de Vencimento: </span>
-                            <span className="contract-details__value">{contrato.}</span>
+                            <span className="contract-details__value">{contrato.dueDate}</span>
                         </div>
                         <div className="contract-details__info-row">
                             <span className="contract-details__label">Publicado por: </span>
