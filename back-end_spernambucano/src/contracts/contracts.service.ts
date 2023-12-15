@@ -39,12 +39,12 @@ export class ContractsService {
     }
 
     // renovar contrato
-    async renewContract(id: string, renewalContract: Contract): Promise<Contract> {
-        const contract = await this.contractRepository.findOne({ where: { id: Number(id) } });
-        if (contract) {
-            contract.renewalContract = renewalContract;
-            return await this.contractRepository.save(contract);
-        }
-        return null;
-    }
+    //async renewContract(id: string, renewalContract: Contract): Promise<Contract> {
+    //    const contract = await this.contractRepository.findOne({ where: { id: Number(id) } });
+    //    if (contract) {
+    //        contract.renewalContract = renewalContract;
+    //        return await this.contractRepository.save(contract);
+    //    }
+    //    return null;
+    //}
 }

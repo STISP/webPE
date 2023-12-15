@@ -32,8 +32,8 @@ export class ContractsController {
     }
 
     // renovar contrato
-    @Post(':id/renew')
-    async renewContract(@Param('id') id: string, @Body() renewalContract: Contract): Promise<Contract> {
-        return this.contractService.renewContract(id, renewalContract);
-    }
+    //@Post(':id/renew')
+    //async renewContract(@Param('id') id: string, @Body() renewalContract: Contract): Promise<Contract> {
+    //    return this.contractService.renewContract(id, renewalContract);
+    //}
 }

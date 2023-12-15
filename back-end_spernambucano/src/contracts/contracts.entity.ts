@@ -7,19 +7,23 @@ export class Contract {
 
     // nome do contrato
     @Column()
-    name: string;
+    clientName: string;
+
+    // numero do contrato
+    @Column()
+    contractNumber: string;
 
     // data de início do contrato
     @Column()
     startDate: Date;
 
     // data de término do contrato
-    @Column()
-    dueDate: Date;
+    //@Column()
+    //endDate: Date;
 
     // valor do contrato
     @Column()
-    value: number;
+    contractValue: number;
 
     // status do contrato
     @Column()
@@ -27,7 +31,7 @@ export class Contract {
 
     // descrição do contrato
     @Column()
-    description: string;
+    contractDescription: string;
 
     // termos de pagamento do contrato
     @Column()
@@ -67,11 +71,15 @@ export class Contract {
     witnesses: string;
 
     // id do supermercado
-    @Column()
-    supermarketId: number;
+    //@Column()
+    //supermarketId: number;
 
     // contrato de renovação
-    @OneToOne(() => Contract)
-    @JoinColumn()
-    renewalContract: Contract;
+    //@OneToOne(() => Contract)
+    //@JoinColumn()
+    //renewalContract: Contract;
+
+    //// usuario que criou o contrato
+    //@Column()
+    //createdBy: string;
 }

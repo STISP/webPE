@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 const AddContract = () => {
@@ -8,8 +9,51 @@ const AddContract = () => {
     const nomeCapitalizado = nomeSemDomino.charAt(0).toUpperCase() + nomeSemDomino.slice(1);
     const currentDate = new Date().toISOString().split('T')[0];
 
-    const handleSaveContract = () => {
-        // Add logic to save the contract
+    const handleSaveContract = async () => {
+        try {
+            const clientName = document.getElementById('clientName').value;
+            const address = document.getElementById('address').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const contractValue = document.getElementById('contractValue').value;
+            const contractNumber = document.getElementById('contractNumber').value;
+            const startDate = document.getElementById('startDate').value;
+            //const endDate = document.getElementById('endDate').value;
+            const status = document.getElementById('status').value;
+            const contractDescription = document.getElementById('contractDescription').value;
+            const paymentTerms = document.getElementById('paymentTerms').value;
+            const specialClauses = document.getElementById('specialClauses').value;
+            const productDetails = document.getElementById('productDetails').value;
+            const terminationConditions = document.getElementById('terminationConditions').value;
+            const supermarketRep = document.getElementById('supermarketRep').value;
+            const witnesses = document.getElementById('witnesses').value;
+
+            const contractData = {
+                clientName,
+                address,
+                phone,
+                email,
+                contractValue,
+                contractNumber,
+                startDate,
+                //endDate,
+                status,
+                contractDescription,
+                paymentTerms,
+                specialClauses,
+                productDetails,
+                terminationConditions,
+                supermarketRep,
+                witnesses,
+                postedBy: nomeCapitalizado,
+                postedDate: currentDate
+            };
+
+            await axios.post('http://localhost:3000/contracts', contractData);
+            alert('Contrato salvo com sucesso!');
+        } catch (error) {
+            console.error('Erro ao salvar contrato:', error);
+        }
     };
 
     const navigate = useNavigate();
@@ -69,10 +113,10 @@ const AddContract = () => {
                                 <label htmlFor="startDate">Data de inicio do contrato</label>
                                 <input type="date" id="startDate" placeholder="Selecione a data de vencimento" />
                             </div>
-                            <div className="form-group">
+                            {/*<div className="form-group">
                                 <label htmlFor="endDate">Vencimento do contrato</label>
                                 <input type="date" id="endDate" placeholder="Selecione a data de vencimento" />
-                            </div>
+                             </div>*/}
                             <div className="form-group">
                                 <label htmlFor="status">Status do contrato</label>
                                 <select id="status" defaultValue="">
