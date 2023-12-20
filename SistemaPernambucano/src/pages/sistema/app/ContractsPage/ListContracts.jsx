@@ -3,17 +3,26 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const ListContracts = () => {
-    const handleDeleteContract = (contractId) => {
-        // Lógica para excluir um contrato com base no ID
-    };
+    const [q, setQ] = useState("");
+    const [contracts, setContracts] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
 
-    const getContractsList = () => {
-        return [
+    useEffect(() => {
+        if (contracts.length === 0) {
+            fetchContracts();
+        }
+    }, []);
 
-        ];
+    const isValidDate = (dateString) => {
+        const dateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
+        return dateRegex.test(dateString);
     };
 
     const getDueDateColor = (dueDate) => {
+        if (!isValidDate(dueDate)) {
+            return 'rgba(0, 0, 0, 0.65)'; // Return default color if date is invalid
+        }
+
         const currentDate = new Date();
         const dueDateObj = new Date(dueDate);
         const differenceInDays = Math.floor((dueDateObj - currentDate) / (1000 * 60 * 60 * 24));
@@ -32,19 +41,24 @@ const ListContracts = () => {
         navigate('/ContractsPage');
     };
 
-    const [q, setQ] = useState("");
-    const [contracts, setContracts] = useState([]);
-
-    useEffect(() => {
+    const fetchContracts = () => {
+        setIsLoaded(false); // Set isLoaded to false before fetching contracts
         axios.get('http://localhost:3000/contracts')
             .then(response => {
-                setContracts(response.data);
+                const contractsData = response.data.map(contract => ({
+                    id: contract.id,
+                    clientName: contract.clientName,
+                    endDate: contract.endDate,
+                    contractValue: contract.contractValue,
+                    status: contract.status,
+                }));
+                setContracts(contractsData);
+                setIsLoaded(true);
             })
             .catch(error => {
-                console.error('Erro ao buscar os contratos', error);
+                console.error('Erro ao buscar os contratos');
             });
-    }, []);
-
+    };
 
     function search(items) {
         return items.filter((item) => {
@@ -52,13 +66,12 @@ const ListContracts = () => {
             const statusMatches = status.length === 0 || status.includes(item.status);
             return clientNameMatches && statusMatches;
         });
-    } useEffect(() => {
-        setContracts(getContractsList());
-    }, []);
+    }
+
     const [status, setStatus] = useState([]);
 
     const StatusCheckbox = ({ status, setStatus }) => {
-        const statusOptions = ["Ativo", "Expirado", "Cancelado"];
+        const statusOptions = ["ativo", "cancelado"];
 
         const handleChange = (event) => {
             if (event.target.checked) {
@@ -86,7 +99,6 @@ const ListContracts = () => {
             </div>
         );
     };
-
 
     return (
         <div className='view-contracts'>
@@ -124,29 +136,46 @@ const ListContracts = () => {
                 />
                 <StatusCheckbox status={status} setStatus={setStatus} />
             </div>
-            {contracts.length === 0 ? (
-                <p>A lista de contratos está vazia.</p>
+            {/*<div className='avisoVencimentoWarn'>
+                <p className='avisoVencimento'>Aviso de vencimento próximo:</p>
+                <div className='avisoVencimentoMaiorQue30'>
+                    <p>Vencimento em mais de 30 dias</p>
+                </div>
+                <div className='avisoVencimento30'>
+                    <p>Vencimento em 30 dias</p>
+                </div>
+                <div className='avisoVencimento15'>
+                    <p>Vencimento em 15 dias</p>
+                </div>
+            </div>*/}
+
+            {isLoaded ? (
+                contracts.length === 0 ? (
+                    <p>A lista de contratos está vazia.</p>
+                ) : (
+                    <ul className='contracts-list'>
+                        {search(contracts).map((contract) => (
+                            <li key={contract.id} className='contract-item'>
+                                <Link to={`/Contrato/${contract.id}`} className='contract-link'>
+                                    <p className='client-name'>{contract.clientName}</p>
+                                    <p className='contract-value'>Valor do Contrato: {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(contract.contractValue)}</p>
+                                    <div className='contractDetails'>
+                                        <p className={`due-date ${getDueDateColor(contract.endDate)}`} style={{ backgroundColor: getDueDateColor(contract.endDate) }}>Vencimento: {new Date(contract.endDate).toLocaleDateString('pt-BR')}</p>
+                                        <p className='statusListContracts'>{contract.status}</p>
+                                        {/*<button className='delete-contract-button' onClick={() => handleDeleteContract(contract.id)}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none">
+                                                <path d="M3.09219 0.380273L2.9375 0.6875H0.875C0.494727 0.6875 0.1875 0.994727 0.1875 1.375C0.1875 1.75527 0.494727 2.0625 0.875 2.0625H9.125C9.50527 2.0625 9.8125 1.75527 9.8125 1.375C9.8125 0.994727 9.50527 0.6875 9.125 0.6875H7.0625L6.90781 0.380273C6.7918 0.146094 6.55332 0 6.29336 0H3.70664C3.44668 0 3.2082 0.146094 3.09219 0.380273ZM9.125 2.75H0.875L1.33047 10.0332C1.36484 10.5768 1.81602 11 2.35957 11H7.64043C8.18398 11 8.63516 10.5768 8.66953 10.0332L9.125 2.75Z" fill="white" />
+                                            </svg>
+                                            Excluir
+                                        </button>*/}
+                                    </div>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                )
             ) : (
-                <ul className='contracts-list'>
-                    {search(contracts).map((contract) => (
-                        <li key={contract.id} className='contract-item'>
-                            <Link to={`/Contrato/${contract.id}`} className='contract-link'>
-                                <p className='client-name'>{contract.clientName}</p>
-                                <p className='contract-value'>Valor do Contrato: {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(contract.contractValue)}</p>
-                                <div className='contractDetails'>
-                                    <p className={`due-date ${getDueDateColor(contract.dueDate)}`} style={{ backgroundColor: getDueDateColor(contract.dueDate) }}>Vencimento: {new Date(contract.dueDate).toLocaleDateString('pt-BR')}</p>
-                                    <p className='statusListContracts'>{contract.status}</p>
-                                    {/*<button className='delete-contract-button' onClick={() => handleDeleteContract(contract.id)}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none">
-                                            <path d="M3.09219 0.380273L2.9375 0.6875H0.875C0.494727 0.6875 0.1875 0.994727 0.1875 1.375C0.1875 1.75527 0.494727 2.0625 0.875 2.0625H9.125C9.50527 2.0625 9.8125 1.75527 9.8125 1.375C9.8125 0.994727 9.50527 0.6875 9.125 0.6875H7.0625L6.90781 0.380273C6.7918 0.146094 6.55332 0 6.29336 0H3.70664C3.44668 0 3.2082 0.146094 3.09219 0.380273ZM9.125 2.75H0.875L1.33047 10.0332C1.36484 10.5768 1.81602 11 2.35957 11H7.64043C8.18398 11 8.63516 10.5768 8.66953 10.0332L9.125 2.75Z" fill="white" />
-                                        </svg>
-                                        Excluir
-                                    </button>*/}
-                                </div>
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
+                <p>Carregando contratos...</p>
             )}
         </div>
     );

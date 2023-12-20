@@ -12,6 +12,7 @@ export default function TelaInicialSystem() {
 
         return () => clearTimeout(timer);
     }, []);
+
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }

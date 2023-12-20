@@ -14,4 +14,16 @@ export class Usuario {
 
     @Column({ nullable: false })
     senha: string;
+
+    @Column({ default: false })
+    cadastroNovoUsuario: boolean;
+
+    @Column({ default: false })
+    acessoContratos: boolean;
+
+    @Column({ default: false })
+    acessoAdicionarContratos: boolean;
+
+    @Column({ default: false })
+    acessoDeletarContratos: boolean;
 }

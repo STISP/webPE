@@ -6,6 +6,7 @@ export default function CriarConta() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [confirmSenha, setConfirmSenha] = useState('');
   const [mensagem, setMensagem] = useState('');
 
   useEffect(() => {
@@ -14,6 +15,13 @@ export default function CriarConta() {
       setEmail(storedEmail);
     }
   }, []);
+
+  useEffect(() => {
+    const emailParts = email.split('@');
+    if (emailParts.length > 1) {
+      setName(emailParts[0]);
+    }
+  }, [email]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,8 +32,14 @@ export default function CriarConta() {
       senha: senha
     };
 
-    if (!email || !senha) {
+    if (!email || !senha || !confirmSenha) {
       const mensagem = 'Preencha todos os campos';
+      setMensagem(mensagem);
+      return;
+    }
+
+    if (senha !== confirmSenha) {
+      const mensagem = 'As senhas não coincidem';
       setMensagem(mensagem);
       return;
     }
@@ -80,7 +94,7 @@ export default function CriarConta() {
         <div className="allForms">
           <h2>Criar um novo usuario</h2>
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
+            <div className="form-cadast" style={{ display: 'none' }}>
               <input
                 placeholder='Nome'
                 type="text"
@@ -94,7 +108,7 @@ export default function CriarConta() {
                 }}
               />
             </div>
-            <div className="form-group">
+            <div className="form-cadast">
               <input
                 placeholder='Email'
                 type="email"
@@ -108,7 +122,7 @@ export default function CriarConta() {
                 }}
               />
             </div>
-            <div className="form-group">
+            <div className="form-cadast">
               <input
                 placeholder='Senha'
                 type="password"
@@ -121,9 +135,57 @@ export default function CriarConta() {
                 }}
               />
             </div>
+            <div className="form-cadast">
+              <input
+                placeholder='Confirmar Senha'
+                type="password"
+                id="confirmSenha"
+                value={confirmSenha}
+                autoComplete="off"
+                onChange={(e) => {
+                  setConfirmSenha(e.target.value);
+                  setMensagem('');
+                }}
+              />
+            </div>
+            <h3>Permições do novo usuário</h3>
+            <div className='checkboxCadastro'>
+              <input
+                type="checkbox"
+                id="cadastro"
+                value="cadastro"
+              />
+              <label htmlFor="cadastro">Cadastro de novo usuário</label>
+            </div>
+            <div className='checkboxCadastro'>
+              <input
+                type="checkbox"
+                id="acessoContratos"
+                value="acessoContratos"
+              />
+              <label htmlFor="acessoContratos">Acesso aos contratos</label>
+            </div>
+            <div className='checkboxCadastro'>
+              <input
+                type="checkbox"
+                id="addContratos"
+                value="addContratos"
+              />
+              <label htmlFor="addContratos">Acesso para adicionar contratos</label>
+            </div>
+            <div className='checkboxCadastro'>
+              <input
+                type="checkbox"
+                id="delContratos"
+                value="delContratos"
+              />
+              <label htmlFor="delContratos">Acesso para deletar contratos</label>
+            </div>
+
+            <br />
+            {mensagem && <p className="errorEmailExist">{mensagem}</p>}
             <button className='buttonLoginCadastro' type="submit">Cadastrar</button>
           </form>
-          {mensagem && <p className="errorEmailExist">{mensagem}</p>}
         </div>
       </div>
     </>

@@ -14,28 +14,49 @@ export class ContractsService {
     }
 
     async findContractById(id: string): Promise<Contract> {
-        const contract = await this.contractRepository.findOne({ where: { id: Number(id) } });
+        const numberId = Number(id);
+        if (isNaN(numberId)) {
+            throw new Error(`ID inválido: ${id}`);
+        }
+        const contract = await this.contractRepository.findOne({ where: { id: numberId } });
         if (!contract) {
             throw new NotFoundException(`Contrato não encontrado`);
         }
         return contract;
     }
 
+
     async createContract(contract: Contract): Promise<Contract> {
         return await this.contractRepository.save(contract);
     }
 
     async updateContract(id: string, updatedContract: Contract): Promise<Contract> {
-        const contract = await this.contractRepository.findOne({ where: { id: Number(id) } });
-        if (contract) {
-            const updated = Object.assign(contract, updatedContract);
-            return await this.contractRepository.save(updated);
+        try {
+            const contract = await this.contractRepository.findOne({ where: { id: Number(id) } });
+            if (contract) {
+                const updated = Object.assign(contract, updatedContract);
+                return await this.contractRepository.save(updated);
+            }
+            return null;
+        } catch (error) {
+            throw new Error('Erro ao atualizar o contrato.');
         }
-        return null;
     }
 
     async deleteContract(id: string): Promise<void> {
-        await this.contractRepository.delete(id);
+        try {
+            await this.contractRepository.delete(id);
+        } catch (error) {
+            throw new Error('Erro ao excluir o contrato.');
+        }
+    }
+
+    async countContracts(): Promise<number> {
+        try {
+            return await this.contractRepository.count();
+        } catch (error) {
+            throw new Error('Erro ao contar os contratos.');
+        }
     }
 
     // renovar contrato

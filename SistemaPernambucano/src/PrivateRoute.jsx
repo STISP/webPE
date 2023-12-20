@@ -26,8 +26,7 @@ export default function PrivateRoute({ children }) {
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, []);
- */}
+  }, []); */}
 
   if (emailExists === null) {
     return (

@@ -18,8 +18,8 @@ export class Contract {
     startDate: Date;
 
     // data de término do contrato
-    //@Column()
-    //endDate: Date;
+    @Column()
+    endDate: Date;
 
     // valor do contrato
     @Column()
@@ -38,21 +38,21 @@ export class Contract {
     paymentTerms: string;
 
     // cláusulas especiais do contrato
-    @Column()
-    specialClauses: string;
+    // @Column()
+    // specialClauses: string;
 
     // informações de contato do contrato 
     // endereco do contrato
-    @Column()
-    address: string;
+    // @Column()
+    // address: string;
 
     // telefone do contrato
-    @Column()
-    phone: string;
+    // @Column()
+    // phone: string;
 
     // email do contrato
-    @Column()
-    email: string;
+    // @Column()
+    // email: string;
 
     // detalhes do produto do contrato
     @Column()
@@ -63,12 +63,18 @@ export class Contract {
     terminationConditions: string;
 
     // representante do supermercado
-    @Column()
-    supermarketRep: string;
+    // @Column()
+    // supermarketRep: string;
 
     // testemunhas do contrato
+    // @Column()
+    // witnesses: string;
+
     @Column()
-    witnesses: string;
+    postedBy: string;
+
+    @Column()
+    postedDate: Date;
 
     // id do supermercado
     //@Column()
