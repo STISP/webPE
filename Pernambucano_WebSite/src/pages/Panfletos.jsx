@@ -10,6 +10,13 @@ import Quarta_verde_Panfleto5 from '../assets/Quarta verde 5 30.11.2023.jpg';
 import Quarta_verde_Panfleto6 from '../assets/Quarta verde 6 30.11.2023.jpg';
 import DiaPeAniversario1 from '../assets/1 Dia P (aniversário) 30_11_2023.jpg';
 import DiaPeAniversario2 from '../assets/1 Dia P (aniversário) 30_11_2023.jpg';
+import OfertaNatal1 from '../assets/ofertaNatal 1 24.12.2023.jpg';
+import OfertaNatal2 from '../assets/ofertaNatal 2 24.12.2023.jpg';
+import OfertaNatal3 from '../assets/ofertaNatal 3 24.12.2023.jpg';
+import OfertaNatal4 from '../assets/ofertaNatal 4 24.12.2023.jpg';
+import OfertaNatal5 from '../assets/ofertaNatal 5 24.12.2023.jpg';
+import OfertaNatal6 from '../assets/ofertaNatal 6 24.12.2023.jpg';
+import OfertaNatal7 from '../assets/ofertaNatal 7 24.12.2023.jpg';
 
 export default function Panfletos() {
   const [panfletoSelecionado, setPanfletoSelecionado] = React.useState(null);
@@ -18,12 +25,18 @@ export default function Panfletos() {
   const panfletos = [
     {
       id: 1,
+      titulo: 'Promoções de Natal',
+      dataValidade: 'Ofertas válidas até 24 de dezembro',
+      imagem: [OfertaNatal1, OfertaNatal2, OfertaNatal3, OfertaNatal4, OfertaNatal5, OfertaNatal6, OfertaNatal7],
+    },
+    {
+      id: 2,
       titulo: 'Dia P e Aniversário',
       dataValidade: 'Ofertas válidas no dia 31 de novembro',
       imagem: [DiaPeAniversario1, DiaPeAniversario2],
     },
     {
-      id: 2,
+      id: 3,
       titulo: 'Quarta verde',
       dataValidade: 'Apenas nesta quarta, 29 de novembro',
       imagem: [Quarta_verde_Panfleto1, Quarta_verde_Panfleto2, Quarta_verde_Panfleto3, Quarta_verde_Panfleto4, Quarta_verde_Panfleto5, Quarta_verde_Panfleto6],

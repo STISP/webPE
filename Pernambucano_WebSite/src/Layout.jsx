@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import Footer from './components/Footer.jsx';
 import Menu from './components/Menu.jsx';
+import { Link } from 'react-router-dom';
 
 const Layout = ({ children }) => {
   const [message, setMessage] = useState('');
   const [isBlackFriday, setIsBlackFriday] = useState(false);
+  const [isChristmasPromo, setIsChristmasPromo] = useState(false);
   const [promoDayClass, setPromoDayClass] = useState('');
 
   useEffect(() => {
@@ -28,8 +30,17 @@ const Layout = ({ children }) => {
     const isBlackFrday = month === 10 && date >= 23 && date <= 30;
     setIsBlackFriday(isBlackFrday);
 
+    const isChristmasPromoDay = month === 11 && date >= 21 && date <= 24;
+    setIsChristmasPromo(isChristmasPromoDay);
+
     if (isBlackFrday) {
       setMessage('Hoje é Black Friday! Aproveite as promoções em nossas lojas');
+    } else if (isChristmasPromoDay) {
+      setMessage(
+        <Link to="/panfletos" className='promoNatal' rel="noopener noreferrer">
+          Hoje tem promoção de Natal! <span>Clique aqui para conferir</span>
+        </Link>
+      );
     } else {
       const todayMessage = promoMessages[dayOfWeek] || '';
       setMessage(todayMessage);
