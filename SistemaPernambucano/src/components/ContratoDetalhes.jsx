@@ -68,6 +68,11 @@ const ContratoDetalhes = () => {
         // Lógica para desativar o contrato
     };
 
+    function formatDate(date) {
+        return new Intl.DateTimeFormat('pt-BR').format(new Date(date));
+    }
+
+
     return (
         <>
             {contrato && (
@@ -145,11 +150,11 @@ const ContratoDetalhes = () => {
                         </div>
                         <div className="contract-details__info-row">
                             <span className="contract-details__label">Data de Início: </span>
-                            <span className="contract-details__value">{contrato.startDate}</span>
+                            <span className="contract-details__value">{formatDate(contrato.startDate)}</span>
                         </div>
                         <div className="contract-details__info-row">
                             <span className="contract-details__label">Data de Vencimento: </span>
-                            <span className="contract-details__value">{contrato.endDate}</span>
+                            <span className="contract-details__value">{formatDate(contrato.endDate)}</span>
                         </div>
                         {/*<div className="contract-details__info-row">
                             <span className="contract-details__label">Publicado por: </span>

@@ -25,9 +25,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Routes>
           <Route path="/" element={<Layout><PrivateRoute><TelaInicialSystem /></PrivateRoute></Layout>} />
           <Route path="/ContractsPage" element={<Layout><PrivateRoute><ContractsPage /></PrivateRoute></Layout>} />
-          <Route path="/AddContract" element={<Layout><PrivateRoute><AddContract /></PrivateRoute></Layout>} />
-          <Route path="/ListContracts" element={<Layout><PrivateRoute><ListContracts /></PrivateRoute></Layout>} />
-          <Route exact path="/Contrato/:id" element={<Layout><PrivateRoute><ContratoDetalhes /></PrivateRoute></Layout>} />
+          <Route path="/ContractsPage/ListContracts/AddContract" element={<Layout><PrivateRoute><AddContract /></PrivateRoute></Layout>} />
+          <Route path="/ContractsPage/ListContracts" element={<Layout><PrivateRoute><ListContracts /></PrivateRoute></Layout>} />
+          <Route exact path="/ContractsPage/ListContracts/Contrato/:id" element={<Layout><PrivateRoute><ContratoDetalhes /></PrivateRoute></Layout>} />
           <Route path="/cadastro" element={<Layout><PrivateRoute><CriarConta /></PrivateRoute></Layout>} />
           <Route path="/Login" element={<Layout hideMenuPaths={["/Login"]}><Login /></Layout>} />
           <Route path="*" element={<RotaNaoEncontrada />} />

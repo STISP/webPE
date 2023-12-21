@@ -47,7 +47,7 @@ const AddContract = () => {
 
             await axios.post('http://localhost:3000/contracts', contractData);
             alert('Contrato salvo com sucesso!');
-            navigate('/ListContracts');
+            navigate('/ContractsPage/ListContracts');
         } catch (error) {
             console.error('Erro ao salvar contrato:', error);
             setErrorMessage('Problema ao cadastrar o contrato, tente novamente ou contate o suporte.');
@@ -58,7 +58,7 @@ const AddContract = () => {
     const [firstLoad, setFirstLoad] = useState(true);
     const handleCancel = () => {
         if (firstLoad) {
-            navigate('/ListContracts');
+            navigate('/ContractsPage/ListContracts');
         } else {
             navigate(-1);
         }

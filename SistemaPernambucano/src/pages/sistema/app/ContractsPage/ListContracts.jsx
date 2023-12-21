@@ -114,7 +114,7 @@ const ListContracts = () => {
                         </svg>
                         Voltar
                     </button>
-                    <Link to="/AddContract" >
+                    <Link to="/ContractsPage/ListContracts/AddContract" >
                         <button className='add-contract-button'>
                             <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512" fill='#fff'>
                                 <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
@@ -156,7 +156,7 @@ const ListContracts = () => {
                     <ul className='contracts-list'>
                         {search(contracts).map((contract) => (
                             <li key={contract.id} className='contract-item'>
-                                <Link to={`/Contrato/${contract.id}`} className='contract-link'>
+                                <Link to={`/ContractsPage/ListContracts/Contrato/${contract.id}`} className='contract-link'>
                                     <p className='client-name'>{contract.clientName}</p>
                                     <p className='contract-value'>Valor do Contrato: {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(contract.contractValue)}</p>
                                     <div className='contractDetails'>

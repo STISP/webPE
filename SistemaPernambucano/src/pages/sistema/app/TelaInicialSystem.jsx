@@ -21,7 +21,6 @@ export default function TelaInicialSystem() {
     const nomeSemDomino = nome.replace(/@suppernambucano.com.br/g, '');
     const nomeCapitalizado = nomeSemDomino.charAt(0).toUpperCase() + nomeSemDomino.slice(1);
 
-
     return (
         <>
             <br />
