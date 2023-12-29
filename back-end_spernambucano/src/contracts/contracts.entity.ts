@@ -76,6 +76,9 @@ export class Contract {
     @Column()
     postedDate: Date;
 
+    @Column()
+    loja: string;
+
     // id do supermercado
     //@Column()
     //supermarketId: number;

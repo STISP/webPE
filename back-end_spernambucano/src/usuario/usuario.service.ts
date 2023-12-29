@@ -39,24 +39,24 @@ export class UsuarioService {
   }
 
   // permições de acesso do novo usuario para as entidades cadastroNovoUsuario, acessoContratos, acessoAdicionarContratos, acessoDeletarContratos. quero individualmente
-  async getCadastroNovoUsuario(email: string): Promise<boolean | null> {
-    const usuario = await this.usuarioRepository.findOne({ where: { email } });
-    return usuario ? usuario.cadastroNovoUsuario : null;
-  }
-  
-  async getAcessoContratos(email: string): Promise<boolean | null> {
-    const usuario = await this.usuarioRepository.findOne({ where: { email } });
-    return usuario ? usuario.acessoContratos : null;
-  }
-
-  async getAcessoAdicionarContratos(email: string): Promise<boolean | null> {
-    const usuario = await this.usuarioRepository.findOne({ where: { email } });
-    return usuario ? usuario.acessoAdicionarContratos : null;
-  }
-
-  async getAcessoDeletarContratos(email: string): Promise<boolean | null> {
-    const usuario = await this.usuarioRepository.findOne({ where: { email } });
-    return usuario ? usuario.acessoDeletarContratos : null;
-  }
+  // async getCadastroNovoUsuario(email: string): Promise<boolean | null> {
+  //   const usuario = await this.usuarioRepository.findOne({ where: { email } });
+  //   return usuario ? usuario.cadastroNovoUsuario : null;
+  // }
+  // 
+  // async getAcessoContratos(email: string): Promise<boolean | null> {
+  //   const usuario = await this.usuarioRepository.findOne({ where: { email } });
+  //   return usuario ? usuario.acessoContratos : null;
+  // }
+// 
+  // async getAcessoAdicionarContratos(email: string): Promise<boolean | null> {
+  //   const usuario = await this.usuarioRepository.findOne({ where: { email } });
+  //   return usuario ? usuario.acessoAdicionarContratos : null;
+  // }
+// 
+  // async getAcessoDeletarContratos(email: string): Promise<boolean | null> {
+  //   const usuario = await this.usuarioRepository.findOne({ where: { email } });
+  //   return usuario ? usuario.acessoDeletarContratos : null;
+  // }
 
 }

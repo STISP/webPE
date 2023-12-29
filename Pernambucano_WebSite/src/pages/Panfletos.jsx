@@ -1,4 +1,5 @@
 import React from 'react';
+import InstagramEmbed from 'react-instagram-embed';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -17,6 +18,7 @@ import OfertaNatal4 from '../assets/ofertaNatal 4 24.12.2023.jpg';
 import OfertaNatal5 from '../assets/ofertaNatal 5 24.12.2023.jpg';
 import OfertaNatal6 from '../assets/ofertaNatal 6 24.12.2023.jpg';
 import OfertaNatal7 from '../assets/ofertaNatal 7 24.12.2023.jpg';
+// https://www.phind.com/search?cache=xisi29mel447rlxztg0eih1p
 
 export default function Panfletos() {
   const [panfletoSelecionado, setPanfletoSelecionado] = React.useState(null);
@@ -26,13 +28,13 @@ export default function Panfletos() {
     {
       id: 1,
       titulo: 'Promoções de Natal',
-      dataValidade: 'Ofertas válidas até 24 de dezembro',
+      dataValidade: 'Ofertas válidas até 31 de dezembro (Prolongado)',
       imagem: [OfertaNatal1, OfertaNatal2, OfertaNatal3, OfertaNatal4, OfertaNatal5, OfertaNatal6, OfertaNatal7],
     },
     {
       id: 2,
       titulo: 'Dia P e Aniversário',
-      dataValidade: 'Ofertas válidas no dia 31 de novembro',
+      dataValidade: 'Ofertas válidas no dia 30 de novembro',
       imagem: [DiaPeAniversario1, DiaPeAniversario2],
     },
     {
@@ -70,19 +72,7 @@ export default function Panfletos() {
     return (
       <>
         <div className="imagens-panfleto">
-          {/*<div className="tituloBottonBack">
-            <h1>{panfletoSelecionado.titulo}</h1>
-
-            <div className="bottonsPrevNext">
-              <button className='prevBTN' onClick={handlePrev}>Anterior</button>
-              <button className='nextBTN' onClick={handleNext}>Próximo</button>
-            </div>
-
-            <button onClick={handleVoltar} className="voltar-btn">
-              Voltar
-            </button>
-          </div>*/}
-          <Slider ref={sliderRef} dots={true} infinite={true} speed={500}>
+           <Slider ref={sliderRef} dots={true} infinite={true} speed={500}>
             {panfletoSelecionado.imagem.map((imagem, index) => (
               <div key={index}>
                 <a href={imagem} target="_blank" rel="noopener noreferrer">

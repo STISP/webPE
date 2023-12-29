@@ -9,6 +9,10 @@ const AddContract = () => {
     const currentDate = new Date().toISOString().split('T')[0];
 
     const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
+
+    // gerador de id aleatório criptografado em base 36 que nunca se repete
+    //const id = Math.random().toString(36).substr(2, 9) + Math.random().toString(36).substr(2, 9);
 
     const handleSaveContract = async () => {
         try {
@@ -24,13 +28,15 @@ const AddContract = () => {
             const terminationConditions = document.getElementById('terminationConditions').value;
             const postedBy = document.getElementById('postedBy').value;
             const postedDate = document.getElementById('postedDate').value;
+            const loja = document.getElementById('loja').value;
 
-            if (!clientName || !contractValue || !contractNumber || !startDate || !endDate || !status || !contractDescription || !paymentTerms || !productDetails || !terminationConditions || !postedBy || !postedDate) {
+            if (!id || !clientName || !contractValue || !contractNumber || !startDate || !endDate || !status || !contractDescription || !paymentTerms || !productDetails || !terminationConditions || !postedBy || !postedDate || !loja) {
                 setErrorMessage('Por favor, preencha todos os campos!');
                 return;
             }
 
             const contractData = {
+                id: id,
                 clientName,
                 contractValue,
                 contractNumber,
@@ -42,10 +48,11 @@ const AddContract = () => {
                 productDetails,
                 terminationConditions,
                 postedBy: nomeCapitalizado,
-                postedDate: currentDate
+                postedDate: currentDate,
+                loja: loja
             };
 
-            await axios.post('http://localhost:3000/contracts', contractData);
+            await axios.post('http://192.168.1.70:3000/contracts', contractData);
             alert('Contrato salvo com sucesso!');
             navigate('/ContractsPage/ListContracts');
         } catch (error) {
@@ -54,7 +61,6 @@ const AddContract = () => {
         }
     };
 
-    const navigate = useNavigate();
     const [firstLoad, setFirstLoad] = useState(true);
     const handleCancel = () => {
         if (firstLoad) {
@@ -84,18 +90,6 @@ const AddContract = () => {
                                 <label htmlFor="clientName">Nome do Cliente</label>
                                 <input type="text" id="clientName" placeholder="Digite o nome do cliente" required />
                             </div>
-                            {/*<div className="form-group">
-                                <label htmlFor="address">Endereço</label>
-                                <input type="text" id="address" placeholder="Digite o endereço" required />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="phone">Telefone</label>
-                                <input type="text" id="phone" placeholder="Digite o telefone" required />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="email">Email</label>
-                                <input type="text" id="email" placeholder="Digite o email" required />
-                            </div>*/}
                         </div>
 
                         <div>
@@ -106,6 +100,18 @@ const AddContract = () => {
                             <div className="form-group">
                                 <label htmlFor="contractNumber">Numero do contrato</label>
                                 <input type="number" id="contractNumber" placeholder="Digite o numero do contrato" required />
+                            </div>                            <div className="form-group">
+                                <label htmlFor="loja">Loja do contrato</label>
+                                <select id="loja" defaultValue="" required>
+                                    <option value="MERCADINHO DOM HELDER DE ALIMENTOS LTDA">MERCADINHO DOM HELDER DE ALIMENTOS LTDA</option>
+                                    <option value="MERCANTIL JABOATÃO DE ALIMENTOS LTDA">MERCANTIL JABOATÃO DE ALIMENTOS LTDA (MATRIZ)</option>
+                                    <option value="T.H SUPERMERCADO EIRELLI EPP">T.H SUPERMERCADO EIRELLI EPP</option>
+                                    <option value="COMERCIO DE ALIMENTOS PERNAMBUCANO LTDAP">COMERCIO DE ALIMENTOS PERNAMBUCANO LTDAP</option>
+                                    <option value="MERCANTIL DOIS IRMÃOS DE ALIMENTOS LTDA">MERCANTIL DOIS IRMÃOS DE ALIMENTOS LTDA</option>
+                                    <option value="MERCANTIL GOIANA DE ALIMENTOS LTDA">MERCANTIL GOIANA DE ALIMENTOS LTDA</option>
+                                    <option value="MERCANTIL JABOATAO DE ALIMENTOS LTDA">MERCANTIL JABOATAO DE ALIMENTOS LTDA</option>
+                                    <option value="COMERCIO DE ALIMENTOS PERNAMBUCANO LTDA">COMERCIO DE ALIMENTOS PERNAMBUCANO (CENTRAL DE SERVIÇOS)</option>
+                                </select>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="startDate">Data de inicio do contrato</label>
@@ -122,6 +128,7 @@ const AddContract = () => {
                                     <option value="cancelado">Desativado</option>
                                 </select>
                             </div>
+
                             <div className="form-group">
                                 <label htmlFor="contractDescription">Descrição do contrato</label>
                                 <textarea id="contractDescription" placeholder="Digite a descrição do contrato" required></textarea>
@@ -130,10 +137,6 @@ const AddContract = () => {
                                 <label htmlFor="paymentTerms">Termos de pagamento</label>
                                 <textarea id="paymentTerms" placeholder="Digite os termos de pagamento" required></textarea>
                             </div>
-                            {/*<div className="form-group">
-                                <label htmlFor="specialClauses">Cláusulas especiais</label>
-                                <textarea id="specialClauses" placeholder="Digite as cláusulas especiais" required></textarea>
-                            </div>*/}
                             <div className="form-group">
                                 <label htmlFor="productDetails">Detalhes do produto ou serviço</label>
                                 <textarea id="productDetails" placeholder="Digite os detalhes do produto ou serviço" required></textarea>
@@ -143,17 +146,6 @@ const AddContract = () => {
                                 <textarea id="terminationConditions" placeholder="Digite as condições de rescisão" required></textarea>
                             </div>
                         </div>
-
-                        {/*<div>
-                            <div className="form-group">
-                                <label htmlFor="supermarketRep">Representante do supermercado</label>
-                                <input type="text" id="supermarketRep" placeholder="Digite o nome do representante" required />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="witnesses">Testemunhas</label>
-                                <input type="text" id="witnesses" placeholder="Digite o nome das testemunhas" required />
-                            </div>
-                        </div>*/}
 
                         <div style={{ display: 'none' }}>
                             <div className="form-group">

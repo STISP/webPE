@@ -1,6 +1,7 @@
 import '../../../App.css'
 import { useState, useEffect } from 'react';
 import { MoonLoader } from 'react-spinners';
+import LogoCompleta from '../../../assets/LogoCompletaW.svg'
 
 export default function TelaInicialSystem() {
     const [isLoading, setIsLoading] = useState(true);
@@ -12,10 +13,6 @@ export default function TelaInicialSystem() {
 
         return () => clearTimeout(timer);
     }, []);
-
-    function capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
 
     const nome = localStorage.getItem('email');
     const nomeSemDomino = nome.replace(/@suppernambucano.com.br/g, '');
@@ -32,10 +29,10 @@ export default function TelaInicialSystem() {
                 <>
                     <div className='tituloAndSubtituloPage'>
                         <h1 className='TituloPage'>Bem vindo {nomeCapitalizado}!</h1>
-                        <p className='SubtituloPage'>Informações gerais</p>
+                        <p className='SubtituloPage'>Sistema totalmente desenvolvido por Supermercado Pernambucano</p>
+                        <a href="https://suppernambucano.com.br/" target="_blank"><img src={LogoCompleta} alt="Logo Pernambucano" /></a>
                     </div>
                 </>
-
             )
             }
         </>

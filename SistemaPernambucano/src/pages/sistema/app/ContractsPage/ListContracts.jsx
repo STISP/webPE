@@ -36,6 +36,16 @@ const ListContracts = () => {
         }
     };
 
+    const getStatusColor = (status) => {
+        if (status === 'ativo') {
+            return 'rgba(0, 133, 3, 0.65)';
+        } else if (status === 'cancelado') {
+            return 'rgba(255, 0, 0, 0.65)';
+        } else {
+            return 'rgba(0, 0, 0, 0.65)';
+        }
+    };
+
     const navigate = useNavigate();
     const handleGoBack = () => {
         navigate('/ContractsPage');
@@ -43,7 +53,7 @@ const ListContracts = () => {
 
     const fetchContracts = () => {
         setIsLoaded(false); // Set isLoaded to false before fetching contracts
-        axios.get('http://localhost:3000/contracts')
+        axios.get('http://192.168.1.70:3000/contracts')
             .then(response => {
                 const contractsData = response.data.map(contract => ({
                     id: contract.id,
@@ -136,22 +146,13 @@ const ListContracts = () => {
                 />
                 <StatusCheckbox status={status} setStatus={setStatus} />
             </div>
-            {/*<div className='avisoVencimentoWarn'>
-                <p className='avisoVencimento'>Aviso de vencimento próximo:</p>
-                <div className='avisoVencimentoMaiorQue30'>
-                    <p>Vencimento em mais de 30 dias</p>
-                </div>
-                <div className='avisoVencimento30'>
-                    <p>Vencimento em 30 dias</p>
-                </div>
-                <div className='avisoVencimento15'>
-                    <p>Vencimento em 15 dias</p>
-                </div>
-            </div>*/}
 
             {isLoaded ? (
                 contracts.length === 0 ? (
-                    <p>A lista de contratos está vazia.</p>
+                    <div className="WarnListClean">
+                        <h2>Lista vazia no momento</h2>
+                        <Link to="/ContractsPage/ListContracts/AddContract">Adicione o primeiro contrato clicando aqui</Link>
+                    </div>
                 ) : (
                     <ul className='contracts-list'>
                         {search(contracts).map((contract) => (
@@ -161,13 +162,7 @@ const ListContracts = () => {
                                     <p className='contract-value'>Valor do Contrato: {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(contract.contractValue)}</p>
                                     <div className='contractDetails'>
                                         <p className={`due-date ${getDueDateColor(contract.endDate)}`} style={{ backgroundColor: getDueDateColor(contract.endDate) }}>Vencimento: {new Date(contract.endDate).toLocaleDateString('pt-BR')}</p>
-                                        <p className='statusListContracts'>{contract.status}</p>
-                                        {/*<button className='delete-contract-button' onClick={() => handleDeleteContract(contract.id)}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none">
-                                                <path d="M3.09219 0.380273L2.9375 0.6875H0.875C0.494727 0.6875 0.1875 0.994727 0.1875 1.375C0.1875 1.75527 0.494727 2.0625 0.875 2.0625H9.125C9.50527 2.0625 9.8125 1.75527 9.8125 1.375C9.8125 0.994727 9.50527 0.6875 9.125 0.6875H7.0625L6.90781 0.380273C6.7918 0.146094 6.55332 0 6.29336 0H3.70664C3.44668 0 3.2082 0.146094 3.09219 0.380273ZM9.125 2.75H0.875L1.33047 10.0332C1.36484 10.5768 1.81602 11 2.35957 11H7.64043C8.18398 11 8.63516 10.5768 8.66953 10.0332L9.125 2.75Z" fill="white" />
-                                            </svg>
-                                            Excluir
-                                        </button>*/}
+                                        <p className='statusListContracts' style={{ color: getStatusColor(contract.status), fontWeight: 600 }}>{contract.status}</p>
                                     </div>
                                 </Link>
                             </li>

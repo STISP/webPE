@@ -8,7 +8,7 @@ export default function PrivateRoute({ children }) {
   useEffect(() => {
     const checkEmail = async () => {
       const email = localStorage.getItem("email");
-      const response = await fetch(`http://localhost:3000/usuario/check-email?email=${email}`);
+      const response = await fetch(`http://192.168.1.70:3000/usuario/check-email?email=${email}`);
       const { exists } = await response.json();
       setEmailExists(exists);
     };

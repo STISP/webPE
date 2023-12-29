@@ -31,7 +31,7 @@ export default function Login() {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/usuario/login', {
+      const response = await fetch('http://192.168.1.70:3000/usuario/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ export default function Login() {
 
       if (response.ok && data.success) {
         localStorage.setItem('email', email);
-        window.location.href = 'http://localhost:5173/#/';
+        window.location.href = 'http://192.168.1.70:5173/#/';
       } else {
         const mensagem = 'Email ou senha incorretos';
         setTentativas((prevTentativas) => prevTentativas + 1);
@@ -71,8 +71,8 @@ export default function Login() {
         <div className="allForms">
           <h2>Entrar na conta</h2>
           <p>Seja bem vindo de volta</p>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
+          <form onSubmit={handleSubmit} className='form-login'>
+            <div className="form-group-login">
               <input
                 placeholder='Email'
                 type="email"
@@ -84,7 +84,7 @@ export default function Login() {
                 }}
               />
             </div>
-            <div className="form-group">
+            <div className="form-group-login">
               <input
                 placeholder='Senha'
                 type="password"

@@ -52,7 +52,7 @@ export default function CriarConta() {
     }
 
     try {
-      const checkEmailResponse = await fetch(`http://localhost:3000/usuario/check-email?email=${email}`);
+      const checkEmailResponse = await fetch(`http://192.168.1.70:3000/usuario/check-email?email=${email}`);
       const { exists } = await checkEmailResponse.json();
       if (exists) {
         const mensagem = 'Email já cadastrado';
@@ -60,7 +60,7 @@ export default function CriarConta() {
         return;
       }
 
-      const response = await fetch('http://localhost:3000/usuario/cadastro', {
+      const response = await fetch('http://192.168.1.70:3000/usuario/cadastro', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ export default function CriarConta() {
       if (response.ok) {
         localStorage.setItem('email', email);
         localStorage.setItem('nome', name);
-        window.location.href = 'http://localhost:5173/SistemaPE/'
+        window.location.href = 'http://192.168.1.70:5173/SistemaPE/'
       } else {
         console.log('Erro ao criar conta' + response.status);
         const mensagem = 'Erro ao criar conta. Por favor, tente novamente mais tarde.';
@@ -148,7 +148,7 @@ export default function CriarConta() {
                 }}
               />
             </div>
-            <h3>Permições do novo usuário</h3>
+            {/*<h3>Permições do novo usuário</h3>
             <div className='checkboxCadastro'>
               <input
                 type="checkbox"
@@ -180,7 +180,7 @@ export default function CriarConta() {
                 value="delContratos"
               />
               <label htmlFor="delContratos">Acesso para deletar contratos</label>
-            </div>
+            </div>*/}
 
             <br />
             {mensagem && <p className="errorEmailExist">{mensagem}</p>}

@@ -134,10 +134,10 @@ a {
   align-items: center;
 }
 .menu ul a:hover {
-  background: #fafafa;
+  background: #fafafa44;
   cursor: pointer;
-  color: #132438;
-  fill: #132438;
+  color: #ffffff;
+  fill: #ffffff;
   transition: 0.3s ease;
 }
 .menu ul a.active {
@@ -636,7 +636,7 @@ a {
   display: flex;
   gap: 0.3rem;
   align-items: center;
-  margin-bottom: .3rem;
+  margin-bottom: 0.3rem;
   border-bottom: 1px solid #fff;
   cursor: pointer;
 }
@@ -859,6 +859,9 @@ a {
   font-family: "Source Sans 3", sans-serif;
   font-weight: 600;
 }
+.status-checkbox label {
+  cursor: pointer;
+}
 .filerSearch input[type="checkbox"]:focus {
   outline: none;
   border-color: #007bff;
@@ -910,4 +913,59 @@ a {
   background-color: rgba(0, 133, 3, 0.65);
   padding: 0.3rem 0.8rem;
   border-radius: 6px;
+}
+.WarnListClean {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.WarnListClean a {
+  margin: 0;
+  font-size: 0.9rem;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 400;
+  color: #818181;
+}
+.WarnListClean a:hover {
+  color: #000;
+  border-bottom: 1px solid #000;
+}
+.WarnListClean h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 600;
+}
+.tituloAndSubtituloPage img {
+  background: #0261a3;
+  border-radius: 0.7rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  width: 65%;
+}
+.transferencia-entre-lojas {
+  margin: 20px;
+}
+
+.transferencia-entre-lojas h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.form-group-login {
+  margin-bottom: 1rem;
+}
+.form-group-login input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-family: "Source Sans 3", sans-serif;
+}
+.form-login {
+  width: 20rem;
 }

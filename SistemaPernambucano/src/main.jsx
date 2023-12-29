@@ -12,6 +12,7 @@ import ContractsPage from './pages/sistema/app/ContractsPage/ContractsPage.jsx'
 import ListContracts from './pages/sistema/app/ContractsPage/ListContracts.jsx'
 import ContratoDetalhes from './components/ContratoDetalhes.jsx'
 import AddContract from './pages/sistema/app/ContractsPage/AddContract.jsx'
+import TransferenciaEntreLojas from './pages/sistema/app/Transferencia entre lojas/TransferenciaEntreLojas.jsx'
 
 function isMobileView() {
   return window.matchMedia('(max-width: 1210px)').matches;
@@ -28,6 +29,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/ContractsPage/ListContracts/AddContract" element={<Layout><PrivateRoute><AddContract /></PrivateRoute></Layout>} />
           <Route path="/ContractsPage/ListContracts" element={<Layout><PrivateRoute><ListContracts /></PrivateRoute></Layout>} />
           <Route exact path="/ContractsPage/ListContracts/Contrato/:id" element={<Layout><PrivateRoute><ContratoDetalhes /></PrivateRoute></Layout>} />
+          <Route path="/TransferenciaEntreLojas" element={<Layout><PrivateRoute><TransferenciaEntreLojas /></PrivateRoute></Layout>} />
           <Route path="/cadastro" element={<Layout><PrivateRoute><CriarConta /></PrivateRoute></Layout>} />
           <Route path="/Login" element={<Layout hideMenuPaths={["/Login"]}><Login /></Layout>} />
           <Route path="*" element={<RotaNaoEncontrada />} />

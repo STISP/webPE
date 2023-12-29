@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import Footer from './components/Footer.jsx';
 import Menu from './components/Menu.jsx';
 import { Link } from 'react-router-dom';
 
 const Layout = ({ children }) => {
+  const Footer = lazy(() => import('./components/Footer.jsx'));
+  const Menu = lazy(() => import('./components/Menu.jsx'));
   const [message, setMessage] = useState('');
   const [isBlackFriday, setIsBlackFriday] = useState(false);
   const [isChristmasPromo, setIsChristmasPromo] = useState(false);
@@ -55,11 +57,13 @@ const Layout = ({ children }) => {
           {message}
         </h3>
       )}
-      <Menu />
-      <div className="content">
-        {children}
-      </div>
-      <Footer />
+      <Suspense fallback={<div></div>}>
+        <Menu />
+        <div className="content">
+          {children}
+        </div>
+        <Footer />
+      </Suspense>
     </>
   );
 };

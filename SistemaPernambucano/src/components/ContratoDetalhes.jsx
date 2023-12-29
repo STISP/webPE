@@ -8,7 +8,7 @@ const ContratoDetalhes = () => {
 
     const getContractDetails = async (id) => {
         try {
-            const response = await axios.get(`http://localhost:3000/contracts/${id}`);
+            const response = await axios.get(`http://192.168.1.70:3000/contracts/${id}`);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -18,8 +18,8 @@ const ContratoDetalhes = () => {
 
     const deleteContract = async (id) => {
         try {
-            await axios.delete(`http://localhost:3000/contracts/${id}`);
-            navigate('/ListContracts');
+            await axios.delete(`http://192.168.1.70:3000/contracts/${id}`);
+            navigate('/ContractsPage/ListContracts');
         } catch (error) {
             console.error(error);
         }
@@ -132,6 +132,10 @@ const ContratoDetalhes = () => {
                     )}
 
                     <div className="contract-details__info-row">
+                        <span className="contract-details__label">Loja do contrato: </span>
+                        <span className="contract-details__value">{contrato.loja}</span>
+                    </div>
+                    <div className="contract-details__info-row">
                         <span className="contract-details__label">Status: </span>
                         <span className="contract-details__value">{contrato.status}</span>
                     </div>
@@ -156,14 +160,6 @@ const ContratoDetalhes = () => {
                             <span className="contract-details__label">Data de Vencimento: </span>
                             <span className="contract-details__value">{formatDate(contrato.endDate)}</span>
                         </div>
-                        {/*<div className="contract-details__info-row">
-                            <span className="contract-details__label">Publicado por: </span>
-                            <span className="contract-details__value">{contrato.postedBy}</span>
-                        </div>
-                        <div className="contract-details__info-row">
-                            <span className="contract-details__label">Data de Publicação: </span>
-                            <span className="contract-details__value">{contrato.postedDate}</span>
-                        </div>*/}
                         <div className="contract-details__info-row">
                             <span className="contract-details__label">Descrição do Contrato</span> <br />
                             <span className="contract-details__value">{contrato.contractDescription}</span>
@@ -172,19 +168,9 @@ const ContratoDetalhes = () => {
                             <span className="contract-details__label">Termos de Pagamento</span> <br />
                             <span className="contract-details__value">{contrato.paymentTerms}</span>
                         </div>
-                        {/*<div className="contract-details__info-row">
-                            <span className="contract-details__label">Cláusulas Especiais: </span> <br />
-                            <span className="contract-details__value">{contrato.specialClauses}</span>
-                        </div>*/}
                     </section>
 
                     <section className="contract-details__additional-info">
-                        {/*<p className="contract-details__subtitle">Informações de Contato:</p>
-                        <ul className="contract-details__contact-info">
-                            <li><span className="contract-details__label">Endereço:</span> {contrato.address}</li>
-                            <li><span className="contract-details__label">Telefone:</span> {contrato.phone}</li>
-                            <li><span className="contract-details__label">Email:</span> {contrato.email}</li>
-                        </ul>*/}
 
                         <div className="contract-details__other-details">
                             <div>
@@ -196,14 +182,6 @@ const ContratoDetalhes = () => {
                                 {contrato.terminationConditions}
                             </div>
                         </div>
-
-                        {/*<div className="contract-details__signatures">
-                            <p><span className="contract-details__subtitle">Assinaturas:</span></p>
-                            <ul className="contract-details__signature-list">
-                                <li><span className="contract-details__label">Representante do Supermercado:</span> {contrato.supermarketRep}</li>
-                                <li><span className="contract-details__label">Testemunhas:</span> {contrato.witnesses}</li>
-                            </ul>
-                        </div>*/}
                     </section>
                 </div>
             )}

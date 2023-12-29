@@ -10,7 +10,6 @@ import BoxIcon from './assets/boxIcon.svg'
 import CarrinhoIcon from './assets/carrinhoIcon.svg'
 import Padaria from './assets/padaria.png'
 
-
 export default function App() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const images = [TodosProdutos, PromoCarne, Verduras];
@@ -63,7 +62,7 @@ export default function App() {
                             style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
                             {images.map((image, index) => (
                                 <div className="carousel-item" key={index}>
-                                    <img loading="lazy" src={image} alt={`Promoção ${index}`} />
+                                    <img src={image} alt={`Promoção ${index}`} />
                                 </div>
                             ))}
                         </div>
