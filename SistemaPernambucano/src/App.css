@@ -440,7 +440,7 @@ a {
 .contract-details__title {
   font-size: 28px;
   color: #333;
-  margin: 0 0 20px 0;
+  margin: 0;
 }
 .contract-details__button {
   display: inline-flex;
@@ -470,22 +470,11 @@ a {
   align-items: center;
   justify-content: space-between;
 }
-.contract-details__info-section {
-  margin-bottom: 30px;
-}
 .contract-details__subtitle {
   font-size: 20px;
   font-weight: bold;
   color: #333;
   margin-bottom: 10px;
-}
-.contract-details__label {
-  font-weight: bold;
-  color: #555;
-}
-.contract-details__value {
-  color: #333;
-  margin-bottom: 15px;
 }
 .contract-details__contact-info {
   list-style: none;
@@ -968,4 +957,44 @@ a {
 }
 .form-login {
   width: 20rem;
+}
+.contract-details__info-row {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(0, 0, 0, 0.20);
+  padding: 10px 20px;
+  gap: 0.5rem;
+  justify-content: center;
+}
+.contract-details__label {
+  color: #474747;
+  font-family: Roboto;
+  font-size: .9rem;
+  font-style: normal;
+  font-weight: 400;
+}
+.contract-details__value {
+  color: #000;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+}
+.contract-details__info-section {
+  margin: 20px 0;
+  padding-bottom: 20px;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.detalhesPostado {
+  display: flex;
+  flex-direction: column;  
+}
+.detalhesPostado p {
+  margin: 0;
+  font-size: 1rem;
+  font-family: "Source Sans 3", sans-serif;
+  color: #858585;
 }

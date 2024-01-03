@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Contract {
     // id do contrato
@@ -6,89 +6,56 @@ export class Contract {
     id: number;
 
     // nome do contrato
-    @Column()
+    @Column({ type: 'text' })
     clientName: string;
 
     // numero do contrato
-    @Column()
+    @Column({ type: 'text' })
     contractNumber: string;
 
     // data de início do contrato
-    @Column()
+    @Column({ type: 'date' })
     startDate: Date;
 
     // data de término do contrato
-    @Column()
+    @Column({ type: 'date' })
     endDate: Date;
 
     // valor do contrato
-    @Column()
+    @Column({ type: 'float' })
     contractValue: number;
 
     // status do contrato
-    @Column()
+    @Column({ type: 'text' })
     status: string;
 
     // descrição do contrato
-    @Column()
+    @Column({ type: 'text' })
     contractDescription: string;
 
     // termos de pagamento do contrato
-    @Column()
+    @Column({ type: 'text' })
     paymentTerms: string;
 
-    // cláusulas especiais do contrato
-    // @Column()
-    // specialClauses: string;
-
-    // informações de contato do contrato 
-    // endereco do contrato
-    // @Column()
-    // address: string;
-
-    // telefone do contrato
-    // @Column()
-    // phone: string;
-
-    // email do contrato
-    // @Column()
-    // email: string;
-
     // detalhes do produto do contrato
-    @Column()
+    @Column({ type: 'text' })
     productDetails: string;
 
     // condições de contrato
-    @Column()
+    @Column({ type: 'text' })
     terminationConditions: string;
 
-    // representante do supermercado
-    // @Column()
-    // supermarketRep: string;
-
-    // testemunhas do contrato
-    // @Column()
-    // witnesses: string;
-
-    @Column()
+    @Column({ type: 'text' })
     postedBy: string;
 
-    @Column()
+    @Column({ type: 'date' })
     postedDate: Date;
 
-    @Column()
+    @Column({ type: 'text' })
     loja: string;
-
-    // id do supermercado
-    //@Column()
-    //supermarketId: number;
 
     // contrato de renovação
     //@OneToOne(() => Contract)
     //@JoinColumn()
     //renewalContract: Contract;
-
-    //// usuario que criou o contrato
-    //@Column()
-    //createdBy: string;
 }

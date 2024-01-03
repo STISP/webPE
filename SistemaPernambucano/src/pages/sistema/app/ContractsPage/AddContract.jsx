@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const AddContract = () => {
+    const navigate = useNavigate();
     const nome = localStorage.getItem('email');
     const nomeSemDomino = nome.replace(/@suppernambucano.com.br/g, '');
     const nomeCapitalizado = nomeSemDomino.charAt(0).toUpperCase() + nomeSemDomino.slice(1);
     const currentDate = new Date().toISOString().split('T')[0];
 
     const [errorMessage, setErrorMessage] = useState('');
-    const navigate = useNavigate();
 
     // gerador de id aleatório criptografado em base 36 que nunca se repete
     //const id = Math.random().toString(36).substr(2, 9) + Math.random().toString(36).substr(2, 9);
@@ -30,13 +30,12 @@ const AddContract = () => {
             const postedDate = document.getElementById('postedDate').value;
             const loja = document.getElementById('loja').value;
 
-            if (!id || !clientName || !contractValue || !contractNumber || !startDate || !endDate || !status || !contractDescription || !paymentTerms || !productDetails || !terminationConditions || !postedBy || !postedDate || !loja) {
+            if (!clientName || !contractValue || !contractNumber || !startDate || !endDate || !status || !contractDescription || !paymentTerms || !productDetails || !terminationConditions || !postedBy || !postedDate || !loja) {
                 setErrorMessage('Por favor, preencha todos os campos!');
                 return;
             }
 
             const contractData = {
-                id: id,
                 clientName,
                 contractValue,
                 contractNumber,
@@ -54,7 +53,7 @@ const AddContract = () => {
 
             await axios.post('http://192.168.1.70:3000/contracts', contractData);
             alert('Contrato salvo com sucesso!');
-            navigate('/ContractsPage/ListContracts');
+            navigate('/ContractsPage');
         } catch (error) {
             console.error('Erro ao salvar contrato:', error);
             setErrorMessage('Problema ao cadastrar o contrato, tente novamente ou contate o suporte.');
@@ -64,7 +63,7 @@ const AddContract = () => {
     const [firstLoad, setFirstLoad] = useState(true);
     const handleCancel = () => {
         if (firstLoad) {
-            navigate('/ContractsPage/ListContracts');
+            navigate('/ContractsPage');
         } else {
             navigate(-1);
         }
@@ -76,11 +75,8 @@ const AddContract = () => {
             <div className="info-contract">
                 <div className="info-contract-content">
                     <div className='addAndBackButton'>
-                        <h2>Adicionar Contrato</h2>
+                        <h2>Adicionar novo contrato</h2>
                         <button className="back-button" onClick={handleCancel}>
-                            <svg xmlns="http://www.w3.org/2000/svg" height="18" width="14" viewBox="0 0 384 512" fill='#fff'>
-                                <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
-                            </svg>
                             Cancelar
                         </button>
                     </div>
@@ -100,9 +96,11 @@ const AddContract = () => {
                             <div className="form-group">
                                 <label htmlFor="contractNumber">Numero do contrato</label>
                                 <input type="number" id="contractNumber" placeholder="Digite o numero do contrato" required />
-                            </div>                            <div className="form-group">
+                            </div>
+                            <div className="form-group">
                                 <label htmlFor="loja">Loja do contrato</label>
                                 <select id="loja" defaultValue="" required>
+                                    <option value="" disabled selected>Selecione a loja</option>
                                     <option value="MERCADINHO DOM HELDER DE ALIMENTOS LTDA">MERCADINHO DOM HELDER DE ALIMENTOS LTDA</option>
                                     <option value="MERCANTIL JABOATÃO DE ALIMENTOS LTDA">MERCANTIL JABOATÃO DE ALIMENTOS LTDA (MATRIZ)</option>
                                     <option value="T.H SUPERMERCADO EIRELLI EPP">T.H SUPERMERCADO EIRELLI EPP</option>

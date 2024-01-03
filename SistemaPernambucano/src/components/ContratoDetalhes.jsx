@@ -78,7 +78,10 @@ const ContratoDetalhes = () => {
             {contrato && (
                 <div className="contract-details">
                     <div className="titleAndButton">
-                        <h2 className="contract-details__title">Detalhes do Contrato</h2>
+                        <div className='detalhesPostado'>
+                            <h2 className="contract-details__title">Detalhes do Contrato</h2>
+                            <p>Postado por {contrato.postedBy} em {formatDate(contrato.postedDate)}</p>
+                        </div>
                         <div className='op-details-button'>
                             {contrato.status && (
                                 <div className='op-details-button2'>
@@ -131,18 +134,18 @@ const ContratoDetalhes = () => {
                         </div>
                     )}
 
-                    <div className="contract-details__info-row">
-                        <span className="contract-details__label">Loja do contrato: </span>
-                        <span className="contract-details__value">{contrato.loja}</span>
-                    </div>
-                    <div className="contract-details__info-row">
-                        <span className="contract-details__label">Status: </span>
-                        <span className="contract-details__value">{contrato.status}</span>
-                    </div>
                     <section className="contract-details__info-section">
                         <div className="contract-details__info-row">
-                            <span className="contract-details__label">Nome do Cliente: </span>
+                            <span className="contract-details__label">Nome do contrato: </span>
                             <span className="contract-details__value">{contrato.clientName}</span>
+                        </div>
+                        <div className="contract-details__info-row">
+                            <span className="contract-details__label">Loja do contrato: </span>
+                            <span className="contract-details__value">{contrato.loja}</span>
+                        </div>
+                        <div className="contract-details__info-row">
+                            <span className="contract-details__label">Status: </span>
+                            <span className="contract-details__value">{contrato.status}</span>
                         </div>
                         <div className="contract-details__info-row">
                             <span className="contract-details__label">Numero do contrato: </span>
@@ -161,26 +164,21 @@ const ContratoDetalhes = () => {
                             <span className="contract-details__value">{formatDate(contrato.endDate)}</span>
                         </div>
                         <div className="contract-details__info-row">
-                            <span className="contract-details__label">Descrição do Contrato</span> <br />
+                            <span className="contract-details__label">Descrição do Contrato</span>
                             <span className="contract-details__value">{contrato.contractDescription}</span>
                         </div>
                         <div className="contract-details__info-row">
-                            <span className="contract-details__label">Termos de Pagamento</span> <br />
+                            <span className="contract-details__label">Termos de Pagamento</span>
                             <span className="contract-details__value">{contrato.paymentTerms}</span>
                         </div>
-                    </section>
+                        <div className="contract-details__info-row">
+                            <span className="contract-details__label">Detalhes do Produto</span>
+                            <span className="contract-details__value">{contrato.productDetails}</span>
+                        </div>
 
-                    <section className="contract-details__additional-info">
-
-                        <div className="contract-details__other-details">
-                            <div>
-                                <span className="contract-details__subtitle">Detalhes do Produto</span> <br />
-                                {contrato.productDetails}
-                            </div>
-                            <div>
-                                <span className="contract-details__subtitle">Condições de Rescisão</span> <br />
-                                {contrato.terminationConditions}
-                            </div>
+                        <div className="contract-details__info-row">
+                            <span className="contract-details__label">Condições de Rescisão</span>
+                            <span className="contract-details__value">{contrato.terminationConditions}</span>
                         </div>
                     </section>
                 </div>
