@@ -15,7 +15,7 @@ import TransferenciaEntreLojas from './pages/sistema/app/Transferencia entre loj
 import RelatoriosContracts from './pages/sistema/app/ContractsPage/RelatoriosContracts.jsx';
 
 function isMobileView() {
-  return window.matchMedia('(max-width: 1210px)').matches;
+  return window.matchMedia('(max-width: 1100px)').matches;
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -26,9 +26,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Routes>
           <Route path="/" element={<Layout><PrivateRoute><TelaInicialSystem /></PrivateRoute></Layout>} />
           <Route path="/ContractsPage" element={<Layout><PrivateRoute><ContractsPage /></PrivateRoute></Layout>} />
-          <Route path="/ContractsPage/ListContracts/AddContract" element={<Layout><PrivateRoute><AddContract /></PrivateRoute></Layout>} />
-          <Route path="/ContractsPage/ListContracts/RelatoriosContracts" element={<Layout><PrivateRoute><RelatoriosContracts /></PrivateRoute></Layout>} />
-          <Route exact path="/ContractsPage/ListContracts/Contrato/:id" element={<Layout><PrivateRoute><ContratoDetalhes /></PrivateRoute></Layout>} />
+          <Route path="/ContractsPage/AddContract" element={<Layout><PrivateRoute><AddContract /></PrivateRoute></Layout>} />
+          <Route path="/ContractsPage/RelatoriosContracts" element={<Layout><PrivateRoute><RelatoriosContracts /></PrivateRoute></Layout>} />
+          <Route exact path="/ContractsPage/Contrato/:id" element={<Layout><PrivateRoute><ContratoDetalhes /></PrivateRoute></Layout>} />
           <Route path="/TransferenciaEntreLojas" element={<Layout><PrivateRoute><TransferenciaEntreLojas /></PrivateRoute></Layout>} />
           <Route path="/cadastro" element={<Layout><PrivateRoute><CriarConta /></PrivateRoute></Layout>} />
           <Route path="/Login" element={<Layout hideMenuPaths={["/Login"]}><Login /></Layout>} />

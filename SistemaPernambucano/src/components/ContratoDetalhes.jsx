@@ -19,7 +19,7 @@ const ContratoDetalhes = () => {
     const deleteContract = async (id) => {
         try {
             await axios.delete(`http://192.168.1.70:3000/contracts/${id}`);
-            navigate('/ContractsPage/ListContracts');
+            navigate('/ContractsPage');
         } catch (error) {
             console.error(error);
         }

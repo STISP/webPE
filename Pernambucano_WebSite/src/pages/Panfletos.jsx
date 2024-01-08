@@ -1,5 +1,4 @@
 import React from 'react';
-import InstagramEmbed from 'react-instagram-embed';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -18,7 +17,8 @@ import OfertaNatal4 from '../assets/ofertaNatal 4 24.12.2023.jpg';
 import OfertaNatal5 from '../assets/ofertaNatal 5 24.12.2023.jpg';
 import OfertaNatal6 from '../assets/ofertaNatal 6 24.12.2023.jpg';
 import OfertaNatal7 from '../assets/ofertaNatal 7 24.12.2023.jpg';
-// https://www.phind.com/search?cache=xisi29mel447rlxztg0eih1p
+import ShowDeOferta1 from '../assets/showDeOferta1.jpg';
+import ShowDeOferta2 from '../assets/showDeOferta2.jpg';
 
 export default function Panfletos() {
   const [panfletoSelecionado, setPanfletoSelecionado] = React.useState(null);
@@ -27,18 +27,24 @@ export default function Panfletos() {
   const panfletos = [
     {
       id: 1,
+      titulo: 'Show de ofertas',
+      dataValidade: 'Ofertas válidas de 05 a 06 de Janeiro',
+      imagem: [ShowDeOferta1, ShowDeOferta2],
+    },
+    {
+      id: 2,
       titulo: 'Promoções de Natal',
       dataValidade: 'Ofertas válidas até 31 de dezembro (Prolongado)',
       imagem: [OfertaNatal1, OfertaNatal2, OfertaNatal3, OfertaNatal4, OfertaNatal5, OfertaNatal6, OfertaNatal7],
     },
     {
-      id: 2,
+      id: 3,
       titulo: 'Dia P e Aniversário',
       dataValidade: 'Ofertas válidas no dia 30 de novembro',
       imagem: [DiaPeAniversario1, DiaPeAniversario2],
     },
     {
-      id: 3,
+      id: 4,
       titulo: 'Quarta verde',
       dataValidade: 'Apenas nesta quarta, 29 de novembro',
       imagem: [Quarta_verde_Panfleto1, Quarta_verde_Panfleto2, Quarta_verde_Panfleto3, Quarta_verde_Panfleto4, Quarta_verde_Panfleto5, Quarta_verde_Panfleto6],

@@ -917,6 +917,7 @@ a {
   font-family: "Source Sans 3", sans-serif;
   font-weight: 400;
   color: #818181;
+  border-bottom: 1px solid transparent;
 }
 .WarnListClean a:hover {
   color: #000;

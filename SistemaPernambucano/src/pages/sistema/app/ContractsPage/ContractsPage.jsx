@@ -48,7 +48,7 @@ const ContractsPage = () => {
 
   const navigate = useNavigate();
   const handleGoRelatorio = () => {
-    navigate('/ContractsPage/ListContracts/RelatoriosContracts');
+    navigate('/ContractsPage/RelatoriosContracts');
   };
 
   const fetchContracts = () => {
@@ -81,7 +81,7 @@ const ContractsPage = () => {
   const [status, setStatus] = useState([]);
 
   const StatusCheckbox = ({ status, setStatus }) => {
-    const statusOptions = ["ativo", "cancelado"];
+    const statusOptions = ["ativo", "Desativado"];
 
     const handleChange = (event) => {
       if (event.target.checked) {
@@ -124,7 +124,7 @@ const ContractsPage = () => {
             </svg>
             Resumo
           </button>
-          <Link to="/ContractsPage/ListContracts/AddContract" >
+          <Link to="/ContractsPage/AddContract" >
             <button className='add-contract-button'>
               <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512" fill='#fff'>
                 <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
@@ -151,13 +151,13 @@ const ContractsPage = () => {
         contracts.length === 0 ? (
           <div className="WarnListClean">
             <h2>Lista vazia no momento</h2>
-            <Link to="/ContractsPage/ListContracts/AddContract">Adicione o primeiro contrato clicando aqui</Link>
+            <Link to="/ContractsPage/AddContract">Adicione o primeiro contrato clicando aqui</Link>
           </div>
         ) : (
           <ul className='contracts-list'>
             {search(contracts).map((contract) => (
               <li key={contract.id} className='contract-item'>
-                <Link to={`/ContractsPage/ListContracts/Contrato/${contract.id}`} className='contract-link'>
+                <Link to={`/ContractsPage/Contrato/${contract.id}`} className='contract-link'>
                   <p className='client-name'>{contract.clientName}</p>
                   <p className='contract-value'>Valor do Contrato: {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(contract.contractValue)}</p>
                   <div className='contractDetails'>

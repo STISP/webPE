@@ -48,7 +48,7 @@ const AddContract = () => {
                 terminationConditions,
                 postedBy: nomeCapitalizado,
                 postedDate: currentDate,
-                loja: loja
+                loja: loja,
             };
 
             await axios.post('http://192.168.1.70:3000/contracts', contractData);
@@ -101,14 +101,14 @@ const AddContract = () => {
                                 <label htmlFor="loja">Loja do contrato</label>
                                 <select id="loja" defaultValue="" required>
                                     <option value="" disabled selected>Selecione a loja</option>
+                                    <option value="COMERCIO DE ALIMENTOS PERNAMBUCANO CENTRAL DE SERVIÇOS">COMERCIO DE ALIMENTOS PERNAMBUCANO CENTRAL DE SERVIÇOS</option>
                                     <option value="MERCADINHO DOM HELDER DE ALIMENTOS LTDA">MERCADINHO DOM HELDER DE ALIMENTOS LTDA</option>
-                                    <option value="MERCANTIL JABOATÃO DE ALIMENTOS LTDA">MERCANTIL JABOATÃO DE ALIMENTOS LTDA (MATRIZ)</option>
+                                    <option value="MERCANTIL JABOATÃO DE ALIMENTOS LTDA MATRIZ">MERCANTIL JABOATÃO DE ALIMENTOS LTDA MATRIZ</option>
                                     <option value="T.H SUPERMERCADO EIRELLI EPP">T.H SUPERMERCADO EIRELLI EPP</option>
                                     <option value="COMERCIO DE ALIMENTOS PERNAMBUCANO LTDAP">COMERCIO DE ALIMENTOS PERNAMBUCANO LTDAP</option>
                                     <option value="MERCANTIL DOIS IRMÃOS DE ALIMENTOS LTDA">MERCANTIL DOIS IRMÃOS DE ALIMENTOS LTDA</option>
                                     <option value="MERCANTIL GOIANA DE ALIMENTOS LTDA">MERCANTIL GOIANA DE ALIMENTOS LTDA</option>
                                     <option value="MERCANTIL JABOATAO DE ALIMENTOS LTDA">MERCANTIL JABOATAO DE ALIMENTOS LTDA</option>
-                                    <option value="COMERCIO DE ALIMENTOS PERNAMBUCANO LTDA">COMERCIO DE ALIMENTOS PERNAMBUCANO (CENTRAL DE SERVIÇOS)</option>
                                 </select>
                             </div>
                             <div className="form-group">

@@ -1,9 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
 @Entity()
 export class Contract {
-    // id do contrato
-    @PrimaryGeneratedColumn()
-    id: number;
+    // id do contrato 
+    @PrimaryGeneratedColumn('uuid')
+    id: string = uuidv4();
 
     // nome do contrato
     @Column({ type: 'text' })
@@ -14,11 +15,11 @@ export class Contract {
     contractNumber: string;
 
     // data de início do contrato
-    @Column({ type: 'date' })
+    @Column()
     startDate: Date;
 
     // data de término do contrato
-    @Column({ type: 'date' })
+    @Column()
     endDate: Date;
 
     // valor do contrato
@@ -48,7 +49,7 @@ export class Contract {
     @Column({ type: 'text' })
     postedBy: string;
 
-    @Column({ type: 'date' })
+    @Column()
     postedDate: Date;
 
     @Column({ type: 'text' })

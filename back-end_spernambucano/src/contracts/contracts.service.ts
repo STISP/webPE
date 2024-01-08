@@ -8,23 +8,19 @@ export class ContractsService {
         @Inject('CONTRACT_REPOSITORY')
         private contractRepository: Repository<Contract>,
     ) { }
+    
 
     async getAllContracts(): Promise<Contract[]> {
         return await this.contractRepository.find();
     }
 
     async findContractById(id: string): Promise<Contract> {
-        const numberId = Number(id);
-        if (isNaN(numberId)) {
-            throw new Error(`ID inválido: ${id}`);
-        }
-        const contract = await this.contractRepository.findOne({ where: { id: numberId } });
+        const contract = await this.contractRepository.findOne({ where: { id } });
         if (!contract) {
             throw new NotFoundException(`Contrato não encontrado`);
         }
         return contract;
     }
-
 
     async createContract(contract: Contract): Promise<Contract> {
         return await this.contractRepository.save(contract);
@@ -32,7 +28,7 @@ export class ContractsService {
 
     async updateContract(id: string, updatedContract: Contract): Promise<Contract> {
         try {
-            const contract = await this.contractRepository.findOne({ where: { id: Number(id) } });
+            const contract = await this.contractRepository.findOne({ where: { id } });
             if (contract) {
                 const updated = Object.assign(contract, updatedContract);
                 return await this.contractRepository.save(updated);
