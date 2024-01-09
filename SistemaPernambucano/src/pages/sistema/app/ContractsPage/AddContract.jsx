@@ -24,13 +24,11 @@ const AddContract = () => {
             const status = document.getElementById('status').value;
             const contractDescription = document.getElementById('contractDescription').value;
             const paymentTerms = document.getElementById('paymentTerms').value;
-            const productDetails = document.getElementById('productDetails').value;
-            const terminationConditions = document.getElementById('terminationConditions').value;
             const postedBy = document.getElementById('postedBy').value;
             const postedDate = document.getElementById('postedDate').value;
             const loja = document.getElementById('loja').value;
 
-            if (!clientName || !contractValue || !contractNumber || !startDate || !endDate || !status || !contractDescription || !paymentTerms || !productDetails || !terminationConditions || !postedBy || !postedDate || !loja) {
+            if (!clientName || !contractValue || !contractNumber || !startDate || !endDate || !status || !contractDescription || !paymentTerms || !postedBy || !postedDate || !loja) {
                 setErrorMessage('Por favor, preencha todos os campos!');
                 return;
             }
@@ -44,8 +42,6 @@ const AddContract = () => {
                 status,
                 contractDescription,
                 paymentTerms,
-                productDetails,
-                terminationConditions,
                 postedBy: nomeCapitalizado,
                 postedDate: currentDate,
                 loja: loja,
@@ -134,14 +130,6 @@ const AddContract = () => {
                             <div className="form-group">
                                 <label htmlFor="paymentTerms">Termos de pagamento</label>
                                 <textarea id="paymentTerms" placeholder="Digite os termos de pagamento" required></textarea>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="productDetails">Detalhes do produto ou serviço</label>
-                                <textarea id="productDetails" placeholder="Digite os detalhes do produto ou serviço" required></textarea>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="terminationConditions">Condições de rescisão</label>
-                                <textarea id="terminationConditions" placeholder="Digite as condições de rescisão" required></textarea>
                             </div>
                         </div>
 

@@ -354,6 +354,7 @@ a {
   font-style: normal;
   font-weight: 700;
   margin: auto 0 0 0;
+  padding-bottom: 0.3rem;
 }
 .contract-value {
   color: rgba(51, 51, 51, 0.8);
@@ -998,4 +999,14 @@ a {
   font-size: 1rem;
   font-family: "Source Sans 3", sans-serif;
   color: #858585;
+}
+.nome-loja {
+  margin: 0;
+  font-size: .9rem;
+  font-family: "Source Sans 3", sans-serif;
+  color: #4d4d4d;
+}
+.store-checkbox {
+  display: flex;
+  gap: 0.5rem;
 }

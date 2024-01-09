@@ -6,6 +6,7 @@ const ContractsPage = () => {
   const [q, setQ] = useState("");
   const [contracts, setContracts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [store, setStore] = useState([]);
 
   useEffect(() => {
     if (contracts.length === 0) {
@@ -61,6 +62,7 @@ const ContractsPage = () => {
           endDate: contract.endDate,
           contractValue: contract.contractValue,
           status: contract.status,
+          loja: contract.loja,
         }));
         setContracts(contractsData);
         setIsLoaded(true);
@@ -70,11 +72,23 @@ const ContractsPage = () => {
       });
   };
 
+  const storeNames = {
+    "MERCADINHO DOM HELDER DE ALIMENTOS LTDA": "P1",
+    "MERCANTIL JABOATÃO DE ALIMENTOS LTDA MATRIZ": "P2",
+    "T.H SUPERMERCADO EIRELLI EPP": "P3",
+    "COMERCIO DE ALIMENTOS PERNAMBUCANO LTDAP": "P4",
+    "MERCANTIL DOIS IRMÃOS DE ALIMENTOS LTDA": "P5",
+    "MERCANTIL GOIANA DE ALIMENTOS LTDA": "P6",
+    "MERCANTIL JABOATAO DE ALIMENTOS LTDA": "P7",
+    "COMERCIO DE ALIMENTOS PERNAMBUCANO CENTRAL DE SERVIÇOS": "P8",
+  };
+
   function search(items) {
     return items.filter((item) => {
       const clientNameMatches = item.clientName.toLowerCase().indexOf(q.toLowerCase()) > -1;
       const statusMatches = status.length === 0 || status.includes(item.status);
-      return clientNameMatches && statusMatches;
+      const storeMatches = store.length === 0 || store.includes(storeNames[item.loja]);
+      return clientNameMatches && statusMatches && storeMatches;
     });
   }
 
@@ -104,6 +118,36 @@ const ContractsPage = () => {
               onChange={handleChange}
             />
             {statusOption}
+          </label>
+        ))}
+      </div>
+    );
+  };
+
+  const StoreCheckbox = ({ store, setStore }) => {
+    const storeOptions = Object.values(storeNames);
+
+    const handleChange = (event) => {
+      if (event.target.checked) {
+        setStore([...store, event.target.value]);
+      } else {
+        setStore(store.filter(option => option !== event.target.value));
+      }
+    };
+
+    return (
+      <div className="store-checkbox">
+        {storeOptions.map((storeOption, index) => (
+          <label key={index}>
+            <input
+              id={`store-${index}`}
+              name={`store-${index}`}
+              type="checkbox"
+              value={storeOption}
+              checked={store.includes(storeOption)}
+              onChange={handleChange}
+            />
+            {storeOption}
           </label>
         ))}
       </div>
@@ -145,6 +189,7 @@ const ContractsPage = () => {
           onChange={(e) => setQ(e.target.value)}
         />
         <StatusCheckbox status={status} setStatus={setStatus} />
+        <StoreCheckbox store={store} setStore={setStore} />
       </div>
 
       {isLoaded ? (
@@ -157,6 +202,7 @@ const ContractsPage = () => {
           <ul className='contracts-list'>
             {search(contracts).map((contract) => (
               <li key={contract.id} className='contract-item'>
+                <p className='nome-loja'>{storeNames[contract.loja]}</p>
                 <Link to={`/ContractsPage/Contrato/${contract.id}`} className='contract-link'>
                   <p className='client-name'>{contract.clientName}</p>
                   <p className='contract-value'>Valor do Contrato: {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(contract.contractValue)}</p>

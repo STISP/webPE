@@ -38,14 +38,6 @@ export class Contract {
     @Column({ type: 'text' })
     paymentTerms: string;
 
-    // detalhes do produto do contrato
-    @Column({ type: 'text' })
-    productDetails: string;
-
-    // condições de contrato
-    @Column({ type: 'text' })
-    terminationConditions: string;
-
     @Column({ type: 'text' })
     postedBy: string;
 
