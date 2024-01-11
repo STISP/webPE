@@ -724,8 +724,8 @@ a {
   gap: 1rem;
   align-items: flex-start;
 }
-.form-buttons p {
-  margin: 0;
+.erroMensage p {
+  margin: 1rem 0;
   color: #ff0000;
   font-size: 1rem;
   font-family: "Source Sans 3", sans-serif;
@@ -733,6 +733,7 @@ a {
   background-color: #ff001117;
   padding: 0.5rem 1rem;
   border-radius: 6px;
+  max-width: 40rem;
 }
 .form-buttons button {
   border: none;
@@ -783,7 +784,7 @@ a {
 }
 .filerSearch {
   display: flex;
-  gap: 1rem;
+  gap: .3rem;
   align-items: center;
   margin-bottom: 1rem;
 }
@@ -819,7 +820,7 @@ a {
 }
 .status-checkbox {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.3rem;
   align-items: center;
   font-size: 1rem;
   font-family: "Source Sans 3", sans-serif;
@@ -982,7 +983,7 @@ a {
 }
 .store-checkbox {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.3rem;
 }
 .contrato-loja-cliente {
   display: flex;

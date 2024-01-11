@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const AddContract = () => {
-    const navigate = useNavigate();
     const nome = localStorage.getItem('email');
     const nomeSemDomino = nome.replace(/@suppernambucano.com.br/g, '');
     const nomeCapitalizado = nomeSemDomino.charAt(0).toUpperCase() + nomeSemDomino.slice(1);
@@ -11,9 +10,7 @@ const AddContract = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
-
-    // gerador de id aleatório criptografado em base 36 que nunca se repete
-    //const id = Math.random().toString(36).substr(2, 9) + Math.random().toString(36).substr(2, 9);
+    const navigate = useNavigate();
 
     const handleSaveContract = async () => {
         try {
@@ -28,6 +25,7 @@ const AddContract = () => {
             const postedBy = document.getElementById('postedBy').value;
             const postedDate = document.getElementById('postedDate').value;
             const loja = document.getElementById('loja').value;
+
 
             if (!clientName || !contractValue || !contractNumber || !startDate || !endDate || !status || !contractDescription || !paymentTerms || !postedBy || !postedDate || !loja) {
                 setErrorMessage('Por favor, preencha todos os campos!');
@@ -76,8 +74,9 @@ const AddContract = () => {
         setFirstLoad(false);
     };
 
-
-
+    function handleInvalid(event) {
+        event.preventDefault();
+    }
 
     return (
         <div className="add-contract">
@@ -100,7 +99,7 @@ const AddContract = () => {
                         <div>
                             <div className="form-group">
                                 <label htmlFor="contractValue">Valor do Contrato</label>
-                                <input type="number" id="contractValue" placeholder="Digite o valor do contrato" required />
+                                <input type="number" id="contractValue" placeholder="Digite o valor do contrato" onInvalid={handleInvalid} required />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="contractNumber">Numero do contrato</label>
@@ -108,16 +107,17 @@ const AddContract = () => {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="loja">Loja do contrato</label>
-                                <select id="loja" defaultValue="" required>
+                                <select id="loja" required>
                                     <option value="" disabled selected>Selecione a loja</option>
-                                    <option value="COMERCIO DE ALIMENTOS PERNAMBUCANO CENTRAL DE SERVIÇOS">COMERCIO DE ALIMENTOS PERNAMBUCANO CENTRAL DE SERVIÇOS</option>
+                                    <option value="COMERCIO DE ALIMENTOS PERNAMBUCANO - CENTRAL DE SERVIÇOS">COMERCIO DE ALIMENTOS PERNAMBUCANO - CENTRAL DE SERVIÇOS</option>
                                     <option value="MERCADINHO DOM HELDER DE ALIMENTOS LTDA">MERCADINHO DOM HELDER DE ALIMENTOS LTDA</option>
-                                    <option value="MERCANTIL JABOATÃO DE ALIMENTOS LTDA MATRIZ">MERCANTIL JABOATÃO DE ALIMENTOS LTDA MATRIZ</option>
+                                    <option value="MERCANTIL JABOATÃO DE ALIMENTOS LTDA - MATRIZ">MERCANTIL JABOATÃO DE ALIMENTOS LTDA - MATRIZ</option>
                                     <option value="T.H SUPERMERCADO EIRELLI EPP">T.H SUPERMERCADO EIRELLI EPP</option>
-                                    <option value="COMERCIO DE ALIMENTOS PERNAMBUCANO LTDAP">COMERCIO DE ALIMENTOS PERNAMBUCANO LTDAP</option>
+                                    <option value="COMERCIO DE ALIMENTOS PERNAMBUCANO LTDA">COMERCIO DE ALIMENTOS PERNAMBUCANO LTDA</option>
                                     <option value="MERCANTIL DOIS IRMÃOS DE ALIMENTOS LTDA">MERCANTIL DOIS IRMÃOS DE ALIMENTOS LTDA</option>
                                     <option value="MERCANTIL GOIANA DE ALIMENTOS LTDA">MERCANTIL GOIANA DE ALIMENTOS LTDA</option>
                                     <option value="MERCANTIL JABOATAO DE ALIMENTOS LTDA">MERCANTIL JABOATAO DE ALIMENTOS LTDA</option>
+                                    <option value="COMERCIO DE ALIMENTOS PERNAMBUCANO LTDA - VASCO DA GAMA">COMERCIO DE ALIMENTOS PERNAMBUCANO LTDA - VASCO DA GAMA</option>
                                 </select>
                             </div>
                             <div className="form-group">
@@ -130,9 +130,9 @@ const AddContract = () => {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="status">Status do contrato</label>
-                                <select id="status" defaultValue="" required>
-                                    <option value="ativo">Ativo</option>
-                                    <option value="cancelado">Desativado</option>
+                                <select id="status" required>
+                                    <option value="Ativo">Ativo</option>
+                                    <option value="Desativado">Desativado</option>
                                 </select>
                             </div>
 
@@ -157,8 +157,11 @@ const AddContract = () => {
                             </div>
                         </div>
 
-                        <div className="form-buttons">
+                        <div className="erroMensage">
                             {errorMessage && <p className="error-message">{errorMessage}</p>}
+                        </div>
+                        
+                        <div className="form-buttons">
                             <div className="cancelAndSave">
                                 <button className="save-button" onClick={handleSaveContract}>
                                     <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512" fill='#fff'>

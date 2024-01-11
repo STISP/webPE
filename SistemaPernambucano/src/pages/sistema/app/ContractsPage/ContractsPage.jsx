@@ -83,13 +83,14 @@ const ContractsPage = () => {
 
   const storeNames = {
     "MERCADINHO DOM HELDER DE ALIMENTOS LTDA": "P1",
-    "MERCANTIL JABOATÃO DE ALIMENTOS LTDA MATRIZ": "P2",
+    "MERCANTIL JABOATÃO DE ALIMENTOS LTDA - MATRIZ": "P2",
     "T.H SUPERMERCADO EIRELLI EPP": "P3",
-    "COMERCIO DE ALIMENTOS PERNAMBUCANO LTDAP": "P4",
+    "COMERCIO DE ALIMENTOS PERNAMBUCANO LTDA": "P4",
     "MERCANTIL DOIS IRMÃOS DE ALIMENTOS LTDA": "P5",
     "MERCANTIL GOIANA DE ALIMENTOS LTDA": "P6",
     "MERCANTIL JABOATAO DE ALIMENTOS LTDA": "P7",
-    "COMERCIO DE ALIMENTOS PERNAMBUCANO CENTRAL DE SERVIÇOS": "P8",
+    "COMERCIO DE ALIMENTOS PERNAMBUCANO LTDA - VASCO DA GAMA": "P8",
+    "COMERCIO DE ALIMENTOS PERNAMBUCANO - CENTRAL DE SERVIÇOS": "CS",
   };
 
   function search(items) {
@@ -101,11 +102,11 @@ const ContractsPage = () => {
         return clientNameMatches && statusMatches && storeMatches;
       })
       .sort((a, b) => {
-        // Coloca os contratos 'cancelados' primeiro
-        if (a.status === 'cancelado' && b.status !== 'cancelado') {
+        // Coloca os contratos 'Desativado' primeiro
+        if (a.status === 'Desativado' && b.status !== 'Desativado') {
           return -1;
         }
-        if (b.status === 'cancelado' && a.status !== 'cancelado') {
+        if (b.status === 'Desativado' && a.status !== 'Desativado') {
           return 1;
         }
 
@@ -119,7 +120,7 @@ const ContractsPage = () => {
   const [status, setStatus] = useState([]);
 
   const StatusCheckbox = ({ status, setStatus }) => {
-    const statusOptions = ["ativo", "cancelado"];
+    const statusOptions = ["Ativo", "Desativado"];
 
     const handleChange = (event) => {
       if (event.target.checked) {

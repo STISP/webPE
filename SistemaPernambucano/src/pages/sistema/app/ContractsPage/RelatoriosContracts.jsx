@@ -10,7 +10,7 @@ const RelatoriosContracts = () => {
             fetch('http://192.168.1.70:3000/contracts')
                 .then(response => response.json())
                 .then(data => {
-                    const activeContracts = data.filter(contract => contract.status === 'ativo');
+                    const activeContracts = data.filter(contract => contract.status === 'Ativo');
                     const contractValues = activeContracts.map(contract => contract.contractValue);
                     setTotalContracts(data.length);
                     setContracts(contractValues);
