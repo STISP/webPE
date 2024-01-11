@@ -8,8 +8,9 @@ const AddContract = () => {
     const nomeSemDomino = nome.replace(/@suppernambucano.com.br/g, '');
     const nomeCapitalizado = nomeSemDomino.charAt(0).toUpperCase() + nomeSemDomino.slice(1);
     const currentDate = new Date().toISOString().split('T')[0];
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
     // gerador de id aleatório criptografado em base 36 que nunca se repete
     //const id = Math.random().toString(36).substr(2, 9) + Math.random().toString(36).substr(2, 9);
@@ -48,11 +49,20 @@ const AddContract = () => {
             };
 
             await axios.post('http://192.168.1.70:3000/contracts', contractData);
-            alert('Contrato salvo com sucesso!');
-            navigate('/ContractsPage');
+            setIsModalOpen(true);
+            setSuccessMessage(`Contrato ${clientName} salvo com sucesso!`);
         } catch (error) {
             console.error('Erro ao salvar contrato:', error);
             setErrorMessage('Problema ao cadastrar o contrato, tente novamente ou contate o suporte.');
+        }
+    };
+
+    const handleModalButtonClick = (action) => {
+        if (action === 'contracts') {
+            navigate('/ContractsPage');
+        } else if (action === 'add') {
+            setIsModalOpen(false);
+            window.location.reload();
         }
     };
 
@@ -65,6 +75,9 @@ const AddContract = () => {
         }
         setFirstLoad(false);
     };
+
+
+
 
     return (
         <div className="add-contract">
@@ -156,6 +169,25 @@ const AddContract = () => {
                             </div>
                         </div>
                     </form>
+                    {isModalOpen && (
+                        <div className="confirmation-modal">
+                            <div className='modal-confimation'>
+                                <h3>{successMessage}</h3>
+                                <p>Deseja continuar ou adicionar outro contrato?</p>
+                                <div className="buttonsModal">
+                                    <button className='page-contracts-modal' onClick={() => handleModalButtonClick('contracts')}>
+                                        Página de contratos
+                                    </button>
+                                    <button className='add-new-contract-modal' onClick={() => handleModalButtonClick('add')}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512" fill='#132438'>
+                                            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
+                                        </svg>
+                                        Adicionar mais contrato
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

@@ -28,22 +28,30 @@ const ContractsPage = () => {
     const dueDateObj = new Date(dueDate);
     const differenceInDays = Math.floor((dueDateObj - currentDate) / (1000 * 60 * 60 * 24));
 
-    if (differenceInDays <= 15) {
-      return 'rgba(164, 2, 2, 0.65)';
+    if (differenceInDays <= 0) {
+      return '#C35A5A';
     } else if (differenceInDays <= 30) {
-      return 'rgba(238, 114, 0, 0.65)';
+      return '#EE7200';
     } else {
-      return 'rgba(0, 133, 3, 0.65)';
+      return '#59AF5B';
     }
   };
 
-  const getStatusColor = (status) => {
-    if (status === 'ativo') {
-      return 'rgba(0, 133, 3, 0.65)';
-    } else if (status === 'cancelado') {
-      return 'rgba(255, 0, 0, 0.65)';
+  const getAvisoMensagem = (dueDate) => {
+    if (!isValidDate(dueDate)) {
+      return null;
+    }
+
+    const currentDate = new Date();
+    const dueDateObj = new Date(dueDate);
+    const differenceInDays = Math.floor((dueDateObj - currentDate) / (1000 * 60 * 60 * 24));
+
+    if (differenceInDays <= 0) {
+      return 'Contrato vencido';
+    } else if (differenceInDays <= 30) {
+      return 'Proximo do vencimento';
     } else {
-      return 'rgba(0, 0, 0, 0.65)';
+      return null;
     }
   };
 
@@ -60,6 +68,7 @@ const ContractsPage = () => {
           id: contract.id,
           clientName: contract.clientName,
           endDate: contract.endDate,
+          startDate: contract.startDate,
           contractValue: contract.contractValue,
           status: contract.status,
           loja: contract.loja,
@@ -84,18 +93,33 @@ const ContractsPage = () => {
   };
 
   function search(items) {
-    return items.filter((item) => {
-      const clientNameMatches = item.clientName.toLowerCase().indexOf(q.toLowerCase()) > -1;
-      const statusMatches = status.length === 0 || status.includes(item.status);
-      const storeMatches = store.length === 0 || store.includes(storeNames[item.loja]);
-      return clientNameMatches && statusMatches && storeMatches;
-    });
+    return items
+      .filter((item) => {
+        const clientNameMatches = item.clientName.toLowerCase().indexOf(q.toLowerCase()) > -1;
+        const statusMatches = status.length === 0 || status.includes(item.status);
+        const storeMatches = store.length === 0 || store.includes(storeNames[item.loja]);
+        return clientNameMatches && statusMatches && storeMatches;
+      })
+      .sort((a, b) => {
+        // Coloca os contratos 'cancelados' primeiro
+        if (a.status === 'cancelado' && b.status !== 'cancelado') {
+          return -1;
+        }
+        if (b.status === 'cancelado' && a.status !== 'cancelado') {
+          return 1;
+        }
+
+        // Ordena o restante dos contratos pela data de vencimento mais próxima
+        const dueDateA = new Date(a.endDate);
+        const dueDateB = new Date(b.endDate);
+        return dueDateA - dueDateB;
+      });
   }
 
   const [status, setStatus] = useState([]);
 
   const StatusCheckbox = ({ status, setStatus }) => {
-    const statusOptions = ["ativo", "Desativado"];
+    const statusOptions = ["ativo", "cancelado"];
 
     const handleChange = (event) => {
       if (event.target.checked) {
@@ -202,13 +226,18 @@ const ContractsPage = () => {
           <ul className='contracts-list'>
             {search(contracts).map((contract) => (
               <li key={contract.id} className='contract-item'>
-                <p className='nome-loja'>{storeNames[contract.loja]}</p>
                 <Link to={`/ContractsPage/Contrato/${contract.id}`} className='contract-link'>
-                  <p className='client-name'>{contract.clientName}</p>
-                  <p className='contract-value'>Valor do Contrato: {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(contract.contractValue)}</p>
-                  <div className='contractDetails'>
-                    <p className={`due-date ${getDueDateColor(contract.endDate)}`} style={{ backgroundColor: getDueDateColor(contract.endDate) }}>Vencimento: {new Date(contract.endDate).toLocaleDateString('pt-BR')}</p>
-                    <p className='statusListContracts' style={{ color: getStatusColor(contract.status), fontWeight: 600 }}>{contract.status}</p>
+                  <div className="contrato-loja" style={{ borderBottom: `5px solid ${getDueDateColor(contract.endDate)}` }}>
+                    <div className='contrato-loja-cliente'>
+                      <p className='nome-loja'>{storeNames[contract.loja]}</p>
+                      <p className='contract-value'>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(contract.contractValue)}</p>
+                    </div>
+                    <p className='client-name'>{contract.clientName}</p>
+                  </div>
+                  <div className='contractDetails' style={{ borderBottom: `1px solid ${getDueDateColor(contract.endDate)}`, borderLeft: `1px solid ${getDueDateColor(contract.endDate)}`, borderRight: `1px solid ${getDueDateColor(contract.endDate)}` }}>
+                    <p className={`due-date ${getDueDateColor(contract.endDate)}`} style={{ color: getDueDateColor(contract.endDate), border: `1px solid ${getDueDateColor(contract.endDate)}` }}>{new Date(contract.startDate).toLocaleDateString('pt-BR')} - {new Date(contract.endDate).toLocaleDateString('pt-BR')}</p>
+                    <p className={`due-date ${getDueDateColor(contract.endDate)}`} style={getAvisoMensagem(contract.endDate) ? { color: getDueDateColor(contract.endDate), border: `1px solid ${getDueDateColor(contract.endDate)}` } : {}}>{getAvisoMensagem(contract.endDate)}</p>
+                    <p className={`due-date ${getDueDateColor(contract.endDate)}`} style={{ color: getDueDateColor(contract.endDate), border: `1px solid ${getDueDateColor(contract.endDate)}` }}>{contract.status}</p>
                   </div>
                 </Link>
               </li>

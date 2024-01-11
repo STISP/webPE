@@ -30,10 +30,4 @@ export class ContractsController {
     async deleteContract(@Param('id') id: string): Promise<void> {
         return this.contractService.deleteContract(id);
     }
-
-    // renovar contrato
-    //@Post(':id/renew')
-    //async renewContract(@Param('id') id: string, @Body() renewalContract: Contract): Promise<Contract> {
-    //    return this.contractService.renewContract(id, renewalContract);
-    //}
 }

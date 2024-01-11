@@ -46,22 +46,4 @@ export class ContractsService {
             throw new Error('Erro ao excluir o contrato.');
         }
     }
-
-    async countContracts(): Promise<number> {
-        try {
-            return await this.contractRepository.count();
-        } catch (error) {
-            throw new Error('Erro ao contar os contratos.');
-        }
-    }
-
-    // renovar contrato
-    //async renewContract(id: string, renewalContract: Contract): Promise<Contract> {
-    //    const contract = await this.contractRepository.findOne({ where: { id: Number(id) } });
-    //    if (contract) {
-    //        contract.renewalContract = renewalContract;
-    //        return await this.contractRepository.save(contract);
-    //    }
-    //    return null;
-    //}
 }

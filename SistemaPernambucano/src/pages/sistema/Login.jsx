@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import LogoCompleta from '../../assets/Logo completa.svg'
 import '../../App.css';
 
 export default function Login() {
@@ -68,8 +69,9 @@ export default function Login() {
     <>
       <br />
       <div className="inicioScreen">
+        <a href="https://suppernambucano.com.br/" target="_blank"><img src={LogoCompleta} alt="Logo Pernambucano" /></a>
         <div className="allForms">
-          <h2>Entrar na conta</h2>
+          <h2 className='entrar-conta'>Entrar na conta</h2>
           <p>Seja bem vindo de volta</p>
           <form onSubmit={handleSubmit} className='form-login'>
             <div className="form-group-login">
@@ -96,13 +98,14 @@ export default function Login() {
                 }}
               />
             </div>
-            <button className='buttonLoginCadastro' type="submit">Entrar</button>
-          </form>
-          {bloqueado ? (
+            {bloqueado ? (
             <p className="errorEmailExist">Usuário bloqueado. Tente novamente mais tarde.</p>
           ) : (
             mensagem && <p className="errorEmailExist">{mensagem}</p>
           )}
+            <button className='buttonLoginCadastro' type="submit">Entrar</button>
+          </form>
+ 
           <p className='alterarLoginCadastro'>
             Não tem uma conta? <Link to="https://suppernambucano.com.br/#/lojas/DomHelderServicos" onClick={handleClick} style={{ textDecoration: 'underline' }}>entre em contato com o ADM</Link>
           </p>

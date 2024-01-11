@@ -171,15 +171,6 @@ const ContratoDetalhes = () => {
                             <span className="contract-details__label">Termos de Pagamento</span>
                             <span className="contract-details__value">{contrato.paymentTerms}</span>
                         </div>
-                        <div className="contract-details__info-row">
-                            <span className="contract-details__label">Detalhes do Produto</span>
-                            <span className="contract-details__value">{contrato.productDetails}</span>
-                        </div>
-
-                        <div className="contract-details__info-row">
-                            <span className="contract-details__label">Condições de Rescisão</span>
-                            <span className="contract-details__value">{contrato.terminationConditions}</span>
-                        </div>
                     </section>
                 </div>
             )}
