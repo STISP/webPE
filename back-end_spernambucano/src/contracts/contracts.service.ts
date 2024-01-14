@@ -1,5 +1,5 @@
 import { Injectable, Inject, NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { LessThanOrEqual, MoreThanOrEqual, Repository } from 'typeorm';
 import { Contract } from './contracts.entity';
 
 @Injectable()
@@ -8,7 +8,7 @@ export class ContractsService {
         @Inject('CONTRACT_REPOSITORY')
         private contractRepository: Repository<Contract>,
     ) { }
-    
+
 
     async getAllContracts(): Promise<Contract[]> {
         return await this.contractRepository.find();
@@ -45,5 +45,73 @@ export class ContractsService {
         } catch (error) {
             throw new Error('Erro ao excluir o contrato.');
         }
+    }
+
+    // relatorio de contratos
+    // Número de contratos ativos apenas para uma loja selecionada
+    async getActiveContracts(store: string): Promise<number> {
+        const activeContracts = await this.contractRepository.count({
+            where: {
+                loja: store,
+                status: 'Ativo',
+            },
+        });
+        return activeContracts;
+    }
+
+    // total de contratos registrado no ultimo mês apenas para uma loja selecionada pelo usuario
+    async getContractsLastMonth(store: string): Promise<number> {
+        const currentDate = new Date();
+        const totalContractsLastMonth = await this.contractRepository.count({
+            where: {
+                loja: store,
+                status: 'Ativo',
+                startDate: LessThanOrEqual(currentDate),
+            },
+        });
+        return totalContractsLastMonth;
+    }
+
+    // contrato com o vencimento mais proximo apenas para uma loja selecionada pelo usuario
+    async getNextExpiration(store: string): Promise<Contract> {
+        const currentDate = new Date();
+        const nextExpiration = await this.contractRepository.findOne({
+            where: {
+                loja: store,
+                status: 'Ativo',
+                endDate: MoreThanOrEqual(currentDate),
+            },
+            order: {
+                endDate: 'ASC',
+            },
+        });
+     
+        if (!nextExpiration) {
+            throw new NotFoundException('Nenhum contrato próximo de vencimento encontrado.');
+        }
+     
+        return nextExpiration;
+     }
+     
+
+    // Valor total dos contratos ativos apenas para uma loja selecionada pelo usuario
+    async getTotalValue(store: string): Promise<number> {
+        const totalValue = await this.contractRepository.createQueryBuilder('contract')
+            .select('SUM(contract.contractValue)', 'total')
+            .where('contract.loja = :store', { store })
+            .andWhere('contract.status = :status', { status: 'Ativo' })
+            .getRawOne();
+        return totalValue.total;
+    }
+
+    // Número de contratos desativados apenas para uma loja selecionada pelo usuario
+    async getInactiveContracts(store: string): Promise<number> {
+        const inactiveContracts = await this.contractRepository.count({
+            where: {
+                loja: store,
+                status: 'Desativado',
+            },
+        });
+        return inactiveContracts;
     }
 }

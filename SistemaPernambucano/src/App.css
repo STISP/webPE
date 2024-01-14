@@ -194,9 +194,8 @@ a {
 }
 .opViewContractsScreenInicial {
   border-radius: 0.75rem;
-  background: #132438;
+  background: #ededed;
   width: 16rem;
-  height: 8rem;
   padding: 2rem;
   transition: 0.3s ease;
 }
@@ -206,21 +205,13 @@ a {
   transition: 0.3s ease;
 }
 .opViewContractsScreenInicial a {
-  color: #fff;
-  fill: #fff;
+  color: #132438;
+  fill: #132438;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 8rem;
 }
-.opViewContractsScreenInicial2 {
-  border-radius: 0.75rem;
-  background: #132438;
-  width: 16rem;
-  height: 8rem;
-  padding: 2rem;
-  transition: 0.3s ease;
-}
+
 .opViewContractsScreenInicial2:hover {
   transform: scale(1.02);
   cursor: pointer;
@@ -232,19 +223,20 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 8rem;
 }
 .iconAndTotalContracts {
   display: flex;
   flex-direction: column;
-  color: #fff;
+  color: #132438;
   font-family: Roboto;
-  font-size: 1.5rem;
+}
+.iconAndTotalContracts p {
+  color: #132438;
+  font-family: Roboto;
+  font-size: 1rem;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 0.8125rem;
-  text-decoration-line: underline;
-  gap: 1.19rem;
 }
 .iconAndTotalContracts a {
   display: flex;
@@ -252,27 +244,11 @@ a {
   justify-content: space-between;
   height: 8rem;
 }
-.iconAndTotalContracts svg {
-  width: 1rem;
+.iconAndTotalContracts img {
+  width: 1.3rem;
   height: 1.3rem;
 }
-.iconAndTotalContracts2 {
-  display: flex;
-  flex-direction: row;
-  color: #fff;
-  font-family: Roboto;
-  font-size: 1.5rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 0.8125rem;
-  gap: 1.19rem;
-  align-items: center;
-  justify-content: space-between;
-}
-.iconAndTotalContracts2 svg {
-  width: 1rem !important;
-  height: 1rem !important;
-}
+
 .totalAndIcon span {
   text-decoration-line: underline;
 }
@@ -282,7 +258,8 @@ a {
   justify-content: space-between;
   height: 8rem;
 }
-.opViewContractsScreenInicial2 svg {
+.iconopview svg {
+  fill: #132438;
   width: 1.3rem;
   height: 1.3rem;
 }
@@ -291,6 +268,14 @@ a {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+.dataAndIcon span {
+  color: #132438;
+  font-family: Roboto;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 0.8125rem;
 }
 .dateInfo {
   display: flex;
@@ -784,7 +769,7 @@ a {
 }
 .filerSearch {
   display: flex;
-  gap: .3rem;
+  gap: 0.3rem;
   align-items: center;
   margin-bottom: 1rem;
 }
@@ -1129,4 +1114,90 @@ a {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+.line {
+  width: 40rem;
+  height: 0.0625rem;
+  background: #d9d9d9;
+  margin: 2rem 0;
+}
+.lojaInfoReport {
+  padding: 2rem;
+  border-radius: 1rem;
+  background: #ededed;
+  width: 39rem;
+  margin-bottom: 1rem;
+}
+.NomeLojaReport {
+  color: #132438;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  position: relative;
+}
+.lojaInfoReport h4 {
+  margin: 0;
+}
+.NomeLojaReport::before {
+  content: "";
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 80%;
+  height: 0.0625rem;
+  background-color: #d9d9d9;
+}
+.lojaInfoReportPart {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.tituloAndSpan p,
+span {
+  margin: 0;
+}
+.tituloAndSpan p {
+  color: rgba(19, 36, 56, 0.6);
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.tituloAndSpan span {
+  color: #132438;
+  font-family: Roboto;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.line2 {
+  width: 80%;
+  height: 0.0625rem;
+  background: #d9d9d9;
+  margin: 0.5rem 0;
+}
+.spaceBack {
+  padding-left: 0.8rem;
+  padding-top: 1rem;
+}
+.linePart2 {
+  width: 0.0625rem;
+  height: 1.6875rem;
+  background: #d9d9d9;
+  flex-shrink: 0;
+}
+.reportLoja h2 {
+  color: #132438;
+  font-family: Roboto;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.reportLoja {
+  padding-bottom: 1rem;
 }

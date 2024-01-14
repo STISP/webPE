@@ -1,10 +1,11 @@
 import { Entity, Column, Unique, PrimaryGeneratedColumn } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
 
 @Entity()
 @Unique(['email'])
 export class Usuario {
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn('uuid')
+    id: string = uuidv4();
 
     @Column({ length: 50 })
     name: string;
@@ -26,4 +27,19 @@ export class Usuario {
 
     // @Column({ default: false })
     // acessoDeletarContratos: boolean;
+
+    // @Column({ default: false })
+    // acessoEditarContratos: boolean;
+
+    // @Column({ default: false })
+    // acessoUsuarios: boolean;
+
+    // @Column({ default: false })
+    // acessoAdicionarUsuarios: boolean;
+
+    // @Column({ default: false })
+    // acessoDeletarUsuarios: boolean;
+
+    // @Column({ default: false })
+    // acessoEditarUsuarios: boolean;
 }

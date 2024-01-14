@@ -19,6 +19,14 @@ const ContractsPage = () => {
     return dateRegex.test(dateString);
   };
 
+  const getContractColor = (contract) => {
+    if (contract.status === 'Desativado') {
+      return '#808080';
+    } else if (contract.status === 'Ativo') {
+      return getDueDateColor(contract.endDate);
+    }
+   };
+
   const getDueDateColor = (dueDate) => {
     if (!isValidDate(dueDate)) {
       return 'rgba(0, 0, 0, 0.65)'; // Return default color if date is invalid
@@ -29,11 +37,11 @@ const ContractsPage = () => {
     const differenceInDays = Math.floor((dueDateObj - currentDate) / (1000 * 60 * 60 * 24));
 
     if (differenceInDays <= 0) {
-      return '#C35A5A';
+      return '#ff0000';
     } else if (differenceInDays <= 30) {
       return '#EE7200';
     } else {
-      return '#59AF5B';
+      return '#00c104';
     }
   };
 
@@ -102,12 +110,12 @@ const ContractsPage = () => {
         return clientNameMatches && statusMatches && storeMatches;
       })
       .sort((a, b) => {
-        // Coloca os contratos 'Desativado' primeiro
+        // Coloca os contratos 'Desativado' no final da lista
         if (a.status === 'Desativado' && b.status !== 'Desativado') {
-          return -1;
+          return 1;
         }
         if (b.status === 'Desativado' && a.status !== 'Desativado') {
-          return 1;
+          return -1;
         }
 
         // Ordena o restante dos contratos pela data de vencimento mais próxima
@@ -228,17 +236,17 @@ const ContractsPage = () => {
             {search(contracts).map((contract) => (
               <li key={contract.id} className='contract-item'>
                 <Link to={`/ContractsPage/Contrato/${contract.id}`} className='contract-link'>
-                  <div className="contrato-loja" style={{ borderBottom: `5px solid ${getDueDateColor(contract.endDate)}` }}>
+                  <div className="contrato-loja" style={{ borderBottom: `5px solid ${getContractColor(contract)}` }}>
                     <div className='contrato-loja-cliente'>
                       <p className='nome-loja'>{storeNames[contract.loja]}</p>
                       <p className='contract-value'>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(contract.contractValue)}</p>
                     </div>
                     <p className='client-name'>{contract.clientName}</p>
                   </div>
-                  <div className='contractDetails' style={{ borderBottom: `1px solid ${getDueDateColor(contract.endDate)}`, borderLeft: `1px solid ${getDueDateColor(contract.endDate)}`, borderRight: `1px solid ${getDueDateColor(contract.endDate)}` }}>
-                    <p className={`due-date ${getDueDateColor(contract.endDate)}`} style={{ color: getDueDateColor(contract.endDate), border: `1px solid ${getDueDateColor(contract.endDate)}` }}>{new Date(contract.startDate).toLocaleDateString('pt-BR')} - {new Date(contract.endDate).toLocaleDateString('pt-BR')}</p>
-                    <p className={`due-date ${getDueDateColor(contract.endDate)}`} style={getAvisoMensagem(contract.endDate) ? { color: getDueDateColor(contract.endDate), border: `1px solid ${getDueDateColor(contract.endDate)}` } : {}}>{getAvisoMensagem(contract.endDate)}</p>
-                    <p className={`due-date ${getDueDateColor(contract.endDate)}`} style={{ color: getDueDateColor(contract.endDate), border: `1px solid ${getDueDateColor(contract.endDate)}` }}>{contract.status}</p>
+                  <div className='contractDetails' style={{ borderBottom: `1px solid ${getContractColor(contract)}`, borderLeft: `1px solid ${getContractColor(contract)}`, borderRight: `1px solid ${getContractColor(contract)}` }}>
+                    <p className={`due-date ${getContractColor(contract)}`} style={{  color: getContractColor(contract), border: `1px solid ${getContractColor(contract)}` }}>{new Date(contract.startDate).toLocaleDateString('pt-BR')} - {new Date(contract.endDate).toLocaleDateString('pt-BR')}</p>
+                    <p className={`due-date ${getContractColor(contract)}`} style={getAvisoMensagem(contract.endDate) ? { color: getContractColor(contract), border: `1px solid ${getContractColor(contract)}` } : {}}>{getAvisoMensagem(contract.endDate)}</p>
+                    <p className={`due-date ${getContractColor(contract)}`} style={{ color: getContractColor(contract), border: `1px solid ${getContractColor(contract)}` }}>{contract.status}</p>
                   </div>
                 </Link>
               </li>

@@ -12,7 +12,8 @@ const AddContract = () => {
     const [successMessage, setSuccessMessage] = useState('');
     const navigate = useNavigate();
 
-    const handleSaveContract = async () => {
+    const handleSaveContract = async (event) => {
+        event.preventDefault(); 
         try {
             const clientName = document.getElementById('clientName').value;
             const contractValue = document.getElementById('contractValue').value;
@@ -46,9 +47,9 @@ const AddContract = () => {
                 loja: loja,
             };
 
-            await axios.post('http://192.168.1.70:3000/contracts', contractData);
-            setIsModalOpen(true);
             setSuccessMessage(`Contrato ${clientName} salvo com sucesso!`);
+            setIsModalOpen(true);
+            axios.post('http://192.168.1.70:3000/contracts', contractData);
         } catch (error) {
             console.error('Erro ao salvar contrato:', error);
             setErrorMessage('Problema ao cadastrar o contrato, tente novamente ou contate o suporte.');
@@ -107,8 +108,8 @@ const AddContract = () => {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="loja">Loja do contrato</label>
-                                <select id="loja" required>
-                                    <option value="" disabled selected>Selecione a loja</option>
+                                <select id="loja" defaultValue="" required>
+                                    <option value="" disabled>Selecione a loja</option>
                                     <option value="COMERCIO DE ALIMENTOS PERNAMBUCANO - CENTRAL DE SERVIÇOS">COMERCIO DE ALIMENTOS PERNAMBUCANO - CENTRAL DE SERVIÇOS</option>
                                     <option value="MERCADINHO DOM HELDER DE ALIMENTOS LTDA">MERCADINHO DOM HELDER DE ALIMENTOS LTDA</option>
                                     <option value="MERCANTIL JABOATÃO DE ALIMENTOS LTDA - MATRIZ">MERCANTIL JABOATÃO DE ALIMENTOS LTDA - MATRIZ</option>
@@ -160,7 +161,7 @@ const AddContract = () => {
                         <div className="erroMensage">
                             {errorMessage && <p className="error-message">{errorMessage}</p>}
                         </div>
-                        
+
                         <div className="form-buttons">
                             <div className="cancelAndSave">
                                 <button className="save-button" onClick={handleSaveContract}>
