@@ -195,7 +195,7 @@ a {
 .opViewContractsScreenInicial {
   border-radius: 0.75rem;
   background: #ededed;
-  width: 16rem;
+  width: 12.9rem;
   padding: 2rem;
   transition: 0.3s ease;
 }
@@ -236,7 +236,7 @@ a {
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 0.8125rem;
+  line-height: 1rem;
 }
 .iconAndTotalContracts a {
   display: flex;
@@ -303,7 +303,7 @@ a {
 }
 .opContract {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 .totalAndIcon p {
   color: rgba(255, 255, 255, 0.9);
@@ -1209,4 +1209,41 @@ span {
   font-weight: 700;
   line-height: normal;
   margin-bottom: 0;
+}
+.store-select {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  outline: none;
+  cursor: pointer;
+}
+.store-select select {
+  padding: 0.3rem;
+  border-radius: 0.25rem;
+  border: 1px solid #d9d9d9;
+  background-color: #fff;
+  color: #132438;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  outline: none;
+  cursor: pointer;
+}
+.store-select select option {
+  color: #132438;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+}
+.store-select select option:hover {
+  background-color: #d9d9d9;
+}
+.store-select select option:checked {
+  background-color: #132438;
+  color: #fff;
 }

@@ -1,11 +1,14 @@
 import { Entity, Column, Unique, PrimaryGeneratedColumn } from 'typeorm';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 
 @Entity()
 @Unique(['email'])
 export class Usuario {
-    @PrimaryGeneratedColumn('uuid')
-    id: string = uuidv4();
+    // @PrimaryGeneratedColumn('uuid')
+    // id: string = uuidv4();
+
+    @PrimaryGeneratedColumn()
+    id: number;
 
     @Column({ length: 50 })
     name: string;

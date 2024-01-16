@@ -119,7 +119,6 @@ const AddContract = () => {
                                 <label htmlFor="loja">Loja do contrato</label>
                                 <select id="loja" defaultValue="" required>
                                     <option value="" disabled>Selecione a loja</option>
-                                    <option value="COMERCIO DE ALIMENTOS PERNAMBUCANO - CENTRAL DE SERVIÇOS">COMERCIO DE ALIMENTOS PERNAMBUCANO - CENTRAL DE SERVIÇOS</option>
                                     <option value="MERCADINHO DOM HELDER DE ALIMENTOS LTDA">MERCADINHO DOM HELDER DE ALIMENTOS LTDA</option>
                                     <option value="MERCANTIL JABOATÃO DE ALIMENTOS LTDA - MATRIZ">MERCANTIL JABOATÃO DE ALIMENTOS LTDA - MATRIZ</option>
                                     <option value="T.H SUPERMERCADO EIRELLI EPP">T.H SUPERMERCADO EIRELLI EPP</option>
@@ -155,7 +154,7 @@ const AddContract = () => {
                                 <textarea id="paymentTerms" placeholder="Digite os termos de pagamento" required></textarea>
                             </div>
 
-                            <h3>Informações da Empresa Contratante</h3>
+                            <h3 className='iconCompanyContract'>Informações da Empresa Contratada</h3> <br />
                             <div className="form-group">
                                 <label htmlFor="companyName">Nome da empresa</label>
                                 <input type="text" id="companyName" placeholder="Digite o nome da empresa" required />

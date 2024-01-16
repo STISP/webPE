@@ -170,11 +170,11 @@ const ContratoDetalhes = () => {
                             <span className="contract-details__value">{contrato.contractDescription}</span>
                         </div>
                         <div className="contract-details__info-row">
-                            <span className="contract-details__label">Termos de Pagamento</span>
+                            <span className="contract-details__label">Termos e forma de pagamento</span>
                             <span className="contract-details__value">{contrato.paymentTerms}</span>
                         </div>
 
-                        <h3 className='iconCompanyContract'>Informações da Empresa Contratante</h3>
+                        <h3 className='iconCompanyContract'>Informações da Empresa Contratada</h3>
                         <div className="contract-details__info-row">
                             <span className="contract-details__label">Nome da Empresa</span>
                             <span className="contract-details__value">{contrato.companyName}</span>

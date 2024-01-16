@@ -74,7 +74,7 @@ export class ContractsService {
     }
 
     // contrato com o vencimento mais proximo apenas para uma loja selecionada pelo usuario
-    async getNextExpiration(store: string): Promise<Contract> {
+    async getNextExpiration(store: string): Promise<Date> {
         const currentDate = new Date();
         const nextExpiration = await this.contractRepository.findOne({
             where: {
@@ -85,15 +85,16 @@ export class ContractsService {
             order: {
                 endDate: 'ASC',
             },
+            select: ['endDate'],
         });
-     
+
         if (!nextExpiration) {
             throw new NotFoundException('Nenhum contrato próximo de vencimento encontrado.');
         }
-     
-        return nextExpiration;
-     }
-     
+
+        return nextExpiration.endDate;
+    }
+
 
     // Valor total dos contratos ativos apenas para uma loja selecionada pelo usuario
     async getTotalValue(store: string): Promise<number> {
@@ -115,7 +116,7 @@ export class ContractsService {
         });
         return inactiveContracts;
     }
-    
+
     // recebe um arquivo de qualquer tipo e salva localmente
     async uploadFile(file: FileDTO): Promise<FileDTO> {
         const { filename, originalname, mimetype, buffer, size } = file;
