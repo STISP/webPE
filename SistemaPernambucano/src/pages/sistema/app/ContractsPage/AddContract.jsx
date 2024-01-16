@@ -13,7 +13,7 @@ const AddContract = () => {
     const navigate = useNavigate();
 
     const handleSaveContract = async (event) => {
-        event.preventDefault(); 
+        event.preventDefault();
         try {
             const clientName = document.getElementById('clientName').value;
             const contractValue = document.getElementById('contractValue').value;
@@ -26,9 +26,13 @@ const AddContract = () => {
             const postedBy = document.getElementById('postedBy').value;
             const postedDate = document.getElementById('postedDate').value;
             const loja = document.getElementById('loja').value;
+            const companyPhone = document.getElementById('companyPhone').value;
+            const companyEmail = document.getElementById('companyEmail').value;
+            const companyName = document.getElementById('companyName').value;
+            const companyFantasyName = document.getElementById('companyFantasyName').value;
+            const companyCNPJ = document.getElementById('companyCNPJ').value;
 
-
-            if (!clientName || !contractValue || !contractNumber || !startDate || !endDate || !status || !contractDescription || !paymentTerms || !postedBy || !postedDate || !loja) {
+            if (!clientName || !contractValue || !contractNumber || !startDate || !endDate || !status || !contractDescription || !paymentTerms || !postedBy || !postedDate || !loja || !companyPhone || !companyEmail || !companyName || !companyFantasyName || !companyCNPJ) {
                 setErrorMessage('Por favor, preencha todos os campos!');
                 return;
             }
@@ -45,6 +49,11 @@ const AddContract = () => {
                 postedBy: nomeCapitalizado,
                 postedDate: currentDate,
                 loja: loja,
+                companyPhone,
+                companyEmail,
+                companyName,
+                companyFantasyName,
+                companyCNPJ,
             };
 
             setSuccessMessage(`Contrato ${clientName} salvo com sucesso!`);
@@ -142,8 +151,30 @@ const AddContract = () => {
                                 <textarea id="contractDescription" placeholder="Digite a descrição do contrato" required></textarea>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="paymentTerms">Termos de pagamento</label>
+                                <label htmlFor="paymentTerms">Termos e forma de pagamento</label>
                                 <textarea id="paymentTerms" placeholder="Digite os termos de pagamento" required></textarea>
+                            </div>
+
+                            <h3>Informações da Empresa Contratante</h3>
+                            <div className="form-group">
+                                <label htmlFor="companyName">Nome da empresa</label>
+                                <input type="text" id="companyName" placeholder="Digite o nome da empresa" required />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="companyFantasyName">Nome fantasia</label>
+                                <input type="text" id="companyFantasyName" placeholder="Digite o nome fantasia da empresa" required />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="companyCNPJ">CNPJ</label>
+                                <input type="text" id="companyCNPJ" placeholder="Digite o CNPJ da empresa" required />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="companyPhone">Telefone</label>
+                                <input type="text" id="companyPhone" placeholder="Digite o telefone da empresa" required />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="companyEmail">Email</label>
+                                <input type="text" id="companyEmail" placeholder="Digite o email da empresa" required />
                             </div>
                         </div>
 

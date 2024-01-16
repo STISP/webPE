@@ -1,6 +1,8 @@
-import { Body, Controller, Get, Param, Post, Delete } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Delete, UploadedFiles, UseInterceptors } from "@nestjs/common";
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { ContractsService } from './contracts.service';
 import { Contract } from './contracts.entity';
+import { FileDTO } from "./uploand.dto";
 
 @Controller('contracts')
 export class ContractsController {
@@ -56,6 +58,12 @@ export class ContractsController {
             totalValue,
             inactiveContracts
         };
+    }
 
+    // receber um arquivo de qualquer tipo e salvar localmente 
+    @Post('upload')
+    @UseInterceptors(FilesInterceptor('file'))
+    async uploadFile(@UploadedFiles() file: FileDTO) {
+        return this.contractService.uploadFile(file);
     }
 }

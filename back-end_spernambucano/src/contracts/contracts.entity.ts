@@ -47,6 +47,21 @@ export class Contract {
     @Column({ type: 'text' })
     loja: string;
 
+    @Column({ type: 'text' })
+    companyPhone: string;
+
+    @Column({ type: 'text' })
+    companyEmail: string;
+
+    @Column({ type: 'text' })
+    companyName: string;
+
+    @Column({ type: 'text' })
+    companyFantasyName: string;
+
+    @Column({ type: 'text' })
+    companyCNPJ: string;
+
     // contrato de renovação
     //@OneToOne(() => Contract)
     //@JoinColumn()

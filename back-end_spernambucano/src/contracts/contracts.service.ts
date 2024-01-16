@@ -1,6 +1,7 @@
 import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { LessThanOrEqual, MoreThanOrEqual, Repository } from 'typeorm';
 import { Contract } from './contracts.entity';
+import { FileDTO } from './uploand.dto';
 
 @Injectable()
 export class ContractsService {
@@ -113,5 +114,18 @@ export class ContractsService {
             },
         });
         return inactiveContracts;
+    }
+    
+    // recebe um arquivo de qualquer tipo e salva localmente
+    async uploadFile(file: FileDTO): Promise<FileDTO> {
+        const { filename, originalname, mimetype, buffer, size } = file;
+        const newFile = {
+            filename,
+            originalname,
+            mimetype,
+            buffer,
+            size,
+        };
+        return newFile;
     }
 }

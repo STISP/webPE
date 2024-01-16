@@ -1201,3 +1201,12 @@ span {
 .reportLoja {
   padding-bottom: 1rem;
 }
+.iconCompanyContract {
+  color: #132438;
+  font-family: Roboto;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 0;
+}

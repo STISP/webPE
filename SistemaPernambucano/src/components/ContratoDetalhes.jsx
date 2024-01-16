@@ -173,6 +173,28 @@ const ContratoDetalhes = () => {
                             <span className="contract-details__label">Termos de Pagamento</span>
                             <span className="contract-details__value">{contrato.paymentTerms}</span>
                         </div>
+
+                        <h3 className='iconCompanyContract'>Informações da Empresa Contratante</h3>
+                        <div className="contract-details__info-row">
+                            <span className="contract-details__label">Nome da Empresa</span>
+                            <span className="contract-details__value">{contrato.companyName}</span>
+                        </div>
+                        <div className="contract-details__info-row">
+                            <span className="contract-details__label">Nome Fantasia da Empresa</span>
+                            <span className="contract-details__value">{contrato.companyFantasyName}</span>
+                        </div>
+                        <div className="contract-details__info-row">
+                            <span className="contract-details__label">Telefone da Empresa</span>
+                            <span className="contract-details__value">{contrato.companyPhone}</span>
+                        </div>
+                        <div className="contract-details__info-row">
+                            <span className="contract-details__label">Email da Empresa</span>
+                            <span className="contract-details__value">{contrato.companyEmail}</span>
+                        </div>
+                        <div className="contract-details__info-row">
+                            <span className="contract-details__label">CNPJ da Empresa</span>
+                            <span className="contract-details__value">{contrato.companyCNPJ}</span>
+                        </div>
                     </section>
                 </div>
             )}
