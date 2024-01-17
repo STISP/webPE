@@ -21,7 +21,8 @@
     "react-sound-visualizer": "^1.0.6",
     "react-spinners": "^0.13.8",
     "react-transition-group": "^4.4.5",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",

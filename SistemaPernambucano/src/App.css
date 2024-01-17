@@ -195,8 +195,8 @@ a {
 .opViewContractsScreenInicial {
   border-radius: 0.75rem;
   background: #ededed;
-  width: 12.9rem;
-  padding: 2rem;
+  width: 13rem;
+  padding: 1.9rem;
   transition: 0.3s ease;
 }
 .opViewContractsScreenInicial:hover {
@@ -236,7 +236,7 @@ a {
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 1rem;
+  margin: 0.6rem 0 1rem 0;
 }
 .iconAndTotalContracts a {
   display: flex;

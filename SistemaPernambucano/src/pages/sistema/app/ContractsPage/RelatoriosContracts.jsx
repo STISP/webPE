@@ -5,32 +5,20 @@ import iconContract from '../../../../assets/iconContract.svg';
 import iconContractVencido from '../../../../assets/iconContractVencido.svg';
 import valorContractIcon from '../../../../assets/valorContractIcon.svg';
 import IconLink from '../../../../assets/IconLink.svg';
+import * as XLSX from 'xlsx';
 
 const RelatoriosContracts = () => {
     const [totalContracts, setTotalContracts] = useState(0);
     const [contracts, setContracts] = useState([]);
     const [selectedStore, setSelectedStore] = useState("");
-
-    useEffect(() => {
-        if (contracts.length === 0) {
-            fetch('http://192.168.1.70:3000/contracts')
-                .then(response => response.json())
-                .then(data => {
-                    const activeContracts = data.filter(contract => contract.status === 'Ativo');
-                    const contractValues = activeContracts.map(contract => contract.contractValue);
-                    setTotalContracts(data.length);
-                    setContracts(contractValues);
-                })
-                .catch('Erro ao carregar contratos');
-        }
-    }, [contracts]);
+    const [showConfirmation, setShowConfirmation] = useState(false);
+    const [reports, setReports] = useState({});
+    const [contractsExpired, setContractsExpired] = useState([]);
 
     const totalValue = contracts.reduce((acc, value) => acc + value, 0);
 
     const currentDate = new Date().toLocaleDateString('pt-BR');
     const currentDay = new Date().toLocaleDateString('pt-BR', { weekday: 'long' });
-
-    const [reports, setReports] = useState({});
 
     useEffect(() => {
         if (contracts.length === 0) {
@@ -61,6 +49,13 @@ const RelatoriosContracts = () => {
                     fetchReports();
                 })
                 .catch('Erro ao carregar contratos');
+
+            fetch('http://192.168.1.70:3000/contracts/expired/all')
+                .then(response => response.json())
+                .then(data => {
+                    setContractsExpired(data);
+                })
+                .catch('Erro ao carregar contratos vencidos');
         }
     }, [contracts]);
 
@@ -76,7 +71,30 @@ const RelatoriosContracts = () => {
         "COMERCIO DE ALIMENTOS PERNAMBUCANO LTDA - VASCO DA GAMA"
     ];
 
-    const [showConfirmation, setShowConfirmation] = useState(false);
+    function downloadReport() {
+        const rows = transformReportsToRows(reports);
+        generateExcelData(rows);
+    }
+
+    function generateExcelData(rows) {
+        const ws = XLSX.utils.json_to_sheet(rows);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+        XLSX.writeFile(wb, 'report.xlsx');
+    }
+
+    function transformReportsToRows(reports) {
+        return Object.entries(reports).map(([store, stats]) => ({
+            'Loja': store,
+            'Contratos Ativos': stats.activeContracts || 0,
+            'Contratos Registrados do Último Mês': stats.contractsLastMonth || 0,
+            'Valor Total de Contratos Ativos': stats.totalValue ? stats.totalValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : "0",
+            'Quant. Contratos Desativados': stats.inactiveContracts || 0,
+            'Quant. Contratos Vencidos': stats.ExpiredContracts || 0,
+            'Data do Próximo Vencimento': stats.nextExpiration ? new Date(stats.nextExpiration).toLocaleDateString('pt-BR') : "Nenhum"
+        }));
+    }
+
     function reloadPage() {
         // Fetch the data again
         const fetchData = async () => {
@@ -102,7 +120,7 @@ const RelatoriosContracts = () => {
                     reports[stores[i]] = data;
                 }
                 setShowConfirmation(true);
-                setTimeout(() => setShowConfirmation(false), 5000);
+                setTimeout(() => setShowConfirmation(false), 3000);
                 setReports(reports);
             } catch (error) {
                 console.error('Erro ao carregar contratos', error);
@@ -111,6 +129,7 @@ const RelatoriosContracts = () => {
 
         fetchData();
     }
+
 
     return (
         <>
@@ -126,6 +145,12 @@ const RelatoriosContracts = () => {
                         </svg>
                         {showConfirmation && <div>Atualizado</div>}
                     </button>
+                    <button className='add-contract-button' onClick={downloadReport}>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="12" viewBox="0 0 384 512" fill='#fff'>
+                            <path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM216 232V334.1l31-31c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-72 72c-9.4 9.4-24.6 9.4-33.9 0l-72-72c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l31 31V232c0-13.3 10.7-24 24-24s24 10.7 24 24z" />
+                        </svg>
+                        Baixar Relatório
+                    </button>
                     <Link to="/ContractsPage" >
                         <button className='add-contract-button'>
                             <img src={voltarIcon} />
@@ -140,7 +165,7 @@ const RelatoriosContracts = () => {
                     <Link to="/ContractsPage">
                         <div className='iconAndTotalContracts'>
                             <img src={iconContract} />
-                            <p>Todos os contratos</p>
+                            <p>Todos os Contratos</p>
                         </div>
                         <div className="dataAndIcon">
                             <span>{totalContracts} Contratos</span>
@@ -153,10 +178,10 @@ const RelatoriosContracts = () => {
                     <Link to="/ContractsPage">
                         <div className='iconAndTotalContracts iconopview'>
                             <img src={iconContractVencido} />
-                            <p>Contratos vencidos</p>
+                            <p>Todos os Contratos Vencidos</p>
                         </div>
                         <div className="dataAndIcon">
-                            <span>0 Contratos</span>
+                            <span>{contractsExpired} Contratos</span>
                             <img src={IconLink} />
                         </div>
                     </Link>
@@ -166,7 +191,7 @@ const RelatoriosContracts = () => {
                     <Link to="/ContractsPage">
                         <div className='iconAndTotalContracts iconopview'>
                             <img src={valorContractIcon} />
-                            <p>Valor total de contratos ativos</p>
+                            <p>Valor Total de Contratos Ativos</p>
                         </div>
                         <div className="dataAndIcon">
                             <span>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalValue)}</span>
@@ -214,6 +239,11 @@ const RelatoriosContracts = () => {
                                 <div className="tituloAndSpan">
                                     <p>Próximo vencimento</p>
                                     <span>{reports[store]?.nextExpiration ? new Date(reports[store].nextExpiration).toLocaleDateString('pt-BR') : "Nenhum"}</span>
+                                </div>
+                                <div className="linePart2" />
+                                <div className="tituloAndSpan">
+                                    <p>Contratos vencidos</p>
+                                    <span>{reports[store]?.ExpiredContracts || 0}</span>
                                 </div>
                             </div>
                         </div>

@@ -73,8 +73,8 @@ export class ContractsService {
         return totalContractsLastMonth;
     }
 
-    // contrato com o vencimento mais proximo apenas para uma loja selecionada pelo usuario
-    async getNextExpiration(store: string): Promise<Date> {
+    // contrato com o vencimento mais proximo apenas para uma loja selecionada pelo usuário
+    async getNextExpiration(store: string): Promise<Date | null> {
         const currentDate = new Date();
         const nextExpiration = await this.contractRepository.findOne({
             where: {
@@ -89,12 +89,12 @@ export class ContractsService {
         });
 
         if (!nextExpiration) {
-            throw new NotFoundException('Nenhum contrato próximo de vencimento encontrado.');
+            // Retorna null se não houver nenhum contrato próximo de vencimento
+            return null;
         }
 
         return nextExpiration.endDate;
     }
-
 
     // Valor total dos contratos ativos apenas para uma loja selecionada pelo usuario
     async getTotalValue(store: string): Promise<number> {
@@ -116,6 +116,30 @@ export class ContractsService {
         });
         return inactiveContracts;
     }
+
+    // Numero de contratos venciados apenas para uma loja selecionada pelo usuario
+    async ExpiredContracts(store: string): Promise<number> {
+        const currentDate = new Date();
+        const expiredContracts = await this.contractRepository.count({
+            where: {
+                loja: store,
+                endDate: LessThanOrEqual(currentDate),
+            },
+        });
+        return expiredContracts;
+    }
+
+    // Numero de todos os contratos venciados de todas as lojas (soma)
+    async getTotalExpiredContractsAllStores(): Promise<number> {
+        const currentDate = new Date();
+        const expiredContracts = await this.contractRepository.count({
+            where: {
+                endDate: LessThanOrEqual(currentDate),
+            },
+        });
+        return expiredContracts;
+    }
+
 
     // recebe um arquivo de qualquer tipo e salva localmente
     async uploadFile(file: FileDTO): Promise<FileDTO> {

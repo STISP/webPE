@@ -38,9 +38,10 @@ export class ContractsController {
     async getContractReports(@Param() params: { store: string }): Promise<{
         activeContracts: number,
         contractsLastMonth: number,
-        nextExpiration: Date,
+        nextExpiration: Date | null,
         totalValue: number,
         inactiveContracts: number
+        ExpiredContracts: number
     }> {
         const { store } = params;
         const activeContracts = await this.contractService.getActiveContracts(store);
@@ -48,16 +49,24 @@ export class ContractsController {
         const nextExpiration = await this.contractService.getNextExpiration(store);
         const totalValue = await this.contractService.getTotalValue(store);
         const inactiveContracts = await this.contractService.getInactiveContracts(store);
+        const ExpiredContracts = await this.contractService.ExpiredContracts(store);
 
-        const nextExpirationDate = new Date(nextExpiration.toString());
+        const nextExpirationDate = nextExpiration ? new Date(nextExpiration.toString()) : null;
 
         return {
             activeContracts,
             contractsLastMonth,
             nextExpiration: nextExpirationDate,
             totalValue,
-            inactiveContracts
+            inactiveContracts,
+            ExpiredContracts
         };
+    }
+
+    // Numero de todos os contratos venciados de todas as lojas (soma)
+    @Get('expired/all')
+    async getTotalExpiredContractsAllStores(): Promise<number> {
+        return this.contractService.getTotalExpiredContractsAllStores();
     }
 
     // receber um arquivo de qualquer tipo e salvar localmente 
