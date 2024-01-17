@@ -60,7 +60,6 @@ const RelatoriosContracts = () => {
     }, [contracts]);
 
     const stores = [
-        "COMERCIO DE ALIMENTOS PERNAMBUCANO - CENTRAL DE SERVIÇOS",
         "MERCADINHO DOM HELDER DE ALIMENTOS LTDA",
         "MERCANTIL JABOATÃO DE ALIMENTOS LTDA - MATRIZ",
         "T.H SUPERMERCADO EIRELLI EPP",
@@ -80,17 +79,17 @@ const RelatoriosContracts = () => {
         const ws = XLSX.utils.json_to_sheet(rows);
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-        XLSX.writeFile(wb, 'report.xlsx');
+        XLSX.writeFile(wb, 'Relatório dos Contratos.xlsx');
     }
 
     function transformReportsToRows(reports) {
         return Object.entries(reports).map(([store, stats]) => ({
             'Loja': store,
+            'Total de Contratos Ativos R$': stats.totalValue ? stats.totalValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : "0",
             'Contratos Ativos': stats.activeContracts || 0,
-            'Contratos Registrados do Último Mês': stats.contractsLastMonth || 0,
-            'Valor Total de Contratos Ativos': stats.totalValue ? stats.totalValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : "0",
-            'Quant. Contratos Desativados': stats.inactiveContracts || 0,
-            'Quant. Contratos Vencidos': stats.ExpiredContracts || 0,
+            'Contratos Desativados': stats.inactiveContracts || 0,
+            'Contratos Vencidos': stats.ExpiredContracts || 0,
+            'N° de Registro do Último Mês': stats.contractsLastMonth || 0,
             'Data do Próximo Vencimento': stats.nextExpiration ? new Date(stats.nextExpiration).toLocaleDateString('pt-BR') : "Nenhum"
         }));
     }

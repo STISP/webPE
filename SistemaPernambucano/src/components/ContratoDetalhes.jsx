@@ -5,6 +5,11 @@ import { useEffect, useState } from 'react';
 const ContratoDetalhes = () => {
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
+
+    const handleEditContract = () => {
+        setShowEditModal(true);
+    };
 
     const getContractDetails = async (id) => {
         try {
@@ -47,6 +52,21 @@ const ContratoDetalhes = () => {
     const [contrato, setContrato] = useState(null);
     const navigate = useNavigate();
 
+    const [nomeDoContrato, setNomeDoContrato] = useState("");
+    const [loja, setLoja] = useState("");
+    const [status, setStatus] = useState("");
+    const [numeroDoContrato, setNumeroDoContrato] = useState("");
+    const [valorDoContrato, setValorDoContrato] = useState("");
+    const [dataDeInicio, setDataDeInicio] = useState("");
+    const [dataDeVencimento, setDataDeVencimento] = useState("");
+    const [descricaoDoContrato, setDescricaoDoContrato] = useState("");
+    const [termosDePagamento, setTermosDePagamento] = useState("");
+    const [nomeDaEmpresa, setNomeDaEmpresa] = useState("");
+    const [nomeFantasiaDaEmpresa, setNomeFantasiaDaEmpresa] = useState("");
+    const [telefoneDaEmpresa, setTelefoneDaEmpresa] = useState("");
+    const [emailDaEmpresa, setEmailDaEmpresa] = useState("");
+    const [cnpjDaEmpresa, setCnpjDaEmpresa] = useState("");
+
     useEffect(() => {
         const fetchContractDetails = async () => {
             const contract = await getContractDetails(id);
@@ -71,7 +91,6 @@ const ContratoDetalhes = () => {
     function formatDate(date) {
         return new Intl.DateTimeFormat('pt-BR').format(new Date(date));
     }
-
 
     return (
         <>

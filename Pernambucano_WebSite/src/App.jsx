@@ -42,13 +42,9 @@ export default function App() {
 
     useEffect(() => {
         const dataAtual = new Date();
-        const mesAlvo = 10;
-        const diaAlvo = 1;
         const anoAtual = dataAtual.getFullYear();
-        const anoAlvo = anoAtual - 23;
-        const dataAlvo = new Date(anoAlvo, mesAlvo, diaAlvo);
-        const diferencaEmMilissegundos = dataAtual.getTime() - dataAlvo.getTime();
-        const anos = Math.floor(diferencaEmMilissegundos / (1000 * 60 * 60 * 24 * 365));
+        const anoAlvo = 2001;
+        const anos = anoAtual - anoAlvo;
         setAnosDeExperiencia(anos);
     }, []);
 
