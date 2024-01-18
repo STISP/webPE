@@ -108,7 +108,7 @@ const AddContract = () => {
 
                         <div>
                             <div className="form-group">
-                                <label htmlFor="contractValue">Valor do Contrato</label>
+                                <label htmlFor="contractValue">Valor total do Contrato</label>
                                 <input type="number" id="contractValue" placeholder="Digite o valor do contrato" onInvalid={handleInvalid} required />
                             </div>
                             <div className="form-group">
@@ -127,6 +127,7 @@ const AddContract = () => {
                                     <option value="MERCANTIL GOIANA DE ALIMENTOS LTDA">MERCANTIL GOIANA DE ALIMENTOS LTDA</option>
                                     <option value="MERCANTIL JABOATAO DE ALIMENTOS LTDA">MERCANTIL JABOATAO DE ALIMENTOS LTDA</option>
                                     <option value="COMERCIO DE ALIMENTOS PERNAMBUCANO LTDA - VASCO DA GAMA">COMERCIO DE ALIMENTOS PERNAMBUCANO LTDA - VASCO DA GAMA</option>
+                                    <option value="PERNAMBUCO SERVIÇOS ADMINISTRATIVOS EIRELI">PERNAMBUCO SERVIÇOS ADMINISTRATIVOS EIRELI</option>
                                 </select>
                             </div>
                             <div className="form-group">

@@ -102,6 +102,7 @@ const ContractsPage = () => {
         "MERCANTIL GOIANA DE ALIMENTOS LTDA": "P6",
         "MERCANTIL JABOATAO DE ALIMENTOS LTDA": "P7",
         "COMERCIO DE ALIMENTOS PERNAMBUCANO LTDA - VASCO DA GAMA": "P8",
+        "PERNAMBUCO SERVIÇOS ADMINISTRATIVOS EIRELI": "PSA",
     };
 
     function search(items) {

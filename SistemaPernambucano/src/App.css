@@ -1116,7 +1116,7 @@ a {
   gap: 0.5rem;
 }
 .line {
-  width: 40rem;
+  width: 52rem;
   height: 0.0625rem;
   background: #d9d9d9;
   margin: 2rem 0;
@@ -1147,7 +1147,7 @@ a {
   left: 0;
   width: 80%;
   height: 0.0625rem;
-  background-color: #d9d9d9;
+  background-color: #132438;
 }
 .lojaInfoReportPart {
   display: flex;
@@ -1177,7 +1177,7 @@ span {
 .line2 {
   width: 80%;
   height: 0.0625rem;
-  background: #d9d9d9;
+  background: #132438;
   margin: 0.5rem 0;
 }
 .spaceBack {
@@ -1187,7 +1187,7 @@ span {
 .linePart2 {
   width: 0.0625rem;
   height: 1.6875rem;
-  background: #d9d9d9;
+  background: #132438;
   flex-shrink: 0;
 }
 .reportLoja h2 {

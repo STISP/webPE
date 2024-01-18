@@ -124,6 +124,7 @@ const RelatoriosContracts = () => {
             } catch (error) {
                 console.error('Erro ao carregar contratos', error);
             }
+
         };
 
         fetchData();
@@ -168,7 +169,6 @@ const RelatoriosContracts = () => {
                         </div>
                         <div className="dataAndIcon">
                             <span>{totalContracts} Contratos</span>
-                            <img src={IconLink} />
                         </div>
                     </Link>
                 </div>
@@ -181,7 +181,6 @@ const RelatoriosContracts = () => {
                         </div>
                         <div className="dataAndIcon">
                             <span>{contractsExpired} Contratos</span>
-                            <img src={IconLink} />
                         </div>
                     </Link>
                 </div>
@@ -194,7 +193,6 @@ const RelatoriosContracts = () => {
                         </div>
                         <div className="dataAndIcon">
                             <span>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalValue)}</span>
-                            <img src={IconLink} />
                         </div>
                     </Link>
                 </div>
