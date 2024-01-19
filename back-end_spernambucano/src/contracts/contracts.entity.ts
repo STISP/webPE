@@ -22,7 +22,15 @@ export class Contract {
     @Column()
     endDate: Date;
 
-    // valor do contrato
+    // vezes parceladas do contrato
+    @Column({ type: 'integer' })
+    installments: number;
+
+    // valor da parcela contrato
+    @Column({ type: 'float' })
+    monthlyValue: number;
+
+    // valor total do contrato
     @Column({ type: 'float' })
     contractValue: number;
 

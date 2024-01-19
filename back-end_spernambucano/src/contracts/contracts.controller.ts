@@ -23,11 +23,6 @@ export class ContractsController {
         return this.contractService.createContract(contract);
     }
 
-    @Post(':id')
-    async updateContract(@Param('id') id: string, @Body() contract: Contract): Promise<Contract> {
-        return this.contractService.updateContract(id, contract);
-    }
-
     @Delete(':id')
     async deleteContract(@Param('id') id: string): Promise<void> {
         return this.contractService.deleteContract(id);
@@ -69,10 +64,10 @@ export class ContractsController {
         return this.contractService.getTotalExpiredContractsAllStores();
     }
 
-    // receber um arquivo de qualquer tipo e salvar localmente 
-    @Post('upload')
-    @UseInterceptors(FilesInterceptor('file'))
-    async uploadFile(@UploadedFiles() file: FileDTO) {
-        return this.contractService.uploadFile(file);
+    // quando o contrato é editado, o status é alterado para 'Desativado' e um novo contrato é criado com o status 'Ativo'
+    @Post('edit/:id')
+    async editContract(@Param('id') id: string, @Body() updatedContract: Contract): Promise<{ oldContract: Contract, newContract: Contract }> {
+        return this.contractService.editContract(id, updatedContract);
     }
+
 }

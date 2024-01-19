@@ -52,21 +52,6 @@ const ContratoDetalhes = () => {
     const [contrato, setContrato] = useState(null);
     const navigate = useNavigate();
 
-    const [nomeDoContrato, setNomeDoContrato] = useState("");
-    const [loja, setLoja] = useState("");
-    const [status, setStatus] = useState("");
-    const [numeroDoContrato, setNumeroDoContrato] = useState("");
-    const [valorDoContrato, setValorDoContrato] = useState("");
-    const [dataDeInicio, setDataDeInicio] = useState("");
-    const [dataDeVencimento, setDataDeVencimento] = useState("");
-    const [descricaoDoContrato, setDescricaoDoContrato] = useState("");
-    const [termosDePagamento, setTermosDePagamento] = useState("");
-    const [nomeDaEmpresa, setNomeDaEmpresa] = useState("");
-    const [nomeFantasiaDaEmpresa, setNomeFantasiaDaEmpresa] = useState("");
-    const [telefoneDaEmpresa, setTelefoneDaEmpresa] = useState("");
-    const [emailDaEmpresa, setEmailDaEmpresa] = useState("");
-    const [cnpjDaEmpresa, setCnpjDaEmpresa] = useState("");
-
     useEffect(() => {
         const fetchContractDetails = async () => {
             const contract = await getContractDetails(id);
@@ -114,7 +99,7 @@ const ContratoDetalhes = () => {
                                         </>
                                     )}
                                         <>
-                                            <button className="contract-details__button" onClick={handleRenewContract}>Editar</button>
+                                            <button className="contract-details__button" onClick={handleEditContract}>Editar</button>
                                         </>
                                     )}
                                     */}
@@ -125,6 +110,7 @@ const ContratoDetalhes = () => {
                                         </svg>
                                         Deletar contrato
                                     </button>
+                                    <button className="contract-details__button" onClick={handleEditContract}>Editar</button>
                                 </div>
                             )}
                             <button className="contract-details__button" onClick={handleGoBack}>
@@ -180,6 +166,14 @@ const ContratoDetalhes = () => {
                         <div className="contract-details__info-row">
                             <span className="contract-details__label">Valor total do Contrato</span>
                             <span className="contract-details__value">{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(contrato.contractValue)}</span>
+                        </div>
+                        <div className="contract-details__info-row">
+                            <span className="contract-details__label">Quantidade de Parcelas</span>
+                            <span className="contract-details__value">{contrato.installments}</span>
+                        </div>
+                        <div className="contract-details__info-row">
+                            <span className="contract-details__label">Valor Mensal</span>
+                            <span className="contract-details__value">{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(contrato.monthlyValue)}</span>
                         </div>
                         <div className="contract-details__info-row">
                             <span className="contract-details__label">Data de Início</span>

@@ -27,19 +27,6 @@ export class ContractsService {
         return await this.contractRepository.save(contract);
     }
 
-    async updateContract(id: string, updatedContract: Contract): Promise<Contract> {
-        try {
-            const contract = await this.contractRepository.findOne({ where: { id } });
-            if (contract) {
-                const updated = Object.assign(contract, updatedContract);
-                return await this.contractRepository.save(updated);
-            }
-            return null;
-        } catch (error) {
-            throw new Error('Erro ao atualizar o contrato.');
-        }
-    }
-
     async deleteContract(id: string): Promise<void> {
         try {
             await this.contractRepository.delete(id);
@@ -140,17 +127,29 @@ export class ContractsService {
         return expiredContracts;
     }
 
+    // editar o contrato, o contrato atual é 'deletado' e um novo é salvo
+    // quando o contrato é editado, o status é alterado para 'Desativado' e um novo contrato é criado com o status 'Ativo'
+    async editContract(id: string, updatedContract: Contract): Promise<{ oldContract: Contract, newContract: Contract }> {
+        try {
+            const contract = await this.contractRepository.findOne({ where: { id } });
+            if (contract) {
+                // Altera o status do contrato atual para 'Desativado'
+                // contract.status = 'Desativado';
+                const oldContract = await this.contractRepository.save(contract); // Save the old contract
 
-    // recebe um arquivo de qualquer tipo e salva localmente
-    async uploadFile(file: FileDTO): Promise<FileDTO> {
-        const { filename, originalname, mimetype, buffer, size } = file;
-        const newFile = {
-            filename,
-            originalname,
-            mimetype,
-            buffer,
-            size,
-        };
-        return newFile;
+                // adiciona o id um novo id ao contrato atualizado usando o uuidv4
+                // updatedContract.id = id;
+                // Cria um novo contrato com os dados atualizados
+                const newContract = this.contractRepository.create(updatedContract);
+                const savedNewContract = await this.contractRepository.save(newContract);
+
+                return { oldContract, newContract: savedNewContract };
+            }
+            return null;
+        } catch (error) {
+            console.error(error);
+            throw new Error(`Erro ao atualizar o contrato: ${error.message}`);
+         }
     }
+
 }

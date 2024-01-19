@@ -31,8 +31,10 @@ const AddContract = () => {
             const companyName = document.getElementById('companyName').value;
             const companyFantasyName = document.getElementById('companyFantasyName').value;
             const companyCNPJ = document.getElementById('companyCNPJ').value;
+            const installments = document.getElementById('installments') ? document.getElementById('installments').value : 1;
+            const monthlyValue = document.getElementById('monthlyValue') ? document.getElementById('monthlyValue').value : contractValue;
 
-            if (!clientName || !contractValue || !contractNumber || !startDate || !endDate || !status || !contractDescription || !paymentTerms || !postedBy || !postedDate || !loja || !companyPhone || !companyEmail || !companyName || !companyFantasyName || !companyCNPJ) {
+            if (!clientName || !contractValue || !contractNumber || !startDate || !endDate || !status || !contractDescription || !paymentTerms || !postedBy || !postedDate || !loja || !companyPhone || !companyEmail || !companyName || !companyFantasyName || !companyCNPJ || !installments || !monthlyValue) {
                 setErrorMessage('Por favor, preencha todos os campos!');
                 return;
             }
@@ -54,6 +56,8 @@ const AddContract = () => {
                 companyName,
                 companyFantasyName,
                 companyCNPJ,
+                installments,
+                monthlyValue,
             };
 
             setSuccessMessage(`Contrato ${clientName} salvo com sucesso!`);
@@ -88,6 +92,8 @@ const AddContract = () => {
         event.preventDefault();
     }
 
+    const [isParcelas, setIsParcelas] = useState(false);
+
     return (
         <div className="add-contract">
             <div className="info-contract">
@@ -111,6 +117,24 @@ const AddContract = () => {
                                 <label htmlFor="contractValue">Valor total do Contrato</label>
                                 <input type="number" id="contractValue" placeholder="Digite o valor do contrato" onInvalid={handleInvalid} required />
                             </div>
+                            <div className="form-group">
+                                <label >Parcelado?</label>
+                                <select onChange={(e) => setIsParcelas(e.target.value === 'Sim')} required>
+                                    <option value="Não">Não</option>
+                                    <option value="Sim">Sim</option>
+                                </select>
+                            </div>
+                            {isParcelas && (
+                                <>
+                                    <div className="form-group">
+                                        <label htmlFor="installments">Quantidade de parcelas</label>
+                                        <input type="number" id="installments" placeholder="Digite a quantidade de parcelas" onInvalid={handleInvalid} required />
+                                    </div><div className="form-group">
+                                        <label htmlFor="monthlyValue">Valor da parcela</label>
+                                        <input type="number" id="monthlyValue" placeholder="Digite o valor da parcela" onInvalid={handleInvalid} required />
+                                    </div>
+                                </>
+                            )}
                             <div className="form-group">
                                 <label htmlFor="contractNumber">Numero do contrato</label>
                                 <input type="number" id="contractNumber" placeholder="Digite o numero do contrato" required />
