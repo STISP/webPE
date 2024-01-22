@@ -19,7 +19,8 @@ const AddContract = () => {
             const contractValue = document.getElementById('contractValue').value;
             const contractNumber = document.getElementById('contractNumber').value;
             const startDate = document.getElementById('startDate').value;
-            const endDate = document.getElementById('endDate').value;
+            const endDateElement = document.getElementById('endDate');
+            const endDate = endDateElement ? endDateElement.value : "9999-01-01 00:00:00";
             const status = document.getElementById('status').value;
             const contractDescription = document.getElementById('contractDescription').value;
             const paymentTerms = document.getElementById('paymentTerms').value;
@@ -34,8 +35,8 @@ const AddContract = () => {
             const installments = document.getElementById('installments') ? document.getElementById('installments').value : 1;
             const monthlyValue = document.getElementById('monthlyValue') ? document.getElementById('monthlyValue').value : contractValue;
 
-            if (!clientName || !contractValue || !contractNumber || !startDate || !endDate || !status || !contractDescription || !paymentTerms || !postedBy || !postedDate || !loja || !companyPhone || !companyEmail || !companyName || !companyFantasyName || !companyCNPJ || !installments || !monthlyValue) {
-                setErrorMessage('Por favor, preencha todos os campos!');
+            if (!clientName || !contractValue || !contractNumber || !startDate || !status || !contractDescription || !paymentTerms || !postedBy || !postedDate || !loja || !companyName || !companyFantasyName || !companyCNPJ || !installments || !monthlyValue) {
+                setErrorMessage('Por favor, preencha todos os campos obrigatorios!');
                 return;
             }
 
@@ -51,8 +52,8 @@ const AddContract = () => {
                 postedBy: nomeCapitalizado,
                 postedDate: currentDate,
                 loja: loja,
-                companyPhone,
-                companyEmail,
+                companyPhone: companyPhone || 'Nenhum',
+                companyEmail: companyEmail || 'Nenhum',
                 companyName,
                 companyFantasyName,
                 companyCNPJ,
@@ -93,6 +94,7 @@ const AddContract = () => {
     }
 
     const [isParcelas, setIsParcelas] = useState(false);
+    const [isVencimento, setIsVencimento] = useState(true);
 
     return (
         <div className="add-contract">
@@ -107,18 +109,18 @@ const AddContract = () => {
                     <form>
                         <div>
                             <div className="form-group">
-                                <label htmlFor="clientName">Nome do Cliente</label>
-                                <input type="text" id="clientName" placeholder="Digite o nome do cliente" required />
+                                <label htmlFor="clientName">*Nome do contrato</label>
+                                <input type="text" id="clientName" placeholder="Digite o nome do contrato" required />
                             </div>
                         </div>
 
                         <div>
                             <div className="form-group">
-                                <label htmlFor="contractValue">Valor total do Contrato</label>
+                                <label htmlFor="contractValue">*Valor total do Contrato</label>
                                 <input type="number" id="contractValue" placeholder="Digite o valor do contrato" onInvalid={handleInvalid} required />
                             </div>
                             <div className="form-group">
-                                <label >Parcelado?</label>
+                                <label>Parcelado?</label>
                                 <select onChange={(e) => setIsParcelas(e.target.value === 'Sim')} required>
                                     <option value="Não">Não</option>
                                     <option value="Sim">Sim</option>
@@ -127,20 +129,20 @@ const AddContract = () => {
                             {isParcelas && (
                                 <>
                                     <div className="form-group">
-                                        <label htmlFor="installments">Quantidade de parcelas</label>
+                                        <label htmlFor="installments">*Quantidade de parcelas</label>
                                         <input type="number" id="installments" placeholder="Digite a quantidade de parcelas" onInvalid={handleInvalid} required />
                                     </div><div className="form-group">
-                                        <label htmlFor="monthlyValue">Valor da parcela</label>
+                                        <label htmlFor="monthlyValue">*Valor da parcela</label>
                                         <input type="number" id="monthlyValue" placeholder="Digite o valor da parcela" onInvalid={handleInvalid} required />
                                     </div>
                                 </>
                             )}
                             <div className="form-group">
-                                <label htmlFor="contractNumber">Numero do contrato</label>
+                                <label htmlFor="contractNumber">*Numero do contrato</label>
                                 <input type="number" id="contractNumber" placeholder="Digite o numero do contrato" required />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="loja">Loja do contrato</label>
+                                <label htmlFor="loja">*Loja do contrato</label>
                                 <select id="loja" defaultValue="" required>
                                     <option value="" disabled>Selecione a loja</option>
                                     <option value="MERCADINHO DOM HELDER DE ALIMENTOS LTDA">MERCADINHO DOM HELDER DE ALIMENTOS LTDA</option>
@@ -155,15 +157,23 @@ const AddContract = () => {
                                 </select>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="startDate">Data de inicio do contrato</label>
+                                <label htmlFor="startDate">*Data de inicio do contrato</label>
                                 <input type="date" id="startDate" placeholder="Digite a data de início do contrato" required />
                             </div>
+                            {isVencimento && (
+                                <div className="form-group">
+                                    <label htmlFor="endDate">*Vencimento do contrato</label>
+                                    <input type="date" id="endDate" placeholder="Digite a data de vencimento do contrato" />
+                                </div>
+                            )}
                             <div className="form-group">
-                                <label htmlFor="endDate">Vencimento do contrato</label>
-                                <input type="date" id="endDate" placeholder="Digite a data de vencimento do contrato" required />
+                                <label className='data-indeterminada' htmlFor="endDateIndeterminada">
+                                    <input type="checkbox" id="endDateIndeterminada" onChange={(e) => setIsVencimento(!e.target.checked)} />
+                                    Marque se o contrato não tiver data de vencimento
+                                </label>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="status">Status do contrato</label>
+                                <label htmlFor="status">*Status do contrato</label>
                                 <select id="status" required>
                                     <option value="Ativo">Ativo</option>
                                     <option value="Desativado">Desativado</option>
@@ -171,34 +181,34 @@ const AddContract = () => {
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="contractDescription">Descrição do contrato</label>
+                                <label htmlFor="contractDescription">*Descrição do contrato</label>
                                 <textarea id="contractDescription" placeholder="Digite a descrição do contrato" required></textarea>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="paymentTerms">Termos e forma de pagamento</label>
+                                <label htmlFor="paymentTerms">*Termos e forma de pagamento</label>
                                 <textarea id="paymentTerms" placeholder="Digite os termos de pagamento" required></textarea>
                             </div>
 
                             <h3 className='iconCompanyContract'>Informações da Empresa Contratada</h3> <br />
                             <div className="form-group">
-                                <label htmlFor="companyName">Nome da empresa</label>
+                                <label htmlFor="companyName">*Nome da empresa</label>
                                 <input type="text" id="companyName" placeholder="Digite o nome da empresa" required />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="companyFantasyName">Nome fantasia</label>
+                                <label htmlFor="companyFantasyName">*Nome fantasia</label>
                                 <input type="text" id="companyFantasyName" placeholder="Digite o nome fantasia da empresa" required />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="companyCNPJ">CNPJ</label>
+                                <label htmlFor="companyCNPJ">*CNPJ</label>
                                 <input type="text" id="companyCNPJ" placeholder="Digite o CNPJ da empresa" required />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="companyPhone">Telefone</label>
-                                <input type="text" id="companyPhone" placeholder="Digite o telefone da empresa" required />
+                                <input type="text" id="companyPhone" placeholder="Digite o telefone da empresa" />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="companyEmail">Email</label>
-                                <input type="text" id="companyEmail" placeholder="Digite o email da empresa" required />
+                                <input type="text" id="companyEmail" placeholder="Digite o email da empresa" />
                             </div>
                         </div>
 
