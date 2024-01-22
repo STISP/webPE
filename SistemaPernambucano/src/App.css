@@ -1264,8 +1264,36 @@ span {
   display: flex !important;
   cursor: pointer;
 }
-
-
+.success-message {
+  background-color: #132438;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  gap: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+.success-message p {
+  margin: 0;
+}
+.success-message svg {
+  fill: #fff;
+  width: 1.3rem;
+  height: 1.3rem;
+}
 
 .edit-modal {
   position: fixed;
@@ -1288,7 +1316,7 @@ span {
   font-size: 1.5rem;
   font-family: "Source Sans 3", sans-serif;
   font-weight: 700;
-  margin: .3rem 0 1rem 0;
+  margin: 0.3rem 0 1rem 0;
 }
 .edit-modal__buttons {
   display: flex;

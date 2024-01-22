@@ -10,6 +10,17 @@ const ContratoDetalhes = () => {
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
+    const [showSuccessMessageEdit, setShowSuccessMessageEdit] = useState(false);
+
+    useEffect(() => {
+        if (showSuccessMessageEdit) {
+            const timer = setTimeout(() => {
+                setShowSuccessMessageEdit(false);
+            }, 3000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [showSuccessMessageEdit]);
 
     const handleEditContract = () => {
         setShowEditModal(true);
@@ -73,33 +84,27 @@ const ContratoDetalhes = () => {
         return new Intl.DateTimeFormat('pt-BR').format(new Date(date));
     }
 
-    const handleStartDateChange = (value) => {
+    const handleChange = (field, value) => {
         setContrato((prevContrato) => ({
             ...prevContrato,
-            startDate: new Date(value),
+            [field]: value,
         }));
     };
 
-    const handleEndDateChange = (value) => {
-        setContrato((prevContrato) => ({
-            ...prevContrato,
-            endDate: new Date(value),
-        }));
-    };
-
-    const handleStatusChange = (value) => {
-        setContrato((prevContrato) => ({
-            ...prevContrato,
-            status: value,
-        }));
-    };
-
-    const handleLojaChange = (value) => {
-        setContrato((prevContrato) => ({
-            ...prevContrato,
-            loja: value,
-        }));
-    };
+    const handleStartDateChange = (value) => handleChange("startDate", new Date(value));
+    const handleEndDateChange = (value) => handleChange("endDate", new Date(value));
+    const handleStatusChange = (value) => handleChange("status", value);
+    const handleLojaChange = (value) => handleChange("loja", value);
+    const handleClientNameChange = (value) => handleChange("clientName", value);
+    const handleContractNumberChange = (value) => handleChange("contractNumber", value);
+    const handleParcelasChange = (value) => handleChange("installments", value);
+    const handleDescricaoChange = (value) => handleChange("contractDescription", value);
+    const handleTermosPagamentoChange = (value) => handleChange("paymentTerms", value);
+    const handleNameEmpresaChange = (value) => handleChange("companyName", value);
+    const handleNomeFantasiaChange = (value) => handleChange("companyFantasyName", value);
+    const handleTelefoneEmpresaChange = (value) => handleChange("companyPhone", value);
+    const handleEmailEmpresaChange = (value) => handleChange("companyEmail", value);
+    const handleCnpjEmpresaChange = (value) => handleChange("companyCNPJ", value);
 
     const handleDeactivateContract = async () => {
 
@@ -110,9 +115,46 @@ const ContratoDetalhes = () => {
     }
     // quando modifico alguma coisa do modal, ele muda na tela de detalhes e isso não pode acontecer - corrigir.
     // quando clico em salvar, ele não salva as alterações no banco de dados ainda - adicionar. 
-    // rota para atualizar os dados: post http://192.168.1.70:3000/contracts/edit/%{id}
-    
+    // rota para atualizar os dados: post http://192.168.1.70:3000/contracts/edit
+    // https://www.phind.com/search?cache=f48ga23rqn0rcoo4zz8gzr4i
+
     // atualizar o website
+
+
+    const handleSave = async () => {
+        try {
+            const updatedContract = {
+                id: contrato.id,
+                clientName: contrato.clientName,
+                contractNumber: contrato.contractNumber,
+                startDate: contrato.startDate,
+                endDate: contrato.endDate,
+                installments: contrato.installments,
+                monthlyValue: contrato.monthlyValue,
+                contractValue: contrato.contractValue,
+                status: contrato.status,
+                contractDescription: contrato.contractDescription,
+                paymentTerms: contrato.paymentTerms,
+                postedBy: contrato.postedBy,
+                postedDate: contrato.postedDate,
+                loja: contrato.loja,
+                companyPhone: contrato.companyPhone,
+                companyEmail: contrato.companyEmail,
+                companyName: contrato.companyName,
+                companyFantasyName: contrato.companyFantasyName,
+                companyCNPJ: contrato.companyCNPJ,
+            };
+
+            await axios.post('http://192.168.1.70:3000/contracts/edit', updatedContract);
+            setShowEditModal(false);
+            setShowSuccessMessageEdit(true);
+            setContrato(updatedContract);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+
 
     return (
         <>
@@ -150,6 +192,14 @@ const ContratoDetalhes = () => {
                             </button>
                         </div>
                     </div>
+                    {showSuccessMessageEdit && (
+                        <div className="success-message">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                            </svg>
+                            <p>Contrato editado com sucesso!</p>
+                        </div>
+                    )}
                     {showEditModal && (
                         <div className="edit-modal">
                             <div className="edit-modal__content">
@@ -161,7 +211,7 @@ const ContratoDetalhes = () => {
                                     <form className="edit-modal__form" action="">
                                         <div className="edit-modal__form-row">
                                             <label className="edit-modal__label" htmlFor="clientName">Nome do Contrato</label>
-                                            <input className="edit-modal__input" type="text" id="clientName" name="clientName" placeholder={contrato.clientName} />
+                                            <input className="edit-modal__input" type="text" id="clientName" name="clientName" value={contrato.clientName} onChange={(e) => handleClientNameChange(e.target.value)} />
                                         </div>
                                         <div className="edit-modal__form-row">
                                             <label className="edit-modal__label" htmlFor="loja">Loja do Contrato</label>
@@ -186,7 +236,7 @@ const ContratoDetalhes = () => {
                                         </div>
                                         <div className="edit-modal__form-row">
                                             <label className="edit-modal__label" htmlFor="contractNumber">Numero do Contrato</label>
-                                            <input className="edit-modal__input" type="text" id="contractNumber" name="contractNumber" placeholder={contrato.contractNumber} />
+                                            <input className="edit-modal__input" type="text" id="contractNumber" name="contractNumber" value={contrato.contractNumber} onChange={(e) => handleContractNumberChange(e.target.value)} />
                                         </div>
                                         <div className="edit-modal__form-row">
                                             <label className="edit-modal__label" htmlFor="contractValue">Valor total do Contrato</label>
@@ -199,7 +249,7 @@ const ContratoDetalhes = () => {
                                         </div>
                                         <div className="edit-modal__form-row">
                                             <label className="edit-modal__label" htmlFor="installments">Quantidade de Parcelas</label>
-                                            <input className="edit-modal__input" type="number" id="installments" name="installments" placeholder={contrato.installments} />
+                                            <input className="edit-modal__input" type="number" id="installments" name="installments" value={contrato.installments} onChange={(e) => handleParcelasChange(e.target.value)} />
                                         </div>
                                         <div className="edit-modal__form-row">
                                             <label className="edit-modal__label" htmlFor="monthlyValue">Valor Mensal</label>
@@ -235,36 +285,43 @@ const ContratoDetalhes = () => {
                                         </div>
                                         <div className="edit-modal__form-row">
                                             <label className="edit-modal__label" htmlFor="contractDescription">Descrição do Contrato</label>
-                                            <input className="edit-modal__input" type="text" id="contractDescription" name="contractDescription" placeholder={contrato.contractDescription} />
+                                            <input className="edit-modal__input" type="text" id="contractDescription" name="contractDescription" value={contrato.contractDescription}
+                                                onChange={(e) => handleDescricaoChange(e.target.value)} />
                                         </div>
                                         <div className="edit-modal__form-row">
                                             <label className="edit-modal__label" htmlFor="paymentTerms">Termos e forma de pagamento</label>
-                                            <input className="edit-modal__input" type="text" id="paymentTerms" name="paymentTerms" placeholder={contrato.paymentTerms} />
+                                            <input className="edit-modal__input" type="text" id="paymentTerms" name="paymentTerms" value={contrato.paymentTerms}
+                                                onChange={(e) => handleTermosPagamentoChange(e.target.value)} />
                                         </div>
                                         <div className="edit-modal__form-row">
                                             <label className="edit-modal__label" htmlFor="companyName">Nome da Empresa</label>
-                                            <input className="edit-modal__input" type="text" id="companyName" name="companyName" placeholder={contrato.companyName} />
+                                            <input className="edit-modal__input" type="text" id="companyName" name="companyName" value={contrato.companyName}
+                                                onChange={(e) => handleNameEmpresaChange(e.target.value)} />
                                         </div>
                                         <div className="edit-modal__form-row">
                                             <label className="edit-modal__label" htmlFor="companyFantasyName">Nome Fantasia da Empresa</label>
-                                            <input className="edit-modal__input" type="text" id="companyFantasyName" name="companyFantasyName" placeholder={contrato.companyFantasyName} />
+                                            <input className="edit-modal__input" type="text" id="companyFantasyName" name="companyFantasyName" value={contrato.companyFantasyName}
+                                                onChange={(e) => handleNomeFantasiaChange(e.target.value)} />
                                         </div>
                                         <div className="edit-modal__form-row">
                                             <label className="edit-modal__label" htmlFor="companyPhone">Telefone da Empresa</label>
-                                            <input className="edit-modal__input" type="text" id="companyPhone" name="companyPhone" placeholder={contrato.companyPhone} />
+                                            <input className="edit-modal__input" type="text" id="companyPhone" name="companyPhone" value={contrato.companyPhone}
+                                                onChange={(e) => handleTelefoneEmpresaChange(e.target.value)} />
                                         </div>
                                         <div className="edit-modal__form-row">
                                             <label className="edit-modal__label" htmlFor="companyEmail">Email da Empresa</label>
-                                            <input className="edit-modal__input" type="text" id="companyEmail" name="companyEmail" placeholder={contrato.companyEmail} />
+                                            <input className="edit-modal__input" type="text" id="companyEmail" name="companyEmail" value={contrato.companyEmail}
+                                                onChange={(e) => handleEmailEmpresaChange(e.target.value)} />
                                         </div>
                                         <div className="edit-modal__form-row">
                                             <label className="edit-modal__label" htmlFor="companyCNPJ">CNPJ da Empresa</label>
-                                            <input className="edit-modal__input" type="text" id="companyCNPJ" name="companyCNPJ" placeholder={contrato.companyCNPJ} />
+                                            <input className="edit-modal__input" type="text" id="companyCNPJ" name="companyCNPJ" value={contrato.companyCNPJ}
+                                                onChange={(e) => handleCnpjEmpresaChange(e.target.value)} />
                                         </div>
                                     </form>
 
                                     <div className="edit-modal__buttons">
-                                        <button className="edit-modal__save-button">Salvar</button>
+                                        <button className="edit-modal__save-button" onClick={handleSave}>Salvar</button>
                                         <button className="edit-modal__close-button" onClick={() => setShowEditModal(false)}>Cancelar</button>
                                     </div>
                                 </div>

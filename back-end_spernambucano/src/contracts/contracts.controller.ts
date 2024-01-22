@@ -65,9 +65,8 @@ export class ContractsController {
     }
 
     // quando o contrato é editado, o status é alterado para 'Desativado' e um novo contrato é criado com o status 'Ativo'
-    @Post('edit/:id')
+    @Post('edit')
     async editContract(@Param('id') id: string, @Body() updatedContract: Contract): Promise<{ oldContract: Contract, newContract: Contract }> {
         return this.contractService.editContract(id, updatedContract);
     }
-
 }
