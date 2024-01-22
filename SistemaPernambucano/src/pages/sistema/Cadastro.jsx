@@ -93,7 +93,7 @@ export default function CriarConta() {
       <div className="inicioScreen">
         <div className="allForms">
           <h2>Criar um novo usuario</h2>
-          <form onSubmit={handleSubmit}>
+          <form autocomplete="off" onSubmit={handleSubmit}>
             <div className="form-cadast" style={{ display: 'none' }}>
               <input
                 placeholder='Nome'

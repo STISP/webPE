@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import ShowConfirmationDelete from './showConfirmationDelete-contract';
 import IconBack from '../assets/voltarIcon.svg';
 import DeleteIcon from '../assets/deleteIcon.svg';
+import EditIcon from '../assets/EditIcon.svg';
+
 
 
 const ContratoDetalhes = () => {
@@ -91,8 +93,8 @@ const ContratoDetalhes = () => {
         }));
     };
 
-    const handleStartDateChange = (value) => handleChange("startDate", new Date(value));
-    const handleEndDateChange = (value) => handleChange("endDate", new Date(value));
+    // const handleStartDateChange = (value) => handleChange("startDate", new Date(value));
+    // const handleEndDateChange = (value) => handleChange("endDate", new Date(value));
     const handleStatusChange = (value) => handleChange("status", value);
     const handleLojaChange = (value) => handleChange("loja", value);
     const handleClientNameChange = (value) => handleChange("clientName", value);
@@ -105,6 +107,8 @@ const ContratoDetalhes = () => {
     const handleTelefoneEmpresaChange = (value) => handleChange("companyPhone", value);
     const handleEmailEmpresaChange = (value) => handleChange("companyEmail", value);
     const handleCnpjEmpresaChange = (value) => handleChange("companyCNPJ", value);
+    const handleValorMensalChange = (value) => handleChange("monthlyValue", value);
+    const handleValorTotalChange = (value) => handleChange("contractValue", value);
 
     const handleDeactivateContract = async () => {
 
@@ -114,8 +118,7 @@ const ContratoDetalhes = () => {
 
     }
     // quando modifico alguma coisa do modal, ele muda na tela de detalhes e isso não pode acontecer - corrigir.
-    // quando clico em salvar, ele não salva as alterações no banco de dados ainda - adicionar. 
-    // rota para atualizar os dados: post http://192.168.1.70:3000/contracts/edit
+    
     // https://www.phind.com/search?cache=f48ga23rqn0rcoo4zz8gzr4i
 
     // atualizar o website
@@ -183,7 +186,10 @@ const ContratoDetalhes = () => {
                                         <img src={DeleteIcon} alt="Icone de deletar" />
                                         Deletar contrato
                                     </button>
-                                    <button className="contract-details__button" onClick={handleEditContract}>Editar</button>
+                                    <button className="contract-details__button" onClick={handleEditContract}>
+                                        <img src={EditIcon} />
+                                        Editar
+                                        </button>
                                 </div>
                             )}
                             <button className="contract-details__button" onClick={handleGoBack}>
@@ -208,7 +214,7 @@ const ContratoDetalhes = () => {
                                 </div>
 
                                 <div className="edit-modal__body">
-                                    <form className="edit-modal__form" action="">
+                                    <form className="edit-modal__form" action="" autocomplete="off">
                                         <div className="edit-modal__form-row">
                                             <label className="edit-modal__label" htmlFor="clientName">Nome do Contrato</label>
                                             <input className="edit-modal__input" type="text" id="clientName" name="clientName" value={contrato.clientName} onChange={(e) => handleClientNameChange(e.target.value)} />
@@ -245,7 +251,9 @@ const ContratoDetalhes = () => {
                                                 type="number"
                                                 id="contractValue"
                                                 name="contractValue"
-                                                placeholder={(contrato.contractValue).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} />
+                                                value={contrato.contractValue}
+                                                onChange={(e) => handleChange("contractValue", e.target.value)}
+                                                 />
                                         </div>
                                         <div className="edit-modal__form-row">
                                             <label className="edit-modal__label" htmlFor="installments">Quantidade de Parcelas</label>
@@ -258,10 +266,11 @@ const ContratoDetalhes = () => {
                                                 type="number"
                                                 id="monthlyValue"
                                                 name="monthlyValue"
-                                                placeholder={contrato.monthlyValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                                                value={contrato.monthlyValue}
+                                                onChange={(e) => handleChange("monthlyValue", e.target.value)}
                                             />
                                         </div>
-                                        <div className="edit-modal__form-row">
+                                        {/*<div className="edit-modal__form-row">
                                             <label className="edit-modal__label" htmlFor="startDate">Data de Início</label>
                                             <input
                                                 className="edit-modal__input"
@@ -282,7 +291,7 @@ const ContratoDetalhes = () => {
                                                 value={new Date(contrato.endDate).toISOString().split('T')[0]}
                                                 onChange={(e) => handleEndDateChange(e.target.value)}
                                             />
-                                        </div>
+                                        </div> */}
                                         <div className="edit-modal__form-row">
                                             <label className="edit-modal__label" htmlFor="contractDescription">Descrição do Contrato</label>
                                             <input className="edit-modal__input" type="text" id="contractDescription" name="contractDescription" value={contrato.contractDescription}

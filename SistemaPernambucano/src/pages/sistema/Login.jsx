@@ -73,7 +73,7 @@ export default function Login() {
         <div className="allForms">
           <h2 className='entrar-conta'>Entrar na conta</h2>
           <p>Seja bem vindo de volta</p>
-          <form onSubmit={handleSubmit} className='form-login'>
+          <form autocomplete="off" onSubmit={handleSubmit} className='form-login'>
             <div className="form-group-login">
               <input
                 placeholder='Email'

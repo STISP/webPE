@@ -69,4 +69,17 @@ export class ContractsController {
     async editContract(@Param('id') id: string, @Body() updatedContract: Contract): Promise<{ oldContract: Contract, newContract: Contract }> {
         return this.contractService.editContract(id, updatedContract);
     }
+
+    // gasto mensal dos contratos ativos para todas as lojas (soma)
+    @Get('monthly/all')
+    async getMonthlyExpenseAllStores(): Promise<number> {
+        return this.contractService.getMonthlyExpenseAllStores();
+    }
+
+    // gasto mensal dos contratos ativos para uma loja selecionada pelo usuario
+    @Get('monthly/:store')
+    async getMonthlyExpense(@Param() params: { store: string }): Promise<number> {
+        const { store } = params;
+        return this.contractService.getMonthlyExpense(store);
+    }
 }

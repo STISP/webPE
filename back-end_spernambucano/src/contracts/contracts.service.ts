@@ -149,7 +149,39 @@ export class ContractsService {
         } catch (error) {
             console.error(error);
             throw new Error(`Erro ao atualizar o contrato: ${error.message}`);
-         }
+        }
     }
 
+    // gasto mensal dos contratos ativos para todas as lojas (soma)
+    async getMonthlyExpenseAllStores(): Promise<number> {
+        const currentDate = new Date();
+        const monthlyExpense = await this.contractRepository.createQueryBuilder('contract')
+            .select('SUM(contract.monthlyValue)', 'total')
+            .where('contract.status = :status', { status: 'Ativo' })
+            .andWhere('contract.endDate >= :currentDate', { currentDate })
+            .getRawOne();
+
+        if (!monthlyExpense || !monthlyExpense.total) {
+            return 0;
+        }
+
+        return monthlyExpense.total;
+    }
+
+    // gasto mensal dos contratos ativos para uma loja selecionada pelo usuario
+    async getMonthlyExpense(store: string): Promise<number> {
+        const currentDate = new Date();
+        const monthlyExpense = await this.contractRepository.createQueryBuilder('contract')
+            .select('SUM(contract.monthlyValue)', 'total')
+            .where('contract.loja = :store', { store })
+            .andWhere('contract.status = :status', { status: 'Ativo' })
+            .andWhere('contract.endDate >= :currentDate', { currentDate })
+            .getRawOne();
+
+        if (!monthlyExpense || !monthlyExpense.total) {
+            return 0;
+        }
+
+        return monthlyExpense.total;
+    }
 }

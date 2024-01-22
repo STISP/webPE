@@ -50,7 +50,7 @@ const EditModal = ({ showEditModal, setShowEditModal, id }) => {
                 <h2>Editar Contrato</h2>
             </div>
             <div>
-                <form>
+                <form autocomplete="off">
                     <div>
                         <div className="form-group">
                             <label htmlFor="clientName">Nome do Cliente</label>

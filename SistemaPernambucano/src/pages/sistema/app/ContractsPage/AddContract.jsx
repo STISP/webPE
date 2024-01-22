@@ -106,7 +106,7 @@ const AddContract = () => {
                             Cancelar
                         </button>
                     </div>
-                    <form>
+                    <form autocomplete="off">
                         <div>
                             <div className="form-group">
                                 <label htmlFor="clientName">*Nome do contrato</label>
