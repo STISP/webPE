@@ -781,6 +781,7 @@ a {
   box-sizing: border-box;
   font-size: 1rem;
   font-family: "Source Sans 3", sans-serif;
+  width: 9.9rem;
 }
 .filerSearch input:focus {
   outline: none;
@@ -1127,7 +1128,7 @@ a {
   padding: 2rem;
   border-radius: 1rem;
   background: #ededed;
-  width: 43rem;
+  width: 44rem;
   margin-bottom: 1rem;
 }
 .NomeLojaReport {
@@ -1405,4 +1406,20 @@ span {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+.OdernarPor {
+  padding: 0.4rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #3f3f3f;
+  font-family: Roboto;
+  font-size: 1rem;
+  font-family: "Source Sans 3", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  outline: none;
+  cursor: pointer;
 }

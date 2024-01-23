@@ -6,7 +6,7 @@ const AddContract = () => {
     const nome = localStorage.getItem('email');
     const nomeSemDomino = nome.replace(/@suppernambucano.com.br/g, '');
     const nomeCapitalizado = nomeSemDomino.charAt(0).toUpperCase() + nomeSemDomino.slice(1);
-    const currentDate = new Date().toISOString().split('T')[0];
+    const currentDate = new Date().toISOString();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
@@ -89,9 +89,25 @@ const AddContract = () => {
         setFirstLoad(false);
     };
 
-    function handleInvalid(event) {
-        event.preventDefault();
-    }
+    const [contractValue, setContractValue] = useState(0);
+    const [numInstallments, setNumInstallments] = useState(0);
+    const [installmentValue, setInstallmentValue] = useState(0);
+
+    const handleContractValueChange = (event) => {
+        setContractValue(parseFloat(event.target.value));
+    };
+
+    const handleNumInstallmentsChange = (event) => {
+        setNumInstallments(parseInt(event.target.value));
+    };
+
+    React.useEffect(() => {
+        if (contractValue > 0 && numInstallments > 0) {
+            let calculatedInstallment = (contractValue / numInstallments).toFixed(2);
+            setInstallmentValue(parseFloat(calculatedInstallment));
+        }
+    }, [contractValue, numInstallments]);
+
 
     const [isParcelas, setIsParcelas] = useState(false);
     const [isVencimento, setIsVencimento] = useState(true);
@@ -117,7 +133,7 @@ const AddContract = () => {
                         <div>
                             <div className="form-group">
                                 <label htmlFor="contractValue">*Valor total do Contrato</label>
-                                <input type="number" id="contractValue" placeholder="Digite o valor do contrato" onInvalid={handleInvalid} required />
+                                <input type="number" id="contractValue" placeholder="Digite o valor do contrato" onInput={handleContractValueChange} required />
                             </div>
                             <div className="form-group">
                                 <label>Parcelado?</label>
@@ -130,10 +146,11 @@ const AddContract = () => {
                                 <>
                                     <div className="form-group">
                                         <label htmlFor="installments">*Quantidade de parcelas</label>
-                                        <input type="number" id="installments" placeholder="Digite a quantidade de parcelas" onInvalid={handleInvalid} required />
-                                    </div><div className="form-group">
+                                        <input type="number" id="installments" placeholder="Digite a quantidade de parcelas" onInput={handleNumInstallmentsChange} required />
+                                    </div>
+                                    <div className="form-group">
                                         <label htmlFor="monthlyValue">*Valor da parcela</label>
-                                        <input type="number" id="monthlyValue" placeholder="Digite o valor da parcela" onInvalid={handleInvalid} required />
+                                        <input type="number" id="monthlyValue" placeholder="Digite o valor da parcela" value={installmentValue} readOnly required />
                                     </div>
                                 </>
                             )}

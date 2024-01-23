@@ -8,6 +8,8 @@ const ContractsPage = () => {
     const [contracts, setContracts] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [store, setStore] = useState("");
+    const [sortOrder, setSortOrder] = useState('nenhum');
+    const [expiredContracts, setExpiredContracts] = useState(false);
 
     useEffect(() => {
         if (contracts.length === 0) {
@@ -85,6 +87,7 @@ const ContractsPage = () => {
                     contractValue: contract.contractValue,
                     status: contract.status,
                     loja: contract.loja,
+                    postedDate: contract.postedDate,
                 }));
                 setContracts(contractsData);
                 setIsLoaded(true);
@@ -107,27 +110,44 @@ const ContractsPage = () => {
     };
 
     function search(items) {
-        return items
+        let sortedItems = items
             .filter((item) => {
                 const clientNameMatches = item.clientName.toLowerCase().indexOf(q.toLowerCase()) > -1;
                 const statusMatches = status.length === 0 || status.includes(item.status);
                 const storeMatches = store === "" || store === storeNames[item.loja];
-                return clientNameMatches && statusMatches && storeMatches;
+                const expiredMatches = !expiredContracts || item.status === 'Desativado';
+                return clientNameMatches && statusMatches && storeMatches && expiredMatches;
             })
             .sort((a, b) => {
-                // Coloca os contratos 'Desativado' no final da lista
-                if (a.status === 'Desativado' && b.status !== 'Desativado') {
-                    return 1;
+                switch (sortOrder) {
+                    case 'nenhum':
+                        return 0;
+                    case 'asc':
+                        // Sort by contract value in ascending order
+                        return a.contractValue - b.contractValue;
+                    case 'desc':
+                        // Sort by contract value in descending order
+                        return b.contractValue - a.contractValue;
+                    case 'nearest':
+                        // Sort by due date in ascending order
+                        const dueDateA = new Date(a.endDate);
+                        const dueDateB = new Date(b.endDate);
+                        return dueDateA - dueDateB;
+                    default:
+                        return 0;
                 }
-                if (b.status === 'Desativado' && a.status !== 'Desativado') {
-                    return -1;
-                }
-
-                // Ordena o restante dos contratos pela data de vencimento mais próxima
-                const dueDateA = new Date(a.endDate);
-                const dueDateB = new Date(b.endDate);
-                return dueDateA - dueDateB;
             });
+    
+        // faça um if que se o sortOrder for igual a 'nenhum' ele vai organizar a lista de forma do mais novo para o mais antigo, onde o mais novo aparece na frente (o ultimo adicionado no banco de dados)
+        if (sortOrder === 'nenhum') {
+            sortedItems = sortedItems.sort((a, b) => {
+                const postedDateA = new Date(a.postedDate);
+                const postedDateB = new Date(b.postedDate);
+                return postedDateB - postedDateA;
+            });
+        }
+    
+        return sortedItems;
     }
 
     const [status, setStatus] = useState([]);
@@ -158,6 +178,11 @@ const ContractsPage = () => {
                         {statusOption}
                     </label>
                 ))}
+
+                <label>
+                    <input type="checkbox" checked={expiredContracts} onChange={(e) => setExpiredContracts(e.target.checked)} />
+                    Contratos Vencidos
+                </label>
             </div>
         );
     };
@@ -211,7 +236,7 @@ const ContractsPage = () => {
                 </div>
             </div>
             <div className="filerSearch">
-                <input
+                <input autoComplete='off'
                     type="search"
                     name="search-form"
                     id="search-form"
@@ -220,6 +245,13 @@ const ContractsPage = () => {
                     value={q}
                     onChange={(e) => setQ(e.target.value)}
                 />
+                <select className="OdernarPor" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
+                    <option value="nenhum">Ordenar por</option>
+                    <option value="asc">Menor para Maior R$</option>
+                    <option value="desc">Maior para Menor R$</option>
+                    <option value="nearest">Próximo vencimento</option>
+                </select>
+
                 <StoreSelect store={store} setStore={setStore} />
                 <StatusCheckbox status={status} setStatus={setStatus} />
             </div>

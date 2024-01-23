@@ -87,10 +87,23 @@ const ContratoDetalhes = () => {
     }
 
     const handleChange = (field, value) => {
-        setContrato((prevContrato) => ({
-            ...prevContrato,
-            [field]: value,
-        }));
+        setContrato((prevContrato) => {
+            const newContrato = {
+                ...prevContrato,
+                [field]: value,
+            };
+    
+            if (field === 'contractValue' || field === 'installments') {
+                let installmentValue = 0;
+                if (newContrato.contractValue > 0 && newContrato.installments > 0) {
+                    installmentValue = (newContrato.contractValue / newContrato.installments).toFixed(2);
+                    installmentValue = parseFloat(installmentValue);
+                }
+                newContrato.monthlyValue = installmentValue;
+            }
+    
+            return newContrato;
+        });
     };
 
     // const handleStartDateChange = (value) => handleChange("startDate", new Date(value));
@@ -117,12 +130,6 @@ const ContratoDetalhes = () => {
     const handleRenewContract = async () => {
 
     }
-    // quando modifico alguma coisa do modal, ele muda na tela de detalhes e isso não pode acontecer - corrigir.
-    
-    // https://www.phind.com/search?cache=f48ga23rqn0rcoo4zz8gzr4i
-
-    // atualizar o website
-
 
     const handleSave = async () => {
         try {

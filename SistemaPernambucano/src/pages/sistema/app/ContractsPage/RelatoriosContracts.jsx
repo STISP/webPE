@@ -17,6 +17,7 @@ const RelatoriosContracts = () => {
     const currentDate = new Date().toLocaleDateString('pt-BR');
     const currentDay = new Date().toLocaleDateString('pt-BR', { weekday: 'long' });
     const [gastoMensal, setgastoMensal] = useState(0);
+    const [monthlyExpensesPerStore, setMonthlyExpensesPerStore] = useState({});
 
     useEffect(() => {
         if (contracts.length === 0) {
@@ -61,6 +62,18 @@ const RelatoriosContracts = () => {
                     setgastoMensal(data);
                 })
                 .catch('Erro ao carregar gasto mensal');
+
+            const fetchMonthlyExpensesPerStore = async () => {
+                const expenses = {};
+                for (let i = 0; i < stores.length; i++) {
+                    const encodedStore = encodeURIComponent(stores[i]);
+                    const response = await fetch(`http://192.168.1.70:3000/contracts/monthly/${encodedStore}`);
+                    const data = await response.json();
+                    expenses[stores[i]] = data;
+                }
+                setMonthlyExpensesPerStore(expenses);
+            };
+            fetchMonthlyExpensesPerStore();
         }
     }, [contracts]);
 
@@ -84,14 +97,14 @@ const RelatoriosContracts = () => {
     function generateExcelData(rows) {
         const ws = XLSX.utils.json_to_sheet(rows);
         const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-        XLSX.writeFile(wb, 'Relatório dos Contratos.xlsx');
+        XLSX.utils.book_append_sheet(wb, ws, 'Contratos');
+        XLSX.writeFile(wb, 'Relatório de Contratos.xlsx');
     }
 
     function transformReportsToRows(reports) {
         return Object.entries(reports).map(([store, stats]) => ({
             'Loja': store,
-            'Gasto Mensal': stats.gastoMensal ? stats.gastoMensal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : "0",
+            'Gasto Mensal R$': new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(monthlyExpensesPerStore[store] || 0),
             'Total de Contratos Ativos R$': stats.totalValue ? stats.totalValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : "0",
             'Contratos Ativos': stats.activeContracts || 0,
             'Contratos Desativados': stats.inactiveContracts || 0,
@@ -140,6 +153,19 @@ const RelatoriosContracts = () => {
             } catch (error) {
                 console.error('Erro ao carregar contratos', error);
             }
+
+            const fetchMonthlyExpensesPerStore = async () => {
+                const expenses = {};
+                for (let i = 0; i < stores.length; i++) {
+                    const encodedStore = encodeURIComponent(stores[i]);
+                    const response = await fetch(`http://192.168.1.70:3000/contracts/monthly/${encodedStore}`);
+                    const data = await response.json();
+                    expenses[stores[i]] = data;
+                }
+                setMonthlyExpensesPerStore(expenses);
+            };
+            fetchMonthlyExpensesPerStore();
+
         };
         fetchData();
     }
@@ -213,7 +239,7 @@ const RelatoriosContracts = () => {
                 <div className='opViewContractsScreenInicial'>
                     <div className='iconAndTotalContracts'>
                         <img src={iconContract} />
-                        <p>Gasto Mensal</p>
+                        <p>Gasto Mensal Total</p>
                     </div>
                     <div className="dataAndIcon">
                         <span>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(gastoMensal)}</span>
@@ -249,7 +275,7 @@ const RelatoriosContracts = () => {
                                 <div className="linePart2" />
                                 <div className="tituloAndSpan">
                                     <p>Gasto mensal</p>
-                                    <span>{reports[store]?.gastoMensal ? reports[store].gastoMensal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : "0"}</span>
+                                    <span>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(monthlyExpensesPerStore[store] || 0)}</span>
                                 </div>
                             </div>
 
