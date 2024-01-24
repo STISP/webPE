@@ -2097,3 +2097,37 @@ input[type="searchLoja"]::placeholder {
   font-weight: bold;
   background-color: #e40000;
 }
+.sejaBemVindo {
+  color: #0261A3;
+  text-align: center;
+  font-family: "Source Sans 3";
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.3125rem;
+  letter-spacing: 0.025rem;
+  margin: 2rem 0;
+}
+.links-list li {
+  margin: 0.5rem 0;
+}
+.links-list li a {
+  color: #0261A3;
+  font-family: "Source Sans 3";
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.3125rem;
+  letter-spacing: 0.025rem;
+  text-decoration: none;
+
+  display: flex;
+  width: 7.00769rem;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: "DM Sans";
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+}

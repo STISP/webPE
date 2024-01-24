@@ -18,6 +18,7 @@ const JaboataoCentro = React.lazy(() => import('../src/pages/NossasLojas/SobreLo
 const Central = React.lazy(() => import('./pages/NossasLojas/SobreLojas.jsx/Central.jsx'));
 const Sobre = React.lazy(() => import('./pages/Sobre/Sobre.jsx'));
 const JaboataoMatriz = React.lazy(() => import('./pages/NossasLojas/SobreLojas.jsx/JaboataoMatriz.jsx'));
+const Links = React.lazy(() => import('./pages/Links.jsx'));
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -38,6 +39,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path="/lojas/VascoDaGama" element={<VascoDaGama />} />
             <Route path="/sobre" element={<Sobre />} />
             <Route path="/panfletos" element={<Panfletos />} />
+            <Route path="/links" element={<Links />} />
             <Route path="*" element={<RotaNaoEncontrada />} />
           </Routes>
         </Suspense>

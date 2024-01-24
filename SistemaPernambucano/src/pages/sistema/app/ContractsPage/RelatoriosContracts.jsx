@@ -4,7 +4,7 @@ import voltarIcon from '../../../../assets/voltarIcon.svg';
 import iconContract from '../../../../assets/iconContract.svg';
 import iconContractVencido from '../../../../assets/iconContractVencido.svg';
 import valorContractIcon from '../../../../assets/valorContractIcon.svg';
-import * as XLSX from 'xlsx';
+import * as ExcelJS from 'exceljs';
 
 const RelatoriosContracts = () => {
     const [totalContracts, setTotalContracts] = useState(0);
@@ -94,11 +94,74 @@ const RelatoriosContracts = () => {
         generateExcelData(rows);
     }
 
-    function generateExcelData(rows) {
-        const ws = XLSX.utils.json_to_sheet(rows);
-        const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, 'Contratos');
-        XLSX.writeFile(wb, 'Relatório de Contratos.xlsx');
+    async function generateExcelData(rows) {
+        const workbook = new ExcelJS.Workbook();
+        const worksheet = workbook.addWorksheet('Contratos');
+
+        // ... código para adicionar dados ao workbook ...
+        worksheet.columns = [
+            { header: 'Loja', key: 'Loja', width: 30 },
+            { header: 'Gasto Mensal R$', key: 'Gasto Mensal R$', width: 16 },
+            { header: 'Total de Contratos Ativos R$', key: 'Total de Contratos Ativos R$', width: 27 },
+            { header: 'Ativos', key: 'Contratos Ativos', width: 7 },
+            { header: 'Desativados', key: 'Contratos Desativados', width: 12 },
+            { header: 'Vencidos', key: 'Contratos Vencidos', width: 10 },
+            { header: 'N° de Registro do Último Mês', key: 'N° de Registro do Último Mês', width: 28 },
+            { header: 'Data do Próximo Vencimento', key: 'Data do Próximo Vencimento', width: 28 },
+        ];
+
+        // Add style to worksheet
+        worksheet.eachRow((row, rowNumber) => {
+            row.eachCell((cell, colNumber) => {
+                cell.fill = {
+                    type: 'pattern',
+                    pattern: 'solid',
+                    fgColor: { argb: '132438' }
+                };
+                cell.font = {
+                    color: { argb: 'FFFFFFFF' },
+                    bold: true,
+                    size: 11
+                };
+            });
+        });
+
+        worksheet.addRows(rows);
+
+        worksheet.addRow([]);
+
+        worksheet.mergeCells('A12:B12');
+        worksheet.getCell('A12').value = 'Resumo de Contratos';
+        worksheet.getCell('A12').fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: '132438' }
+        };
+        worksheet.getCell('A12').font = {
+            color: { argb: 'FFFFFFFF' },
+            bold: true,
+            size: 14,
+        };
+        worksheet.getCell('A12').alignment = { vertical: 'middle', horizontal: 'center' };
+
+        worksheet.addRow(['Total de Contratos Ativos R$', new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalValue)]);
+        worksheet.addRow(['Gasto Mensal Total', new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(gastoMensal)]);
+        worksheet.addRow(['Total de Contratos', totalContracts]);
+        worksheet.addRow(['Total de Contratos Vencidos', contractsExpired]);
+
+        // Escrevendo o arquivo
+        const buffer = await workbook.xlsx.writeBuffer();
+        const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        const url = URL.createObjectURL(blob);
+
+        // Iniciando o download
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'Relatório de Contratos.xlsx';
+        link.click();
+
+        // Liberando a URL criada
+        URL.revokeObjectURL(url);
     }
 
     function transformReportsToRows(reports) {
