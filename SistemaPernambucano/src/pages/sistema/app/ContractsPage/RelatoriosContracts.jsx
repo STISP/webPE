@@ -4,6 +4,7 @@ import voltarIcon from '../../../../assets/voltarIcon.svg';
 import iconContract from '../../../../assets/iconContract.svg';
 import iconContractVencido from '../../../../assets/iconContractVencido.svg';
 import valorContractIcon from '../../../../assets/valorContractIcon.svg';
+import totalValueIcon from '../../../../assets/totalValueIcon.svg';
 import * as ExcelJS from 'exceljs';
 
 const RelatoriosContracts = () => {
@@ -98,7 +99,6 @@ const RelatoriosContracts = () => {
         const workbook = new ExcelJS.Workbook();
         const worksheet = workbook.addWorksheet('Contratos');
 
-        // ... código para adicionar dados ao workbook ...
         worksheet.columns = [
             { header: 'Loja', key: 'Loja', width: 30 },
             { header: 'Gasto Mensal R$', key: 'Gasto Mensal R$', width: 16 },
@@ -110,7 +110,6 @@ const RelatoriosContracts = () => {
             { header: 'Data do Próximo Vencimento', key: 'Data do Próximo Vencimento', width: 28 },
         ];
 
-        // Add style to worksheet
         worksheet.eachRow((row, rowNumber) => {
             row.eachCell((cell, colNumber) => {
                 cell.fill = {
@@ -149,18 +148,15 @@ const RelatoriosContracts = () => {
         worksheet.addRow(['Total de Contratos', totalContracts]);
         worksheet.addRow(['Total de Contratos Vencidos', contractsExpired]);
 
-        // Escrevendo o arquivo
         const buffer = await workbook.xlsx.writeBuffer();
         const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
         const url = URL.createObjectURL(blob);
 
-        // Iniciando o download
         const link = document.createElement('a');
         link.href = url;
         link.download = 'Relatório de Contratos.xlsx';
         link.click();
 
-        // Liberando a URL criada
         URL.revokeObjectURL(url);
     }
 
@@ -178,7 +174,6 @@ const RelatoriosContracts = () => {
     }
 
     function reloadPage() {
-        // Fetch the data again
         const fetchData = async () => {
             try {
                 const response = await fetch('http://192.168.1.70:3000/contracts');
@@ -188,7 +183,6 @@ const RelatoriosContracts = () => {
                 setTotalContracts(data.length);
                 setContracts(contractValues);
 
-                // Iterate over each store and fetch the report
                 const reports = {};
                 for (let i = 0; i < stores.length; i++) {
                     const encodedStore = encodeURIComponent(stores[i]);
@@ -288,25 +282,26 @@ const RelatoriosContracts = () => {
                     </div>
 
                     <div className='opViewContractsScreenInicial'>
-                        <Link to="/ContractsPage">
-                            <div className='iconAndTotalContracts iconopview'>
-                                <img src={valorContractIcon} />
-                                <p>Valor Total de Contratos Ativos</p>
-                            </div>
-                            <div className="dataAndIcon">
-                                <span>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalValue)}</span>
-                            </div>
-                        </Link>
+                        <div className='iconAndTotalContracts'>
+                            <img src={valorContractIcon} />
+                            <p>Gasto Mensal Total</p>
+                        </div>
+                        <div className="dataAndIcon">
+                            <span>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(gastoMensal)}</span>
+                        </div>
                     </div>
                 </div>
-                <div className='opViewContractsScreenInicial'>
-                    <div className='iconAndTotalContracts'>
-                        <img src={iconContract} />
-                        <p>Gasto Mensal Total</p>
-                    </div>
-                    <div className="dataAndIcon">
-                        <span>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(gastoMensal)}</span>
-                    </div>
+
+                <div className='opViewContractsScreenInicia2'>
+                    <Link to="/ContractsPage">
+                        <div className='iconAndTotalContracts2 iconopview'>
+                            <img src={totalValueIcon} />
+                            <p>Valor Total de Contratos Ativos</p>
+                        </div>
+                        <div className="dataAndIcon2">
+                            <span>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalValue)}</span>
+                        </div>
+                    </Link>
                 </div>
             </div>
 

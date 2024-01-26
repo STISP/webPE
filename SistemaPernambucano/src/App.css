@@ -224,6 +224,66 @@ a {
   flex-direction: column;
   justify-content: space-between;
 }
+.iconAndTotalContracts2 {
+  display: flex;
+  flex-direction: row;
+  color: #132438;
+  font-family: Roboto;
+  align-items: center;
+  gap: 0.5rem;
+}
+.iconAndTotalContracts2 p {
+  color: #132438;
+  font-family: Roboto;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 500;
+  margin: 0;
+}
+.iconAndTotalContracts2 a {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 8rem;
+}
+.iconAndTotalContracts2 img {
+  width: 1.7rem;
+  height: 1.7rem;
+}
+.opViewContractsScreenInicia2 {
+  border-radius: 0.75rem;
+  background: #ededed;
+  width: 48.5rem;
+  padding: 1.1rem 1.9rem;
+  transition: 0.3s ease;
+}
+.opViewContractsScreenInicia2:hover {
+  transform: scale(1.01);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.opViewContractsScreenInicia2 a {
+  color: #fff;
+  fill: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.dataAndIcon2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.dataAndIcon2 span {
+  color: #132438;
+  font-family: Roboto;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 0.8125rem;
+}
+
 .iconAndTotalContracts {
   display: flex;
   flex-direction: column;
@@ -1128,7 +1188,7 @@ a {
   padding: 2rem;
   border-radius: 1rem;
   background: #ededed;
-  width: 44rem;
+  width: 48.5rem;
   margin-bottom: 1rem;
 }
 .NomeLojaReport {
@@ -1148,7 +1208,7 @@ a {
   position: absolute;
   bottom: -0.5rem;
   left: 0;
-  width: 90%;
+  width: 80%;
   height: 0.0625rem;
   background-color: #132438;
 }
@@ -1178,7 +1238,7 @@ span {
   line-height: normal;
 }
 .line2 {
-  width: 90%;
+  width: 80%;
   height: 0.0625rem;
   background: #132438;
   margin: 0.5rem 0;
