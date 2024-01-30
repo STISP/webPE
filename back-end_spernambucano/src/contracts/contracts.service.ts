@@ -1,7 +1,6 @@
 import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { LessThanOrEqual, MoreThanOrEqual, Repository } from 'typeorm';
 import { Contract } from './contracts.entity';
-import { FileDTO } from './uploand.dto';
 
 @Injectable()
 export class ContractsService {

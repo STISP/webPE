@@ -2,12 +2,12 @@ import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Quarta_verde_Panfleto1 from '../assets/Quarta verde 1 30.11.2023.jpg';
-import Quarta_verde_Panfleto2 from '../assets/Quarta verde 2 30.11.2023.jpg';
-import Quarta_verde_Panfleto3 from '../assets/Quarta verde 3 30.11.2023.jpg';
-import Quarta_verde_Panfleto4 from '../assets/Quarta verde 4 30.11.2023.jpg';
-import Quarta_verde_Panfleto5 from '../assets/Quarta verde 5 30.11.2023.jpg';
-import Quarta_verde_Panfleto6 from '../assets/Quarta verde 6 30.11.2023.jpg';
+import DiaP1 from '../assets/Dia P - jan 20241.jpg';
+import DiaP2 from '../assets/Dia P - jan 20242.jpg';
+import DiaP3 from '../assets/Dia P - jan 20243.jpg';
+import DiaP4 from '../assets/Dia P - jan 20244.jpg';
+import DiaP5 from '../assets/Dia P - jan 20245.jpg';
+import DiaP6 from '../assets/Dia P - jan 20246.jpg';
 import DiaPeAniversario1 from '../assets/1 Dia P (aniversário) 30_11_2023.jpg';
 import DiaPeAniversario2 from '../assets/1 Dia P (aniversário) 30_11_2023.jpg';
 import OfertaNatal1 from '../assets/ofertaNatal 1 24.12.2023.jpg';
@@ -27,27 +27,27 @@ export default function Panfletos() {
   const panfletos = [
     {
       id: 1,
+      titulo: 'Dia P - Muitas ofertas!',
+      dataValidade: 'Ofertás Válidas no Dia 30 de Janeiro ou Enquanto Durarem os Estoques',
+      imagem: [DiaP1, DiaP2, DiaP3, DiaP4, DiaP5, DiaP6],
+    },
+    {
+      id: 2,
       titulo: 'Show de ofertas',
       dataValidade: 'Ofertas válidas de 05 a 06 de Janeiro',
       imagem: [ShowDeOferta1, ShowDeOferta2],
     },
     {
-      id: 2,
+      id: 3,
       titulo: 'Promoções de Natal',
       dataValidade: 'Ofertas válidas até 31 de dezembro (Prolongado)',
       imagem: [OfertaNatal1, OfertaNatal2, OfertaNatal3, OfertaNatal4, OfertaNatal5, OfertaNatal6, OfertaNatal7],
     },
     {
-      id: 3,
+      id: 4,
       titulo: 'Dia P e Aniversário',
       dataValidade: 'Ofertas válidas no dia 30 de novembro',
       imagem: [DiaPeAniversario1, DiaPeAniversario2],
-    },
-    {
-      id: 4,
-      titulo: 'Quarta verde',
-      dataValidade: 'Apenas nesta quarta, 29 de novembro',
-      imagem: [Quarta_verde_Panfleto1, Quarta_verde_Panfleto2, Quarta_verde_Panfleto3, Quarta_verde_Panfleto4, Quarta_verde_Panfleto5, Quarta_verde_Panfleto6],
     },
   ];
 
