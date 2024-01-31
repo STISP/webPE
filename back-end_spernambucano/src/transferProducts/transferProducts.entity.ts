@@ -18,6 +18,10 @@ export class TransferProducts {
     @Column({ type: 'integer' })
     productQuantity: number;
 
+    // dia postado
+    @Column()
+    postDate: Date;
+
     // data da transferencia
     @Column()
     transferDate: Date;

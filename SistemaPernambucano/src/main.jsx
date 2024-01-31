@@ -13,26 +13,20 @@ import AddContract from './pages/sistema/app/ContractsPage/AddContract.jsx'
 import TransferenciaEntreLojas from './pages/sistema/app/Transferencia entre lojas/TransferenciaEntreLojas.jsx'
 import RelatoriosContracts from './pages/sistema/app/ContractsPage/RelatoriosContracts.jsx';
 
-function isMobileView() {
-  return window.matchMedia('(max-width: 1100px)').matches;
-}
-
 ReactDOM.createRoot(document.getElementById('root')).render(
-  isMobileView() ?
-    <div>Deixe em tela cheia e atualize a pagina</div> :
-    <React.StrictMode>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Layout><PrivateRoute><TelaInicialSystem /></PrivateRoute></Layout>} />
-          <Route path="/ContractsPage" element={<Layout><PrivateRoute><ContractsPage /></PrivateRoute></Layout>} />
-          <Route path="/ContractsPage/AddContract" element={<Layout><PrivateRoute><AddContract /></PrivateRoute></Layout>} />
-          <Route path="/ContractsPage/RelatoriosContracts" element={<Layout><PrivateRoute><RelatoriosContracts /></PrivateRoute></Layout>} />
-          <Route exact path="/ContractsPage/Contrato/:id" element={<Layout><PrivateRoute><ContratoDetalhes /></PrivateRoute></Layout>} />
-          <Route path="/TransferenciaEntreLojas" element={<Layout><PrivateRoute><TransferenciaEntreLojas /></PrivateRoute></Layout>} />
-          <Route path="/cadastro" element={<Layout><PrivateRoute><CriarConta /></PrivateRoute></Layout>} />
-          <Route path="/Login" element={<Layout hideMenuPaths={["/Login"]}><Login /></Layout>} />
-          <Route path="*" element={<RotaNaoEncontrada />} />
-        </Routes>
-      </Router>
-    </React.StrictMode>
+  <React.StrictMode>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout><PrivateRoute><TelaInicialSystem /></PrivateRoute></Layout>} />
+        <Route path="/ContractsPage" element={<Layout><PrivateRoute><ContractsPage /></PrivateRoute></Layout>} />
+        <Route path="/ContractsPage/AddContract" element={<Layout><PrivateRoute><AddContract /></PrivateRoute></Layout>} />
+        <Route path="/ContractsPage/RelatoriosContracts" element={<Layout><PrivateRoute><RelatoriosContracts /></PrivateRoute></Layout>} />
+        <Route exact path="/ContractsPage/Contrato/:id" element={<Layout><PrivateRoute><ContratoDetalhes /></PrivateRoute></Layout>} />
+        <Route path="/TransferenciaEntreLojas" element={<Layout><PrivateRoute><TransferenciaEntreLojas /></PrivateRoute></Layout>} />
+        <Route path="/cadastro" element={<Layout><PrivateRoute><CriarConta /></PrivateRoute></Layout>} />
+        <Route path="/Login" element={<Layout hideMenuPaths={["/Login"]}><Login /></Layout>} />
+        <Route path="*" element={<RotaNaoEncontrada />} />
+      </Routes>
+    </Router>
+  </React.StrictMode>
 )

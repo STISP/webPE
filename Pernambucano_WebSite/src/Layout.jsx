@@ -35,6 +35,9 @@ const Layout = ({ children }) => {
     const isChristmasPromoDay = month === 11 && date >= 21 && date <= 24;
     setIsChristmasPromo(isChristmasPromoDay);
 
+    const isEndOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate() === date;
+    const isPromoDay = isEndOfMonth && !isBlackFrday && !isChristmasPromoDay;
+
     if (isBlackFrday) {
       setMessage('Hoje é Black Friday! Aproveite as promoções em nossas lojas');
     } else if (isChristmasPromoDay) {
@@ -43,6 +46,8 @@ const Layout = ({ children }) => {
           Hoje tem promoção de Natal! <span>Clique aqui para conferir</span>
         </Link>
       );
+    } else if (isPromoDay) {
+      setMessage('Dia P - Promoção especial no final do mês!');
     } else {
       const todayMessage = promoMessages[dayOfWeek] || '';
       setMessage(todayMessage);
