@@ -40,7 +40,7 @@ export class TransferProducts {
     @Column({ type: 'text' })
     destinationStore: string;
 
-    // nome do responsável
+    // nome de quem postou
     @Column({ type: 'text' })
-    responsibleName: string;
+    postedBy: string;
 }

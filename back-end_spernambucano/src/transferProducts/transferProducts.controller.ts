@@ -37,4 +37,16 @@ export class TransferProductsController {
     async getTransferProductByDeliveryDate(): Promise<TransferProducts[]> {
         return this.transferProductsService.getTransferProductByDeliveryDate();
     }
+
+    // rota para pegar todas as transferencias entregues (deliveryDate != 01/01/9999)
+    // rota que vai ser usada para gerar o relatorio de transferencias entregues
+    // Rota para buscar produtos de transferência por um intervalo de datas específico
+    // @Get('dateRange/:startDate/:endDate')
+    // async getTransferProductsByDateRange(
+    //     @Param('startDate') startDate: string,
+    //     @Param('endDate') endDate: string
+    // ): Promise<TransferProducts[]> {
+    //     return this.transferProductsService.getTransferProductsByDateRange(startDate, endDate);
+    // }
+    // rota para buscar por loja de origem
 }

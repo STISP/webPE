@@ -30,7 +30,7 @@ const ContratoDetalhes = () => {
 
     const getContractDetails = async (id) => {
         try {
-            const response = await axios.get(`http://192.168.1.70:3000/contracts/${id}`);
+            const response = await axios.get(`http://localhost:3000/contracts/${id}`);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -40,7 +40,7 @@ const ContratoDetalhes = () => {
 
     const deleteContract = async (id) => {
         try {
-            await axios.delete(`http://192.168.1.70:3000/contracts/${id}`);
+            await axios.delete(`http://localhost:3000/contracts/${id}`);
             navigate('/ContractsPage');
         } catch (error) {
             console.error(error);
@@ -155,7 +155,7 @@ const ContratoDetalhes = () => {
                 companyCNPJ: contrato.companyCNPJ,
             };
 
-            await axios.post('http://192.168.1.70:3000/contracts/edit', updatedContract);
+            await axios.post('http://localhost:3000/contracts/edit', updatedContract);
             setShowEditModal(false);
             setShowSuccessMessageEdit(true);
             setContrato(updatedContract);

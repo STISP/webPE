@@ -9,13 +9,8 @@ const ViewTransferDado = (props) => {
     };
 
     return (
-        <div id={id} className="transferenciasRecentes" >
-            <div className="tituloANdViewAll">
-                <h2>Transferência Recente</h2>
-                <p>Ver todos</p>
-            </div>
-
-            <div className="transferenciasRecentes">
+        <div key={id} className="ViewTransferDado2" >
+            <div className="ViewTransferDado2">
                 <img src={{}} alt="" />
                 <div className="InfoProducts">
                     <p className='ProductName'>{productName}</p>
@@ -33,12 +28,10 @@ const ViewTransferDado = (props) => {
                 </div>
                 {showMoreInfo && (
                     <div className="moreInfo" >
-                        teste
-                        {/*<p className='CodigoProduto'>Código do Produto:  {productCode}</p>
+                        <p className='CodigoProduto'>Código do Produto:  {productCode}</p>
                         <p className='QuantidadeProduto'>Quantidade: {productQuantity}</p>
                         <p className='DataTransferencia'>Data de Transferência: {transferDate}</p>
                         <p className='DataEntrega'>Data de Entrega: {deliveryDate}</p>
-                        <p className='Responsavel'>Responsável: {responsibleName}</p>*/}
                     </div>
                 )}
             </div>

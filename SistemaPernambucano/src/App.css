@@ -182,9 +182,6 @@ a {
   margin: 0;
   color: #797979;
 }
-.menuContracts {
-  margin: 2rem 0 1.5rem 0;
-}
 .icon-tabler-logout {
   fill: #fff;
 }
@@ -379,7 +376,7 @@ a {
   gap: 1rem;
   display: flex;
   flex-wrap: wrap;
-  max-width: 56rem;
+  max-width: 55rem;
 }
 .view-contracts {
   padding-bottom: 1rem;
@@ -391,6 +388,7 @@ a {
   align-items: center;
   margin-right: 0.5rem;
   gap: 3rem;
+  margin: 2rem 0 1.5rem 0;
 }
 .menuContracts button {
   display: inline-flex;
@@ -966,13 +964,13 @@ a {
   border-bottom-style: inset;
   padding-bottom: 1rem;
 }
-.transferencia-entre-lojas {
-  margin: 20px;
-}
-
-.transferencia-entre-lojas h1 {
-  font-size: 24px;
-  margin-bottom: 10px;
+.inicioTransferencia {
+  display: flex;
+  justify-content: space-between;
+  width: 52.5rem;
+  align-items: center;
+  gap: 3rem;
+  margin: 2rem 0 1.5rem 0;
 }
 .form-group-login {
   margin-bottom: 1rem;
@@ -1555,7 +1553,7 @@ span {
 }
 .inputTransferProduct p {
   margin: 0;
-  font-size: .8rem;
+  font-size: 0.8rem;
   font-family: "Source Sans 3", sans-serif;
   font-weight: 400;
   color: #3f3f3f;

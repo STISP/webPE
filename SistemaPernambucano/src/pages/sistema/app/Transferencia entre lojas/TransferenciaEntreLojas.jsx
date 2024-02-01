@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import ViewTransferDado from './VIewTransferDado';
-import RegistrarTransfer from './RegistrarTransfer';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import ViewTransferDado from './components/VIewTransferDado';
+import RegistrarTransfer from './components/RegistrarTransferModal';
 
 const TransferenciaEntreLojas = () => {
     const [showRegistarTransfer, setShowRegistarTransfer] = useState(false);
+    const [transferencias, setTransferencias] = useState([]);
 
     const handleRegistarTransferClick = () => {
         setShowRegistarTransfer(!showRegistarTransfer);
@@ -13,10 +15,27 @@ const TransferenciaEntreLojas = () => {
         setShowRegistarTransfer(false);
     };
 
+    useEffect(() => {
+        const fetchTransferencias = async () => {
+            try {
+                const response = await axios.get('http://192.168.1.70:3000/transferProducts');
+                setTransferencias(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchTransferencias();
+    }, []);
+
     return (
         <div className="transferencia-entre-lojas">
-            <h1>Transferência Entre Lojas</h1>
-            <p>Controle de Consumo de Materiais de Expediente</p>
+            <div className="inicioTransferencia">
+                <div className='tituloAndSubtituloPage'>
+                    <h1 className='TituloPage'>Transferência Entre Lojas</h1>
+                    <p className='SubtituloPage'>Controle de Consumo de Materiais de Expediente</p>
+                </div>
+            </div>
 
             <div className="line" />
 
@@ -52,10 +71,22 @@ const TransferenciaEntreLojas = () => {
 
             <div className="line" />
 
-            <ViewTransferDado />
+            {transferencias.map((transferencia) => (
+                <ViewTransferDado
+                    key={transferencia.id}
+                    productName={transferencia.productName}
+                    productCode={transferencia.productCode}
+                    postDate={transferencia.postDate}
+                    productQuantity={transferencia.productQuantity}
+                    transferDate={transferencia.transferDate}
+                    deliveryDate={transferencia.deliveryDate}
+                    originStore={transferencia.originStore}
+                    destinationStore={transferencia.destinationStore}
+                />
+            ))}
 
             {showRegistarTransfer && (
-                <RegistrarTransfer onClose={handleCloseRegistarTransfer}/>
+                <RegistrarTransfer onClose={handleCloseRegistarTransfer} />
             )}
         </div>
     );

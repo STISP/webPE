@@ -115,7 +115,7 @@ const ContractsPage = () => {
                 const clientNameMatches = item.clientName.toLowerCase().indexOf(q.toLowerCase()) > -1;
                 const statusMatches = status.length === 0 || status.includes(item.status);
                 const storeMatches = store === "" || store === storeNames[item.loja];
-                const expiredMatches = !expiredContracts || item.status === 'Desativado';
+                const expiredMatches = !expiredContracts || (expiredContracts && getDueDateColor(item.endDate) === '#ff0000');
                 return clientNameMatches && statusMatches && storeMatches && expiredMatches;
             })
             .sort((a, b) => {

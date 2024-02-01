@@ -29,7 +29,7 @@ const EditModal = ({ showEditModal, setShowEditModal, id }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`http://192.168.1.70:3000/contracts/edit/${id}`, contractData);
+            await axios.post(`http://localhost:3000/contracts/edit/${id}`, contractData);
             setShowEditModal(false);
             window.location.reload();
         } catch (error) {
