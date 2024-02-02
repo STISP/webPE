@@ -1,9 +1,19 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const RegistrarTransfer = ({ onClose }) => {
+
+    const nome = localStorage.getItem('email');
+    const nomeSemDomino = nome.replace(/@suppernambucano.com.br/g, '');
+    const nomeCapitalizado = nomeSemDomino.charAt(0).toUpperCase() + nomeSemDomino.slice(1);
+    
     const [formValues, setFormValues] = useState({
+        aindaNaoEntregue: false,
         productName: '',
-        quantity: '',
+        productCode: '',
+        productQuantity: '',
+        postDate: new Date().toISOString().slice(0, 10),
+        productValue: '',
         transferDate: '',
         originStore: '',
         destinationStore: ''
@@ -14,17 +24,44 @@ const RegistrarTransfer = ({ onClose }) => {
         setFormValues({ ...formValues, [name]: value });
     };
 
+    const handleCheckboxChange = (event) => {
+        const { name, checked } = event.target;
+        setFormValues({ ...formValues, [name]: checked });
+    };
+
     const handleRegister = () => {
-        // Perform registration logic here
+        const { productName, productCode, productQuantity, productValue, deliveryDate, transferDate, originStore, destinationStore, aindaNaoEntregue } = formValues;
+
+        const data = {
+            productName: productName,
+            productCode: productCode,
+            productQuantity: productQuantity,
+            postDate: new Date().toISOString().slice(0, 10),
+            productValue: productValue,
+            deliveryDate: aindaNaoEntregue ? '9999-01-01T00:00:00Z' : deliveryDate, // Set deliveryDate to '01/01/9999' if aindaNaoEntregue is true
+            transferDate: transferDate,
+            originStore: originStore,
+            destinationStore: destinationStore,
+            postedBy: nomeCapitalizado,
+        };
+
+        axios.post('http://192.168.1.70:3000/transferProducts/create', data)
+            .then(() => {
+                alert('Transferência registrada com sucesso!');
+                onClose();
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     };
 
     return (
         <div className='registrarTransferModal'>
             <div className="registroTrasnferAll">
-                <h1>Registro da Transferência</h1>
+                <h1>Registro de Transferência</h1>
 
-                <form autocomplete="off" className="formTransferRegister">
-                    <div className="origemDestinoTransfer">
+                <form autoComplete="off" className="formTransferRegister">
+                    <div className="divisaoInput">
                         <div className='SelectTransferProduct'>
                             <label htmlFor="originStore">Origem</label>
                             <select id="originStore" name="originStore" value={formValues.originStore} onChange={handleInputChange} required>
@@ -62,15 +99,39 @@ const RegistrarTransfer = ({ onClose }) => {
                         <input type="text" id="productName" name="productName" value={formValues.productName} onChange={handleInputChange} required />
                     </div>
 
-                    <div className='inputTransferProduct'>
-                        <label htmlFor="quantity">Quantidade</label>
-                        <input type="number" id="quantity" name="quantity" value={formValues.quantity} onChange={handleInputChange} required />
-                        <p>Em unidades</p>
+                    <div className="divisaoInput">
+                        <div className='inputTransferProduct'>
+                            <label htmlFor="productCode">Código do Produto</label>
+                            <input type="text" id="productCode" name="productCode" value={formValues.productCode} onChange={handleInputChange} required />
+                        </div>
+
+                        <div className='inputTransferProduct'>
+                            <label htmlFor="productQuantity">Quantidade</label>
+                            <input type="number" id="productQuantity" name="productQuantity" value={formValues.productQuantity} onChange={handleInputChange} required />
+                            <p>Em unidades</p>
+                        </div>
+
+                        <div className='inputTransferProduct'>
+                            <label htmlFor="productValue">Valor do Produto</label>
+                            <input type="number" id="productValue" name="productValue" value={formValues.productValue} onChange={handleInputChange} required />
+                            <p>Em reais</p>
+                        </div>
                     </div>
 
-                    <div className='inputTransferProduct'>
-                        <label htmlFor="transferDate">Data de Transferência</label>
-                        <input type="date" id="transferDate" name="transferDate" value={formValues.transferDate} onChange={handleInputChange} required />
+                    <div className="divisaoInput">
+                        <div className='inputTransferProduct'>
+                            <label htmlFor="transferDate">Data de Transferência</label>
+                            <input type="date" id="transferDate" name="transferDate" value={formValues.transferDate} onChange={handleInputChange} required />
+                        </div>
+
+                        <div className='inputTransferProduct'>
+                            <label htmlFor="deliveryDate">Data Entregue</label>
+                            <input type="date" id="deliveryDate" name="deliveryDate" value={formValues.deliveryDate} onChange={handleInputChange} disabled={formValues.aindaNaoEntregue} />
+                            <div className="checkBoxAindaNaoEntregue">
+                                <input type="checkbox" id="aindaNaoEntregue" name="aindaNaoEntregue" value="Ainda não entregue" checked={formValues.aindaNaoEntregue} onChange={handleCheckboxChange} />
+                                <label htmlFor="aindaNaoEntregue">Ainda não entregue</label>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="butaoCancelarAndRegistrar">

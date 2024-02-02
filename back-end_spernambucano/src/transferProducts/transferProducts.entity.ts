@@ -14,6 +14,10 @@ export class TransferProducts {
     @Column({ type: 'text' })
     productCode: string;
 
+    // valor do produto
+    @Column({ type: 'float' })
+    productValue: number;
+
     // quantidade do produto
     @Column({ type: 'integer' })
     productQuantity: number;

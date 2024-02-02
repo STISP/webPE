@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const ViewTransferDado = (props) => {
-    const { id, productName, productCode, postDate, productQuantity, transferDate, deliveryDate, originStore, destinationStore } = props;
+    const { id, productName, productCode, productQuantity, productValue, postDate, transferDate, deliveryDate, originStore, destinationStore } = props;
     const [showMoreInfo, setShowMoreInfo] = useState(false);
 
     const handleMoreInfoClick = () => {
@@ -28,10 +28,26 @@ const ViewTransferDado = (props) => {
                 </div>
                 {showMoreInfo && (
                     <div className="moreInfo" >
-                        <p className='CodigoProduto'>Código do Produto:  {productCode}</p>
-                        <p className='QuantidadeProduto'>Quantidade: {productQuantity}</p>
-                        <p className='DataTransferencia'>Data de Transferência: {transferDate}</p>
-                        <p className='DataEntrega'>Data de Entrega: {deliveryDate}</p>
+                        <div className='CodigoProduto'>
+                            <p>Código do Produto:</p>
+                            <p>{productCode}</p>
+                        </div>
+                        <div className='QuantidadeProduto'>
+                            <p>Quantidade:</p>
+                            <p>{productQuantity}</p>
+                        </div>
+                        <div className='ValorProduto'>
+                            <p>Valor:</p>
+                            <p>{productValue}</p>
+                        </div>
+                        <div className='DataTransferencia'>
+                            <p>Data de Transferência:</p>
+                            <p> {transferDate}</p>
+                        </div>
+                        <div className='DataEntrega'>
+                            <p>Data de Entrega:</p>
+                            <p> {deliveryDate}</p>
+                        </div>
                     </div>
                 )}
             </div>

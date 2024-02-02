@@ -970,7 +970,7 @@ a {
   width: 52.5rem;
   align-items: center;
   gap: 3rem;
-  margin: 2rem 0 1.5rem 0;
+  margin: 2rem 0 0 0;
 }
 .form-group-login {
   margin-bottom: 1rem;
@@ -1181,6 +1181,12 @@ a {
   height: 0.0625rem;
   background: #d9d9d9;
   margin: 2rem 0;
+}
+.lineTransfer {
+  width: 52rem;
+  height: 0.0625rem;
+  background: #d9d9d9;
+  margin: 1.125rem 0;
 }
 .lojaInfoReport {
   padding: 2rem;
@@ -1433,7 +1439,6 @@ span {
   line-height: normal;
   outline: none;
 }
-
 .edit-modal__form-row:last-child {
   margin-bottom: 0;
 }
@@ -1550,6 +1555,7 @@ span {
 .inputTransferProduct {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 .inputTransferProduct p {
   margin: 0;
@@ -1558,13 +1564,24 @@ span {
   font-weight: 400;
   color: #3f3f3f;
 }
-.origemDestinoTransfer {
+.checkBoxAindaNaoEntregue {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+  font-size: 1rem;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 600;
+  color: #3f3f3f;
+  margin-top: 0.3rem;
+}
+.divisaoInput {
   display: flex;
   gap: 1rem;
 }
 .SelectTransferProduct {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 .SelectTransferProduct select {
   padding: 0.4rem;
@@ -1581,4 +1598,81 @@ span {
   line-height: normal;
   outline: none;
   cursor: pointer;
+}
+.botoesTransfer {
+  display: flex;
+  gap: 1rem;
+}
+.botoesTransfer p {
+  margin: 0;
+}
+.botoesTransfer button {
+  background-color: #132438;
+  color: #fff;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  transition: 0.3s ease;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.3rem;
+  border-radius: 0.375rem;
+}
+.botoesTransfer button:hover {
+  background-color: #273648;
+  transform: scale(1.01);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.resumoTranfer {
+  display: flex;
+  gap: 1rem;
+}
+.ValorTotalMensal h2,
+.TransferenciasPendentes h2,
+.NumeroTransferencias h2,
+.ValorTotalMensal p,
+.TransferenciasPendentes p,
+.NumeroTransferencias p {
+  margin: 0;
+  font-family: "Source Sans 3", sans-serif;
+}
+.ValorTotalMensal h2,
+.TransferenciasPendentes h2,
+.NumeroTransferencias h2 {
+  font-weight: 600;
+  font-size: 2rem;
+  color: #132438;
+}
+.ValorTotalMensal p,
+.TransferenciasPendentes p,
+.NumeroTransferencias p {
+  font-size: 0.943rem;
+  color: #1d2e41;
+  font-weight: 500;
+}
+.NumeroTransferencias,
+.ValorTotalMensal,
+.TransferenciasPendentes {
+  border: 1px solid #d9d9d9;
+  padding: 1rem 1.5rem;
+  border-radius: 0.375rem;
+  background: #ededed;
+  transition: 0.3s ease;
+  width: 18.5%;
+}
+.RelatorioTransferCompleto {
+  border: 1px solid #d9d9d9; 
+  padding: 1rem 1.8rem;
+  border-radius: 0.375rem;
+  background: #132438;
+  transition: 0.3s ease;
+  color: #fff;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
 }
