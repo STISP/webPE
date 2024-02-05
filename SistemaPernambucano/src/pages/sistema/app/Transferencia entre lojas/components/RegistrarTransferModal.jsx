@@ -12,7 +12,7 @@ const RegistrarTransfer = ({ onClose }) => {
         productName: '',
         productCode: '',
         productQuantity: '',
-        postDate: new Date().toISOString().slice(0, 10),
+        postDate: new Date().toISOString(),
         productValue: '',
         transferDate: '',
         originStore: '',
@@ -36,7 +36,7 @@ const RegistrarTransfer = ({ onClose }) => {
             productName: productName,
             productCode: productCode,
             productQuantity: productQuantity,
-            postDate: new Date().toISOString().slice(0, 10),
+            postDate: new Date().toISOString(),
             productValue: productValue,
             deliveryDate: aindaNaoEntregue ? '9999-01-01T00:00:00Z' : deliveryDate, // Set deliveryDate to '01/01/9999' if aindaNaoEntregue is true
             transferDate: transferDate,

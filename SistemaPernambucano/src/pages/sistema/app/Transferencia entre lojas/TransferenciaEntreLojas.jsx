@@ -4,6 +4,8 @@ import ViewTransferDado from './components/VIewTransferDado';
 import RegistrarTransfer from './components/RegistrarTransferModal';
 import AddSimbolo from '../../../../assets/AddSimbolo.svg';
 import TransferIcon from '../../../../assets/TransferIcon.svg';
+import IconBox from '../../../../assets/IconBox.svg';
+import { Link } from 'react-router-dom';
 
 const TransferenciaEntreLojas = () => {
     const [showRegistarTransfer, setShowRegistarTransfer] = useState(false);
@@ -20,7 +22,7 @@ const TransferenciaEntreLojas = () => {
     useEffect(() => {
         const fetchTransferencias = async () => {
             try {
-                const response = await axios.get('http://192.168.1.70:3000/transferProducts');
+                const response = await axios.get('http://192.168.1.70:3000/transferProducts/all');
                 setTransferencias(response.data);
             } catch (error) {
                 console.error(error);
@@ -28,6 +30,9 @@ const TransferenciaEntreLojas = () => {
         };
         fetchTransferencias();
     }, []);
+
+    // ao adicionar uma transferência, a lista de transferências é atualizada
+    // ao deletar uma transferência, a lista de transferências é atualizada
 
     const ValorTotalMesAtual = 30
     const NumeroDeTransferenciaDoMesAtual = 10
@@ -57,28 +62,25 @@ const TransferenciaEntreLojas = () => {
                     <h2>{TransferenciasPendentes}</h2>
                     <p>Transferências Pendentes</p>
                 </div>
-                <button className='RelatorioTransferCompleto'>
-                    <p>Relatorio <br/> Completo</p>
-                </button>
             </div>
 
             <div className="lineTransfer" />
 
             <div className="botoesTransfer">
-                <button onClick={handleRegistarTransferClick}>
+                <Link onClick={handleRegistarTransferClick}>
                     <img src={TransferIcon} />
                     <p>Transferir Produtos Entre Lojas</p>
-                </button>
+                </Link>
 
-                <button>
-                    <img src={AddSimbolo} />
-                    <p>Adicionar Produtos ao Estoque</p>
-                </button>
-
-                <button>
-                    <img src={{}} />
+                <Link to="/EstoqueDeProdutos">
+                    <img src={IconBox} />
                     <p>Estoque dos Produtos</p>
-                </button>
+                </Link>
+
+                <Link to="/RelatorioTransferenciaEntreLoja">
+                    <img src={AddSimbolo} />
+                    <p>Relatorio Completo</p>
+                </Link>
             </div>
 
             <div className="lineTransfer" />
@@ -89,10 +91,10 @@ const TransferenciaEntreLojas = () => {
                     productName={transferencia.productName}
                     productCode={transferencia.productCode}
                     productValue={transferencia.productValue}
-                    postDate={transferencia.postDate}
+                    postDate={new Date(transferencia.postDate).toLocaleDateString('pt-BR')}
                     productQuantity={transferencia.productQuantity}
-                    transferDate={transferencia.transferDate}
-                    deliveryDate={transferencia.deliveryDate}
+                    transferDate={new Date(transferencia.transferDate).toLocaleDateString('pt-BR')}
+                    deliveryDate={new Date(transferencia.deliveryDate).toLocaleDateString('pt-BR')}
                     originStore={transferencia.originStore}
                     destinationStore={transferencia.destinationStore}
                 />

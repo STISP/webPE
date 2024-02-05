@@ -1528,7 +1528,7 @@ span {
 }
 .butaoCancelarAndRegistrar button {
   padding: 0.6rem 1.3rem;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   background-color: #132438;
   color: #fff;
   font-family: "Source Sans 3", sans-serif;
@@ -1606,7 +1606,7 @@ span {
 .botoesTransfer p {
   margin: 0;
 }
-.botoesTransfer button {
+.botoesTransfer a {
   background-color: #132438;
   color: #fff;
   font-family: "Source Sans 3", sans-serif;
@@ -1620,9 +1620,9 @@ span {
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1.3rem;
-  border-radius: 0.375rem;
+  border-radius: 0.5rem;
 }
-.botoesTransfer button:hover {
+.botoesTransfer a:hover {
   background-color: #273648;
   transform: scale(1.01);
   cursor: pointer;
@@ -1660,19 +1660,152 @@ span {
 .TransferenciasPendentes {
   border: 1px solid #d9d9d9;
   padding: 1rem 1.5rem;
-  border-radius: 0.375rem;
+  border-radius: 0.5rem;
   background: #ededed;
   transition: 0.3s ease;
-  width: 18.5%;
 }
 .RelatorioTransferCompleto {
-  border: 1px solid #d9d9d9; 
+  border: 1px solid #d9d9d9;
   padding: 1rem 1.8rem;
-  border-radius: 0.375rem;
+  border-radius: 0.5rem;
   background: #132438;
   transition: 0.3s ease;
   color: #fff;
   font-family: "Source Sans 3", sans-serif;
   font-weight: 600;
   font-size: 1rem;
+}
+.butoesViewDetailsAndDelete button {
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.butoesViewDetailsAndDelete {
+  display: flex;
+  gap: 0.625rem;
+}
+.butoesViewDetailsAndDelete button {
+  border-bottom: 1px solid transparent;
+}
+.moreInfoTransfer {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: #0060d0;
+  transition: 0.3s ease;
+}
+.moreInfoTransfer:hover {
+  color: #004080;
+  border-bottom: 1px solid #004080;
+  transition: 0.3s ease;
+}
+.DeleteButtonTransfer {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: #ff0000;
+}
+.DeleteButtonTransfer:hover {
+  color: #cc0000;
+  border-bottom: 1px solid #cc0000;
+  transition: 0.3s ease;
+}
+.ProductName {
+  color: #132438;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+.DiaPostado {
+  color: #3f3f3f;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+}
+.ViewTransferDado * {
+  margin: 0;
+}
+.ViewTransferDado {
+  background: #ededed;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  max-width: 47rem;
+  border: 1px solid #d9d9d9;
+  margin-bottom: 1rem;
+}
+.InfoStartTrasfer img {
+  width: 56px;
+  height: 56px;
+  padding-right: 1rem;
+}
+.InfoProducts {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 48rem;
+}
+.InfoStartTrasfer {
+  display: flex;
+  align-items: center;
+}
+.OrigemDestino {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.origem, .destino {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #d9d9d9;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+}
+.origem, .destino p {
+  font-family: "Source Sans 3", sans-serif;
+  color: #5f5f5f;
+}
+.origem, .destino h3 {
+  font-family: "Source Sans 3", sans-serif;
+  color: #2b2b2b;
+}
+.transferencia-entre-lojas {
+  padding-bottom: 1rem;
+}
+
+.moreInfoAll::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: #d9d9d9;
+  margin: 1rem 0;
+}
+.moreInfo {
+  display: flex;
+  justify-content: space-between;
+}
+.infoTransfer {
+  display: flex;
+  flex-direction: column;
+  background: #D9D9D9;
+  padding: .6rem 1.1rem  ;
+  border-radius: .5rem;
+  align-items: center;
+}
+.infoTransfer p {
+  margin: 0;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 500;
+  font-size: .9rem;
+  color: #5f5f5f;
+}
+.infoTransfer h3 {
+  margin: 0;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #2b2b2b;
 }
