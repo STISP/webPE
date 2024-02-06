@@ -1755,7 +1755,8 @@ span {
   gap: 1rem;
   align-items: center;
 }
-.origem, .destino {
+.origem,
+.destino {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1763,11 +1764,13 @@ span {
   padding: 0.5rem 1rem;
   border-radius: 0.3rem;
 }
-.origem, .destino p {
+.origem,
+.destino p {
   font-family: "Source Sans 3", sans-serif;
   color: #5f5f5f;
 }
-.origem, .destino h3 {
+.origem,
+.destino h3 {
   font-family: "Source Sans 3", sans-serif;
   color: #2b2b2b;
 }
@@ -1790,16 +1793,16 @@ span {
 .infoTransfer {
   display: flex;
   flex-direction: column;
-  background: #D9D9D9;
-  padding: .6rem 1.1rem  ;
-  border-radius: .5rem;
+  background: #d9d9d9;
+  padding: 0.6rem 1.1rem;
+  border-radius: 0.5rem;
   align-items: center;
 }
 .infoTransfer p {
   margin: 0;
   font-family: "Source Sans 3", sans-serif;
   font-weight: 500;
-  font-size: .9rem;
+  font-size: 0.9rem;
   color: #5f5f5f;
 }
 .infoTransfer h3 {
@@ -1808,4 +1811,18 @@ span {
   font-weight: 600;
   font-size: 1.2rem;
   color: #2b2b2b;
+}
+.WarnTransfer {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  color: #D00000;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+.transterPendente {
+  display: flex;
 }

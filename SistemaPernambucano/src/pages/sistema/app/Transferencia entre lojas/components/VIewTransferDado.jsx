@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ImageTransferDado from '../../../../../assets/IconPernembucanoTransfer.svg';
 import setaIcon from '../../../../../assets/setaIcon.svg';
+import WarnTransfer from '../../../../../assets/WarnTransfer.svg';
 
 const ViewTransferDado = (props) => {
     const { id, productName, productCode, productQuantity, productValue, postDate, transferDate, deliveryDate, originStore, destinationStore } = props;
@@ -10,10 +11,31 @@ const ViewTransferDado = (props) => {
         setShowMoreInfo(!showMoreInfo);
     };
 
-    // função que deleta a transferência do banco de dados e atualiza a lista de transferências. o id da transferência é passado como parâmetro
+    const [showInput, setShowInput] = useState(false);
+    const [newDeliveryDate, setNewDeliveryDate] = useState('');
+
+    const handleToggleInput = () => {
+        setShowInput(!showInput);
+    };
+
+    const handleChangeDeliveryDate = (event) => {
+        setNewDeliveryDate(event.target.value);
+    };
 
     return (
         <div key={id} className="ViewTransferDadoAll" >
+            {deliveryDate === 'Pendente' && (
+                <div className='transterPendente'>
+                    <div className='WarnTransfer'>
+                        <img src={WarnTransfer} />
+                        <p>Não entregue</p>
+                    </div>
+                    <button onClick={handleToggleInput}>Definir produto como entregue</button>
+                </div>
+            )}
+            {showInput && (
+                <input type="date" value={newDeliveryDate} onChange={handleChangeDeliveryDate} />
+            )}
             <div className="ViewTransferDado">
                 <div className="InfoProducts">
                     <div className='InfoStartTrasfer'>
@@ -53,19 +75,19 @@ const ViewTransferDado = (props) => {
                                 <p>Quantidade</p>
                             </div>
                             <div className='infoTransfer'>
-                                <h3>{productValue}</h3>
+                                <h3>{(productValue).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} </h3>
                                 <p>Valor Und.</p>
                             </div>
                             <div className='infoTransfer'>
-                                <h3>{productValue * productQuantity}</h3>
+                                <h3>{(productValue * productQuantity).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h3>
                                 <p>Valor Total</p>
                             </div>
                             <div className='infoTransfer'>
-                                <h3> {transferDate}</h3>
+                                <h3>{transferDate}</h3>
                                 <p>Data transferida</p>
                             </div>
                             <div className='infoTransfer'>
-                                <h3> {deliveryDate}</h3>
+                                <h3>{deliveryDate}</h3>
                                 <p>Entregue em</p>
                             </div>
                         </div>

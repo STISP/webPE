@@ -94,7 +94,7 @@ const TransferenciaEntreLojas = () => {
                     postDate={new Date(transferencia.postDate).toLocaleDateString('pt-BR')}
                     productQuantity={transferencia.productQuantity}
                     transferDate={new Date(transferencia.transferDate).toLocaleDateString('pt-BR')}
-                    deliveryDate={new Date(transferencia.deliveryDate).toLocaleDateString('pt-BR')}
+                    deliveryDate={new Date(transferencia.deliveryDate).getFullYear() === 9998 ? 'Pendente' : new Date(transferencia.deliveryDate).toLocaleDateString('pt-BR')}
                     originStore={transferencia.originStore}
                     destinationStore={transferencia.destinationStore}
                 />
