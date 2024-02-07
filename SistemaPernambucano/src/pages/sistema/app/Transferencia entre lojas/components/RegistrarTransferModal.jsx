@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const RegistrarTransfer = ({ onClose }) => {
+const RegistrarTransfer = ({ onClose, onAddSuccess }) => {
 
     const nome = localStorage.getItem('email');
     const nomeSemDomino = nome.replace(/@suppernambucano.com.br/g, '');
     const nomeCapitalizado = nomeSemDomino.charAt(0).toUpperCase() + nomeSemDomino.slice(1);
-    
+
     const [formValues, setFormValues] = useState({
         aindaNaoEntregue: false,
         productName: '',
@@ -15,6 +15,7 @@ const RegistrarTransfer = ({ onClose }) => {
         postDate: new Date().toISOString(),
         productValue: '',
         transferDate: '',
+        deliveryDate: '',
         originStore: '',
         destinationStore: ''
     });
@@ -30,6 +31,7 @@ const RegistrarTransfer = ({ onClose }) => {
     };
 
     const handleRegister = () => {
+        event.preventDefault();
         const { productName, productCode, productQuantity, productValue, deliveryDate, transferDate, originStore, destinationStore, aindaNaoEntregue } = formValues;
 
         const data = {
@@ -38,7 +40,7 @@ const RegistrarTransfer = ({ onClose }) => {
             productQuantity: productQuantity,
             postDate: new Date().toISOString(),
             productValue: productValue,
-            deliveryDate: aindaNaoEntregue ? '9999-01-01T00:00:00Z' : deliveryDate, // Set deliveryDate to '01/01/9999' if aindaNaoEntregue is true
+            deliveryDate: aindaNaoEntregue ? '9999-01-01T00:00:00Z' : deliveryDate,
             transferDate: transferDate,
             originStore: originStore,
             destinationStore: destinationStore,
@@ -47,8 +49,8 @@ const RegistrarTransfer = ({ onClose }) => {
 
         axios.post('http://192.168.1.70:3000/transferProducts/create', data)
             .then(() => {
-                alert('Transferência registrada com sucesso!');
                 onClose();
+                onAddSuccess();
             })
             .catch((error) => {
                 console.error(error);

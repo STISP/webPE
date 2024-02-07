@@ -25,8 +25,11 @@ export class TransferProductsService {
         return transferProduct;
     }
 
-    async deleteTransferProduct(id: string): Promise<void> {
+    // deletar uma transferencia
+    async deleteTransferProduct(id: string): Promise<TransferProducts> {
+        const transferProduct = await this.getTransferProductById(id);
         await this.transferProductsRepository.delete(id);
+        return transferProduct;
     }
 
     async updateTransferProduct(id: string, transferProduct: TransferProducts): Promise<TransferProducts> {

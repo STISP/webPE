@@ -19,20 +19,26 @@ const TransferenciaEntreLojas = () => {
         setShowRegistarTransfer(false);
     };
 
+    const fetchTransferencias = async () => {
+        try {
+            const response = await axios.get('http://192.168.1.70:3000/transferProducts/all');
+            setTransferencias(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     useEffect(() => {
-        const fetchTransferencias = async () => {
-            try {
-                const response = await axios.get('http://192.168.1.70:3000/transferProducts/all');
-                setTransferencias(response.data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
         fetchTransferencias();
     }, []);
 
-    // ao adicionar uma transferência, a lista de transferências é atualizada
-    // ao deletar uma transferência, a lista de transferências é atualizada
+    const handleDeleteSuccess = () => {
+        fetchTransferencias();
+    };
+
+    const handleAddSuccess = () => {
+        fetchTransferencias();
+    };
 
     const ValorTotalMesAtual = 30
     const NumeroDeTransferenciaDoMesAtual = 10
@@ -88,6 +94,7 @@ const TransferenciaEntreLojas = () => {
             {transferencias.map((transferencia) => (
                 <ViewTransferDado
                     key={transferencia.id}
+                    id={transferencia.id}
                     productName={transferencia.productName}
                     productCode={transferencia.productCode}
                     productValue={transferencia.productValue}
@@ -97,11 +104,12 @@ const TransferenciaEntreLojas = () => {
                     deliveryDate={new Date(transferencia.deliveryDate).getFullYear() === 9998 ? 'Pendente' : new Date(transferencia.deliveryDate).toLocaleDateString('pt-BR')}
                     originStore={transferencia.originStore}
                     destinationStore={transferencia.destinationStore}
+                    onDeleteSuccess={handleDeleteSuccess}
                 />
             ))}
 
             {showRegistarTransfer && (
-                <RegistrarTransfer onClose={handleCloseRegistarTransfer} />
+                <RegistrarTransfer onClose={handleCloseRegistarTransfer} onAddSuccess={handleAddSuccess} />
             )}
         </div>
     );

@@ -22,7 +22,7 @@ export class TransferProductsController {
     }
 
     @Delete(':id')
-    async deleteTransferProduct(@Param('id') id: string): Promise<void> {
+    async deleteTransferProduct(@Param('id') id: string): Promise<TransferProducts> {
         return this.transferProductsService.deleteTransferProduct(id);
     }
 
