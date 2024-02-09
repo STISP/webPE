@@ -8,8 +8,6 @@ import DiaP3 from '../assets/Dia P - jan 20243.jpg';
 import DiaP4 from '../assets/Dia P - jan 20244.jpg';
 import DiaP5 from '../assets/Dia P - jan 20245.jpg';
 import DiaP6 from '../assets/Dia P - jan 20246.jpg';
-import DiaPeAniversario1 from '../assets/1 Dia P (aniversário) 30_11_2023.jpg';
-import DiaPeAniversario2 from '../assets/1 Dia P (aniversário) 30_11_2023.jpg';
 import OfertaNatal1 from '../assets/ofertaNatal 1 24.12.2023.jpg';
 import OfertaNatal2 from '../assets/ofertaNatal 2 24.12.2023.jpg';
 import OfertaNatal3 from '../assets/ofertaNatal 3 24.12.2023.jpg';
@@ -19,6 +17,16 @@ import OfertaNatal6 from '../assets/ofertaNatal 6 24.12.2023.jpg';
 import OfertaNatal7 from '../assets/ofertaNatal 7 24.12.2023.jpg';
 import ShowDeOferta1 from '../assets/showDeOferta1.jpg';
 import ShowDeOferta2 from '../assets/showDeOferta2.jpg';
+import FoliaDeOfertas1 from '../assets/Folia de ofertas 1.jpeg';
+import FoliaDeOfertas2 from '../assets/Folia de ofertas 2.jpeg';
+import FoliaDeOfertas3 from '../assets/Folia de ofertas 3.jpeg';
+import FoliaDeOfertas4 from '../assets/Folia de ofertas 4.jpeg';
+import FoliaDeOfertas5 from '../assets/Folia de ofertas 5.jpeg';
+import FoliaDeOfertas6 from '../assets/Folia de ofertas 6.jpeg';
+import FoliaDeOfertas7 from '../assets/Folia de ofertas 7.jpeg';
+import FoliaDeOfertas8 from '../assets/Folia de ofertas 8.jpeg';
+
+
 
 export default function Panfletos() {
   const [panfletoSelecionado, setPanfletoSelecionado] = React.useState(null);
@@ -27,27 +35,27 @@ export default function Panfletos() {
   const panfletos = [
     {
       id: 1,
+      titulo: 'Folia de ofertas',
+      dataValidade: 'Ofertás Válidas no Dia 09/02 á 12/02 de Fevereiro, 2024 ou Enquanto Durarem os Estoques',
+      imagem: [FoliaDeOfertas1, FoliaDeOfertas2, FoliaDeOfertas3, FoliaDeOfertas4, FoliaDeOfertas5, FoliaDeOfertas6, FoliaDeOfertas7, FoliaDeOfertas8],
+    },
+    {
+      id: 2,
       titulo: 'Dia P - Muitas ofertas!',
       dataValidade: 'Ofertás Válidas no Dia 30 de Janeiro ou Enquanto Durarem os Estoques',
       imagem: [DiaP1, DiaP2, DiaP3, DiaP4, DiaP5, DiaP6],
     },
     {
-      id: 2,
+      id: 3,
       titulo: 'Show de ofertas',
       dataValidade: 'Ofertas válidas de 05 a 06 de Janeiro',
       imagem: [ShowDeOferta1, ShowDeOferta2],
     },
     {
-      id: 3,
+      id: 4,
       titulo: 'Promoções de Natal',
       dataValidade: 'Ofertas válidas até 31 de dezembro (Prolongado)',
       imagem: [OfertaNatal1, OfertaNatal2, OfertaNatal3, OfertaNatal4, OfertaNatal5, OfertaNatal6, OfertaNatal7],
-    },
-    {
-      id: 4,
-      titulo: 'Dia P e Aniversário',
-      dataValidade: 'Ofertas válidas no dia 30 de novembro',
-      imagem: [DiaPeAniversario1, DiaPeAniversario2],
     },
   ];
 
