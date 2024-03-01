@@ -1,6 +1,6 @@
 import DeleteIcon from '../assets/deleteIcon.svg';
 
-const ConfirmationDelete = ({ contrato, confirmDeleteContract, cancelDeleteContract }) => {
+const ConfirmationDelete = ({contrato, confirmDeleteContract, cancelDeleteContract }) => {
     return (
         <div className="confirmation-modal">
             <div className='modal-confimation'>
@@ -13,6 +13,7 @@ const ConfirmationDelete = ({ contrato, confirmDeleteContract, cancelDeleteContr
                     </button>
                     <button className='Cancelar-modal' onClick={cancelDeleteContract}>Cancelar</button>
                 </div>
+                <p>*Caso esteja vencido, desative o contrato e crie um novo.</p>
             </div>
         </div>
     );

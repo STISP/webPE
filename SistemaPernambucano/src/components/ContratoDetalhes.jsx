@@ -6,8 +6,6 @@ import IconBack from '../assets/voltarIcon.svg';
 import DeleteIcon from '../assets/deleteIcon.svg';
 import EditIcon from '../assets/EditIcon.svg';
 
-
-
 const ContratoDetalhes = () => {
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -92,7 +90,7 @@ const ContratoDetalhes = () => {
                 ...prevContrato,
                 [field]: value,
             };
-    
+
             if (field === 'contractValue' || field === 'installments') {
                 let installmentValue = 0;
                 if (newContrato.contractValue > 0 && newContrato.installments > 0) {
@@ -101,7 +99,7 @@ const ContratoDetalhes = () => {
                 }
                 newContrato.monthlyValue = installmentValue;
             }
-    
+
             return newContrato;
         });
     };
@@ -124,11 +122,21 @@ const ContratoDetalhes = () => {
     const handleValorTotalChange = (value) => handleChange("contractValue", value);
 
     const handleDeactivateContract = async () => {
-
+        try {
+            await axios.post(`http://192.168.1.70:3000/contracts/deactivate/${id}`);
+            setContrato(prevContrato => ({ ...prevContrato, status: 'Desativado' }));
+        } catch (error) {
+            console.error(error);
+        }
     }
 
-    const handleRenewContract = async () => {
-
+    const handleActiveContract = async () => {
+        try {
+            await axios.post(`http://192.168.1.70:3000/contracts/activate/${id}`);
+            setContrato(prevContrato => ({ ...prevContrato, status: 'Ativo' }));
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     const handleSave = async () => {
@@ -164,8 +172,6 @@ const ContratoDetalhes = () => {
         }
     };
 
-
-
     return (
         <>
             {contrato && (
@@ -178,16 +184,20 @@ const ContratoDetalhes = () => {
                         <div className='op-details-button'>
                             {contrato.status && (
                                 <div className='op-details-button2'>
-                                    {/* 
+
                                     {contrato.status === 'Ativo' && (
-                                        <button className="contract-details__button" onClick={handleDeactivateContract}>Desativar contrato</button>
+                                        <button className="contract-details__buttonAD" onClick={handleDeactivateContract}>
+                                            Desativar
+                                        </button>
                                     )}
                                     {contrato.status === 'Desativado' && (
                                         <>
-                                            <button className="contract-details__button" onClick={handleRenewContract}>Ativar contrato</button>
+                                            <button className="contract-details__buttonAD" onClick={handleActiveContract}>
+                                                Ativar
+                                            </button>
                                         </>
                                     )}
-                                    */}
+
 
                                     <button className="contract-details__button" onClick={handleDeleteContract}>
                                         <img src={DeleteIcon} alt="Icone de deletar" />
@@ -196,7 +206,7 @@ const ContratoDetalhes = () => {
                                     <button className="contract-details__button" onClick={handleEditContract}>
                                         <img src={EditIcon} />
                                         Editar
-                                        </button>
+                                    </button>
                                 </div>
                             )}
                             <button className="contract-details__button" onClick={handleGoBack}>
@@ -260,7 +270,7 @@ const ContratoDetalhes = () => {
                                                 name="contractValue"
                                                 value={contrato.contractValue}
                                                 onChange={(e) => handleChange("contractValue", e.target.value)}
-                                                 />
+                                            />
                                         </div>
                                         <div className="edit-modal__form-row">
                                             <label className="edit-modal__label" htmlFor="installments">Quantidade de Parcelas</label>

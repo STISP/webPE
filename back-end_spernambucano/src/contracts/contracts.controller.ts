@@ -62,7 +62,7 @@ export class ContractsController {
         return this.contractService.getTotalExpiredContractsAllStores();
     }
 
-    // quando o contrato é editado, o status é alterado para 'Desativado' e um novo contrato é criado com o status 'Ativo'
+    // Para editar um contrato
     @Post('edit')
     async editContract(@Param('id') id: string, @Body() updatedContract: Contract): Promise<{ oldContract: Contract, newContract: Contract }> {
         return this.contractService.editContract(id, updatedContract);
@@ -79,5 +79,17 @@ export class ContractsController {
     async getMonthlyExpense(@Param() params: { store: string }): Promise<number> {
         const { store } = params;
         return this.contractService.getMonthlyExpense(store);
+    }
+
+    // botão para desativar um contrato
+    @Post('deactivate/:id')
+    async deactivateContract(@Param('id') id: string): Promise<Contract> {
+        return this.contractService.deactivateContract(id);
+    }
+
+    // botão para ativar um contrato
+    @Post('activate/:id')
+    async activateContract(@Param('id') id: string): Promise<Contract> {
+        return this.contractService.activateContract(id);
     }
 }

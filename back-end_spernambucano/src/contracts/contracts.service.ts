@@ -183,4 +183,24 @@ export class ContractsService {
 
         return monthlyExpense.total;
     }
+
+    // botão para desativar um contrato
+    async deactivateContract(id: string): Promise<Contract> {
+        const contract = await this.contractRepository.findOne({ where: { id } });
+        if (contract) {
+            contract.status = 'Desativado';
+            return await this.contractRepository.save(contract);
+        }
+        return null;
+    }
+
+    // botão para ativar um contrato
+    async activateContract(id: string): Promise<Contract> {
+        const contract = await this.contractRepository.findOne({ where: { id } });
+        if (contract) {
+            contract.status = 'Ativo';
+            return await this.contractRepository.save(contract);
+        }
+        return null;
+    }
 }

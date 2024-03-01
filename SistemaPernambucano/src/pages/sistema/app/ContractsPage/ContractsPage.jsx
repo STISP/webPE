@@ -138,7 +138,6 @@ const ContractsPage = () => {
                 }
             });
     
-        // faça um if que se o sortOrder for igual a 'nenhum' ele vai organizar a lista de forma do mais novo para o mais antigo, onde o mais novo aparece na frente (o ultimo adicionado no banco de dados)
         if (sortOrder === 'nenhum') {
             sortedItems = sortedItems.sort((a, b) => {
                 const postedDateA = new Date(a.postedDate);

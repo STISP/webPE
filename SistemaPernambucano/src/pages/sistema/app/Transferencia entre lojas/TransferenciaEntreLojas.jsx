@@ -80,7 +80,7 @@ const TransferenciaEntreLojas = () => {
 
                 <Link to="/EstoqueDeProdutos">
                     <img src={IconBox} />
-                    <p>Estoque dos Produtos</p>
+                    <p>Estoque de Materiais</p>
                 </Link>
 
                 <Link to="/RelatorioTransferenciaEntreLoja">
