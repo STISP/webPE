@@ -34,15 +34,61 @@ const TransferenciaEntreLojas = () => {
 
     const handleDeleteSuccess = () => {
         fetchTransferencias();
+        fetchTransferenciasPendentes();
+        fetchNumeroDeTransferenciaDoMesAtual();
+        fetchValorTotalMesAtual();
     };
 
     const handleAddSuccess = () => {
         fetchTransferencias();
+        fetchTransferenciasPendentes();
+        fetchNumeroDeTransferenciaDoMesAtual();
+        fetchValorTotalMesAtual();
     };
 
-    const ValorTotalMesAtual = 30
-    const NumeroDeTransferenciaDoMesAtual = 10
-    const TransferenciasPendentes = 5
+    const [ValorTotalMesAtual, setValorTotalMesAtual] = useState(0);
+
+    const fetchValorTotalMesAtual = async () => {
+        try {
+            const response = await axios.get('http://192.168.1.70:3000/transferProducts/delivered/totalValue');
+            setValorTotalMesAtual(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchValorTotalMesAtual();
+    }, []);
+
+    const [NumeroDeTransferenciaDoMesAtual, setNumeroDeTransferenciaDoMesAtual] = useState(0);
+
+    const fetchNumeroDeTransferenciaDoMesAtual = async () => {
+        try {
+            const response = await axios.get('http://192.168.1.70:3000/transferProducts/delivered/total');
+            setNumeroDeTransferenciaDoMesAtual(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchNumeroDeTransferenciaDoMesAtual();
+    }, []);
+
+    const [transferenciasPendentes, setTransferenciasPendentes] = useState(0);
+
+    const fetchTransferenciasPendentes = async () => {
+        try {
+            const response = await axios.get('http://192.168.1.70:3000/transferProducts/pending/total');
+            setTransferenciasPendentes(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    useEffect(() => {
+        fetchTransferenciasPendentes();
+    }, []);
 
     return (
         <div className="transferencia-entre-lojas">
@@ -58,15 +104,15 @@ const TransferenciaEntreLojas = () => {
             <div className="resumoTranfer">
                 <div className="ValorTotalMensal">
                     <h2>{ValorTotalMesAtual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h2>
-                    <p>Total Transferêrido no Mês Atual</p>
+                    <p>Total transferêrido do mês atual</p>
                 </div>
                 <div className="NumeroTransferencias">
                     <h2>{NumeroDeTransferenciaDoMesAtual}</h2>
-                    <p>Número de Transferências do Mês Atual</p>
+                    <p>Número de transferências do mês atual</p>
                 </div>
                 <div className="TransferenciasPendentes">
-                    <h2>{TransferenciasPendentes}</h2>
-                    <p>Transferências Pendentes</p>
+                    <h2>{transferenciasPendentes}</h2>
+                    <p>Transferências pendentes</p>
                 </div>
             </div>
 

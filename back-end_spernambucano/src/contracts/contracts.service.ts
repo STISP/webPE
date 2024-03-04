@@ -9,7 +9,6 @@ export class ContractsService {
         private contractRepository: Repository<Contract>,
     ) { }
 
-
     async getAllContracts(): Promise<Contract[]> {
         return await this.contractRepository.find();
     }

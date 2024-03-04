@@ -1,5 +1,5 @@
 import { Injectable, Inject, NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Between, LessThanOrEqual, Repository } from 'typeorm';
 import { TransferProducts } from './transferProducts.entity';
 
 @Injectable()
@@ -49,15 +49,30 @@ export class TransferProductsService {
         return await this.transferProductsRepository.find({ where: { deliveryDate }, order: { postDate: 'DESC' }, take: 3 });
     }
 
-    // rota para mostrar o total de transferencias pendentes
+    // rota para mostrar o total de transferencias pendentes que no banco de dados tá "9998-12-31 21:00:00"
     async getTotalPendingTransferProducts(): Promise<number> {
-        const deliveryDate = new Date('01/01/9999');
+        const deliveryDate = new Date('9998-12-31 21:00:00');
         return await this.transferProductsRepository.count({ where: { deliveryDate } });
     }
 
-    // rota para pegar todas as transferencias entregues (deliveryDate != 01/01/9999) apenas do mês atual
+    // rota para pegar o total as transferencias apenas do mês atual
+    async getTotalDeliveredTransferProductsOfCurrentMonth(): Promise<number> {
+        const date = new Date();
+        const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+        const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+        return await this.transferProductsRepository.count({ where: { transferDate: Between(firstDay, lastDay) } });
+    }
 
-    // rota para mostrar o total transferido em R$ apenas do mês atual
+    // rota para mostrar o total de transferencias em R$ apenas do mês atual (soma tudo de productValue e retorna o valor total)
+    async getTotalDeliveredTransferProductsValueOfCurrentMonth(): Promise<number> {
+        const date = new Date();
+        const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+        const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+        const transferProducts = await this.transferProductsRepository.find({ where: { transferDate: Between(firstDay, lastDay) } });
+        const totalValue = transferProducts.reduce((acc, transferProduct) => acc + (transferProduct.productValue * transferProduct.productQuantity), 0);
+        return totalValue;
+    }
+
     // rota que vai ser usada para gerar o relatorio de transferencias entregues
     // rota para buscar por loja de origem
     // Rota para buscar produtos de transferência por um intervalo de datas específico

@@ -47,4 +47,5 @@ export class TransferProducts {
     // nome de quem postou
     @Column({ type: 'text' })
     postedBy: string;
+    value: number;
 }

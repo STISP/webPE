@@ -32,12 +32,6 @@ export class TransferProductsController {
         return this.transferProductsService.updateTransferProduct(id, transferProduct);
     }
 
-    // rota para pegar todas as transferencias pendentes (deliveryDate = 01/01/9999)
-    @Get('pending')
-    async getTransferProductByDeliveryDate(): Promise<TransferProducts[]> {
-        return this.transferProductsService.getTransferProductByDeliveryDate();
-    }
-
     // rota para pegar 3 ultimas das transferencias pendentes (deliveryDate = 01/01/9999) organizadas por maior data de postagem
     @Get('pending/lastThree')
     async getThreeLastTransferProductsByDeliveryDate(): Promise<TransferProducts[]> {
@@ -50,10 +44,19 @@ export class TransferProductsController {
         return this.transferProductsService.getTotalPendingTransferProducts();
     }
 
-    // rota para pegar todas as transferencias entregues (deliveryDate != 01/01/9999) apenas do mês atual
+    // rota para pegar o total as transferencias apenas do mês atual
+    @Get('delivered/total')
+    async getTotalDeliveredTransferProductsOfCurrentMonth(): Promise<number> {
+        return this.transferProductsService.getTotalDeliveredTransferProductsOfCurrentMonth();
+    }
 
-    // rota para mostrar o total transferido em R$ apenas do mês atual
-    // 
+    // rota para mostrar o total de transferencias em R$ apenas do mês atual
+    @Get('delivered/totalValue')
+    async getTotalDeliveredTransferProductsValueOfCurrentMonth(): Promise<number> {
+        return this.transferProductsService.getTotalDeliveredTransferProductsValueOfCurrentMonth();
+    }
+
+
     // rota que vai ser usada para gerar o relatorio de transferencias entregues
     // rota para buscar por loja de origem
     // Rota para buscar produtos de transferência por um intervalo de datas específico
