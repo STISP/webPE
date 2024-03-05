@@ -14,7 +14,7 @@ export class Products {
     @Column({ type: 'text' })
     productName: string;
 
-    // valor do produto
-    @Column({ type: 'float' })
-    productValue: number;
+    // quantidade do produto
+    @Column({ type: 'integer' })
+    productQuantity: number;
 }

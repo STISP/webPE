@@ -1707,10 +1707,17 @@ span {
 }
 .butoesViewDetailsAndDelete {
   display: flex;
-  gap: 0.625rem;
+  align-items: center;
+  gap: 0.5rem;
 }
 .butoesViewDetailsAndDelete button {
   border-bottom: 1px solid transparent;
+}
+.butoesViewDetailsAndDelete p {
+  margin: 0;
+  padding: 0;
+  font-family: "Source Sans 3", sans-serif;
+  color: #919191;
 }
 .moreInfoTransfer {
   background: none;

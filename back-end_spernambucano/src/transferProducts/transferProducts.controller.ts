@@ -56,6 +56,12 @@ export class TransferProductsController {
         return this.transferProductsService.getTotalDeliveredTransferProductsValueOfCurrentMonth();
     }
 
+    // rota para definir a data de entrega de uma transferencia que ainda tá como pendente - ele vai atualizar apenas o dado (deliveryDate) de uma transferencia pelo id
+    @Post('deliveryDate/:id')
+    async updateDeliveryDate(@Param('id') id: string, @Body('deliveryDate') deliveryDate: Date): Promise<TransferProducts> {
+        return this.transferProductsService.updateDeliveryDate(id, deliveryDate);
+    }
+
 
     // rota que vai ser usada para gerar o relatorio de transferencias entregues
     // rota para buscar por loja de origem

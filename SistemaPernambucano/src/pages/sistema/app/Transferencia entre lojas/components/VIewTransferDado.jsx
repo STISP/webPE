@@ -44,6 +44,27 @@ const ViewTransferDado = ({ id, productName, productCode, productQuantity, produ
         setShowConfirmationModal(false);
     };
 
+    const handleUpdateDeliveryDate = () => {
+        if (newDeliveryDate.trim() === '') {
+            return;
+        } else {
+            axios.post(`http://192.168.1.70:3000/transferProducts/deliveryDate/${id}`, { deliveryDate: newDeliveryDate })
+                .then(response => {
+                    window.location.reload();
+                })
+        }
+    };
+
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            handleUpdateDeliveryDate();
+            handleToggleInput();
+        }
+    };
+
+    const ImprimirTransfer = () => {
+        window.print();
+    }
 
     return (
         <div key={id} className="ViewTransferDadoAll" >
@@ -62,6 +83,7 @@ const ViewTransferDado = ({ id, productName, productCode, productQuantity, produ
                                     className='inputDateTransferPendente'
                                     value={newDeliveryDate}
                                     onChange={handleChangeDeliveryDate}
+                                    onKeyPress={handleKeyPress}
                                     style={{
                                         position: 'absolute',
                                         zIndex: 1,
@@ -94,7 +116,8 @@ const ViewTransferDado = ({ id, productName, productCode, productQuantity, produ
                             <p className='ProductName'>{productName}</p>
                             <p className='DiaPostado'>Postado em: {postDate}</p>
                             <div className="butoesViewDetailsAndDelete">
-                                <button className='moreInfoTransfer' onClick={handleMoreInfoClick}>ver mais informações</button>
+                                <button className='moreInfoTransfer' onClick={handleMoreInfoClick}>ver mais informações</button> <p>•</p>
+                                <button className='moreInfoTransfer' onClick={ImprimirTransfer}>Imprimir</button> <p>•</p>
                                 <button onClick={handleDeleteTransfer} className='DeleteButtonTransfer'>Deletar</button>
                             </div>
                         </div>

@@ -73,6 +73,12 @@ export class TransferProductsService {
         return totalValue;
     }
 
+    // rota para definir a data de entrega de uma transferencia que ainda tá como pendente - o usuario vai atualizar digitando a data e apenas mudando o dado (deliveryDate) de uma transferencia pelo id da transferencia
+    async updateDeliveryDate(id: string, deliveryDate: Date): Promise<TransferProducts> {
+        await this.transferProductsRepository.update(id, { deliveryDate });
+        return await this.getTransferProductById(id);
+    }
+
     // rota que vai ser usada para gerar o relatorio de transferencias entregues
     // rota para buscar por loja de origem
     // Rota para buscar produtos de transferência por um intervalo de datas específico
