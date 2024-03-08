@@ -67,7 +67,7 @@ const RegistrarTransfer = ({ onClose, onAddSuccess }) => {
                         <div className='SelectTransferProduct'>
                             <label htmlFor="originStore">Origem</label>
                             <select id="originStore" name="originStore" value={formValues.originStore} onChange={handleInputChange} required>
-                                <option value="">Selecione a origem</option>
+                                <option value="" disabled selected>Selecione a origem</option>
                                 <option value="P1">P1</option>
                                 <option value="P2">P2</option>
                                 <option value="P3">P3</option>
@@ -82,7 +82,7 @@ const RegistrarTransfer = ({ onClose, onAddSuccess }) => {
                         <div className='SelectTransferProduct'>
                             <label htmlFor="destinationStore">Destino</label>
                             <select id="destinationStore" name="destinationStore" value={formValues.destinationStore} onChange={handleInputChange} required>
-                                <option value="">Selecione o destino</option>
+                                <option value="" disabled selected>Selecione o destino</option>
                                 <option value="P1">P1</option>
                                 <option value="P2">P2</option>
                                 <option value="P3">P3</option>

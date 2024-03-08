@@ -10,7 +10,6 @@ export class TransferProducts {
     @Column({ type: 'text' })
     productName: string;
 
-    // codigo do produto
     @Column({ type: 'text' })
     productCode: string;
 

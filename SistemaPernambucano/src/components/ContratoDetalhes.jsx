@@ -81,7 +81,11 @@ const ContratoDetalhes = () => {
     };
 
     function formatDate(date) {
-        return new Intl.DateTimeFormat('pt-BR').format(new Date(date));
+        if (date) {
+            return new Intl.DateTimeFormat('pt-BR').format(new Date(date));
+        } else {
+            return '';
+        }
     }
 
     const handleChange = (field, value) => {
@@ -105,7 +109,6 @@ const ContratoDetalhes = () => {
     };
 
     // const handleStartDateChange = (value) => handleChange("startDate", new Date(value));
-    // const handleEndDateChange = (value) => handleChange("endDate", new Date(value));
     const handleStatusChange = (value) => handleChange("status", value);
     const handleLojaChange = (value) => handleChange("loja", value);
     const handleClientNameChange = (value) => handleChange("clientName", value);
@@ -118,8 +121,10 @@ const ContratoDetalhes = () => {
     const handleTelefoneEmpresaChange = (value) => handleChange("companyPhone", value);
     const handleEmailEmpresaChange = (value) => handleChange("companyEmail", value);
     const handleCnpjEmpresaChange = (value) => handleChange("companyCNPJ", value);
-    const handleValorMensalChange = (value) => handleChange("monthlyValue", value);
-    const handleValorTotalChange = (value) => handleChange("contractValue", value);
+    const handleEndDateChange = (value) => handleChange("endDate", value);
+    // Remove the unused variables
+    // const handleValorMensalChange = (value) => handleChange("monthlyValue", value);
+    // const handleValorTotalChange = (value) => handleChange("contractValue", value);
 
     const handleDeactivateContract = async () => {
         try {
@@ -166,7 +171,8 @@ const ContratoDetalhes = () => {
             await axios.post('http://192.168.1.70:3000/contracts/edit', updatedContract);
             setShowEditModal(false);
             setShowSuccessMessageEdit(true);
-            setContrato(updatedContract);
+            const contract = await getContractDetails(id);
+            setContrato(contract);
         } catch (error) {
             console.error(error);
         }
@@ -179,7 +185,8 @@ const ContratoDetalhes = () => {
                     <div className="titleAndButton">
                         <div className='detalhesPostado'>
                             <h2 className="contract-details__title">Detalhes do Contrato</h2>
-                            <p>Postado por {contrato.postedBy} em {formatDate(contrato.postedDate)}</p>
+                            {/*<h2 className="contract-details__title">{contrato.clientName.length > 20 ? contrato.clientName.substring(0, 20) + '...' : contrato.clientName}</h2>*/}
+                            <p>Postado por {contrato.postedBy.length > 15 ? contrato.postedBy.substring(0, 15) + '...' : contrato.postedBy} em {formatDate(contrato.postedDate)}</p>
                         </div>
                         <div className='op-details-button'>
                             {contrato.status && (
@@ -197,7 +204,6 @@ const ContratoDetalhes = () => {
                                             </button>
                                         </>
                                     )}
-
 
                                     <button className="contract-details__button" onClick={handleDeleteContract}>
                                         <img src={DeleteIcon} alt="Icone de deletar" />
@@ -287,28 +293,13 @@ const ContratoDetalhes = () => {
                                                 onChange={(e) => handleChange("monthlyValue", e.target.value)}
                                             />
                                         </div>
-                                        {/*<div className="edit-modal__form-row">
-                                            <label className="edit-modal__label" htmlFor="startDate">Data de Início</label>
-                                            <input
-                                                className="edit-modal__input"
-                                                type="date"
-                                                id="startDate"
-                                                name="startDate"
-                                                value={new Date(contrato.startDate).toISOString().split('T')[0]}
-                                                onChange={(e) => handleStartDateChange(e.target.value)}
-                                            />
-                                        </div>
+
                                         <div className="edit-modal__form-row">
                                             <label className="edit-modal__label" htmlFor="endDate">Data de Vencimento</label>
-                                            <input
-                                                className="edit-modal__input"
-                                                type="date"
-                                                id="endDate"
-                                                name="endDate"
-                                                value={new Date(contrato.endDate).toISOString().split('T')[0]}
-                                                onChange={(e) => handleEndDateChange(e.target.value)}
-                                            />
-                                        </div> */}
+                                            <input className="edit-modal__input" type="date" id="endDate" name="endDate"
+                                                onChange={(e) => handleEndDateChange(e.target.value)} />
+                                        </div>
+
                                         <div className="edit-modal__form-row">
                                             <label className="edit-modal__label" htmlFor="contractDescription">Descrição do Contrato</label>
                                             <input className="edit-modal__input" type="text" id="contractDescription" name="contractDescription" value={contrato.contractDescription}

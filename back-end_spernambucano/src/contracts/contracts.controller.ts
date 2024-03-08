@@ -92,4 +92,6 @@ export class ContractsController {
     async activateContract(@Param('id') id: string): Promise<Contract> {
         return this.contractService.activateContract(id);
     }
+
+
 }
