@@ -6,8 +6,8 @@ export class Products {
     @PrimaryGeneratedColumn('uuid')
     id: string = uuidv4();
 
-    // codigo do produto
-    @Column({ type: 'text' })
+    // código unico do produto
+    @Column({ type: 'varchar', length: 200, unique: true })
     productCode: string;
 
     // nome do produto
