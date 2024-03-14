@@ -4,25 +4,25 @@ const StockProducts = () => {
 
     const [produtos] = useState([
         {
-            id: 120,
+            id: 8888888,
             nome: 'Caneta azul',
             estoque: 20,
             preco: 20.00,
         },
         {
-            id: 2538,
+            id: 9999999,
             nome: 'Caixa de Grampiador',
             estoque: 15,
             preco: 5.00,
         },
         {
-            id: 121,
+            id: 1110121,
             nome: 'Caneta vermelha especial',
             estoque: 20,
             preco: 20.00,
         },
         {
-            id: 253238,
+            id: 2532865,
             nome: 'Teclado simples para uso em escritório',
             estoque: 1000,
             preco: 100.00,
@@ -54,8 +54,10 @@ const StockProducts = () => {
                 </div>
             </div>
 
-            <button className='ButtonAddProdutcStock' onClick={AddProductStock}>Adicionar novo produto</button>
-            <button className='ButtonDownload' onClick={baixarPlanilha}>Baixar Planilha</button>
+            <div className="OPbuttonsStock">
+                <button className='ButtonAddProdutcStock' onClick={AddProductStock}>Novo Material</button>
+                <button className='ButtonDownload' onClick={baixarPlanilha}>Baixar Planilha</button>
+            </div>
 
             <table className='tableStockProduct' style={{ textAlign: 'left' }}>
                 <thead className='TheadStock'>
