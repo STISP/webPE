@@ -1903,3 +1903,91 @@ span {
   gap: 1rem;
   align-items: center;
 }
+ 
+.headerCodigo, .headerProduto, .headerEstoque, .headerPreco, .headerAcoes {
+  color: rgb(116, 116, 116);
+  font-weight: 600;
+  font-size: 1.1rem;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.TheadStock::after {
+  content: "";
+  display: block;
+  border-bottom: 1px solid #898989;
+  width: 100%;
+  margin-top: .5rem;
+}
+
+.dataCodigo, .dataProduto, .dataEstoque, .dataPreco, .dataAcoes {
+  font-weight: 500;
+  font-size: 1.1rem;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.dataAcoes button {
+  background-color: #132438;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  transition: 0.3s ease;
+}
+
+.dataAcoes button:hover {
+  background-color: #273648;
+  transition: 0.3s ease;
+}
+
+.dataAcoes {
+  display: flex;
+  gap: .6rem;
+  align-items: center;
+}
+
+.headerCodigo, .dataCodigo {
+  width: 60px;
+}
+
+.headerProduto, .dataProduto {
+  width: 200px;
+}
+
+.headerEstoque, .dataEstoque {
+  width: 80px;
+
+}
+.headerPreco, .dataPreco {
+  width: 100px;
+}
+
+.tableStockProduct {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  max-width: 88%;
+}
+
+.ProductStockTr:hover {
+  background-color: #D1D1D1;
+}
+
+.ProductStockTr {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 0.6rem;
+  transition: 0.3s ease;
+}
+
+.backgroundListStock {
+  background: #F2F2F2;
+}

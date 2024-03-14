@@ -60,5 +60,4 @@ export class ProductsService {
         productToUpdate.productQuantity -= product.productQuantity;
         return this.productsRepository.save(productToUpdate);
     }
-
 }
