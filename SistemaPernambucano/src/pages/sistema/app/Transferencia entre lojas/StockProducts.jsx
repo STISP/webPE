@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import ModalStockAddProducts from './components/ModalStockAddProducts';
 
 const StockProducts = () => {
-
     const [produtos] = useState([
         {
             id: 8888888,
@@ -37,8 +37,9 @@ const StockProducts = () => {
         alert('Ainda não implementado');
     };
 
-    const AddProductStock = () => {
-        alert('Produto adicionado com sucesso!');
+    const [showModal, setShowModal] = useState(false);
+    const AddNewProductStock = () => {
+        setShowModal(!showModal);
     };
 
     const baixarPlanilha = () => {
@@ -55,9 +56,11 @@ const StockProducts = () => {
             </div>
 
             <div className="OPbuttonsStock">
-                <button className='ButtonAddProdutcStock' onClick={AddProductStock}>Novo Material</button>
+                <button className='ButtonAddProdutcStock' onClick={AddNewProductStock}>Novo Material</button>
                 <button className='ButtonDownload' onClick={baixarPlanilha}>Baixar Planilha</button>
             </div>
+
+            {showModal && <ModalStockAddProducts setShowModal={setShowModal} />}
 
             <table className='tableStockProduct' style={{ textAlign: 'left' }}>
                 <thead className='TheadStock'>
