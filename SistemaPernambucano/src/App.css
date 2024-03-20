@@ -1992,16 +1992,20 @@ span {
 }
 .ButtonAddProdutcStock,
 .ButtonDownload {
+  padding: 0.5rem 1.3rem;
+  border-radius: 0.3rem;
   background-color: #132438;
   color: #fff;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.3rem;
   cursor: pointer;
   display: flex;
   gap: 0.5rem;
   align-items: center;
   transition: 0.3s ease;
+  margin-top: 1rem;
 }
 .ButtonAddProdutcStock:hover,
 .ButtonDownload:hover {
@@ -2033,6 +2037,7 @@ span {
   background-color: #fff;
   border-radius: 0.5rem;
   padding: 2rem;
+  gap: 1rem;
   display: flex;
   flex-direction: column;
 }
@@ -2059,7 +2064,6 @@ span {
   flex-direction: column;
   gap: 0.5rem;
 }
-
 .modalStockAddProducts button {
   padding: 0.5rem 1.3rem;
   border-radius: 0.25rem;
@@ -2087,7 +2091,8 @@ span {
   background-color: #273648;
   transition: 0.3s ease;
 }
-.ErroCodigoJaRegistrado, .PreenchaTodosOsCampos {
+.ErroCodigoJaRegistrado,
+.PreenchaTodosOsCampos {
   color: #d00000;
   font-family: "Source Sans 3", sans-serif;
   font-weight: 500;
@@ -2095,9 +2100,35 @@ span {
   display: flex;
   padding: 1rem 0 0 0;
   justify-content: center;
+  align-items: center;
 }
 .CodigoQuantidadePreco {
   display: flex;
   gap: 1rem;
   align-items: center;
+}
+.dropdownMenu {
+  position: absolute;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  background-color: #f9f9f9;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+.dropdownMenu button {
+  background-color: #f9f9f9;
+  color: #000;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  text-align: left;
+  transition: 0.3s ease;
+}
+.dropdownMenu button:hover {
+  color: #fff;
+  transition: 0.3s ease;
 }

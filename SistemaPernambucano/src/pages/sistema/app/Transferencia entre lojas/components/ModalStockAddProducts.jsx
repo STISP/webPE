@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const ModalStockAddProducts = ({ setShowModal }) => {
+const ModalStockAddProducts = ({ setShowModal, fetchData }) => {
     const [productCode, setProductCode] = useState('');
     const [productName, setProductName] = useState('');
     const [productQuantity, setProductQuantity] = useState('');
@@ -46,6 +46,7 @@ const ModalStockAddProducts = ({ setShowModal }) => {
         try {
             await axios.post('http://192.168.1.70:3000/estoqueDeProdutosParaTransferencia/create', formData);
             setShowModal(false);
+            fetchData();
         } catch (error) {
             setError(true);
             setTimeout(() => {
@@ -66,6 +67,15 @@ const ModalStockAddProducts = ({ setShowModal }) => {
                 <h2>Adicionar novo produto</h2>
                 <form onSubmit={handleSubmit} autoComplete="off">
                     <div className="inputsModalStockAddProducts">
+                        <div className="inputProductName">
+                            <label htmlFor="productName">Nome</label>
+                            <input
+                                type="text"
+                                id="productName"
+                                value={productName}
+                                onChange={handleProductNameChange}
+                            />
+                        </div>
                         <div className='CodigoQuantidadePreco'>
                             <div className="inputProductCode">
                                 <label htmlFor="productCode">Código</label>
@@ -95,25 +105,15 @@ const ModalStockAddProducts = ({ setShowModal }) => {
                                 />
                             </div>
                         </div>
-                        <div className="inputProductName">
-                            <label htmlFor="productName">Nome</label>
-                            <input
-                                type="text"
-                                id="productName"
-                                value={productName}
-                                onChange={handleProductNameChange}
-                            />
-                        </div>
-
                     </div>
 
                     <div className="buttonsModalStockAddProducts">
                         <button type="submit">Adicionar produto</button>
                         <button onClick={modalOff}>Cancelar</button>
+                        {error && <div className='ErroCodigoJaRegistrado'>Código de produto já registrado</div>}
+                        {emptyFields && <div className='PreenchaTodosOsCampos'>Preencha todos os campos</div>}
                     </div>
                 </form>
-                {error && <div className='ErroCodigoJaRegistrado'>Código de produto já registrado</div>}
-                {emptyFields && <div className='PreenchaTodosOsCampos'>Preencha todos os campos</div>}
             </div>
         </div>
     );

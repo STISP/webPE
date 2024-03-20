@@ -17,4 +17,8 @@ export class Products {
     // quantidade do produto
     @Column({ type: 'integer' })
     productQuantity: number;
+
+    // preço unico do produto
+    @Column({ type: 'float' })
+    productPrice: number;
 }
