@@ -18,6 +18,12 @@ export class ProductsController {
         return this.productsService.getProductById(id);
     }
 
+    // rota para procurar produto por productCode
+    @Get('productCode/:productCode')
+    async getProductByCode(@Param('productCode') productCode: string): Promise<Products> {
+        return this.productsService.getProductByCode(productCode);
+    }
+
     // adicionar um novo produto ao estoque
     @Post('create')
     async createProduct(@Body() product: Products): Promise<Products> {
@@ -31,18 +37,16 @@ export class ProductsController {
     }
 
     // adicionar quantidade a um produto no estoque pelo productCode e vai somar a quantidade atual em productQuantity com a quantidade que foi passada pelo usuario
-    @Post('addQuantity/:productCode')
-    async addQuantity(@Param('productCode') productCode: string, @Body() product: Products): Promise<Products> {
-        return this.productsService.addQuantity(productCode, product);
+    // para enviar a quantidade que deseja adicionar ao produto, é necessário passar a quantidade no corpo da requisição
+    // um exemplo de requisição: http://localhost:3000/estoqueDeProdutosParaTransferencia/addQuantity e no corpo da requisição passar o productQuantity e o productCode
+    @Post('addQuantity')
+    async addQuantity(@Body() product: Products): Promise<Products> {
+        return this.productsService.addQuantity(product);
     }
-    // para enviar a quantidade que deseja adicionar ao produto, deve-se passar o productQuantity no body da requisição
-    // um exemplo de requisição: http://localhost:3000/estoqueDeProdutosParaTransferencia/addQuantity/100
-    // e no body da requisição, passar o productQuantity, por exemplo: { "productQuantity": 10 }
 
     // subtrair quantidade a um produto no estoque pelo productCode e vai subtrair a quantidade atual em productQuantity com a quantidade que foi passada pelo usuario
-    @Post('subtractQuantity/:productCode')
-    async subtractQuantity(@Param('productCode') productCode: string, @Body() product: Products): Promise<Products> {
-        return this.productsService.subtractQuantity(productCode, product);
+    @Post('removeQuantity')
+    async subtractQuantity(@Body() product: Products): Promise<Products> {
+        return this.productsService.subtractQuantity(product);
     }
-
 }

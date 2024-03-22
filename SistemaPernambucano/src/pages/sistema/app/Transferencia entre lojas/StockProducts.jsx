@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ModalStockAddProducts from './components/ModalStockAddProducts';
 import ModalAddStock from './components/ModalAddStock';
+import ModalRemoveStock from './components/ModalRemoveStock';
 
 const StockProducts = () => {
     const [produtos, setProdutos] = useState([]);
@@ -27,22 +28,30 @@ const StockProducts = () => {
 
     const deleteProduct = async (productId) => {
         try {
-            await axios.delete(`http://192.168.1.70:3000/estoqueDeProdutosParaTransferencia/${productId}`);
-            toggleDropdown();
-            await fetchData();
+            const confirmDelete = window.confirm('Tem certeza que deseja deletar o produto?');
+            if (confirmDelete) {
+                await axios.delete(`http://192.168.1.70:3000/estoqueDeProdutosParaTransferencia/${productId}`);
+                toggleDropdown();
+                await fetchData();
+            }
         } catch (error) {
             console.log(error);
         }
     };
 
-    // codigo para ativar o modal de adicionar estoque
     const [showModalAddStock, setShowModalAddStock] = useState(false);
-    const ModaladicionarEstoque = () => {
+    const [showModalRemoveStock, setShowModalRemoveStock] = useState(false);
+
+    const [selectedProduct, setSelectedProduct] = useState({ id: null, name: null });
+    const ModaladicionarEstoque = (productCode, productName) => {
+        setSelectedProduct({ id: productCode, name: productName });
         setShowModalAddStock(!showModalAddStock);
     };
 
-    const editProduct = () => {
-        alert('Ainda não implementado!');
+    const [selectedProductRemove, setSelectedProductRemove] = useState({ id: null, name: null });
+    const ModalremoverEstoque = (productCode, productName) => {
+        setSelectedProductRemove({ id: productCode, name: productName });
+        setShowModalRemoveStock(!showModalRemoveStock);
     };
 
     const [showModal, setShowModal] = useState(false);
@@ -50,9 +59,17 @@ const StockProducts = () => {
         setShowModal(!showModal);
     };
 
+    const editProduct = () => {
+        alert('Ainda não implementado!');
+    };
+
     const baixarPlanilha = () => {
         alert('Ainda não implementado!');
     };
+
+    const Voltar = () => {
+        window.location.href = 'http://192.168.1.70:5173/TransferenciaEntreLojas#/TransferenciaEntreLojas';
+    }
 
     return (
         <div className='stockProducts'>
@@ -66,10 +83,12 @@ const StockProducts = () => {
             <div className="OPbuttonsStock">
                 <button className='ButtonAddProdutcStock' onClick={AddNewProductStock}>Novo Material</button>
                 <button className='ButtonDownload' onClick={baixarPlanilha}>Baixar Planilha</button>
+                <button className='ButtonVoltar' onClick={Voltar}>Voltar</button>
             </div>
 
             {showModal && <ModalStockAddProducts setShowModal={setShowModal} fetchData={fetchData} />}
-            {showModalAddStock && <ModalAddStock setShowModalAddStock={setShowModalAddStock} fetchData={fetchData} />}
+            {showModalAddStock && <ModalAddStock productCode={selectedProduct.id} productName={selectedProduct.name} setShowModalAddStock={setShowModalAddStock} fetchData={fetchData} />}
+            {showModalRemoveStock && <ModalRemoveStock productCode={selectedProductRemove.id} productName={selectedProductRemove.name} setShowModalRemoveStock={setShowModalRemoveStock} fetchData={fetchData} />}
 
             <table className='tableStockProduct' style={{ textAlign: 'left' }}>
                 <thead className='TheadStock'>
@@ -90,7 +109,7 @@ const StockProducts = () => {
                             <td className="dataEstoque">{produto.productQuantity}</td>
                             <td className="dataPreco">R$ {produto.productPrice ? produto.productPrice.toFixed(2) : '0.00'}</td>
                             <td className="dataAcoes">
-                                <button onClick={ModaladicionarEstoque}>
+                                <button onClick={() => ModaladicionarEstoque(produto.productCode, produto.productName)}>
                                     Adicionar Estoque
                                 </button>
                                 <button onClick={() => toggleDropdown(produto.id)}>
@@ -98,12 +117,18 @@ const StockProducts = () => {
                                 </button>
                                 {dropdownProductId === produto.id && (
                                     <div className="dropdownMenu">
-                                        <button onClick={() => deleteProduct(produto.id)}>
+                                        <button className='deleteProduct' onClick={() => deleteProduct(produto.id)}>
                                             Deletar Produto
                                         </button>
-                                        <button onClick={editProduct}>
-                                            Editar Produto
+                                        <button onClick={() => {
+                                            ModalremoverEstoque(produto.productCode, produto.productName);
+                                            toggleDropdown();
+                                        }}>
+                                            Remover Estoque
                                         </button>
+                                        {/*<button onClick={editProduct}>
+                                            Editar Produto
+                                        </button>*/}
                                         <button onClick={() => toggleDropdown()}>
                                             Cancelar
                                         </button>

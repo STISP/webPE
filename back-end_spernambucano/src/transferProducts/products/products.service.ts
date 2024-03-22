@@ -24,6 +24,15 @@ export class ProductsService {
         return product;
     }
 
+    // rota para procurar produto por productCode
+    async getProductByCode(productCode: string): Promise<Products> {
+        const product = await this.productsRepository.findOne({ where: { productCode } });
+        if (!product) {
+            throw new NotFoundException('Produto não encontrado');
+        }
+        return product;
+    }
+
     // rota para criar um novo produto
     async createProduct(product: Products): Promise<Products> {
         const existingProduct = await this.productsRepository.findOne({ where: { productCode: product.productCode } });
@@ -38,26 +47,29 @@ export class ProductsService {
         await this.productsRepository.delete(id);
     }
 
-    // rota para adicionar quantidade a um produto no estoque pelo productCode
-    async addQuantity(productCode: string, product: Products): Promise<Products> {
-        const productToUpdate = await this.productsRepository.findOne({ where: { productCode } });
+    // adicionar quantidade a um produto no estoque pelo productCode e vai somar a quantidade atual em productQuantity com a quantidade que foi passada pelo usuario
+    // para enviar a quantidade que deseja adicionar ao produto, é necessário passar a quantidade no corpo da requisição
+    // um exemplo de requisição: http://localhost:3000/estoqueDeProdutosParaTransferencia/addQuantity e no corpo da requisição passar o productQuantity e o productCode
+    async addQuantity(product: Products): Promise<Products> {
+        const productToUpdate = await this.productsRepository.findOne({ where: { productCode: product.productCode } });
         if (!productToUpdate) {
             throw new NotFoundException('Produto não encontrado');
         }
-        productToUpdate.productQuantity += product.productQuantity;
+        productToUpdate.productQuantity = productToUpdate.productQuantity + parseInt(product.productQuantity.toString());
         return this.productsRepository.save(productToUpdate);
     }
 
     // rota para subtrair quantidade a um produto no estoque pelo productCode
-    async subtractQuantity(productCode: string, product: Products): Promise<Products> {
-        const productToUpdate = await this.productsRepository.findOne({ where: { productCode } });
+    async subtractQuantity(product: Products): Promise<Products> {
+        const productToUpdate = await this.productsRepository.findOne({ where: { productCode: product.productCode } });
         if (!productToUpdate) {
             throw new NotFoundException('Produto não encontrado');
         }
-        if (productToUpdate.productQuantity < product.productQuantity) {
-            throw new NotFoundException(`Sem estoque suficiente para a quantidade desejada. Estoque atual: ${productToUpdate.productQuantity}`);
+        const newQuantity = productToUpdate.productQuantity - parseInt(product.productQuantity.toString());
+        if (newQuantity < 0) {
+            throw new HttpException('Não há estoque suficiente', HttpStatus.BAD_REQUEST);
         }
-        productToUpdate.productQuantity -= product.productQuantity;
+        productToUpdate.productQuantity = newQuantity;
         return this.productsRepository.save(productToUpdate);
     }
 }

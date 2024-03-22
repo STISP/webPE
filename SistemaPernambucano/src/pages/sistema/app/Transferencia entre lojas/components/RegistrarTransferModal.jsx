@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const RegistrarTransfer = ({ onClose, onAddSuccess }) => {
@@ -19,17 +19,22 @@ const RegistrarTransfer = ({ onClose, onAddSuccess }) => {
         originStore: '',
         destinationStore: ''
     });
-
+ 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setFormValues({ ...formValues, [name]: value });
+        if (name === 'productCode') {
+            setFormValues({ ...formValues, [name]: value, productName: '', productValue: '' });
+        } else {
+            setFormValues({ ...formValues, [name]: value });
+        }
     };
-
+    
     const handleCheckboxChange = (event) => {
         const { name, checked } = event.target;
         setFormValues({ ...formValues, [name]: checked });
     };
 
+    const [WarnNotFindOrNotEnough, setWarnNotFindOrNotEnough] = useState(false);
     const handleRegister = () => {
         event.preventDefault();
         const { productName, productCode, productQuantity, productValue, deliveryDate, transferDate, originStore, destinationStore, aindaNaoEntregue } = formValues;
@@ -47,15 +52,44 @@ const RegistrarTransfer = ({ onClose, onAddSuccess }) => {
             postedBy: nomeCapitalizado,
         };
 
-        axios.post('http://192.168.1.70:3000/transferProducts/create', data)
+        axios.post('http://192.168.1.70:3000/estoqueDeProdutosParaTransferencia/removeQuantity', {
+            productCode: productCode,
+            productQuantity: productQuantity
+        })
             .then(() => {
-                onClose();
-                onAddSuccess();
+                axios.post('http://192.168.1.70:3000/transferProducts/create', data)
+                    .then(() => {
+                        onClose();
+                        onAddSuccess();
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
             })
             .catch((error) => {
-                console.error(error);
+                setWarnNotFindOrNotEnough(true);
+                setTimeout(() => {
+                    setWarnNotFindOrNotEnough(false);
+                }, 5000);
             });
     };
+
+    useEffect(() => {
+        if (formValues.productCode) {
+            axios.get(`http://192.168.1.70:3000/estoqueDeProdutosParaTransferencia/productCode/${formValues.productCode}`)
+                .then(response => {
+                    const { productName, productPrice } = response.data;
+                    setFormValues(prevValues => ({
+                        ...prevValues,
+                        productName: productName,
+                        productValue: productPrice
+                    }));
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar informações do produto:', error);
+                });
+        }
+    }, [formValues.productCode]);
 
     return (
         <div className='registrarTransferModal'>
@@ -97,7 +131,7 @@ const RegistrarTransfer = ({ onClose, onAddSuccess }) => {
                     </div>
 
                     <div className='inputTransferProduct'>
-                        <label htmlFor="productName">Escolha o Produto</label>
+                        <label htmlFor="productName">Nome da Transferência ou Produto</label>
                         <input type="text" id="productName" name="productName" value={formValues.productName} onChange={handleInputChange} required />
                     </div>
 
@@ -140,6 +174,7 @@ const RegistrarTransfer = ({ onClose, onAddSuccess }) => {
                         <button className='registrarTransfer' onClick={handleRegister}>Registrar</button>
                         <button className='CancelTransfer' onClick={onClose}>Cancelar</button>
                     </div>
+                    {WarnNotFindOrNotEnough && <p className='WarnNotFindOrNotEnough'>Produto não encontrado ou quantidade insuficiente no estoque</p>}
                 </form>
             </div>
         </div >

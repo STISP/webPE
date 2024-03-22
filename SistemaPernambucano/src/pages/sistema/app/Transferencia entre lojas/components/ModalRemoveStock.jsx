@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const ModalAddStock = ({ productCode, productName, setShowModalAddStock, fetchData }) => {
+const ModalRemoveStock = ({ productCode, productName, setShowModalRemoveStock, fetchData }) => {
     const [quantidade, setQuantidade] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -11,31 +12,33 @@ const ModalAddStock = ({ productCode, productName, setShowModalAddStock, fetchDa
                 productCode: productCode,
                 productQuantity: quantidade
             };
-            await axios.post('http://192.168.1.70:3000/estoqueDeProdutosParaTransferencia/addQuantity', payload);
-            setShowModalAddStock(false);
+            await axios.post('http://192.168.1.70:3000/estoqueDeProdutosParaTransferencia/removeQuantity', payload);
+            setShowModalRemoveStock(false);
             fetchData();
         } catch (error) {
-            console.error(error);
+            setErrorMessage('Sem estoque suficiente');
+            setTimeout(() => setErrorMessage(''), 5000);
         }
     };
 
     return (
         <div className='modalAddStockQuantidade'>
             <div className='modal-content-modalAddStockQuantidade'>
-                <h2>Adicionar Estoque de <strong>{productName}</strong></h2>
+                <h2>Remove Estoque de <strong>{productName}</strong></h2>
                 <form onSubmit={handleSubmit} autoComplete="off">
                     <label>
                         Quantidade:
                         <input type='number' value={quantidade} onChange={(e) => setQuantidade(e.target.value)} required />
                     </label>
                     <div className='ButtonsModalAddStockQuantidade'>
-                        <button type='submit'>Adicionar</button>
-                        <button onClick={() => setShowModalAddStock(false)}>Cancelar</button>
+                        <button type='submit'>Remover</button>
+                        <button onClick={() => setShowModalRemoveStock(false)}>Cancelar</button>
                     </div>
+                    {errorMessage && <p className='AvisoSemEstoque'>{errorMessage}</p>}
                 </form>
             </div>
         </div>
     );
 };
 
-export default ModalAddStock;
+export default ModalRemoveStock;

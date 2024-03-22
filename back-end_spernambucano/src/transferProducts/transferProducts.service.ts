@@ -1,5 +1,5 @@
 import { Injectable, Inject, NotFoundException } from '@nestjs/common';
-import { Between, LessThanOrEqual, Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 import { TransferProducts } from './transferProducts.entity';
 
 @Injectable()

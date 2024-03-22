@@ -31,12 +31,23 @@ const ViewTransferDado = ({ id, productName, productCode, productQuantity, produ
     };
 
     const handleConfirmDelete = () => {
-        axios.delete(`http://192.168.1.70:3000/transferProducts/${id}`)
+        // Primeiro, adicione a quantidade de volta ao estoque
+        axios.post(`http://192.168.1.70:3000/estoqueDeProdutosParaTransferencia/addQuantity`, {
+            productCode: productCode,
+            productQuantity: productQuantity
+        })
             .then(response => {
-                onDeleteSuccess();
+                // Se a adição ao estoque for bem-sucedida, prossiga para deletar o produto
+                axios.delete(`http://192.168.1.70:3000/transferProducts/${id}`)
+                    .then(response => {
+                        onDeleteSuccess();
+                    })
+                    .catch(error => {
+                        console.error('Erro ao deletar a transferência:', error);
+                    });
             })
             .catch(error => {
-                console.error('Erro ao deletar a transferência:', error);
+                console.error('Erro ao adicionar ao estoque:', error);
             });
     };
 
@@ -63,7 +74,20 @@ const ViewTransferDado = ({ id, productName, productCode, productQuantity, produ
     };
 
     const ImprimirTransfer = () => {
-        window.print();
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(`<h1>Detalhes da Transferência</h1>`);
+        printWindow.document.write(`<p>Produto: ${productName}</p>`);
+        printWindow.document.write(`<p>Código: ${productCode}</p>`);
+        printWindow.document.write(`<p>Quantidade transferida: ${productQuantity}</p>`);
+        printWindow.document.write(`<p>Valor und.: ${(productValue).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>`);
+        printWindow.document.write(`<p>Valor total: ${(productValue * productQuantity).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>`);
+        printWindow.document.write(`<p>Data de Postagem: ${postDate}</p>`);
+        printWindow.document.write(`<p>Data de Transferência: ${transferDate}</p>`);
+        printWindow.document.write(`<p>Data de Entrega: ${deliveryDate}</p>`);
+        printWindow.document.write(`<p>Loja de Origem: ${originStore}</p>`);
+        printWindow.document.write(`<p>Loja de Destino: ${destinationStore}</p>`);
+        printWindow.document.close();
+        printWindow.print();
     }
 
     return (
