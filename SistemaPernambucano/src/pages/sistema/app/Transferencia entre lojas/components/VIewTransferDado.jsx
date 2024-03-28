@@ -102,18 +102,23 @@ const ViewTransferDado = ({ id, productName, productCode, productQuantity, produ
                             </div>
                             <button onClick={handleToggleInput}>Definir produto como entregue</button>
                             {showInput && (
-                                <input
-                                    type="date"
-                                    className='inputDateTransferPendente'
-                                    value={newDeliveryDate}
-                                    onChange={handleChangeDeliveryDate}
-                                    onKeyPress={handleKeyPress}
-                                    style={{
-                                        position: 'absolute',
-                                        zIndex: 1,
-                                        transform: 'translateX(-125px) translateY(5px)',
-                                    }}
-                                />
+                                <div className='modalAddStockQuantidade'>
+                                    <div className='modal-content-modalAddStockQuantidade'>
+                                        <h2>Definir produto como entregue</h2>
+                                        <p>Data de entrega para: <strong>{productName}</strong></p>
+                                        <input
+                                            type="date"
+                                            className='inputDateTransferPendente'
+                                            value={newDeliveryDate}
+                                            onChange={handleChangeDeliveryDate}
+                                            onKeyPress={handleKeyPress}
+                                        />
+                                        <div className="buttonsAddDiaEntrega">
+                                            <button className='confimarButtonInputDataEntrega' onClick={handleUpdateDeliveryDate}>Confirmar</button>
+                                            <button className='cancelarButtonInputDataEntrega' onClick={handleToggleInput}>Cancelar</button>
+                                        </div>
+                                    </div>
+                                </div>
                             )}
                         </div>
                     </div>

@@ -25,7 +25,7 @@ const ModalAddStock = ({ productCode, productName, setShowModalAddStock, fetchDa
                 <h2>Adicionar Estoque de <strong>{productName}</strong></h2>
                 <form onSubmit={handleSubmit} autoComplete="off">
                     <label>
-                        Quantidade:
+                        Quantidade a ser adicionada:
                         <input type='number' value={quantidade} onChange={(e) => setQuantidade(e.target.value)} required />
                     </label>
                     <div className='ButtonsModalAddStockQuantidade'>

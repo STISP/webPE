@@ -36,15 +36,13 @@ export class ProductsController {
         return this.productsService.deleteProduct(id);
     }
 
-    // adicionar quantidade a um produto no estoque pelo productCode e vai somar a quantidade atual em productQuantity com a quantidade que foi passada pelo usuario
-    // para enviar a quantidade que deseja adicionar ao produto, é necessário passar a quantidade no corpo da requisição
-    // um exemplo de requisição: http://localhost:3000/estoqueDeProdutosParaTransferencia/addQuantity e no corpo da requisição passar o productQuantity e o productCode
+    // adicionar quantidade a um produto no estoque
     @Post('addQuantity')
     async addQuantity(@Body() product: Products): Promise<Products> {
         return this.productsService.addQuantity(product);
     }
 
-    // subtrair quantidade a um produto no estoque pelo productCode e vai subtrair a quantidade atual em productQuantity com a quantidade que foi passada pelo usuario
+    // remover quantidade de um produto no estoque
     @Post('removeQuantity')
     async subtractQuantity(@Body() product: Products): Promise<Products> {
         return this.productsService.subtractQuantity(product);

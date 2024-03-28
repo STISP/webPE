@@ -137,22 +137,26 @@ const TransferenciaEntreLojas = () => {
 
             <div className="lineTransfer" />
 
-            {transferencias.map((transferencia) => (
-                <ViewTransferDado
-                    key={transferencia.id}
-                    id={transferencia.id}
-                    productName={transferencia.productName}
-                    productCode={transferencia.productCode}
-                    productValue={transferencia.productValue}
-                    postDate={new Date(transferencia.postDate).toLocaleDateString('pt-BR')}
-                    productQuantity={transferencia.productQuantity}
-                    transferDate={new Date(transferencia.transferDate).toLocaleDateString('pt-BR')}
-                    deliveryDate={new Date(transferencia.deliveryDate).getFullYear() === 9998 ? 'Pendente' : new Date(transferencia.deliveryDate).toLocaleDateString('pt-BR')}
-                    originStore={transferencia.originStore}
-                    destinationStore={transferencia.destinationStore}
-                    onDeleteSuccess={handleDeleteSuccess}
-                />
-            ))}
+            {transferencias.length === 0 ? (
+                <p>Nenhuma transferência realizada, faça a primeira transferencia <Link onClick={handleRegistarTransferClick}><strong>clicando aqui</strong></Link></p>
+            ) : (
+                transferencias.map((transferencia) => (
+                    <ViewTransferDado
+                        key={transferencia.id}
+                        id={transferencia.id}
+                        productName={transferencia.productName}
+                        productCode={transferencia.productCode}
+                        productValue={transferencia.productValue}
+                        postDate={new Date(transferencia.postDate).toLocaleDateString('pt-BR')}
+                        productQuantity={transferencia.productQuantity}
+                        transferDate={new Date(transferencia.transferDate).toLocaleDateString('pt-BR')}
+                        deliveryDate={new Date(transferencia.deliveryDate).getFullYear() === 9998 ? 'Pendente' : new Date(transferencia.deliveryDate).toLocaleDateString('pt-BR')}
+                        originStore={transferencia.originStore}
+                        destinationStore={transferencia.destinationStore}
+                        onDeleteSuccess={handleDeleteSuccess}
+                    />
+                ))
+            )}
 
             {showRegistarTransfer && (
                 <RegistrarTransfer onClose={handleCloseRegistarTransfer} onAddSuccess={handleAddSuccess} />

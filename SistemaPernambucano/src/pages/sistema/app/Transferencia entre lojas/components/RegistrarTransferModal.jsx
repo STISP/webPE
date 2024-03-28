@@ -19,7 +19,7 @@ const RegistrarTransfer = ({ onClose, onAddSuccess }) => {
         originStore: '',
         destinationStore: ''
     });
- 
+
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         if (name === 'productCode') {
@@ -28,7 +28,7 @@ const RegistrarTransfer = ({ onClose, onAddSuccess }) => {
             setFormValues({ ...formValues, [name]: value });
         }
     };
-    
+
     const handleCheckboxChange = (event) => {
         const { name, checked } = event.target;
         setFormValues({ ...formValues, [name]: checked });
@@ -130,11 +130,6 @@ const RegistrarTransfer = ({ onClose, onAddSuccess }) => {
                         </div>
                     </div>
 
-                    <div className='inputTransferProduct'>
-                        <label htmlFor="productName">Nome da Transferência ou Produto</label>
-                        <input type="text" id="productName" name="productName" value={formValues.productName} onChange={handleInputChange} required />
-                    </div>
-
                     <div className="divisaoInput">
                         <div className='inputTransferProduct'>
                             <label htmlFor="productCode">Código do Produto</label>
@@ -144,7 +139,7 @@ const RegistrarTransfer = ({ onClose, onAddSuccess }) => {
                         <div className='inputTransferProduct'>
                             <label htmlFor="productQuantity">Quantidade</label>
                             <input type="number" id="productQuantity" name="productQuantity" value={formValues.productQuantity} onChange={handleInputChange} required />
-                            <p>Em unidades</p>
+                            <p>Unidades a serem transferidas</p> 
                         </div>
 
                         <div className='inputTransferProduct'>
@@ -152,6 +147,11 @@ const RegistrarTransfer = ({ onClose, onAddSuccess }) => {
                             <input type="number" id="productValue" name="productValue" value={formValues.productValue} onChange={handleInputChange} required />
                             <p>Em reais</p>
                         </div>
+                    </div>
+
+                    <div className='inputTransferProduct'>
+                        <label htmlFor="productName">Nome da Transferência ou Produto</label>
+                        <input type="text" id="productName" name="productName" value={formValues.productName} onChange={handleInputChange} required />
                     </div>
 
                     <div className="divisaoInput">

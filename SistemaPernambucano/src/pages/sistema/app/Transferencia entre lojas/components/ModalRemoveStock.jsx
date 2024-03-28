@@ -24,10 +24,10 @@ const ModalRemoveStock = ({ productCode, productName, setShowModalRemoveStock, f
     return (
         <div className='modalAddStockQuantidade'>
             <div className='modal-content-modalAddStockQuantidade'>
-                <h2>Remove Estoque de <strong>{productName}</strong></h2>
+                <h2>Remover Estoque de <strong>{productName}</strong></h2>
                 <form onSubmit={handleSubmit} autoComplete="off">
                     <label>
-                        Quantidade:
+                        Quantidade a ser removida:
                         <input type='number' value={quantidade} onChange={(e) => setQuantidade(e.target.value)} required />
                     </label>
                     <div className='ButtonsModalAddStockQuantidade'>
