@@ -31,13 +31,11 @@ const ViewTransferDado = ({ id, productName, productCode, productQuantity, produ
     };
 
     const handleConfirmDelete = () => {
-        // Primeiro, adicione a quantidade de volta ao estoque
         axios.post(`http://192.168.1.70:3000/estoqueDeProdutosParaTransferencia/addQuantity`, {
             productCode: productCode,
             productQuantity: productQuantity
         })
             .then(response => {
-                // Se a adição ao estoque for bem-sucedida, prossiga para deletar o produto
                 axios.delete(`http://192.168.1.70:3000/transferProducts/${id}`)
                     .then(response => {
                         onDeleteSuccess();

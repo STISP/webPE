@@ -11,7 +11,6 @@ export class ProductsController {
     async getAllProducts(): Promise<Products[]> {
         return this.productsService.getAllProducts();
     }
-
     // procurar um produto pelo id
     @Get(':id')
     async getProductById(@Param('id') id: string): Promise<Products> {
@@ -47,4 +46,4 @@ export class ProductsController {
     async subtractQuantity(@Body() product: Products): Promise<Products> {
         return this.productsService.subtractQuantity(product);
     }
-}
+} 

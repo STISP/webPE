@@ -72,4 +72,13 @@ export class ProductsService {
         productToUpdate.productQuantity = newQuantity;
         return this.productsRepository.save(productToUpdate);
     }
+
+    // rota para mostrar todos os produtos com quantidade menor que 10
+    async getProductsLessThan10(): Promise<Products[]> {
+        return this.productsRepository.find({ where: { productQuantity: LessThanOrEqual(10) } });
+    }
+
+    // rota para relatorio por loja e por mes e ano de transferencia
+    
+
 }
