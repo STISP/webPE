@@ -119,11 +119,13 @@ export class TransferProductsController {
     e ele vai pegar a quantidade de cada produto que foi transferido (destinationStore) para cada loja e o valor total em reais (quantidade * valor da unidade do produto) que foi transferido para cada loja
     */
 
-    // rota para trazer as transferencias de produtos realizadas em um determinado mês e ano
-    @Get('report/:month/:year')
-    async getReportTransferProductsByMonthAndYear(@Param('month') month: number, @Param('year') year: number): Promise<any> {
-        return this.transferProductsService.getReportTransferProductsByMonthAndYear(month, year);
+    // rota para trazer as transferencias de produtos realizadas em um determinado mês e ano inicial e final
+    @Post('report/transferProductsByMonthAndYear')
+    async getReportTransferProductsByDateRange(@Body() dateRange: { start: string, end: string }): Promise<any> {
+        const { start, end } = dateRange;
+        return this.transferProductsService.getReportTransferProductsByDateRange(start, end);
     }
-    // para chamar essa api é: http://192.168.1.70:3000/transferProducts/report/12/1212
-    
+    // para chamar essa api é: http://localhost:3000/transferProducts/report
+    // e no body da requisição é: { "start": "2024-12-01", "end": "2024-12-31" }
+
 }

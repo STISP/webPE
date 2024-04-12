@@ -134,49 +134,59 @@ export class TransferProductsService {
     e ele vai pegar a quantidade de cada produto que foi transferido (destinationStore) para cada loja e o valor total em reais (quantidade * valor da unidade do produto) que foi transferido para cada loja
     */
 
-    async getReportTransferProductsByMonthAndYear(month: number, year: number): Promise<any> {
-        const firstDay = new Date(year, month - 1, 1);
-        const lastDay = new Date(year, month, 0);
+    async getReportTransferProductsByDateRange(start: string, end: string): Promise<any> {
+        const firstDay = new Date(new Date(start).getTime() + new Date().getTimezoneOffset() * 60000);
+        const lastDay = new Date(new Date(end).getTime() + new Date().getTimezoneOffset() * 60000);
         const transferProducts = await this.transferProductsRepository.find({ where: { transferDate: Between(firstDay, lastDay) } });
 
+        const reportDateStart = firstDay.toLocaleDateString('pt-BR');
+        const reportDateEnd = lastDay.toLocaleDateString('pt-BR');
+
         const report = {
-            header: 'TRANSFERÊNCIA ENTRE LOJAS - (Material de expediente) 11/12/2023',
-            columns: ['PRODUTO', 'CÓD. PRODUTO', 'VALOR UND R$', 'LOJA 01', 'TOTAL', 'LOJA 02', 'TOTAL', 'LOJA 03', 'TOTAL', 'LOJA 04', 'TOTAL', 'LOJA 05', 'TOTAL', 'LOJA 06', 'TOTAL', 'LOJA 07', 'TOTAL', 'LOJA 08', 'TOTAL'],
-            rows: []
+            header: `TRANSFERÊNCIA ENTRE LOJAS - (Material de expediente) ${reportDateStart} - ${reportDateEnd}`,
+            products: []
         };
 
-        // Create a map to store the total quantity and total value for each store
-        const storeTotals = new Map<string, { quantity: number, value: number }>();
+        const productTotals = new Map<string, { code: string, unitValue: number, totalQuantity: number, totalValue: number, stores: Map<string, { total: number, value: number }> }>();
 
-        // Iterate through the transfer products and calculate the totals for each store
         for (const transferProduct of transferProducts) {
-            const { destinationStore, productQuantity, productValue } = transferProduct;
+            const { productName, productCode, destinationStore, productQuantity, productValue } = transferProduct;
             const totalValue = productQuantity * productValue;
 
-            if (storeTotals.has(destinationStore)) {
-                const storeTotal = storeTotals.get(destinationStore);
-                storeTotal.quantity += productQuantity;
-                storeTotal.value += totalValue;
-            } else {
-                storeTotals.set(destinationStore, { quantity: productQuantity, value: totalValue });
+            if (!productTotals.has(productName)) {
+                productTotals.set(productName, { code: productCode, unitValue: productValue, totalQuantity: 0, totalValue: 0, stores: new Map<string, { total: number, value: number }>() });
             }
+
+            const productTotal = productTotals.get(productName);
+            productTotal.totalQuantity += productQuantity;
+            productTotal.totalValue += totalValue;
+
+            if (!productTotal.stores.has(destinationStore)) {
+                productTotal.stores.set(destinationStore, { total: 0, value: 0 });
+            }
+
+            const storeTotal = productTotal.stores.get(destinationStore);
+            storeTotal.total += productQuantity;
+            storeTotal.value += totalValue;
         }
 
-        // Iterate through the store totals and add them to the report rows
-        for (const [store, totals] of storeTotals) {
-            const row = [store];
-            for (const transferProduct of transferProducts) {
-                if (transferProduct.destinationStore === store) {
-                    row.push(transferProduct.productName);
-                    row.push(transferProduct.productCode);
-                    row.push(`R$ ${transferProduct.productValue.toFixed(2)}`);
-                    row.push(transferProduct.productQuantity.toString());
-                    row.push(`R$ ${(transferProduct.productQuantity * transferProduct.productValue).toFixed(2)}`);
-                }
+        for (const [productName, totals] of productTotals) {
+            const product = {
+                name: productName,
+                code: totals.code,
+                unitValue: totals.unitValue,
+                totalQuantity: totals.totalQuantity,
+                totalValue: `R$ ${totals.totalValue.toFixed(2)}`,
+                stores: []
+            };
+            for (const [store, storeTotals] of totals.stores) {
+                product.stores.push({
+                    name: store,
+                    total: storeTotals.total,
+                    value: `R$ ${storeTotals.value.toFixed(2)}`
+                });
             }
-            row.push(totals.quantity.toString());
-            row.push(`R$ ${totals.value.toFixed(2)}`);
-            report.rows.push(row);
+            report.products.push(product);
         }
 
         return report;
