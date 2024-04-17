@@ -2327,3 +2327,115 @@ span {
 .confimarButtonInputDataEntrega:hover {
   background-color: #273648 !important;
 }
+.titulo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+.tabela-transferencias {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+.cabecalho-tabela {
+  background-color: #132438;
+}
+.linha-cabecalho {
+  font-weight: bold;
+  text-align: left;
+  padding: 10px;
+  color: #fff;
+}
+.celula-cabecalho {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+.corpo-tabela {
+  background-color: #fff;
+}
+.linha-produto {
+  border-bottom: 1px solid #ddd;
+}
+.celula-produto {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.search-containerRelatorioTransferencia {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.inputsSearchRelatorioTransferencia {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+}
+.inputSearchRelatorioTransferencia {
+  display: block;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+.inputSearchRelatorioTransferencia label {
+  font-weight: bold;
+  color: #333;
+  font-family: roboto;
+}
+.inputSearchRelatorioTransferencia input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-family: roboto;
+  color: #333;
+}
+.inputSearchRelatorioTransferencia input:focus {
+  border: 1px solid #132438;
+}
+.buttonsSearchRelatorioTransferencia {
+  display: flex;
+}
+.buttonsSearchRelatorioTransferencia .searchRelatorioTransferencia {
+  border-radius: 5px;
+  background-color: #132438;
+  color: #fff;
+  font-family: roboto;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s ease;
+  padding: 12px 22px;
+  font-size: 15px;
+}
+.buttonsSearchRelatorioTransferencia .searchRelatorioTransferencia:hover {
+  background-color: #273648;
+}
+.pagination {
+  display: flex;
+  gap: .5rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.pagination button {
+  border-radius: 5px;
+  background-color: #132438;
+  color: #fff;
+  font-family: roboto;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s ease;
+  padding: 8px 18px;
+  font-size: 16px;
+  margin: 0 5px;
+}
+.pagination button:hover {
+  background-color: #273648;
+}
+.pagination button.active {
+  background-color: #ccc;
+  color: #132438;
+}
