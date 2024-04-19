@@ -2332,11 +2332,11 @@ span {
   font-weight: bold;
   color: #333;
   margin-bottom: 20px;
+  margin-top: 0;
 }
 .tabela-transferencias {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
 }
 .cabecalho-tabela {
   background-color: #132438;
@@ -2397,6 +2397,13 @@ span {
 }
 .buttonsSearchRelatorioTransferencia {
   display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.buttonsSearchRelatorioTransferencia p {
+  margin: 0;
+  color: #777777;
+  font-family: roboto;
 }
 .buttonsSearchRelatorioTransferencia .searchRelatorioTransferencia {
   border-radius: 5px;
@@ -2415,7 +2422,7 @@ span {
 }
 .pagination {
   display: flex;
-  gap: .5rem;
+  gap: 0.5rem;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
@@ -2438,4 +2445,18 @@ span {
 .pagination button.active {
   background-color: #ccc;
   color: #132438;
+}
+.linha-total {
+  background-color: #c0c0c0;
+  font-weight: bold;
+}
+.celula-total {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+.utimaSolicitacaoHour {
+  color: #5c5c5c;
+  font-family: "Source Sans 3", sans-serif;
+  margin: 0;
+  margin-top: 20px;
 }
