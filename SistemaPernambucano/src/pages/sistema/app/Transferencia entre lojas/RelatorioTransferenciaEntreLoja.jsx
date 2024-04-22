@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import * as XLSX from 'xlsx';
 
 const RelatorioTransferenciaEntreLoja = () => {
     const [data, setData] = useState(null);
@@ -86,6 +87,72 @@ const RelatorioTransferenciaEntreLoja = () => {
         }
     };
 
+    const downloadReport = () => {
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.json_to_sheet(data.products.map(product => ({
+            'Produto': product.name,
+            'Código': product.code,
+            'Valor Und R$': product.unitValue,
+            ...product.stores.reduce((acc, store) => {
+                acc[store.name] = store.total;
+                return acc;
+            }, {}),
+            'Total': product.totalQuantity,
+            'Valor Total': product.totalValue
+        })));
+        const totalStores = data.products[0].stores.map(store => ({
+            name: store.name,
+            total: data.products.reduce((total, product) => {
+                const storeData = product.stores.find(s => s.name === store.name) || { total: 0, value: "R$ 0.00" };
+                return total + storeData.total;
+            }, 0)
+        }));
+        const totalQuantity = data.products.reduce((total, product) => total + product.totalQuantity, 0);
+        const totalValue = data.products.reduce((total, product) => {
+            const value = parseFloat(product.totalValue.replace('R$ ', '').replace(',', '.'));
+            return total + value;
+        }, 0);
+        const totalRow = totalStores.reduce((acc, store) => {
+            acc[store.name] = store.total;
+            return acc;
+        }, { 'Produto': 'Total', '': '', ' ': '' });
+        totalRow['Total'] = totalQuantity;
+        totalRow['Valor Total'] = totalValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        XLSX.utils.sheet_add_json(ws, [totalRow], { skipHeader: true, origin: -1 });
+        XLSX.utils.book_append_sheet(wb, ws, 'Transferências');
+
+        const storeNames = Array.from(new Set(stationeryData.products.flatMap(product => product.stores.map(store => store.name)))).sort();
+
+        const ws2 = XLSX.utils.json_to_sheet(stationeryData.products.map(product => {
+            let productObj = { 'Produto': product.name };
+            let totalQuantity = 0;
+            let totalValue = 0;
+
+            storeNames.forEach(storeName => {
+                let store = product.stores.find(s => s.name === storeName);
+                if (store) {
+                    productObj[`${storeName}`] = '';
+                    productObj[`${storeName} - Quant.`] = store.quantity;
+                    productObj[`${storeName} - Valor`] = store.value;
+                    totalQuantity += store.quantity;
+                    totalValue += store.value;
+                } else {
+                    productObj[`${storeName}`] = '';
+                    productObj[`${storeName} - Quant.`] = 0;
+                    productObj[`${storeName} - Valor`] = 0;
+                }
+            });
+
+            productObj['Quantidade Total'] = totalQuantity;
+            productObj['Valor Total'] = totalValue;
+
+            return productObj;
+        }));
+        XLSX.utils.book_append_sheet(wb, ws2, 'Controle de Uso de Material');
+
+        XLSX.writeFile(wb, `Relatório de Transferência de $${startDate} a ${endDate}.xlsx`);
+    };
+
     return (
         <div>
             <div className="menuContracts">
@@ -116,6 +183,7 @@ const RelatorioTransferenciaEntreLoja = () => {
                     </div>
                     <div className="buttonsSearchRelatorioTransferencia">
                         <button className="searchRelatorioTransferencia" onClick={handleSearch}>Gerar Relatório</button>
+                        {status === 'Carregado' && <button className="downloadRelatorioTransferencia" onClick={downloadReport}>Baixar Relatório (em teste)</button>}
                     </div>
                 </div>
             </div>
