@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 const TransferenciaEntreLojas = () => {
     const [showRegistarTransfer, setShowRegistarTransfer] = useState(false);
     const [transferencias, setTransferencias] = useState([]);
+    const [transferenciasPendentes, setTransferenciasPendentes] = useState([]);
 
     const handleRegistarTransferClick = () => {
         setShowRegistarTransfer(!showRegistarTransfer);
@@ -21,8 +22,17 @@ const TransferenciaEntreLojas = () => {
 
     const fetchTransferencias = async () => {
         try {
-            const response = await axios.get('http://192.168.1.70:3000/transferProducts/all');
+            const response = await axios.get('http://192.168.1.70:3000/transferProducts/lastThree');
             setTransferencias(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const fetchTransferenciasPendentes = async () => {
+        try {
+            const responsePedding = await axios.get('http://192.168.1.70:3000/transferProducts/pending'); // Altere esta URL para a correta
+            setTransferenciasPendentes(responsePedding.data);
         } catch (error) {
             console.error(error);
         }
@@ -30,10 +40,12 @@ const TransferenciaEntreLojas = () => {
 
     useEffect(() => {
         fetchTransferencias();
+        fetchTransferenciasPendentes();
     }, []);
 
     const handleDeleteSuccess = () => {
         fetchTransferencias();
+        fetchTransferenciasPendentesTotal();
         fetchTransferenciasPendentes();
         fetchNumeroDeTransferenciaDoMesAtual();
         fetchValorTotalMesAtual();
@@ -41,6 +53,15 @@ const TransferenciaEntreLojas = () => {
 
     const handleAddSuccess = () => {
         fetchTransferencias();
+        fetchTransferenciasPendentesTotal();
+        fetchTransferenciasPendentes();
+        fetchNumeroDeTransferenciaDoMesAtual();
+        fetchValorTotalMesAtual();
+    };
+
+    const handleUpdateSuccess = () => {
+        fetchTransferencias();
+        fetchTransferenciasPendentesTotal();
         fetchTransferenciasPendentes();
         fetchNumeroDeTransferenciaDoMesAtual();
         fetchValorTotalMesAtual();
@@ -76,18 +97,18 @@ const TransferenciaEntreLojas = () => {
         fetchNumeroDeTransferenciaDoMesAtual();
     }, []);
 
-    const [transferenciasPendentes, setTransferenciasPendentes] = useState(0);
+    const [transferenciasPendentesTotal, setTransferenciasPendentesTotal] = useState(0);
 
-    const fetchTransferenciasPendentes = async () => {
+    const fetchTransferenciasPendentesTotal = async () => {
         try {
             const response = await axios.get('http://192.168.1.70:3000/transferProducts/pending/total');
-            setTransferenciasPendentes(response.data);
+            setTransferenciasPendentesTotal(response.data);
         } catch (error) {
             console.error(error);
         }
     };
     useEffect(() => {
-        fetchTransferenciasPendentes();
+        fetchTransferenciasPendentesTotal();
     }, []);
 
     return (
@@ -111,7 +132,7 @@ const TransferenciaEntreLojas = () => {
                     <p>Número de transferências do mês atual</p>
                 </div>
                 <div className="TransferenciasPendentes">
-                    <h2>{transferenciasPendentes}</h2>
+                    <h2>{transferenciasPendentesTotal}</h2>
                     <p>Transferências pendentes</p>
                 </div>
             </div>
@@ -137,6 +158,7 @@ const TransferenciaEntreLojas = () => {
 
             <div className="lineTransfer" />
 
+            <h2>Ultimas Transferências Realizadas</h2>
             {transferencias.length === 0 ? (
                 <p>Nenhuma transferência realizada, faça a primeira transferencia <Link onClick={handleRegistarTransferClick}><strong>clicando aqui</strong></Link></p>
             ) : (
@@ -154,6 +176,30 @@ const TransferenciaEntreLojas = () => {
                         originStore={transferencia.originStore}
                         destinationStore={transferencia.destinationStore}
                         onDeleteSuccess={handleDeleteSuccess}
+                        onUpdateSuccess={handleUpdateSuccess}
+                    />
+                ))
+            )}
+
+            <h2>Transferências Pendentes</h2>
+            {transferenciasPendentes.length === 0 ? (
+                <p>Nenhuma transferência pendente</p>
+            ) : (
+                transferenciasPendentes.map((transferencia) => (
+                    <ViewTransferDado
+                        key={transferencia.id}
+                        id={transferencia.id}
+                        productName={transferencia.productName}
+                        productCode={transferencia.productCode}
+                        productValue={transferencia.productValue}
+                        postDate={new Date(transferencia.postDate).toLocaleDateString('pt-BR')}
+                        productQuantity={transferencia.productQuantity}
+                        transferDate={new Date(transferencia.transferDate).toLocaleDateString('pt-BR')}
+                        deliveryDate={new Date(transferencia.deliveryDate).getFullYear() === 9998 ? 'Pendente' : new Date(transferencia.deliveryDate).toLocaleDateString('pt-BR')}
+                        originStore={transferencia.originStore}
+                        destinationStore={transferencia.destinationStore}
+                        onDeleteSuccess={handleDeleteSuccess}
+                        onUpdateSuccess={handleUpdateSuccess}
                     />
                 ))
             )}

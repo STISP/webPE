@@ -5,7 +5,7 @@ import WarnTransfer from '../../../../../assets/WarnTransfer.svg';
 import axios from 'axios';
 import DeleteIcon from '../../../../../assets/DeleteIcon.svg';
 
-const ViewTransferDado = ({ id, productName, productCode, productQuantity, productValue, postDate, transferDate, deliveryDate, originStore, destinationStore, onDeleteSuccess }) => {
+const ViewTransferDado = ({ id, productName, productCode, productQuantity, productValue, postDate, transferDate, deliveryDate, originStore, destinationStore, onDeleteSuccess, onUpdateSuccess }) => {
 
     const [showMoreInfo, setShowMoreInfo] = useState(false);
 
@@ -59,7 +59,7 @@ const ViewTransferDado = ({ id, productName, productCode, productQuantity, produ
         } else {
             axios.post(`http://192.168.1.70:3000/transferProducts/deliveryDate/${id}`, { deliveryDate: newDeliveryDate })
                 .then(response => {
-                    window.location.reload();
+                    onUpdateSuccess();
                 })
         }
     };

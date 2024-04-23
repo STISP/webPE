@@ -150,7 +150,7 @@ const RelatorioTransferenciaEntreLoja = () => {
         }));
         XLSX.utils.book_append_sheet(wb, ws2, 'Controle de Uso de Material');
 
-        XLSX.writeFile(wb, `Relatório de Transferência de $${startDate} a ${endDate}.xlsx`);
+        XLSX.writeFile(wb, `Relatório de Transferência - ${startDate} a ${endDate}.xlsx`);
     };
 
     return (
