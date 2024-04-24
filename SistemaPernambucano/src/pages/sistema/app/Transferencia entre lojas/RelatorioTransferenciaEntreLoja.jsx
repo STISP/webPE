@@ -10,6 +10,18 @@ const RelatorioTransferenciaEntreLoja = () => {
     const itemsPerPage = 10;
     const [currentPage, setCurrentPage] = useState(1);
     const [hourTimeVerification, setHourTimeVerification] = useState('Nenhuma');
+    const [expedientMaterial, setExpedientMaterial] = useState([]);
+    const [expedientMaterialStore, setExpedientMaterialStore] = useState('P1');
+
+    useEffect(() => {
+        expedientMaterialAPI();
+    }, [expedientMaterialStore]);
+
+    const StoreButton = ({ storeName }) => (
+        <button onClick={() => setExpedientMaterialStore(storeName)}>
+            {storeName}
+        </button>
+    );
 
     const hourTime = () => {
         const date = new Date();
@@ -62,6 +74,7 @@ const RelatorioTransferenciaEntreLoja = () => {
         fetchData();
         hourTime();
         controlOfUseOfStationeryAPI();
+        expedientMaterialAPI();
     };
 
     const handlePageChange = (pageNumber) => {
@@ -86,6 +99,26 @@ const RelatorioTransferenciaEntreLoja = () => {
             console.error('Erro ao buscar os dados');
         }
     };
+
+    const expedientMaterialAPI = async () => {
+        const response = await fetch('http://192.168.1.70:3000/transferProducts/report/expenditureMaterial', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ storeName: expedientMaterialStore, start: startDate, end: endDate }),
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            setExpedientMaterial(data);
+        } else {
+            console.error('Erro ao buscar os dados');
+        }
+    };
+
+    const months = Object.keys(expedientMaterial).sort();
+    const products = Array.from(new Set(Object.values(expedientMaterial).flatMap(Object.keys))).sort();
 
     const downloadReport = () => {
         const wb = XLSX.utils.book_new();
@@ -194,167 +227,214 @@ const RelatorioTransferenciaEntreLoja = () => {
             {status === 'Nada encontrado' && <p className='avisoCarregamentoRelatorioTransfer'>Nada encontrado</p>}
             {status === 'Gere um relatorio para exibir aqui' && <p className='avisoCarregamentoRelatorioTransfer'>Gere um relatorio para exibir aqui</p>}
 
-            {status === 'Carregado' && data && displayedItems && displayedItems[0] && (
-                <>
-                    <p className='utimaSolicitacaoHour'>Última solicitação às {hourTimeVerification}</p>
-                    <h2 className="titulo">{data.header}</h2>
+            {
+                status === 'Carregado' && data && displayedItems && displayedItems[0] && (
+                    <>
+                        <p className='utimaSolicitacaoHour'>Última solicitação às {hourTimeVerification}</p>
+                        <h2 className="titulo">{data.header}</h2>
 
-                    <div style={{ overflowX: 'auto', maxWidth: '52.5rem' }}>
-                        <table className="tabela-transferencias" style={{ whiteSpace: 'nowrap' }}>
-                            <thead className="cabecalho-tabela">
-                                <tr className="linha-cabecalho">
-                                    <th className="celula-cabecalho">PRODUTO</th>
-                                    <th className="celula-cabecalho">CODIGO</th>
-                                    <th className="celula-cabecalho">VALOR UND R$</th>
+                        <div style={{ overflowX: 'auto', maxWidth: '52.5rem' }}>
+                            <table className="tabela-transferencias" style={{ whiteSpace: 'nowrap' }}>
+                                <thead className="cabecalho-tabela">
+                                    <tr className="linha-cabecalho">
+                                        <th className="celula-cabecalho">PRODUTO</th>
+                                        <th className="celula-cabecalho">CODIGO</th>
+                                        <th className="celula-cabecalho">VALOR UND R$</th>
 
-                                    {data.products[0].stores.sort((a, b) => a.name.localeCompare(b.name)).map((store, index) => (
-                                        <th key={index} className="celula-cabecalho">{store.name}</th>
-                                    ))}
-
-                                    <th className="celula-cabecalho">TOTAL</th>
-                                    <th className="celula-cabecalho">VALOR TOTAL</th>
-                                </tr>
-                            </thead>
-                            <tbody className="corpo-tabela">
-                                {displayedItems.map((product, productIndex) => (
-                                    <tr key={productIndex} className="linha-produto">
-                                        <td className="celula-produto">{product.name}</td>
-                                        <td className="celula-produto">{product.code}</td>
-                                        <td className="celula-produto">{product.unitValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
-
-                                        {data.products[0].stores.map((store, storeIndex) => {
-                                            const storeData = product.stores.find(s => s.name === store.name) || { total: 0, value: "R$ 0.00" };
-                                            return <td key={storeIndex} className="celula-produto">{storeData.total}</td>;
-                                        })}
-
-                                        <td className="celula-produto">{product.totalQuantity}</td>
-                                        <td className="celula-produto">{product.totalValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
-                                    </tr>
-                                ))}
-                                <tr className="linha-total">
-                                    <td className="celula-total">Total</td>
-                                    <td className="celula-total"></td>
-                                    <td className="celula-total"></td>
-                                    {data.products[0].stores.map((store, storeIndex) => {
-                                        const totalStore = displayedItems.reduce((total, product) => {
-                                            const storeData = product.stores.find(s => s.name === store.name) || { total: 0, value: "R$ 0.00" };
-                                            return total + storeData.total;
-                                        }, 0);
-                                        return <td key={storeIndex} className="celula-total">{totalStore}</td>;
-                                    })}
-                                    <td className="celula-total">{displayedItems.reduce((total, product) => total + product.totalQuantity, 0)}</td>
-                                    <td className="celula-total">
-                                        {displayedItems.reduce((total, product) => {
-                                            const value = parseFloat(product.totalValue.replace('R$ ', '').replace(',', '.'));
-                                            return total + value;
-                                        }, 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    {data && data.products && totalPages > 1 && (
-                        <div className="pagination">
-                            <button
-                                disabled={currentPage === 1}
-                                onClick={() => handlePageChange(currentPage - 1)}
-                            >
-                                Anterior
-                            </button>
-
-                            {[...Array(totalPages)].map((_, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => handlePageChange(index + 1)}
-                                    className={currentPage === index + 1 ? 'active' : ''}
-                                >
-                                    {index + 1}
-                                </button>
-                            ))}
-
-                            <button
-                                disabled={currentPage === totalPages}
-                                onClick={() => handlePageChange(currentPage + 1)}
-                            >
-                                Próximo
-                            </button>
-                        </div>
-                    )}
-
-                    {stationeryData && stationeryData.products && (
-                        <>
-                            <div className="line" />
-
-                            <h2 className="titulo">{stationeryData.header}</h2>
-                            <div style={{ overflowX: 'auto', maxWidth: '52.5rem' }}>
-                                <table className="tabela-transferencias">
-                                    <thead className="cabecalho-tabela">
-                                        <tr className="linha-cabecalho">
-                                            <th className="celula-cabecalho">PRODUTOS</th>
-
-                                            {Array.from(new Set(stationeryData.products.flatMap(p => p.stores.map(s => s.name)))).sort().map((store, index) => (
-                                                <th key={index} className="celula-cabecalho" colSpan={2}>{store}</th>
-                                            ))}
-
-                                            <th className="celula-cabecalho"></th>
-                                            <th className="celula-cabecalho"></th>
-                                        </tr>
-                                        <tr className="linha-cabecalho">
-                                            <th className="celula-cabecalho"></th>
-
-                                            {Array.from(new Set(stationeryData.products.flatMap(p => p.stores.map(s => s.name)))).sort().flatMap((store, index) => (
-                                                [<th key={`${index}-q`} className="celula-cabecalho">Quant.</th>, <th key={`${index}-v`} className="celula-cabecalho">Valor</th>]
-                                            ))}
-
-                                            <th className="celula-cabecalho" style={{ whiteSpace: 'nowrap' }}>QUANT. TOTAL</th>
-                                            <th className="celula-cabecalho" style={{ whiteSpace: 'nowrap' }}>VALOR TOTAL</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="corpo-tabela">
-                                        {stationeryData.products.map((product, productIndex) => (
-                                            <tr key={productIndex} className="linha-produto">
-                                                <td className="celula-produto">{product.name}</td>
-
-                                                {Array.from(new Set(stationeryData.products.flatMap(p => p.stores.map(s => s.name)))).sort().flatMap((store, storeIndex) => {
-                                                    const storeData = product.stores.find(s => s.name === store) || { quantity: 0, value: 0 };
-                                                    return [<td key={`${storeIndex}-q`} className="celula-produto">{storeData.quantity}</td>, <td key={`${storeIndex}-v`} className="celula-produto">{storeData.value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>];
-                                                })}
-
-                                                <td className="celula-produto">{product.stores.reduce((total, store) => total + store.quantity, 0)}</td>
-                                                <td className="celula-produto">
-                                                    {product.stores.reduce((total, store) => total + store.value, 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-                                                </td>
-                                            </tr>
+                                        {data.products[0].stores.sort((a, b) => a.name.localeCompare(b.name)).map((store, index) => (
+                                            <th key={index} className="celula-cabecalho">{store.name}</th>
                                         ))}
-                                        <tr className="linha-total">
-                                            <td className="celula-total">Total</td>
 
-                                            {Array.from(new Set(stationeryData.products.flatMap(p => p.stores.map(s => s.name)))).sort().flatMap((store, storeIndex) => {
-                                                const totalStoreQuantity = stationeryData.products.reduce((total, product) => {
-                                                    const storeData = product.stores.find(s => s.name === store) || { quantity: 0, value: 0 };
-                                                    return total + storeData.quantity;
-                                                }, 0);
-                                                const totalStoreValue = stationeryData.products.reduce((total, product) => {
-                                                    const storeData = product.stores.find(s => s.name === store) || { quantity: 0, value: 0 };
-                                                    return total + storeData.value;
-                                                }, 0);
-                                                return [<td key={`${storeIndex}-tq`} className="celula-total">{totalStoreQuantity}</td>, <td key={`${storeIndex}-tv`} className="celula-total">{totalStoreValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>];
+                                        <th className="celula-cabecalho">TOTAL</th>
+                                        <th className="celula-cabecalho">VALOR TOTAL</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="corpo-tabela">
+                                    {displayedItems.map((product, productIndex) => (
+                                        <tr key={productIndex} className="linha-produto">
+                                            <td className="celula-produto">{product.name}</td>
+                                            <td className="celula-produto">{product.code}</td>
+                                            <td className="celula-produto">{product.unitValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+
+                                            {data.products[0].stores.map((store, storeIndex) => {
+                                                const storeData = product.stores.find(s => s.name === store.name) || { total: 0, value: "R$ 0.00" };
+                                                return <td key={storeIndex} className="celula-produto">{storeData.total}</td>;
                                             })}
 
-                                            <td className="celula-total">{stationeryData.products.reduce((total, product) => total + product.stores.reduce((total, store) => total + store.quantity, 0), 0)}</td>
-                                            <td className="celula-total">
-                                                {stationeryData.products.reduce((total, product) => total + product.stores.reduce((total, store) => total + store.value, 0), 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-                                            </td>
+                                            <td className="celula-produto">{product.totalQuantity}</td>
+                                            <td className="celula-produto">{product.totalValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
                                         </tr>
-                                    </tbody>
-                                </table>
+                                    ))}
+                                    <tr className="linha-total">
+                                        <td className="celula-total">Total</td>
+                                        <td className="celula-total"></td>
+                                        <td className="celula-total"></td>
+                                        {data.products[0].stores.map((store, storeIndex) => {
+                                            const totalStore = displayedItems.reduce((total, product) => {
+                                                const storeData = product.stores.find(s => s.name === store.name) || { total: 0, value: "R$ 0.00" };
+                                                return total + storeData.total;
+                                            }, 0);
+                                            return <td key={storeIndex} className="celula-total">{totalStore}</td>;
+                                        })}
+                                        <td className="celula-total">{displayedItems.reduce((total, product) => total + product.totalQuantity, 0)}</td>
+                                        <td className="celula-total">
+                                            {displayedItems.reduce((total, product) => {
+                                                const value = parseFloat(product.totalValue.replace('R$ ', '').replace(',', '.'));
+                                                return total + value;
+                                            }, 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        {data && data.products && totalPages > 1 && (
+                            <div className="pagination">
+                                <button
+                                    disabled={currentPage === 1}
+                                    onClick={() => handlePageChange(currentPage - 1)}
+                                >
+                                    Anterior
+                                </button>
+
+                                {[...Array(totalPages)].map((_, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => handlePageChange(index + 1)}
+                                        className={currentPage === index + 1 ? 'active' : ''}
+                                    >
+                                        {index + 1}
+                                    </button>
+                                ))}
+
+                                <button
+                                    disabled={currentPage === totalPages}
+                                    onClick={() => handlePageChange(currentPage + 1)}
+                                >
+                                    Próximo
+                                </button>
                             </div>
-                            <div className="line" />
-                        </>
-                    )}
-                </>
-            )}
+                        )}
+
+                        {stationeryData && stationeryData.products && (
+                            <>
+                                <div className="line" />
+
+                                <h2 className="titulo">{stationeryData.header}</h2>
+                                <div style={{ overflowX: 'auto', maxWidth: '52.5rem' }}>
+                                    <table className="tabela-transferencias">
+                                        <thead className="cabecalho-tabela">
+                                            <tr className="linha-cabecalho">
+                                                <th className="celula-cabecalho">PRODUTOS</th>
+
+                                                {Array.from(new Set(stationeryData.products.flatMap(p => p.stores.map(s => s.name)))).sort().map((store, index) => (
+                                                    <th key={index} className="celula-cabecalho" colSpan={2}>{store}</th>
+                                                ))}
+
+                                                <th className="celula-cabecalho"></th>
+                                                <th className="celula-cabecalho"></th>
+                                            </tr>
+                                            <tr className="linha-cabecalho">
+                                                <th className="celula-cabecalho"></th>
+
+                                                {Array.from(new Set(stationeryData.products.flatMap(p => p.stores.map(s => s.name)))).sort().flatMap((store, index) => (
+                                                    [<th key={`${index}-q`} className="celula-cabecalho">Quant.</th>, <th key={`${index}-v`} className="celula-cabecalho">Valor</th>]
+                                                ))}
+
+                                                <th className="celula-cabecalho" style={{ whiteSpace: 'nowrap' }}>QUANT. TOTAL</th>
+                                                <th className="celula-cabecalho" style={{ whiteSpace: 'nowrap' }}>VALOR TOTAL</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="corpo-tabela">
+                                            {stationeryData.products.map((product, productIndex) => (
+                                                <tr key={productIndex} className="linha-produto">
+                                                    <td className="celula-produto">{product.name}</td>
+
+                                                    {Array.from(new Set(stationeryData.products.flatMap(p => p.stores.map(s => s.name)))).sort().flatMap((store, storeIndex) => {
+                                                        const storeData = product.stores.find(s => s.name === store) || { quantity: 0, value: 0 };
+                                                        return [<td key={`${storeIndex}-q`} className="celula-produto">{storeData.quantity}</td>, <td key={`${storeIndex}-v`} className="celula-produto">{storeData.value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>];
+                                                    })}
+
+                                                    <td className="celula-produto">{product.stores.reduce((total, store) => total + store.quantity, 0)}</td>
+                                                    <td className="celula-produto">
+                                                        {product.stores.reduce((total, store) => total + store.value, 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                            <tr className="linha-total">
+                                                <td className="celula-total">Total</td>
+
+                                                {Array.from(new Set(stationeryData.products.flatMap(p => p.stores.map(s => s.name)))).sort().flatMap((store, storeIndex) => {
+                                                    const totalStoreQuantity = stationeryData.products.reduce((total, product) => {
+                                                        const storeData = product.stores.find(s => s.name === store) || { quantity: 0, value: 0 };
+                                                        return total + storeData.quantity;
+                                                    }, 0);
+                                                    const totalStoreValue = stationeryData.products.reduce((total, product) => {
+                                                        const storeData = product.stores.find(s => s.name === store) || { quantity: 0, value: 0 };
+                                                        return total + storeData.value;
+                                                    }, 0);
+                                                    return [<td key={`${storeIndex}-tq`} className="celula-total">{totalStoreQuantity}</td>, <td key={`${storeIndex}-tv`} className="celula-total">{totalStoreValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>];
+                                                })}
+
+                                                <td className="celula-total">{stationeryData.products.reduce((total, product) => total + product.stores.reduce((total, store) => total + store.quantity, 0), 0)}</td>
+                                                <td className="celula-total">
+                                                    {stationeryData.products.reduce((total, product) => total + product.stores.reduce((total, store) => total + store.value, 0), 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div className="line" />
+                            </>
+                        )}
+
+                        {expedientMaterial && (
+                            <>
+                                <h2 className="titulo">Uso de Material de Expediente por Loja</h2>
+                                <div className="buttonsStore">
+                                    <StoreButton storeName="P1" />
+                                    <StoreButton storeName="P2" />
+                                    <StoreButton storeName="P3" />
+                                    <StoreButton storeName="P4" />
+                                    <StoreButton storeName="P5" />
+                                    <StoreButton storeName="P6" />
+                                    <StoreButton storeName="P7" />
+                                    <StoreButton storeName="P8" />
+                                </div>
+                                <div style={{ overflowX: 'auto', maxWidth: '52.5rem' }}>
+                                    <table className="tabela-transferencias">
+                                        <thead className="cabecalho-tabela">
+                                            <tr className="linha-cabecalho">
+                                                <th className="celula-cabecalho">Mês</th>
+                                                <th className="celula-cabecalho">Produto</th>
+                                                <th className="celula-cabecalho">Quantidade</th>
+                                                <th className="celula-cabecalho">Valor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="corpo-tabela">
+                                            {months.map((month, monthIndex) => {
+                                                const monthName = new Date(2022, month - 1).toLocaleString('pt-BR', { month: 'long' });
+                                                return products.map((product, productIndex) => {
+                                                    const productData = expedientMaterial[month][product] || { quantity: 0, value: 0 };
+                                                    return (
+                                                        <tr key={`${monthIndex}-${productIndex}`} className="linha-produto">
+                                                            {productIndex === 0 && <td rowSpan={Object.values(expedientMaterial[month]).length} className="celula-produto">{monthName}</td>}
+                                                            <td className="celula-produto">{product}</td>
+                                                            <td className="celula-produto">{productData.quantity}</td>
+                                                            <td className="celula-produto">{productData.value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                                                        </tr>
+                                                    );
+                                                });
+                                            })}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div className="line" />
+                            </>
+                        )}
+                    </>
+                )
+            }
         </div >
     );
 };

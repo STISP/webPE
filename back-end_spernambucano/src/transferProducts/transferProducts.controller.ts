@@ -88,6 +88,7 @@ export class TransferProductsController {
     }
 
     // relatorio por loja, onde vai dizer o produto, mes, a quantidade e o valor. no caso vai fazer isso para todos os meses selecionado pelo usuario tipo, se ele escolher jan, fev e mar, vai mostrar a quantidade e o valor relacionado a cada mes para cada produto. o nome dessa planilha é "Material de Expediente - ${ano} (${loja})
+    // na verdade eu quero agrupar por envio de destino (destinationStore), quero ver todas as transferencias de cada me para fazr uma planilha onde vai ser tipo, loja P1 vai ter o mes de janeiro, fevereiro e assim por diante por exemplo, onde vai ter em cada mes vai ter uma lista de produtos que foi transferido onde vai ter o nome, a quantidade total transferida, o valor total transferido 
     /*exemplo de como vai ser o retorno. essa é a planilha que vai ser de exemplo, faça uma estrutura de dados para retornar e fazer algo parecido com isso. (obs: de janeiro a agosto tá vazio, mais da para entender oque quero). no caso o usuario vai dizer a loja que quer, o dia, mes e ano
 
         PRODUTOS	janeiro		fevereiro		março		abril		maio		junho		julho		agosto		setembro		outubro		novembro		dezembro		TOTAL DO ANO	
@@ -108,10 +109,46 @@ export class TransferProductsController {
     TOTAL R$	0	R$ 0,00	0	R$ 0,00	0	R$ 0,00	0	R$ 0,00	0	R$ 0,00	0	R$ 0,00	0	R$ 0,00	0	R$ 0,00	35	R$ 1.394,63	57	R$ 1.632,50	40	R$ 1.246,06	32	R$ 1.273,72	164	 5.546,91 
     */
 
-    @Post('report/materialUseByStoreAndDateRange')
-    async getReportMaterialUseByStoreAndDateRange(@Body('start') start: string, @Body('end') end: string, @Body('store') store: string): Promise<any> {
-        return this.transferProductsService.getReportMaterialUseByStoreAndDateRange(start, end, store);
+    /* Codigo do service:
+        async getExpenditureMaterialReportByStoreAndDateRange(storeName: string, start: string, end: string): Promise<any> {
+        const firstDay = new Date(new Date(start).getTime() + new Date().getTimezoneOffset() * 60000);
+        const lastDay = new Date(new Date(end).getTime() + new Date().getTimezoneOffset() * 60000);
+        const transferProducts = await this.transferProductsRepository.find({
+            where: {
+                destinationStore: storeName,
+                transferDate: Between(firstDay, lastDay)
+            }
+        });
+
+        const report = {};
+
+        for (const transferProduct of transferProducts) {
+            const month = transferProduct.transferDate.getMonth();
+            const productName = transferProduct.productName;
+            const quantity = transferProduct.productQuantity;
+            const value = transferProduct.productValue * quantity;
+
+            if (!report[month]) {
+                report[month] = {};
+            }
+            if (!report[month][productName]) {
+                report[month][productName] = { quantity: 0, value: 0 };
+            }
+
+            report[month][productName].quantity += quantity;
+            report[month][productName].value += value;
+        }
+
+        return report;
+    } */
+
+    // rota para esse relatorio de gastos por loja
+    @Post('report/expenditureMaterial')
+    async getExpenditureMaterialReportByStoreAndDateRange(@Body() data: { storeName: string, start: string, end: string }): Promise<any> {
+        const { storeName, start, end } = data;
+        return this.transferProductsService.getExpenditureMaterialReportByStoreAndDateRange(storeName, start, end);
     }
-    // exemplo de rota para testar - http://localhost:3000/transferProducts/report/materialUseByStoreAndDateRange
-    // exemplo de body para teste - {"start": "2021-01-01", "end": "2021-12-31", "store": "Loja 1"}
+    // exemplo de rota para testar - http://localhost:3000/transferProducts/report/expenditureMaterial
+    // exemplo de body para teste - { "storeName": "P1", "start": "2021-01-01", "end": "2021-12-31" }
+
 }
