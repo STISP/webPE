@@ -9,6 +9,7 @@ import VoltarIcon from '../../../../assets/voltarIcon.svg';
 import ExcelIcon from '../../../../assets/excel.svg';
 import ModalConfirmDelete from './components/ModalConfirmDelete';
 import Engrenagem from '../../../../assets/engrenagem.svg';
+import { useNavigate } from 'react-router-dom';
 
 const StockProducts = () => {
     const [produtos, setProdutos] = useState([]);
@@ -82,9 +83,11 @@ const StockProducts = () => {
         toggleDropdown();
     };
 
-    const Voltar = () => {
-        window.location.href = 'http://192.168.1.70:5173/TransferenciaEntreLojas#/TransferenciaEntreLojas';
-    }
+    const navigate = useNavigate();
+
+    const handleBack = () => {
+        navigate(-1);
+    };
 
     // filtro de pesquisa de produtos por nome ou código do produto
     const [search, setSearch] = useState('');
@@ -103,7 +106,7 @@ const StockProducts = () => {
             </div>
 
             <div className="OPbuttonsStock">
-                <button className='ButtonVoltar' onClick={Voltar}>
+                <button className='ButtonVoltar' onClick={handleBack}>
                     <img src={VoltarIcon} alt="" />
                     Voltar
                 </button>

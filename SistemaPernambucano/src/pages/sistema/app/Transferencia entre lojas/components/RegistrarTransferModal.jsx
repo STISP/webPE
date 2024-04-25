@@ -139,7 +139,7 @@ const RegistrarTransfer = ({ onClose, onAddSuccess }) => {
                         <div className='inputTransferProduct'>
                             <label htmlFor="productQuantity">Quantidade</label>
                             <input type="number" id="productQuantity" name="productQuantity" value={formValues.productQuantity} onChange={handleInputChange} required />
-                            <p>Unidades a serem transferidas</p> 
+                            <p>Unidades a serem transferidas</p>
                         </div>
 
                         <div className='inputTransferProduct'>
@@ -171,8 +171,8 @@ const RegistrarTransfer = ({ onClose, onAddSuccess }) => {
                     </div>
 
                     <div className="butaoCancelarAndRegistrar">
-                        <button className='registrarTransfer' onClick={handleRegister}>Registrar</button>
                         <button className='CancelTransfer' onClick={onClose}>Cancelar</button>
+                        <button className='registrarTransfer' onClick={handleRegister}>Registrar</button>
                     </div>
                     {WarnNotFindOrNotEnough && <p className='WarnNotFindOrNotEnough'>Produto não encontrado ou quantidade insuficiente no estoque</p>}
                 </form>

@@ -2385,7 +2385,7 @@ span {
 }
 .inputSearchRelatorioTransferencia input {
   padding: 10px;
-  border-radius: 5px;
+  border-radius: .5rem;
   border: 1px solid #ccc;
   outline: none;
   font-family: roboto;
@@ -2405,8 +2405,8 @@ span {
   color: #777777;
   font-family: roboto;
 }
-.buttonsSearchRelatorioTransferencia .searchRelatorioTransferencia, .downloadRelatorioTransferencia {
-  border-radius: 5px;
+.buttonsSearchRelatorioTransferencia .searchRelatorioTransferencia,
+.downloadRelatorioTransferencia {
   background-color: #132438;
   color: #fff;
   font-family: roboto;
@@ -2415,9 +2415,11 @@ span {
   border: none;
   transition: 0.3s ease;
   padding: 12px 22px;
+  border-radius: .5rem;
   font-size: 15px;
 }
-.buttonsSearchRelatorioTransferencia .searchRelatorioTransferencia:hover, .downloadRelatorioTransferencia:hover {
+.buttonsSearchRelatorioTransferencia .searchRelatorioTransferencia:hover,
+.downloadRelatorioTransferencia:hover {
   background-color: #273648;
 }
 .pagination {
@@ -2428,7 +2430,7 @@ span {
   margin-top: 20px;
 }
 .pagination button {
-  border-radius: 5px;
+  border-radius: .5rem;
   background-color: #132438;
   color: #fff;
   font-family: roboto;
@@ -2459,4 +2461,38 @@ span {
   font-family: "Source Sans 3", sans-serif;
   margin: 0;
   margin-top: 20px;
+}
+.buttonsStore button.active {
+  background-color: #f9f9f9;
+  color: #132438;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: bold;
+  border: 1px solid #132438;
+  cursor: pointer;
+  padding: 0.6rem 1.2rem;
+  border-radius: .5rem;
+  transition: 0.3s ease;
+}
+.buttonsStore button.active:hover {
+  background-color: #cacaca;
+}
+.buttonsStore button {
+  background-color: #132438;
+  color: #fff;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  padding: 0.6rem 1.2rem;
+  border-radius: .5rem;
+  transition: 0.3s ease;
+  font-size: 1rem;
+}
+.buttonsStore button:hover {
+  background-color: #273648;
+}
+.buttonsStore {
+  display: flex;
+  gap: 1rem;
+  padding-bottom: 1rem;
 }

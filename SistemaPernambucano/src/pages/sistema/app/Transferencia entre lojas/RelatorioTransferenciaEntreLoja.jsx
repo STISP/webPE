@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as XLSX from 'xlsx';
 
 const RelatorioTransferenciaEntreLoja = () => {
@@ -12,13 +13,18 @@ const RelatorioTransferenciaEntreLoja = () => {
     const [hourTimeVerification, setHourTimeVerification] = useState('Nenhuma');
     const [expedientMaterial, setExpedientMaterial] = useState([]);
     const [expedientMaterialStore, setExpedientMaterialStore] = useState('P1');
+    const navigate = useNavigate();
+
+    const handleBack = () => {
+        navigate(-1);
+    };
 
     useEffect(() => {
         expedientMaterialAPI();
     }, [expedientMaterialStore]);
 
     const StoreButton = ({ storeName }) => (
-        <button onClick={() => setExpedientMaterialStore(storeName)}>
+        <button className={expedientMaterialStore === storeName ? 'active' : ''} onClick={() => setExpedientMaterialStore(storeName)}>
             {storeName}
         </button>
     );
@@ -118,7 +124,6 @@ const RelatorioTransferenciaEntreLoja = () => {
     };
 
     const months = Object.keys(expedientMaterial).sort();
-    const products = Array.from(new Set(Object.values(expedientMaterial).flatMap(Object.keys))).sort();
 
     const downloadReport = () => {
         const wb = XLSX.utils.book_new();
@@ -188,6 +193,9 @@ const RelatorioTransferenciaEntreLoja = () => {
 
     return (
         <div>
+            <div className='menuContracts'>
+                <button onClick={handleBack}>Voltar</button>
+            </div>
             <div className="menuContracts">
                 <div className='tituloAndSubtituloPage'>
                     <h1 className='TituloPage'>Relatório de Transferência entre Lojas</h1>
@@ -331,8 +339,8 @@ const RelatorioTransferenciaEntreLoja = () => {
                                                     <th key={index} className="celula-cabecalho" colSpan={2}>{store}</th>
                                                 ))}
 
-                                                <th className="celula-cabecalho"></th>
-                                                <th className="celula-cabecalho"></th>
+                                                <th className="celula-cabecalho" colSpan="1" rowSpan="2" style={{ whiteSpace: 'nowrap' }}>QUANT. TOTAL</th>
+                                                <th className="celula-cabecalho" colSpan="1" rowSpan="2" style={{ whiteSpace: 'nowrap' }}>VALOR TOTAL</th>
                                             </tr>
                                             <tr className="linha-cabecalho">
                                                 <th className="celula-cabecalho"></th>
@@ -341,8 +349,6 @@ const RelatorioTransferenciaEntreLoja = () => {
                                                     [<th key={`${index}-q`} className="celula-cabecalho">Quant.</th>, <th key={`${index}-v`} className="celula-cabecalho">Valor</th>]
                                                 ))}
 
-                                                <th className="celula-cabecalho" style={{ whiteSpace: 'nowrap' }}>QUANT. TOTAL</th>
-                                                <th className="celula-cabecalho" style={{ whiteSpace: 'nowrap' }}>VALOR TOTAL</th>
                                             </tr>
                                         </thead>
                                         <tbody className="corpo-tabela">
@@ -385,11 +391,7 @@ const RelatorioTransferenciaEntreLoja = () => {
                                     </table>
                                 </div>
                                 <div className="line" />
-                            </>
-                        )}
 
-                        {expedientMaterial && (
-                            <>
                                 <h2 className="titulo">Uso de Material de Expediente por Loja</h2>
                                 <div className="buttonsStore">
                                     <StoreButton storeName="P1" />
@@ -401,31 +403,71 @@ const RelatorioTransferenciaEntreLoja = () => {
                                     <StoreButton storeName="P7" />
                                     <StoreButton storeName="P8" />
                                 </div>
+                            </>
+                        )}
+
+                        {expedientMaterial && expedientMaterial[months[0]] && (
+                            <>
                                 <div style={{ overflowX: 'auto', maxWidth: '52.5rem' }}>
                                     <table className="tabela-transferencias">
                                         <thead className="cabecalho-tabela">
                                             <tr className="linha-cabecalho">
-                                                <th className="celula-cabecalho">Mês</th>
                                                 <th className="celula-cabecalho">Produto</th>
-                                                <th className="celula-cabecalho">Quantidade</th>
-                                                <th className="celula-cabecalho">Valor</th>
+                                                {months.map((month) => {
+                                                    const monthName = new Date(2022, month - 1).toLocaleString('pt-BR', { month: 'long' });
+                                                    return (
+                                                        <th key={month} className="celula-cabecalho" colSpan="2">{monthName}</th>
+                                                    );
+                                                })}
+                                                <th className="celula-cabecalho" colSpan="1" rowSpan="2">Quant. total</th>
+                                                <th className="celula-cabecalho" colSpan="1" rowSpan="2">Valor total</th>
+                                            </tr>
+                                            <tr className="linha-cabecalho">
+                                                <th></th>
+                                                {months.map((month, monthIndex) => (
+                                                    <>
+                                                        <th key={`${monthIndex}-quantity`} className="celula-cabecalho">Quantidade</th>
+                                                        <th key={`${monthIndex}-value`} className="celula-cabecalho">Valor</th>
+                                                    </>
+                                                ))}
                                             </tr>
                                         </thead>
                                         <tbody className="corpo-tabela">
-                                            {months.map((month, monthIndex) => {
-                                                const monthName = new Date(2022, month - 1).toLocaleString('pt-BR', { month: 'long' });
-                                                return products.map((product, productIndex) => {
-                                                    const productData = expedientMaterial[month][product] || { quantity: 0, value: 0 };
-                                                    return (
-                                                        <tr key={`${monthIndex}-${productIndex}`} className="linha-produto">
-                                                            {productIndex === 0 && <td rowSpan={Object.values(expedientMaterial[month]).length} className="celula-produto">{monthName}</td>}
-                                                            <td className="celula-produto">{product}</td>
-                                                            <td className="celula-produto">{productData.quantity}</td>
-                                                            <td className="celula-produto">{productData.value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
-                                                        </tr>
-                                                    );
-                                                });
+                                            {Object.keys(expedientMaterial[months[0]]).map((product, productIndex) => {
+                                                const totalQuantityProduct = months.reduce((total, month) => total + (expedientMaterial[month][product]?.quantity || 0), 0);
+                                                const totalValueProduct = months.reduce((total, month) => total + (expedientMaterial[month][product]?.value || 0), 0);
+                                                return (
+                                                    <tr key={productIndex} className="linha-produto">
+                                                        <td className="celula-produto">{product}</td>
+                                                        {months.map((month, monthIndex) => {
+                                                            const monthData = expedientMaterial[month][product] || {};
+                                                            return (
+                                                                <>
+                                                                    <td key={`${monthIndex}-quantity`} className="celula-produto">{monthData.quantity || 0}</td>
+                                                                    <td key={`${monthIndex}-value`} className="celula-produto">{(monthData.value || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                                                                </>
+                                                            );
+                                                        })}
+                                                        <td className="celula-produto">{totalQuantityProduct}</td>
+                                                        <td className="celula-produto">{totalValueProduct.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                                                    </tr>
+                                                );
                                             })}
+                                            <tr className="linha-produto linha-total">
+                                                <td className="celula-produto">Total</td>
+                                                {months.map((month, monthIndex) => {
+                                                    const totalQuantity = expedientMaterial[month] ? Object.values(expedientMaterial[month]).reduce((total, productData) => total + (productData.quantity || 0), 0) : 0;
+                                                    const totalValue = expedientMaterial[month] ? Object.values(expedientMaterial[month]).reduce((total, productData) => total + (productData.value || 0), 0) : 0;
+                                                    return (
+                                                        <>
+                                                            <td key={`${monthIndex}-total-quantity`} className="celula-produto">{totalQuantity}</td>
+                                                            <td key={`${monthIndex}-total-value`} className="celula-produto">{totalValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                                                        </>
+                                                    );
+                                                })}
+                                                <td className="celula-produto">{months.reduce((total, month) => total + Object.values(expedientMaterial[month]).reduce((total, productData) => total + (productData.quantity || 0), 0), 0)}</td>
+                                                <td className="celula-produto">{months.reduce((total, month) => total + Object.values(expedientMaterial[month]).reduce((total, productData) => total + (productData.value || 0), 0), 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
