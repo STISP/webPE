@@ -1208,7 +1208,7 @@ a {
   margin: 2rem 0;
 }
 .lineTransfer {
-  width: 52rem;
+  width: 49rem;
   height: 0.0625rem;
   background: #d9d9d9;
   margin: 1.125rem 0;
@@ -1916,8 +1916,8 @@ span {
   background-color: #132438;
   color: #fff;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.3rem;
+  padding: 0.5rem .6rem;
+  border-radius: 0.5rem;
   cursor: pointer;
   display: flex;
   gap: 0.5rem;
@@ -1958,7 +1958,7 @@ span {
   border-radius: 0.8rem;
   background: #fff;
   border: 1px solid #d9d9d9;
-  width: 90%;
+  width: 83%;
 }
 .ProductStockTr:hover {
   background-color: #d1d1d1;
@@ -2051,7 +2051,7 @@ span {
 }
 .modalStockAddProducts button {
   padding: 0.5rem 1.3rem;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   background-color: #132438;
   color: #fff;
   font-family: "Source Sans 3", sans-serif;
@@ -2333,7 +2333,9 @@ span {
   margin-bottom: 20px;
   margin-top: 0;
 }
-.tabela-transferencias {
+.tabela-transferencias1,
+.tabela-transferencias2,
+.tabela-transferencias3 {
   width: 100%;
   border-collapse: collapse;
 }
@@ -2385,7 +2387,7 @@ span {
 }
 .inputSearchRelatorioTransferencia input {
   padding: 10px;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   border: 1px solid #ccc;
   outline: none;
   font-family: roboto;
@@ -2415,7 +2417,7 @@ span {
   border: none;
   transition: 0.3s ease;
   padding: 12px 22px;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   font-size: 15px;
 }
 .buttonsSearchRelatorioTransferencia .searchRelatorioTransferencia:hover,
@@ -2430,7 +2432,7 @@ span {
   margin-top: 20px;
 }
 .pagination button {
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   background-color: #132438;
   color: #fff;
   font-family: roboto;
@@ -2470,7 +2472,7 @@ span {
   border: 1px solid #132438;
   cursor: pointer;
   padding: 0.6rem 1.2rem;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   transition: 0.3s ease;
 }
 .buttonsStore button.active:hover {
@@ -2484,7 +2486,7 @@ span {
   border: none;
   cursor: pointer;
   padding: 0.6rem 1.2rem;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   transition: 0.3s ease;
   font-size: 1rem;
 }
@@ -2494,5 +2496,20 @@ span {
 .buttonsStore {
   display: flex;
   gap: 1rem;
+  padding-bottom: 1rem;
+}
+.semDadosDeUsoDeMaterial {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: #e9e9e9;
+  color: #000;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 600;
+  font-size: 1.06rem;
+}
+.relatorioTransferenciaEntreLoja {
+  padding-bottom: 1rem;
+}
+.stockProducts {
   padding-bottom: 1rem;
 }

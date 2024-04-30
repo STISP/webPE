@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 
 const RelatorioTransferenciaEntreLoja = () => {
@@ -125,74 +126,33 @@ const RelatorioTransferenciaEntreLoja = () => {
 
     const months = Object.keys(expedientMaterial).sort();
 
-    const downloadReport = () => {
-        const wb = XLSX.utils.book_new();
-        const ws = XLSX.utils.json_to_sheet(data.products.map(product => ({
-            'Produto': product.name,
-            'Código': product.code,
-            'Valor Und R$': product.unitValue,
-            ...product.stores.reduce((acc, store) => {
-                acc[store.name] = store.total;
-                return acc;
-            }, {}),
-            'Total': product.totalQuantity,
-            'Valor Total': product.totalValue
-        })));
-        const totalStores = data.products[0].stores.map(store => ({
-            name: store.name,
-            total: data.products.reduce((total, product) => {
-                const storeData = product.stores.find(s => s.name === store.name) || { total: 0, value: "R$ 0.00" };
-                return total + storeData.total;
-            }, 0)
-        }));
-        const totalQuantity = data.products.reduce((total, product) => total + product.totalQuantity, 0);
-        const totalValue = data.products.reduce((total, product) => {
-            const value = parseFloat(product.totalValue.replace('R$ ', '').replace(',', '.'));
-            return total + value;
-        }, 0);
-        const totalRow = totalStores.reduce((acc, store) => {
-            acc[store.name] = store.total;
-            return acc;
-        }, { 'Produto': 'Total', '': '', ' ': '' });
-        totalRow['Total'] = totalQuantity;
-        totalRow['Valor Total'] = totalValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-        XLSX.utils.sheet_add_json(ws, [totalRow], { skipHeader: true, origin: -1 });
-        XLSX.utils.book_append_sheet(wb, ws, 'Transferências');
+    function downloadTablesAsExcel() {
+        const workbook = XLSX.utils.book_new();
 
-        const storeNames = Array.from(new Set(stationeryData.products.flatMap(product => product.stores.map(store => store.name)))).sort();
+        const table1 = document.querySelector('.tabela-transferencias1');
+        const table2 = document.querySelector('.tabela-transferencias2');
+        const tables3 = Array.from(document.querySelectorAll('.tabela-transferencias3'));
 
-        const ws2 = XLSX.utils.json_to_sheet(stationeryData.products.map(product => {
-            let productObj = { 'Produto': product.name };
-            let totalQuantity = 0;
-            let totalValue = 0;
+        const sheet1 = XLSX.utils.table_to_sheet(table1);
+        XLSX.utils.book_append_sheet(workbook, sheet1, "Todas as transferências");
 
-            storeNames.forEach(storeName => {
-                let store = product.stores.find(s => s.name === storeName);
-                if (store) {
-                    productObj[`${storeName}`] = '';
-                    productObj[`${storeName} - Quant.`] = store.quantity;
-                    productObj[`${storeName} - Valor`] = store.value;
-                    totalQuantity += store.quantity;
-                    totalValue += store.value;
-                } else {
-                    productObj[`${storeName}`] = '';
-                    productObj[`${storeName} - Quant.`] = 0;
-                    productObj[`${storeName} - Valor`] = 0;
-                }
-            });
+        const sheet2 = XLSX.utils.table_to_sheet(table2);
+        XLSX.utils.book_append_sheet(workbook, sheet2, "Controle de Uso (Geral)");
 
-            productObj['Quantidade Total'] = totalQuantity;
-            productObj['Valor Total'] = totalValue;
+        tables3.forEach((table, index) => {
+            const sheet3 = XLSX.utils.table_to_sheet(table);
+            XLSX.utils.book_append_sheet(workbook, sheet3, `P${index + 1}`);
+        });
 
-            return productObj;
-        }));
-        XLSX.utils.book_append_sheet(wb, ws2, 'Controle de Uso de Material');
+        const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
 
-        XLSX.writeFile(wb, `Relatório de Transferência - ${startDate} a ${endDate}.xlsx`);
-    };
+        const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
+
+        saveAs(blob, `Relatório de Transferência - ${startDate.split('-').reverse().join('/')} a ${endDate.split('-').reverse().join('/')}.xlsx`);
+    }
 
     return (
-        <div>
+        <div className='relatorioTransferenciaEntreLoja'>
             <div className='menuContracts'>
                 <button onClick={handleBack}>Voltar</button>
             </div>
@@ -224,7 +184,7 @@ const RelatorioTransferenciaEntreLoja = () => {
                     </div>
                     <div className="buttonsSearchRelatorioTransferencia">
                         <button className="searchRelatorioTransferencia" onClick={handleSearch}>Gerar Relatório</button>
-                        {status === 'Carregado' && <button className="downloadRelatorioTransferencia" onClick={downloadReport}>Baixar Relatório (em teste)</button>}
+                        {status === 'Carregado' && <button className="downloadRelatorioTransferencia" onClick={downloadTablesAsExcel}>Baixar Relatório (em teste)</button>}
                     </div>
                 </div>
             </div>
@@ -237,12 +197,12 @@ const RelatorioTransferenciaEntreLoja = () => {
 
             {
                 status === 'Carregado' && data && displayedItems && displayedItems[0] && (
-                    <>
+                    <p>
                         <p className='utimaSolicitacaoHour'>Última solicitação às {hourTimeVerification}</p>
                         <h2 className="titulo">{data.header}</h2>
 
                         <div style={{ overflowX: 'auto', maxWidth: '52.5rem' }}>
-                            <table className="tabela-transferencias" style={{ whiteSpace: 'nowrap' }}>
+                            <table className="tabela-transferencias1" style={{ whiteSpace: 'nowrap' }}>
                                 <thead className="cabecalho-tabela">
                                     <tr className="linha-cabecalho">
                                         <th className="celula-cabecalho">PRODUTO</th>
@@ -330,7 +290,7 @@ const RelatorioTransferenciaEntreLoja = () => {
 
                                 <h2 className="titulo">{stationeryData.header}</h2>
                                 <div style={{ overflowX: 'auto', maxWidth: '52.5rem' }}>
-                                    <table className="tabela-transferencias">
+                                    <table className="tabela-transferencias2">
                                         <thead className="cabecalho-tabela">
                                             <tr className="linha-cabecalho">
                                                 <th className="celula-cabecalho">PRODUTOS</th>
@@ -406,10 +366,10 @@ const RelatorioTransferenciaEntreLoja = () => {
                             </>
                         )}
 
-                        {expedientMaterial && expedientMaterial[months[0]] && (
+                        {expedientMaterial && expedientMaterial[months[0]] ? (
                             <>
                                 <div style={{ overflowX: 'auto', maxWidth: '52.5rem' }}>
-                                    <table className="tabela-transferencias">
+                                    <table className="tabela-transferencias3">
                                         <thead className="cabecalho-tabela">
                                             <tr className="linha-cabecalho">
                                                 <th className="celula-cabecalho">Produto</th>
@@ -471,13 +431,15 @@ const RelatorioTransferenciaEntreLoja = () => {
                                         </tbody>
                                     </table>
                                 </div>
-                                <div className="line" />
                             </>
-                        )}
-                    </>
+                        ) : (
+                            <p className='semDadosDeUsoDeMaterial'>
+                                Sem dados para essa loja nesse período - {startDate.split('-').reverse().join('/')} a {endDate.split('-').reverse().join('/')}
+                            </p>)}
+                    </p>
                 )
             }
-        </div >
+        </div>
     );
 };
 

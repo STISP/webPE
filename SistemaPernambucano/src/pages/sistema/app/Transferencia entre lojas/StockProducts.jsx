@@ -10,6 +10,7 @@ import ExcelIcon from '../../../../assets/excel.svg';
 import ModalConfirmDelete from './components/ModalConfirmDelete';
 import Engrenagem from '../../../../assets/engrenagem.svg';
 import { useNavigate } from 'react-router-dom';
+import * as XLSX from 'xlsx';
 
 const StockProducts = () => {
     const [produtos, setProdutos] = useState([]);
@@ -54,12 +55,44 @@ const StockProducts = () => {
     };
 
     const baixarPlanilha = () => {
-        axios.get('http://192.168.1.70:3000/estoqueDeProdutosParaTransferencia', { responseType: 'blob' })
+        axios.get('http://192.168.1.70:3000/estoqueDeProdutosParaTransferencia')
             .then(response => {
-                const url = window.URL.createObjectURL(new Blob([response.data]));
+                let json = response.data;
+
+                const nameMapping = {
+                    productCode: "CODIGO",
+                    productName: "PRODUTO",
+                    productQuantity: "QUANTIDADE",
+                    productPrice: "PREÇO"
+                };
+
+                const renamedJson = json.map(obj => {
+                    const newObj = {};
+                    for (let key in obj) {
+                        if (key !== 'id') {
+                            newObj[nameMapping[key] || key] = obj[key];
+                        }
+                    }
+                    return newObj;
+                });
+
+                const dataArray = renamedJson.map(obj => Object.values(obj));
+
+                dataArray.unshift(['Código', 'Produto', 'Quantidade', 'Preço']);
+
+                dataArray.unshift(['Estoque', new Date().toLocaleDateString(), '', '']);
+
+                const worksheet = XLSX.utils.aoa_to_sheet(dataArray);
+
+                const workbook = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+                const workbookBlob = new Blob([s2ab(XLSX.write(workbook, { bookType: 'xlsx', type: 'binary' }))], { type: 'application/octet-stream' });
+
+                const url = window.URL.createObjectURL(workbookBlob);
                 const link = document.createElement('a');
                 link.href = url;
-                link.setAttribute('download', 'estoque_de_produtos.csv');
+                link.setAttribute('download', 'estoque_de_produtos.xlsx');
                 document.body.appendChild(link);
                 link.click();
                 link.remove();
@@ -69,6 +102,13 @@ const StockProducts = () => {
                 console.error('Erro ao baixar planilha:', error);
             });
     };
+
+    function s2ab(s) {
+        const buf = new ArrayBuffer(s.length);
+        const view = new Uint8Array(buf);
+        for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+        return buf;
+    }
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [productToDelete, setProductToDelete] = useState(null);
@@ -89,7 +129,6 @@ const StockProducts = () => {
         navigate(-1);
     };
 
-    // filtro de pesquisa de produtos por nome ou código do produto
     const [search, setSearch] = useState('');
 
     const filteredProducts = produtos.filter(produto => {
