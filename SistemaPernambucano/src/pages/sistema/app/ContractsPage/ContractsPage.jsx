@@ -32,7 +32,7 @@ const ContractsPage = () => {
 
     const getDueDateColor = (dueDate) => {
         if (!isValidDate(dueDate)) {
-            return 'rgba(0, 0, 0, 0.65)'; // Return default color if date is invalid
+            return 'rgba(0, 0, 0, 0.65)';
         }
 
         const currentDate = new Date();
@@ -76,7 +76,7 @@ const ContractsPage = () => {
     }
 
     const fetchContracts = () => {
-        setIsLoaded(false); // Set isLoaded to false before fetching contracts
+        setIsLoaded(false);
         axios.get('http://192.168.1.70:3000/contracts')
             .then(response => {
                 const contractsData = response.data.map(contract => ({
@@ -123,13 +123,10 @@ const ContractsPage = () => {
                     case 'nenhum':
                         return 0;
                     case 'asc':
-                        // Sort by contract value in ascending order
                         return a.contractValue - b.contractValue;
                     case 'desc':
-                        // Sort by contract value in descending order
                         return b.contractValue - a.contractValue;
                     case 'nearest':
-                        // Sort by due date in ascending order
                         const dueDateA = new Date(a.endDate);
                         const dueDateB = new Date(b.endDate);
                         return dueDateA - dueDateB;
@@ -137,7 +134,7 @@ const ContractsPage = () => {
                         return 0;
                 }
             });
-    
+
         if (sortOrder === 'nenhum') {
             sortedItems = sortedItems.sort((a, b) => {
                 const postedDateA = new Date(a.postedDate);
@@ -145,7 +142,7 @@ const ContractsPage = () => {
                 return postedDateB - postedDateA;
             });
         }
-    
+
         return sortedItems;
     }
 
@@ -245,7 +242,7 @@ const ContractsPage = () => {
                     onChange={(e) => setQ(e.target.value)}
                 />
                 <select className="OdernarPor" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
-                    <option value="nenhum">Ordenar por</option>
+                    <option value="nenhum">Ultimos Adicionados</option>
                     <option value="asc">Menor para Maior R$</option>
                     <option value="desc">Maior para Menor R$</option>
                     <option value="nearest">Próximo vencimento</option>

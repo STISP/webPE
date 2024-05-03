@@ -2513,3 +2513,56 @@ span {
 .stockProducts {
   padding-bottom: 1rem;
 }
+.handlePrintContract {
+  color: #132438;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+  border-bottom: 1px solid transparent;
+  margin: 0;
+  width: 6rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.handlePrintContract:hover {
+  border-bottom: 1px solid #132438;
+  transition: 0.3s ease;
+}
+.handlePrintContract img {
+  width: .9rem;
+  height: .9rem;
+}
+.backAndPrint {
+  display: flex;
+  gap: 1rem;
+  padding: 0 0 0.5rem  0;
+}
+.handleAbrirTodasTransferencias {
+  background-color: #132438;
+  color: #fff;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1.3rem;
+  border-radius: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  transition: 0.3s ease;
+  width: 49rem;
+  justify-content: center;
+}
+.handleAbrirTodasTransferencias:hover {
+  background-color: #273648;
+}
+.handleAbrirTodasTransferencias span{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

@@ -30,7 +30,6 @@ const RelatoriosContracts = () => {
                     setTotalContracts(data.length);
                     setContracts(contractValues);
 
-                    // Iterate over each store and fetch the report
                     const fetchReports = async () => {
                         const reports = {};
                         for (let i = 0; i < stores.length; i++) {
@@ -270,7 +269,7 @@ const RelatoriosContracts = () => {
                     </div>
 
                     <div className='opViewContractsScreenInicial'>
-                        <Link to="/ContractsPage">
+                        <Link>
                             <div className='iconAndTotalContracts iconopview'>
                                 <img src={iconContractVencido} />
                                 <p>Todos os Contratos Vencidos</p>

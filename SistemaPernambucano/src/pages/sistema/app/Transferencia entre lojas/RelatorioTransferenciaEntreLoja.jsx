@@ -145,9 +145,7 @@ const RelatorioTransferenciaEntreLoja = () => {
         });
 
         const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-
         const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
-
         saveAs(blob, `Relatório de Transferência - ${startDate.split('-').reverse().join('/')} a ${endDate.split('-').reverse().join('/')}.xlsx`);
     }
 
@@ -184,7 +182,7 @@ const RelatorioTransferenciaEntreLoja = () => {
                     </div>
                     <div className="buttonsSearchRelatorioTransferencia">
                         <button className="searchRelatorioTransferencia" onClick={handleSearch}>Gerar Relatório</button>
-                        {status === 'Carregado' && <button className="downloadRelatorioTransferencia" onClick={downloadTablesAsExcel}>Baixar Relatório (em teste)</button>}
+                        {status === 'Carregado' && <button className="downloadRelatorioTransferencia" onClick={downloadTablesAsExcel}>Baixar Relatório</button>}
                     </div>
                 </div>
             </div>

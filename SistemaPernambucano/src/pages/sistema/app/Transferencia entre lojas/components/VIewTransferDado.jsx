@@ -35,7 +35,7 @@ const ViewTransferDado = ({ id, productName, productCode, productQuantity, produ
             productCode: productCode,
             productQuantity: productQuantity
         })
-            .then(response => {
+            .finally(() => {
                 axios.delete(`http://192.168.1.70:3000/transferProducts/${id}`)
                     .then(response => {
                         onDeleteSuccess();
@@ -73,20 +73,79 @@ const ViewTransferDado = ({ id, productName, productCode, productQuantity, produ
 
     const ImprimirTransfer = () => {
         const printWindow = window.open('', '_blank');
-        printWindow.document.write(`<h1>Detalhes da Transferência</h1>`);
-        printWindow.document.write(`<p>Produto: ${productName}</p>`);
-        printWindow.document.write(`<p>Código: ${productCode}</p>`);
-        printWindow.document.write(`<p>Quantidade transferida: ${productQuantity}</p>`);
-        printWindow.document.write(`<p>Valor und.: ${(productValue).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>`);
-        printWindow.document.write(`<p>Valor total: ${(productValue * productQuantity).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>`);
-        printWindow.document.write(`<p>Data de Postagem: ${postDate}</p>`);
-        printWindow.document.write(`<p>Data de Transferência: ${transferDate}</p>`);
-        printWindow.document.write(`<p>Data de Entrega: ${deliveryDate}</p>`);
-        printWindow.document.write(`<p>Loja de Origem: ${originStore}</p>`);
-        printWindow.document.write(`<p>Loja de Destino: ${destinationStore}</p>`);
+        printWindow.document.write(`
+        <html>
+            <head>
+                <title>Detalhes da Transferência</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        text-align: center;
+                    }
+                    h1 {
+                        text-align: center;
+                    }
+                    table {
+                        margin: auto; 
+                        border-collapse: collapse;
+                        width: 60%;
+                    }
+                    th, td {
+                        border: 1px solid black;
+                        padding: 8px;
+                    }
+            </style>
+            </head>
+            <body>
+                <h1>Detalhes da Transferência</h1>
+                <table>
+                    <tr>
+                        <td>Produto:</td>
+                        <td>${productName}</td>
+                    </tr>
+                    <tr>
+                        <td>Código:</td>
+                        <td>${productCode}</td>
+                    </tr>
+                    <tr>
+                        <td>Quantidade transferida:</td>
+                        <td>${productQuantity}</td>
+                    </tr>
+                    <tr>
+                        <td>Valor und.:</td>
+                        <td>${(productValue).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                    </tr>
+                    <tr>
+                        <td>Valor total:</td>
+                        <td>${(productValue * productQuantity).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                    </tr>
+                    <tr>
+                        <td>Data de Postagem:</td>
+                        <td>${postDate}</td>
+                    </tr>
+                    <tr>
+                        <td>Data de Transferência:</td>
+                        <td>${transferDate}</td>
+                    </tr>
+                    <tr>
+                        <td>Data de Entrega:</td>
+                        <td>${deliveryDate}</td>
+                    </tr>
+                    <tr>
+                        <td>Loja de Origem:</td>
+                        <td>${originStore}</td>
+                    </tr>
+                    <tr>
+                        <td>Loja de Destino:</td>
+                        <td>${destinationStore}</td>
+                    </tr>
+                </table>
+            </body>
+        </html>
+       `);
         printWindow.document.close();
         printWindow.print();
-    }
+    };
 
     return (
         <div key={id} className="ViewTransferDadoAll" >

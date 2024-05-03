@@ -5,6 +5,7 @@ import ShowConfirmationDelete from './showConfirmationDelete-contract';
 import IconBack from '../assets/voltarIcon.svg';
 import DeleteIcon from '../assets/deleteIcon.svg';
 import EditIcon from '../assets/EditIcon.svg';
+import print from '../assets/print.svg';
 
 const ContratoDetalhes = () => {
     const [showConfirmation, setShowConfirmation] = useState(false);
@@ -108,7 +109,6 @@ const ContratoDetalhes = () => {
         });
     };
 
-    // const handleStartDateChange = (value) => handleChange("startDate", new Date(value));
     const handleStatusChange = (value) => handleChange("status", value);
     const handleLojaChange = (value) => handleChange("loja", value);
     const handleClientNameChange = (value) => handleChange("clientName", value);
@@ -122,9 +122,6 @@ const ContratoDetalhes = () => {
     const handleEmailEmpresaChange = (value) => handleChange("companyEmail", value);
     const handleCnpjEmpresaChange = (value) => handleChange("companyCNPJ", value);
     const handleEndDateChange = (value) => handleChange("endDate", value);
-    // Remove the unused variables
-    // const handleValorMensalChange = (value) => handleChange("monthlyValue", value);
-    // const handleValorTotalChange = (value) => handleChange("contractValue", value);
 
     const handleDeactivateContract = async () => {
         try {
@@ -178,10 +175,115 @@ const ContratoDetalhes = () => {
         }
     };
 
+    const handlePrintContract = () => {
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(`
+            <html>
+                <head>
+                    <title>Contrato</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                        }
+                        h1 {
+                            text-align: center;
+                        }
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                        }
+                        th, td {
+                            border: 1px solid black;
+                            padding: 8px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h1>Contrato</h1>
+                    <table>
+                        <tr>
+                            <th>Nome do contrato</th>
+                            <td>${contrato.clientName}</td>
+                        </tr>
+                        <tr>
+                            <th>Loja do contrato</th>
+                            <td>${contrato.loja}</td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td>${contrato.status}</td>
+                        </tr>
+                        <tr>
+                            <th>Numero do contrato</th>
+                            <td>${contrato.contractNumber}</td>
+                        </tr>
+                        <tr>
+                            <th>Valor total do Contrato</th>
+                            <td>${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(contrato.contractValue)}</td>
+                        </tr>
+                        <tr>
+                            <th>Quantidade de Parcelas</th>
+                            <td>${contrato.installments}</td>
+                        </tr>
+                        <tr>
+                            <th>Valor Mensal</th>
+                            <td>${new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(contrato.monthlyValue)}</td>
+                        </tr>
+                        <tr>
+                            <th>Data de Início</th>
+                            <td>${formatDate(contrato.startDate)}</td>
+                        </tr>
+                        <tr>
+                            <th>Data de Vencimento</th>
+                            <td>${formatDate(contrato.endDate) === '01/01/9999' ? 'Sem previsão de encerramento' : formatDate(contrato.endDate)}</td>
+                        </tr>
+                        <tr>
+                            <th>Descrição do Contrato</th>
+                            <td>${contrato.contractDescription}</td>
+                        </tr>
+                        <tr>
+                            <th>Termos e forma de pagamento</th>
+                            <td>${contrato.paymentTerms}</td>
+                        </tr>
+                        <tr>
+                            <th>Nome da Empresa</th>
+                            <td>${contrato.companyName}</td>
+                        </tr>
+                        <tr>
+                            <th>Nome Fantasia da Empresa</th>
+                            <td>${contrato.companyFantasyName}</td>
+                        </tr>
+                        <tr>
+                            <th>Telefone da Empresa</th>
+                            <td>${contrato.companyPhone}</td>
+                        </tr>
+                        <tr>
+                            <th>Email da Empresa</th>
+                            <td>${contrato.companyEmail}</td>
+                        </tr>
+                        <tr>
+                            <th>CNPJ da Empresa</th>
+                            <td>${contrato.companyCNPJ}</td>
+                        </tr>
+                    </table>
+                </body>
+            </html>
+        `);
+        printWindow.document.close();
+        printWindow.print();
+    }
+
     return (
         <>
             {contrato && (
                 <div className="contract-details">
+                    <div className="backAndPrint">
+                        <button className="contract-details__button" onClick={handleGoBack}>
+                            <img src={IconBack} alt="Icone de voltar" />
+                            Voltar
+                        </button>
+                    </div>
+
                     <div className="titleAndButton">
                         <div className='detalhesPostado'>
                             <h2 className="contract-details__title">Detalhes do Contrato</h2>
@@ -215,9 +317,10 @@ const ContratoDetalhes = () => {
                                     </button>
                                 </div>
                             )}
-                            <button className="contract-details__button" onClick={handleGoBack}>
-                                <img src={IconBack} alt="Icone de voltar" />
-                                Voltar
+                            {/*botão de imprimir*/}
+                            <button className="contract-details__button" onClick={handlePrintContract}>
+                                <img src={print} />
+                                Imprimir
                             </button>
                         </div>
                     </div>
