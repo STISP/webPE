@@ -11,9 +11,19 @@ import ModalConfirmDelete from './components/ModalConfirmDelete';
 import Engrenagem from '../../../../assets/engrenagem.svg';
 import { useNavigate } from 'react-router-dom';
 import * as XLSX from 'xlsx';
+import ModalEditProduct from './components/ModalEditProduct';
 
 const StockProducts = () => {
     const [produtos, setProdutos] = useState([]);
+    const [EditProductID, setEditProductID] = useState(null);
+
+    const editProduct = (productId) => {
+        toggleDropdown();
+        setEditProductID(productId);
+        setShowModalEditProduct(true);
+    };
+
+    const [showModalEditProduct, setShowModalEditProduct] = useState(false);
 
     const fetchData = async () => {
         try {
@@ -77,18 +87,12 @@ const StockProducts = () => {
                 });
 
                 const dataArray = renamedJson.map(obj => Object.values(obj));
-
                 dataArray.unshift(['Código', 'Produto', 'Quantidade', 'Preço']);
-
                 dataArray.unshift(['Estoque', new Date().toLocaleDateString(), '', '']);
-
                 const worksheet = XLSX.utils.aoa_to_sheet(dataArray);
-
                 const workbook = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-
                 const workbookBlob = new Blob([s2ab(XLSX.write(workbook, { bookType: 'xlsx', type: 'binary' }))], { type: 'application/octet-stream' });
-
                 const url = window.URL.createObjectURL(workbookBlob);
                 const link = document.createElement('a');
                 link.href = url;
@@ -116,11 +120,6 @@ const StockProducts = () => {
     const deleteProduct = (productId) => {
         setProductToDelete(productId);
         setShowDeleteModal(true);
-    };
-
-    const editProduct = () => {
-        alert('Funcionalidade não implementada');
-        toggleDropdown();
     };
 
     const navigate = useNavigate();
@@ -164,6 +163,7 @@ const StockProducts = () => {
             {showModalAddStock && <ModalAddStock productCode={selectedProduct.id} productName={selectedProduct.name} setShowModalAddStock={setShowModalAddStock} fetchData={fetchData} />}
             {showModalRemoveStock && <ModalRemoveStock productCode={selectedProductRemove.id} productName={selectedProductRemove.name} setShowModalRemoveStock={setShowModalRemoveStock} fetchData={fetchData} />}
             {showDeleteModal && (<ModalConfirmDelete show={showDeleteModal} onHide={() => setShowDeleteModal(false)} id={productToDelete} toggleDropdown={toggleDropdown} fetchData={fetchData} />)}
+            {showModalEditProduct && <ModalEditProduct EditProductID={EditProductID} setShowModalEditProduct={setShowModalEditProduct} fetchData={fetchData} />}
 
             <table className='tableStockProduct' style={{ textAlign: 'left' }}>
                 <thead className='TheadStock'>
@@ -183,7 +183,9 @@ const StockProducts = () => {
                         filteredProducts.map((produto, index) => (
                             <tr className={`ProductStockTr ${index % 2 === 0 ? 'backgroundListStock' : ''}`} key={produto.id}>
                                 <td className="dataCodigo">{produto.productCode}</td>
-                                <td className="dataProduto">{produto.productName && produto.productName.length > 20 ? produto.productName.slice(0, 20) + '...' : produto.productName}</td>
+                                <td className="dataProduto" title={produto.productName}>
+                                    {produto.productName}
+                                </td>
                                 <td className="dataEstoque">{produto.productQuantity}</td>
                                 <td className="dataPreco">R$ {produto.productPrice ? produto.productPrice.toFixed(2) : '0.00'}</td>
                                 <td className="dataAcoes">
@@ -204,7 +206,7 @@ const StockProducts = () => {
                                             <button className='deleteProduct' onClick={() => deleteProduct(produto.id)}>
                                                 Deletar Produto
                                             </button>
-                                            <button onClick={editProduct}>
+                                            <button onClick={() => editProduct(produto.id)}>
                                                 Editar Produto
                                             </button>
                                             <button onClick={() => toggleDropdown()}>

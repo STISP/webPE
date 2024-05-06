@@ -78,7 +78,16 @@ export class ProductsService {
         return this.productsRepository.find({ where: { productQuantity: LessThanOrEqual(10) } });
     }
 
-    // rota para relatorio por loja e por mes e ano de transferencia
-    
-
+    // rota para editar um produto
+    async editProduct(product: Products): Promise<Products> {
+        const productToUpdate = await this.productsRepository.findOne({ where: { id: product.id } });
+        if (!productToUpdate) {
+            throw new NotFoundException('Produto não encontrado');
+        }
+        productToUpdate.productCode = product.productCode;
+        productToUpdate.productName = product.productName;
+        productToUpdate.productQuantity = product.productQuantity;
+        productToUpdate.productPrice = product.productPrice;
+        return this.productsRepository.save(productToUpdate);
+    }
 }

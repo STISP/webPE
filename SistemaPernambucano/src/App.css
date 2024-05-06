@@ -2566,3 +2566,7 @@ span {
   align-items: center;
   gap: 0.5rem;
 }
+.flexModalEdit {
+  display: flex;
+  gap: 1rem;
+}

@@ -16,6 +16,9 @@ export class ProductsController {
     async getProductById(@Param('id') id: string): Promise<Products> {
         return this.productsService.getProductById(id);
     }
+    // pra eu procurar um produto pelo productCode, eu preciso passar o productCode no body da requisição. por exemplo:
+    // { "productCode": "123" }
+    // e a requisição fica: http://localhost:3000/estoqueDeProdutosParaTransferencia/productCode
 
     // rota para procurar produto por productCode
     @Get('productCode/:productCode')
@@ -45,5 +48,11 @@ export class ProductsController {
     @Post('removeQuantity')
     async subtractQuantity(@Body() product: Products): Promise<Products> {
         return this.productsService.subtractQuantity(product);
+    }
+
+    // rota para editar um produto
+    @Post('editProduct')
+    async editProduct(@Body() product: Products): Promise<Products> {
+        return this.productsService.editProduct(product);
     }
 } 
