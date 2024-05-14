@@ -171,7 +171,7 @@ const StockProducts = () => {
                         <th className="headerCodigo">Código</th>
                         <th className="headerProduto">Nome do Produto</th>
                         <th className="headerEstoque">Estoque</th>
-                        <th className="headerPreco">Preço</th>
+                        <th className="headerPreco">Preço atual</th>
                         <th className="headerAcoes">Ações</th>
                     </tr>
                 </thead>

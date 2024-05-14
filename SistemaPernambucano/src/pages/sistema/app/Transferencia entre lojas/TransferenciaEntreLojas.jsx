@@ -174,34 +174,34 @@ const TransferenciaEntreLojas = () => {
 
             <div className="lineTransfer" />
 
+            {transferenciasPendentes.length === 0 ? null : (
+                <>
+                    <h2>Transferências Pendentes</h2>
+                    {transferenciasPendentes.map((transferencia) => (
+                        <ViewTransferDado
+                            key={transferencia.id}
+                            id={transferencia.id}
+                            productName={transferencia.productName}
+                            productCode={transferencia.productCode}
+                            productValue={transferencia.productValue}
+                            postDate={new Date(transferencia.postDate).toLocaleDateString('pt-BR')}
+                            productQuantity={transferencia.productQuantity}
+                            transferDate={new Date(transferencia.transferDate).toLocaleDateString('pt-BR')}
+                            deliveryDate={new Date(transferencia.deliveryDate).getFullYear() === 9998 ? 'Pendente' : new Date(transferencia.deliveryDate).toLocaleDateString('pt-BR')}
+                            originStore={transferencia.originStore}
+                            destinationStore={transferencia.destinationStore}
+                            onDeleteSuccess={handleDeleteSuccess}
+                            onUpdateSuccess={handleUpdateSuccess}
+                        />
+                    ))}
+                </>
+            )}
+ 
             <h2>Ultimas Transferências Realizadas</h2>
             {transferencias.length === 0 ? (
                 <p>Nenhuma transferência realizada, faça a primeira transferencia <Link onClick={handleRegistarTransferClick}><strong>clicando aqui</strong></Link></p>
             ) : (
                 transferencias.map((transferencia) => (
-                    <ViewTransferDado
-                        key={transferencia.id}
-                        id={transferencia.id}
-                        productName={transferencia.productName}
-                        productCode={transferencia.productCode}
-                        productValue={transferencia.productValue}
-                        postDate={new Date(transferencia.postDate).toLocaleDateString('pt-BR')}
-                        productQuantity={transferencia.productQuantity}
-                        transferDate={new Date(transferencia.transferDate).toLocaleDateString('pt-BR')}
-                        deliveryDate={new Date(transferencia.deliveryDate).getFullYear() === 9998 ? 'Pendente' : new Date(transferencia.deliveryDate).toLocaleDateString('pt-BR')}
-                        originStore={transferencia.originStore}
-                        destinationStore={transferencia.destinationStore}
-                        onDeleteSuccess={handleDeleteSuccess}
-                        onUpdateSuccess={handleUpdateSuccess}
-                    />
-                ))
-            )}
-
-            <h2>Transferências Pendentes</h2>
-            {transferenciasPendentes.length === 0 ? (
-                <p>Nenhuma transferência pendente</p>
-            ) : (
-                transferenciasPendentes.map((transferencia) => (
                     <ViewTransferDado
                         key={transferencia.id}
                         id={transferencia.id}
@@ -228,16 +228,16 @@ const TransferenciaEntreLojas = () => {
                 {showTodasTransferencias ? (
                     <span className='spanAbrirTodasTransfer'>
                         Fechar todas as transferências
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" height="15" fill="#fff">
-                            <path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" />
+                        <svg className='spanAbrirTodasTransfer' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" height="15" fill="#fff">
+                            <path d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z" />
                         </svg>
-
                     </span>
                 ) : (
                     <span>
                         Abrir todas as transferências
-                        <svg className='spanAbrirTodasTransfer' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" height="15" fill="#fff">
-                            <path d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z" />
+
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" height="15" fill="#fff">
+                            <path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" />
                         </svg>
                     </span>
                 )}

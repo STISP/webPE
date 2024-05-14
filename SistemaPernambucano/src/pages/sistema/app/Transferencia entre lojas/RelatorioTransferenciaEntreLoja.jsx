@@ -149,6 +149,155 @@ const RelatorioTransferenciaEntreLoja = () => {
         saveAs(blob, `Relatório de Transferência - ${startDate.split('-').reverse().join('/')} a ${endDate.split('-').reverse().join('/')}.xlsx`);
     }
 
+    const [yearsReport, setYearsReport] = useState([]);
+    const [monthsReport, setMonthsReport] = useState([]);
+    const [selectedYear, setSelectedYear] = useState(null);
+    const [selectedMonth, setSelectedMonth] = useState(null);
+
+    const fetchYearsReport = async () => {
+        const response = await fetch('http://192.168.1.70:3000/transferProducts/report/yearsReport');
+        if (response.ok) {
+            const data = await response.json();
+            setYearsReport(data);
+        }
+    }
+
+    const fetchMonthsReport = async (year) => {
+        const response = await fetch(`http://192.168.70:3000/transferProducts/report/monthsReport/${year}`);
+        if (response.ok) {
+            const data = await response.json();
+            setMonthsReport(data);
+        }
+    }
+
+    const fetchTransferProducts = async (month, year) => {
+        const response = await fetch(`http://192.168.70:3000/transferProducts/report/transferProducts/${month}/${year}`);
+        if (response.ok) {
+            const data = await response.json();
+            setData(data);
+        }
+    }
+
+    const handleYearClick = (year) => {
+        setSelectedYear(year);
+        fetchMonthsReport(year);
+    }
+
+    const handleMonthClick = (month) => {
+        setSelectedMonth(month);
+        fetchTransferProducts(month, selectedYear);
+    }
+
+    useEffect(() => {
+        fetchYearsReport();
+    }, []);
+    
+
+    /*
+    // outro tipo de relatório onde vai ser mostrado para o usuario os botoões do ano e o mes que ele deseja ver que tiver disponivel no banco de dados
+    // e quando ele clicar por exemplo '2023' vai aparecer os meses que tem disponivel no banco de dados e quando ele clicar em um mes vai aparecer as tabelas
+
+    // essas rotas estão no back-end
+            @Get('report/years')
+        async getYears(): Promise<number[]> {
+            return this.transferProductsService.getYears();
+        }
+        // api: http://192.168.1.70:3000/transferProducts/report/years
+
+        @Get('report/months/:year')
+        async getMonths(@Param('year') year: number): Promise<number[]> {
+            return this.transferProductsService.getMonths(year);
+        }
+        // api: http://192.168.1.70:3000/transferProducts/report/months/2023
+
+        @Get('report/transferProducts/:month/:year')
+        async getTransferProductsByMonthAndYear(@Param('month') month: number, @Param('year') year: number): Promise<any> {
+            return this.transferProductsService.getTransferProductsByMonthAndYear(month, year);
+        }
+        // api: http://192.168.1.70:3000/transferProducts/report/transferProducts/9/2023
+    
+    // codigo:
+    const [yearsReport, setYearsReport] = useState([]);
+    const [monthsReport, setMonthsReport] = useState([]);
+    const [selectedYear, setSelectedYear] = useState(null);
+    const [selectedMonth, setSelectedMonth] = useState(null);
+
+    const fetchYearsReport = async () => {
+        const response = await fetch('http://192.168.1.70:3000/transferProducts/report/yearsReport');
+        if (response.ok) {
+            const data = await response.json();
+            setYearsReport(data);
+        }
+    }
+
+    const fetchMonthsReport = async (year) => {
+        const response = await fetch(`http://192.168.1.70:3000/transferProducts/report/monthsReport/${year}`);
+        if (response.ok) {
+            const data = await response.json();
+            setMonthsReport(data);
+        }
+    }
+
+    const fetchTransferProducts = async (month, year) => {
+        const response = await fetch(`http://192.168.1.70:3000/transferProducts/report/transferProducts/${month}/${year}`);
+        if (response.ok) {
+            const data = await response.json();
+            setData(data);
+        }
+    }
+
+    const handleYearClick = (year) => {
+        setSelectedYear(year);
+        fetchMonthsReport(year); 
+    }
+
+    const handleMonthClick = (month) => {
+        setSelectedMonth(month);
+        fetchTransferProducts(month, selectedYear);
+    }
+
+    useEffect(() => {
+        fetchYearsReport();
+    }, []);
+
+    return (
+        <div>
+            <h1>Relatório de Transferência entre Lojas</h1>
+            <div>
+                {yearsReport.map(year => (
+                    <button key={year} onClick={() => handleYearClick(year)}>{year}</button>
+                ))}
+            </div>
+            <div>
+                {monthsReport.map(month => (
+                    <button key={month} onClick={() => handleMonthClick(month)}>{month}</button>
+                ))}
+            </div>
+            {data && (
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data.products.map(product => (
+                            <tr key={product.name}>
+                                <td>{product.name}</td>
+                                <td>{product.totalQuantity}</td>
+                                <td>{product.totalValue}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
+        </div>
+        
+
+     */
+
     return (
         <div className='relatorioTransferenciaEntreLoja'>
             <div className='menuContracts'>

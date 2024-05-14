@@ -72,7 +72,6 @@ a {
   position: fixed;
   left: 0;
   top: 0;
-  width: 280px;
   height: 100%;
   background-color: #132438;
   display: flex;
@@ -82,7 +81,7 @@ a {
 }
 .menu ul {
   list-style: none;
-  padding: 0;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -98,7 +97,7 @@ a {
   font-style: normal;
   font-weight: 700;
   line-height: 0.8125rem;
-  width: 13rem;
+  width: 12rem;
   padding: 1rem 1.25rem;
   border-radius: 0.5rem;
   text-align: center;
@@ -156,7 +155,7 @@ a {
   width: 10rem;
 }
 .content {
-  padding-left: 304px;
+  padding-left: 288px;
 }
 .menu {
   margin-right: 20px;
@@ -2569,4 +2568,24 @@ span {
 .flexModalEdit {
   display: flex;
   gap: 1rem;
+}
+.LogoMenu {
+  display: flex;
+  justify-content: center;
+}
+.AtencaoEstoque {
+  color: #fff;
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  display: flex;
+  margin: 0 0 1rem 0;
+  background-color: #d00000;
+  width: 41.7rem;
+  padding: 1rem 1rem;
+  border-radius: 0.5rem;
+  justify-content: center;
+}
+.AtencaoEstoque p {
+  margin: 0;
 }
